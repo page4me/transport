@@ -15,7 +15,18 @@ class CreateBazaEkspTable extends Migration
     {
         Schema::create('baza_eksp', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->bigInteger('id_przed')->nullable();
+            $table->string('rodzaj')->nullable();
+            $table->string('adres')->nullable();
+            $table->string('kod_p')->nullable();
+            $table->string('miasto')->nullable();
+            $table->string('gmina')->nullable();
+            $table->string('wlasnosc')->nullable();
+            $table->string('umowa')->nullable();
+            $table->date('dat_umowy')->nullable();
+            $table->text('uwagi')->nullable();
+            $table->timestamps('create_at');
+            $table->timestamps('create_up');
         });
     }
 
