@@ -25,11 +25,10 @@ class CreateWykazPojTable extends Migration
             $table->string('wlasnosc')->nullable();
             $table->date('data_wpr')->nullable();
             $table->date('data_wyc')->nullable();
-            $table->integer('status', 2);
+            $table->integer('status');
             $table->date('stan')->nullable();
             $table->text('uwagi')->nullable();
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 

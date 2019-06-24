@@ -19,8 +19,7 @@ class CreateRodzajPrzedTable extends Migration
             $table->string('nazwa', 100)->nullable();
             $table->string('typ', 100)->nullable();
             $table->text('uwagi')->nullable();
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 

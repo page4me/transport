@@ -28,8 +28,7 @@ class CreatePrzedsiebiorcaTable extends Migration
             $table->string('email');
             $table->integer('status')->default(0);
             $table->longText('uwagi');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 

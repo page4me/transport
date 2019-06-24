@@ -19,13 +19,12 @@ class CreateZdolFinansTable extends Migration
             $table->string('nazwa', 255)->nullable();
             $table->string('numer', 100)->nullable();
             $table->date('data_od')->nullable();
-            $table->data('data_do')->nullable();
+            $table->date('data_do')->nullable();
             $table->integer('ile_poj')->nullable();
             $table->string('suma_zab', 100)->nullable();
             $table->integer('status')->nullable();
             $table->text('uwagi')->nullable();
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 

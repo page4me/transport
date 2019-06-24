@@ -28,8 +28,7 @@ class CreateKontroleTable extends Migration
             $table->string('wyn_pokont')->nullable();
             $table->date('dat_kol_kont')->nullable();
             $table->text('uwagi')->nullable();
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 
