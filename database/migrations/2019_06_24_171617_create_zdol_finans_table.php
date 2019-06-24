@@ -15,7 +15,6 @@ class CreateZdolFinansTable extends Migration
     {
         Schema::create('zdol_finans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_przed');
             $table->bigInteger('id_przed')->nullable();
             $table->string('nazwa', 255)->nullable();
             $table->string('numer', 100)->nullable();
