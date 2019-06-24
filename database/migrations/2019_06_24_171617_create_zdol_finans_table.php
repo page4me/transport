@@ -24,8 +24,8 @@ class CreateZdolFinansTable extends Migration
             $table->string('suma_zab', 100)->nullable();
             $table->integer('status')->nullable();
             $table->text('uwagi')->nullable();
-            $table->timestamps('create_at');
-            $table->timestamps('create_up');
+            $table->timestamps('created_at');
+            $table->timestamps('updated_at');
         });
     }
 

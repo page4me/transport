@@ -28,8 +28,8 @@ class CreateCertKompTable extends Migration
             $table->string('umowa')->nullable();
             $table->date('dat_umowy')->nullable();
             $table->text('uwagi')->nullable();
-            $table->timestamps('create_at');
-            $table->timestamps('create_up');
+            $table->timestamps('created_at');
+            $table->timestamps('updated_at');
         });
     }
 

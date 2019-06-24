@@ -28,8 +28,8 @@ class CreateWykazPojTable extends Migration
             $table->integer('status', 2);
             $table->date('stan')->nullable();
             $table->text('uwagi')->nullable();
-            $table->timestamps('create_at');
-            $table->timestamps('create_up');
+            $table->timestamps('created_at');
+            $table->timestamps('updated_at');
         });
     }
 

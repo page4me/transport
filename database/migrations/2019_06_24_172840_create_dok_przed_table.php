@@ -23,8 +23,8 @@ class CreateDokPrzedTable extends Migration
             $table->date('data_wn')->nullable();
             $table->date('data_wyd')->nullable();
             $table->text('uwagi')->nullable();
-            $table->timestamps('create_at');
-            $table->timestamps('create_up');
+            $table->timestamps('created_at');
+            $table->timestamps('updated_at');
         });
     }
 
