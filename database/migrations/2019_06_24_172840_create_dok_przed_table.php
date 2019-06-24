@@ -22,6 +22,7 @@ class CreateDokPrzedTable extends Migration
             $table->string('nr_sprawy')->nullable();
             $table->date('data_wn')->nullable();
             $table->date('data_wyd')->nullable();
+            $table->text('uwagi')->nullable();
             $table->timestamps('create_at');
             $table->timestamps('create_up');
         });
