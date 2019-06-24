@@ -15,6 +15,9 @@ class CreateRodzajPrzedTable extends Migration
     {
         Schema::create('rodzaj_przed', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nazwa', 100)->nullable();
+            $table->string('typ', 100)->nullable();
+            $table->text('uwagi')->nullable();
             $table->timestamps();
         });
     }
