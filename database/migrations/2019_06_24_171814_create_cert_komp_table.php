@@ -15,7 +15,21 @@ class CreateCertKompTable extends Migration
     {
         Schema::create('cert_komp', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->bigInteger('id_przed')->nullable();
+            $table->string('rodzaj')->nullable();
+            $table->string('nr_cert')->nullable();
+            $table->string('imie_os_z')->nullable();
+            $table->string('nazwisko_os_z')->nullable();
+            $table->string('adres')->nullable();
+            $table->string('miasto')->nullable();
+            $table->date('dat_ur')->nullable();
+            $table->date('dat_wyd')->nullable();
+            $table->string('os_zarz')->nullable();
+            $table->string('umowa')->nullable();
+            $table->date('dat_umowy')->nullable();
+            $table->text('uwagi')->nullable();
+            $table->timestamps('create_at');
+            $table->timestamps('create_up');
         });
     }
 
