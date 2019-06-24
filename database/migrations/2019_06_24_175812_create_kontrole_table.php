@@ -15,7 +15,21 @@ class CreateKontroleTable extends Migration
     {
         Schema::create('kontrole', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->bigInteger('id_przed')->nullable();
+            $table->string('nazwa')->nullable();
+            $table->date('dat_zawiad')->nullable();
+            $table->date('dat_roz')->nullable();
+            $table->date('dat_zak')->nullable();
+            $table->string('nr_upo')->nullable();
+            $table->string('kto')->nullable();
+            $table->string('wynik')->nullable();
+            $table->string('zalecenia')->nullable();
+            $table->date('dat_zal')->nullable();
+            $table->string('wyn_pokont')->nullable();
+            $table->date('dat_kol_kont')->nullable();
+            $table->text('uwagi')->nullable();
+            $table->timestamps('create_at');
+            $table->timestamps('create_up');
         });
     }
 
