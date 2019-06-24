@@ -15,7 +15,20 @@ class CreatePrzedsiebiorcaTable extends Migration
     {
         Schema::create('przedsiebiorca', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('nazwa_firmy');
+            $table->string('imie');
+            $table->string('nazwisko');
+            $table->string('adres');
+            $table->string('miejscowosc');
+            $table->string('kod_p');
+            $table->string('gmina');
+            $table->integer('nip')->default(0);
+            $table->integer('regon')->default(0);
+            $table->integer('telefon')->default(0);
+            $table->string('email');
+            $table->integer('status')->default(0);
+            $table->longText('uwagi');
+
         });
     }
 
