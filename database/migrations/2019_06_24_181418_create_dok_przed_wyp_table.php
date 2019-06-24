@@ -8,7 +8,7 @@ class CreateDokPrzedWypTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * dokumenty przedsiebiorcy - wypisy do licencji, zezwolenia, zaswiadczenia
      * @return void
      */
     public function up()
@@ -23,6 +23,7 @@ class CreateDokPrzedWypTable extends Migration
             $table->string('nr_sprawy')->nullable();
             $table->date('data_wn')->nullable();
             $table->date('data_wyd')->nullable();
+            $table->text('uwagi')->nullable();
             $table->timestamps('create_at');
             $table->timestamps('create_up');
         });
