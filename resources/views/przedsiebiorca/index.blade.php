@@ -17,6 +17,7 @@
     <thead class="table-primary" style="font-weight:bold;">
         <tr>
           <td>Nr licencji</td>
+          <td>Rodzaj</td>
           <td>Nazwa firmy</td>
           <td>Imię</td>
           <td>Nazwisko</td>
@@ -35,9 +36,13 @@
               @foreach($rodzaje as $row)
                 @if($petent->id == $row->id)
                   {{$row->nr_dok}}
-                @endif
-              @endforeach 
+                
             </strong></td>
+            <td>
+             {{$row->nazwa}}
+              @endif
+              @endforeach
+            </td>
             <td>{{$petent->nazwa_firmy}}</td>
             <td>{{$petent->imie}}</td>
             <td>{{$petent->nazwisko}}</td>
@@ -58,6 +63,7 @@
         @endforeach
     </tbody>
   </table>
+  <div class="text-center"><a href="/" role="button" class="btn btn-primary"><i class="fas fa-home fa-lg"></i> Home </a></div>
 </div>
 <div>
 </div>
