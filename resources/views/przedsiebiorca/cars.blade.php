@@ -8,12 +8,11 @@
   <div class="card-header bg-dark text-light" >
    Wykaz pojazdów przedsiębiorcy o  -
      <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
-       @if(strlen($przedsiebiorca->nr_dokumentu) < 3)
-          00{{$przedsiebiorca->nr_dokumentu}}
-        @elseif (strlen($przedsiebiorca->nr_dokumentu) > 3)
-          0{{$przedsiebiorca->nr_dokumentu}}
-        @endif
-     </span><span style="color: #fff;font-size:16px;">wydano dn. 25-06-2019 r.</span>
+       @foreach($dok as $dk)
+         {{ $dk->nr_dok }}
+      
+     </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
+       @endforeach
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -28,15 +27,15 @@
        <div class="row">
           <div class="col-md-4">
               <div style="font-weight: bold;">{{$przedsiebiorca->nazwa_firmy }} <br />{{$przedsiebiorca->adres}}<br />{{$przedsiebiorca->kod_p}} {{$przedsiebiorca->miejscowosc}}</div>
-              <p><strong>Rodzaj:</strong>@if($przedsiebiorca->id_rodzaj_przedsiebiorcy=='1')
+              <p><strong>Rodzaj:</strong>@if($przedsiebiorca->id_osf=='1')
                Osoba fizyczna
-              @elseif($przedsiebiorca->id_rodzaj_przedsiebiorcy=='2')
+              @elseif($przedsiebiorca->id_osf=='2')
                Sp. z o.o.
-              @elseif($przedsiebiorca->id_rodzaj_przedsiebiorcy=='3')
+              @elseif($przedsiebiorca->id_osf=='3')
                Sp. z o.o. Sp. K.
-              @elseif($przedsiebiorca->id_rodzaj_przedsiebiorcy=='4')
+              @elseif($przedsiebiorca->id_osf=='4')
                Sp. J.
-              @elseif($przedsiebiorca->id_rodzaj_przedsiebiorcy=='5')
+              @elseif($przedsiebiorca->id_osf=='5')
                Sp. C.
               @endif</p>
           </div>
@@ -68,9 +67,10 @@
                <th class="text-center">DMC / Ilosć os.</th>
                <th class="text-center">Własnosć</th>
                <th class="text-center">Data wprowadzenia</th>
+               <th class="text-center">Opcja</th>
               </tr>
              </thead>
-             <tr><td colspan="7" class="text-center"><strong><span style="font-size: 16px;color:red;">Pojazdy wprowadzone do licencji / zezwolenia
+             <tr><td colspan="8" class="text-center"><strong><span style="font-size: 16px;color:red;">Pojazdy wprowadzone do licencji / zezwolenia
              </span></strong></td></tr>
              <tr>
                <td class="text-center">1</td>
@@ -80,6 +80,7 @@
                <td class="text-center">40 000 kg</td>
                <td class="text-center">Własnosć</td>
                <td class="text-center">wprowadzono <br />15-05-2019 r.</td>
+               <td class="text-center"><a href="#" role="button" class="btn btn-danger btn-sm">Wycofaj</a></td>
              </tr>
              <tr>
                <td class="text-center">2</td>
@@ -89,6 +90,7 @@
                <td class="text-center">40 000 kg</td>
                <td class="text-center">Własnosć</td>
                <td class="text-center">wprowadzono <br />15-05-2019 r.</td>
+               <td class="text-center"><a href="#" role="button" class="btn btn-danger btn-sm">Wycofaj</a></td>
              </tr>
              <tr>
                <td class="text-center">3</td>
@@ -98,6 +100,7 @@
                <td class="text-center">40 000 kg</td>
                <td class="text-center">Własnosć</td>
                <td class="text-center">wprowadzono <br />15-05-2019 r.</td>
+               <td class="text-center"><a href="#" role="button" class="btn btn-danger btn-sm">Wycofaj</a></td>
              </tr>
            </table>
            
@@ -111,7 +114,7 @@
                <th class="text-center">Nr VIN</th>
                <th class="text-center">DMC / Ilosć os.</th>
                <th class="text-center">Własnosć</th>
-               <th class="text-center">Data wprowadzenia</th>
+               <th class="text-center">Data wycofania</th>
               </tr>
              </thead>
              <tr><td colspan="7" class="text-center"><strong><span style="font-size: 16px;color:red;">Pojazdy wycofane z licencji / zezwolenia</span>
@@ -147,7 +150,7 @@
          </div>
        </div>
  </div>
- <div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}" role="button">Powrót do listy przedsiębiorców</a></div>
+ <div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}" role="button">Powrót do listy przedsiębiorców</a></div><br />
 </div>
 </div>
 @endsection
