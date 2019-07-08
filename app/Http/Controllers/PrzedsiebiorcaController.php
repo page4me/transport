@@ -55,7 +55,7 @@ class PrzedsiebiorcaController extends Controller
      */
     public function store(Request $request)
     {
-          $validatedData = $request->validate([
+        $validatedData = $request->validate([
          'id_osf' => 'required',
          'nazwa_firmy' => 'required|max:255',
          'imie' => 'required|max:255',
@@ -70,7 +70,7 @@ class PrzedsiebiorcaController extends Controller
         ]);
         $przedsiebiorca = \App\Przedsiebiorca::create($validatedData);
 
-        return redirect('/przedsiebiorca')->with('success', 'Przedsiebiorca dodany do bazy danych');
+        return redirect('/przedsiebiorca/dokumenty/create')->with('success', 'Przedsiebiorca dodany do bazy danych');
     }
 
     /**
@@ -102,7 +102,7 @@ class PrzedsiebiorcaController extends Controller
         return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert'));
     }
 
-    /**
+     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -111,6 +111,13 @@ class PrzedsiebiorcaController extends Controller
     public function edit($id)
     {
         //
+         $rodzaje= DB::table('rodzaj_przed')->get();
+
+         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+         $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
+
+         return view('przedsiebiorca.edit', compact('przedsiebiorca', 'rodzaje','dok'));
+
     }
 
     /**
@@ -123,6 +130,22 @@ class PrzedsiebiorcaController extends Controller
     public function update(Request $request, $id)
     {
         //
+         $validatedData = $request->validate([
+         'id_osf' => 'required|max:2',
+         'nazwa_firmy' => 'required|max:255',
+         'imie' => 'required|max:255',
+         'nazwisko' => 'required|max:255',
+         'adres' => 'required|max:255',
+         'miejscowosc' => 'required|max:255',
+         'kod_p' => 'required|max:6',
+         'nip' => 'required|max:11',
+         'regon' => 'required|max:9',
+         'telefon' => 'required|max:10',
+         
+     ]);
+     \App\Przedsiebiorca::whereId($id)->update($validatedData);
+
+     return redirect('/przedsiebiorca')->with('success', 'Dane przedsiębiorcy zmienione');
     }
 
     /**
@@ -134,6 +157,10 @@ class PrzedsiebiorcaController extends Controller
     public function destroy($id)
     {
         //
+            $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+            $przedsiebiorca->delete();
+
+            return redirect('/przedsiebiorca')->with('danger', 'Dane przedsiębiorcy usunięte');
     }
 
     public function cars($id)
