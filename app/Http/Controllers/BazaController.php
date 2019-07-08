@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class BazaController extends Controller
 {
@@ -23,7 +24,9 @@ class BazaController extends Controller
      */
     public function create()
     {
-        //
+        $przedsiebiorca= DB::table('przedsiebiorca')->get();
+         
+        return view('przedsiebiorca.baza.create', compact('przedsiebiorca'));
     }
 
     /**
@@ -34,7 +37,20 @@ class BazaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+         'id_przed' => 'required|max:1',
+         'rodzaj' => 'string|max:255|nullable',
+         'gmina' => 'string|max:255|nullable',
+         'adres' => 'required|max:255',
+         'miasto' => 'required|max:255',
+         'kod_p' => 'required|max:6',
+         'wlasnosc' => 'string|max:255|nullable',
+         'umowa' => 'string|max:255|nullable',
+         'uwagi' => 'string|max:255|nullable'         
+        ]);
+        $baza = \App\Baza::create($validatedData);
+
+        return redirect('/przedsiebiorca/baza/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
 
     /**
