@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class DokPrzedController extends Controller
 {
@@ -23,7 +24,9 @@ class DokPrzedController extends Controller
      */
     public function create()
     {
-        //
+        $przedsiebiorca = \App\Przedsiebiorca::latest()->get();
+        
+        return view('przedsiebiorca.dokumenty.create', compact('przedsiebiorca'));
     }
 
     /**
@@ -34,7 +37,21 @@ class DokPrzedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+         'id_przed' => 'required',
+         'nazwa' => 'required|max:255',
+         'rodz_dok' => 'required:max:255',
+         'nr_dok' => 'required|max:255',
+         'nr_druku' => 'required|max:255',
+         'nr_sprawy' => 'required|max:255',
+         'data_wn' => 'required',
+         'data_wyd' => 'required',
+         'data_waz' => 'required',
+         
+        ]);
+        $dokumenty = \App\DokumentyPrzed::create($validatedData);
+
+        return redirect('/przedsiebiorca/baza/create')->with('success', 'Dokument dodany do bazy danych');
     }
 
     /**
@@ -68,7 +85,22 @@ class DokPrzedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+         
+         'nazwa' => 'required|max:255',
+         'rodz_dok' => 'required:max:255',
+         'nr_dok' => 'required|max:255',
+         'nr_druku' => 'required|max:255',
+         'nr_sprawy' => 'required|max:255',
+         'data_wn' => 'required',
+         'data_wyd' => 'required',
+         'data_waz' => 'required',
+         
+        ]);
+       
+        \App\DokumentyPrzed::whereId($id)->update($validatedData);
+
+        return redirect('/przedsiebiorca')->with('success', 'Dane dokumentów przedsiębiorcy zmienione');
     }
 
     /**
