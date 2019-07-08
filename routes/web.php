@@ -17,4 +17,11 @@ Route::get('/', function () {
 
 Route::get('/przedsiebiorca/cars/{id}', 'PrzedsiebiorcaController@cars')->name('cars');
 
+Route::get('/przedsiebiorca/pdf/{id}', 'PrzedsiebiorcaController@gPDF');
+
+
+Route::resource('przedsiebiorca/baza', 'BazaController');
+
+Route::resource('przedsiebiorca/dokumenty', 'DokPrzedController');
+
 Route::resource('przedsiebiorca', 'PrzedsiebiorcaController');
