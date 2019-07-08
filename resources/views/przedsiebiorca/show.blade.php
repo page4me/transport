@@ -10,8 +10,8 @@
    Dane szczegółowe przedsiębiorcy -
      <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
        @foreach($dok as $dk)
-         {{ $dk->nr_dok }}
-      
+         @if(!empty($dk->nr_dok)) {{ $dk->nr_dok}} @else brak @endif
+       
      </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
        @endforeach
   </div>
@@ -59,7 +59,7 @@
               @endforeach
                          </div>
              <div>Umowa do dnia -  @if(!empty($ck->id)) {{$ck->umowa}} @else brak @endif</div> 
-             <div><strong>Certyfikat kompetencji:</strong><br />@if(!empty($ck->id))<span style="color:#0041a8;font-weight: bold;">{{$ck->rodzaj}}</span>@else brak @endif / Nr @if(!empty($ck->id)) {{$ck->nr_cert}} @else brak @endif</div><br />
+             <div><strong>Certyfikat kompetencji:</strong><br />@if(!empty($ck->id))<span style="color:#0041a8;font-weight: bold;">{{$ck->rodzaj}}</span>@else brak @endif / Nr @if(!empty($ck->id)) {{$ck->nr_cert}} @else brak <br /><br /> @endif</div><br />
             
               <div>
                  <strong>Ilosć pojazdów:</strong>
