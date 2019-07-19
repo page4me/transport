@@ -3,17 +3,14 @@
 
 @section('content')
 <div class="container-fluid">
-<div>
-  @if(session()->get('success'))
-    <div class="alert alert-success">
-      {{ session()->get('success') }}
-    </div><br />
-  @endif
+<div><br />
+   
+ 
   <div class="card bg-dark text-white">
     <div class="card-body">Przedsiębiorcy - <a href="przedsiebiorca/create" role="button" class="btn btn-success">Dodaj nowego</a></div>
   </div>
  <div class="table-responsive">
-  <table class="table table-bordered table-sm">
+  <table class="table table-bordered table-striped table-sm">
     <thead class="table-primary" style="font-weight:bold;">
         <tr>
           <td>Nr licencji</td>
@@ -51,14 +48,14 @@
             <td>{{$petent->nip}}</td>
             <td>{{$petent->regon}}</td>
             <td>+48 {{$petent->telefon}}</td>
-            <td><a href="{{ route('przedsiebiorca.edit',$petent->id)}}" class="btn btn-sm btn-success">Edytuj</a></td>
+            <td><a href="{{ route('przedsiebiorca.edit',$petent->id)}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></a></td>
             <td><form action="{{ route('przedsiebiorca.destroy', $petent->id)}}" method="post">
                   @csrf
                   @method('DELETE')
-                  <button class="btn btn-sm btn-danger" type="submit">Usuń</button>
+                  <button class="btn btn-sm btn-danger" type="submit" id="confirm_delete"><i class="fa fa-trash"></i></button>
                 </form>
             </td>
-            <td><a href="{{ route('przedsiebiorca.show',$petent->id)}}" class="btn btn-sm btn-primary">Podgląd</a></td>
+            <td><a href="{{ route('przedsiebiorca.show',$petent->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></a></td>
         </tr>
         @endforeach
     </tbody>
@@ -67,4 +64,33 @@
 </div>
 <div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $( "#confirm_delete" ).submit(function( event ) {
+            event.preventDefault();
+            swal({
+                title: 'Are you sure?',
+                text: "Please click confirm to delete this item",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: true
+            }).then(function() {
+                    $("#confirm_delete").off("submit").submit();
+            }, function(dismiss) {
+                // dismiss can be 'cancel', 'overlay',
+                // 'close', and 'timer'
+                if (dismiss === 'cancel') {
+                    swal('Cancelled', 'Delete Cancelled :)', 'error');
+                }
+            })
+        });
+    });
+</script>
+
 @endsection
