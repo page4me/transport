@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Alert;
 
 class DokPrzedController extends Controller
 {
@@ -37,6 +38,7 @@ class DokPrzedController extends Controller
      */
     public function store(Request $request)
     {
+        Alert::success('Dodano nowy dokument', '');
         $validatedData = $request->validate([
          'id_przed' => 'required',
          'nazwa' => 'required|max:255',
@@ -85,6 +87,7 @@ class DokPrzedController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Alert::success('Zmniany Zapisano', 'Dane dokumentów przedsiębiorcy zmienione');
         $validatedData = $request->validate([
          
          'nazwa' => 'required|max:255',
@@ -101,6 +104,7 @@ class DokPrzedController extends Controller
         \App\DokumentyPrzed::whereId($id)->update($validatedData);
 
         return redirect('/przedsiebiorca')->with('success', 'Dane dokumentów przedsiębiorcy zmienione');
+
     }
 
     /**
