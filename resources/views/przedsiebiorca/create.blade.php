@@ -15,7 +15,19 @@
 
 </style>
 <div class="container">
+  <div style="padding-top: 20px;margin: 0 auto; text-align: center;">
+    <i class="fa fa-truck-monster fa-3x"></i>&nbsp;&nbsp;
+    <i class="far fa-arrow-alt-circle-right fa-3x " ></i>&nbsp;&nbsp;
+    <i class="fa fa-truck-monster fa-3x" style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+    <i class="far fa-arrow-alt-circle-right fa-3x" style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+    <i class="fa fa-truck-monster fa-3x" style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+    <i class="far fa-arrow-alt-circle-right fa-3x" style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+    <i class="fa fa-truck-monster fa-3x" style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+    <i class="far fa-arrow-alt-circle-right fa-3x " style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+    <i class="fa fa-truck-monster fa-3x " style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+  </div>
 <div class="card uper">
+
   <div class="card-header bg-primary text-light">
     Nowy Przedsiebiorca - KROK 1
   </div>
