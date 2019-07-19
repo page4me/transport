@@ -15,6 +15,17 @@
 
 </style>
 <div class="container">
+  <div style="padding-top: 20px;margin: 0 auto; text-align: center;">
+    <i class="fa fa-truck-monster fa-3x"></i>&nbsp;&nbsp;
+    <i class="far fa-arrow-alt-circle-right fa-3x " ></i>&nbsp;&nbsp;
+    <i class="fa fa-truck-monster fa-3x"></i>&nbsp;&nbsp;
+    <i class="far fa-arrow-alt-circle-right fa-3x"></i>&nbsp;&nbsp;
+    <i class="fa fa-truck-monster fa-3x"></i>&nbsp;&nbsp;
+    <i class="far fa-arrow-alt-circle-right fa-3x"></i>&nbsp;&nbsp;
+    <i class="fa fa-truck-monster fa-3x" style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+    <i class="far fa-arrow-alt-circle-right fa-3x " style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+    <i class="fa fa-truck-monster fa-3x " style="color: #e0e0e0;"></i>&nbsp;&nbsp;
+  </div>
 <div class="card uper">
   <div class="card-header bg-primary text-light">
     Nowy Przedsiebiorca - Baza Eksploatacyjna KROK 3
@@ -35,10 +46,12 @@
 
           <div class="col-md-8 form-group">
               <label for="id_przed">Przedsiębiorca:</label>
-              <select class="form-control" name="id_przed" id="id_przed" >
-                <option value="0"> </option>
+              <select class="form-control" name="id_przed" id="id_przed">
+
                  @foreach($przedsiebiorca as $row)
-                     <option value="{{$row->id}}">{{$row->nazwa_firmy}}, {{$row->adres}}, {{$row->miejscowosc}}, NIP: {{$row->nip}}</option>
+
+                        <option value="{{$row->id}}">{{$row->nazwa_firmy}}, {{$row->adres}}, {{$row->miejscowosc}}, NIP: {{$row->nip}}</option>
+
                  @endforeach
               </select>
           </div>
@@ -94,7 +107,7 @@
               <input type="text" class="form-control" name="uwagi"/>
           </div>
         </div>
-          <button type="submit" class="btn btn-success">Utwórz nowego przedsiębiorcę</button>
+          <button type="submit" class="btn btn-success">Dodaj bazę eksploatacyjną</button>
       </form>
   </div>
 </div>
