@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use Alert;
 
 class CertController extends Controller
 {
@@ -23,7 +25,9 @@ class CertController extends Controller
      */
     public function create()
     {
-        //
+        $przedsiebiorca= DB::table('przedsiebiorca')->get();
+         
+        return view('przedsiebiorca.zarzadzajacy.create', compact('przedsiebiorca'));
     }
 
     /**
@@ -34,7 +38,25 @@ class CertController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Alert::success('Dodano nowego zarządzającego', 'Zarządzający przypisany do przedsiębiorcy');
+        $validatedData = $request->validate([
+         'id_przed' => 'required|max:1',
+         'rodzaj' => 'string|max:255|nullable',
+         'nr_cert' => 'string|max:255|nullable',
+         'imnie_os_z' => 'string|max:255|nullable',
+         'nazwisko_os_z' => 'string|max:255|nullable',
+         'adres' => 'required|max:255',
+         'miasto' => 'required|max:255',
+         'dat_ur' => 'required|max:16',
+         'dat_wyd' => 'string|max:255|nullable',
+         'os_zarz' => 'string|max:255|nullable',
+         'umowa' => 'string|max:255|nullable',
+         'dat_umowy' => 'string|max:255|nullable',
+         'uwagi' => 'string|max:255|nullable'         
+        ]);
+        $baza = \App\Certyfikat::create($validatedData);
+
+        return redirect('/przedsiebiorca/zabezpieczenie/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
 
     /**
