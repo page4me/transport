@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use PDF;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PrzedsiebiorcaController extends Controller
 {
@@ -16,6 +17,7 @@ class PrzedsiebiorcaController extends Controller
     public function index()
     {
         //
+
         $przedsiebiorca = \App\Przedsiebiorca::all();
       
         $rodzaje= DB::table('dok_przed')
@@ -29,7 +31,7 @@ class PrzedsiebiorcaController extends Controller
        
        // echo '<pre>';
        // print_r($rodzaje);
-
+        
         return view('przedsiebiorca.index', compact('przedsiebiorca','rodzaje'));
     }
 
@@ -55,6 +57,7 @@ class PrzedsiebiorcaController extends Controller
      */
     public function store(Request $request)
     {
+        Alert::success('Dodano nowego przedsiębiorcę', '');
         $validatedData = $request->validate([
          'id_osf' => 'required',
          'nazwa_firmy' => 'required|max:255',
@@ -97,7 +100,7 @@ class PrzedsiebiorcaController extends Controller
 
         $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
 
-
+        
 
         return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert'));
     }
@@ -130,6 +133,7 @@ class PrzedsiebiorcaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        Alert::success('Zmniany Zapisano', 'Dane przedsiębiorcy zmienione');
          $validatedData = $request->validate([
          'id_osf' => 'required|max:2',
          'nazwa_firmy' => 'required|max:255',
@@ -157,6 +161,7 @@ class PrzedsiebiorcaController extends Controller
     public function destroy($id)
     {
         //
+            
             $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
             $przedsiebiorca->delete();
 
