@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Alert;
 
 class BazaController extends Controller
 {
@@ -37,6 +38,7 @@ class BazaController extends Controller
      */
     public function store(Request $request)
     {
+        Alert::success('Dodano nową bazę', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
         $validatedData = $request->validate([
          'id_przed' => 'required|max:1',
          'rodzaj' => 'string|max:255|nullable',
@@ -50,7 +52,7 @@ class BazaController extends Controller
         ]);
         $baza = \App\Baza::create($validatedData);
 
-        return redirect('/przedsiebiorca/baza/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
+        return redirect('/przedsiebiorca/zarzadzajacy/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
 
     /**
