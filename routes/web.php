@@ -24,4 +24,8 @@ Route::resource('przedsiebiorca/baza', 'BazaController');
 
 Route::resource('przedsiebiorca/dokumenty', 'DokPrzedController');
 
+Route::resource('przedsiebiorca/zarzadzajacy', 'CertController');
+
+Route::resource('przedsiebiorca/zabezpieczenie', 'ZdolnoscController');
+
 Route::resource('przedsiebiorca', 'PrzedsiebiorcaController');
