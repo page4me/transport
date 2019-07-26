@@ -10,7 +10,6 @@
      <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
        @foreach($dok as $dk)
          {{ $dk->nr_dok }}
-
      </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
        @endforeach
   </div>
