@@ -128,7 +128,7 @@
                <td class="text-center" style="width:100px;">XKSDJKS9797987</td>
                <td class="text-center" style="width:80px;">40 000 kg</td>
                <td class="text-center" style="width:90px;">Własnosć</td>
-               <td class="text-center" style="font-size: 11px;color:red;">wycofany z ruchu dn.<br />15-05-2019 r.</td>
+               <td class="text-center" style="font-size: 11px;color:red;">wycofany dn.<br />15-05-2019 r.</td>
              </tr>
              <tr>
                <td class="text-center" style="width:20px;">1</td>
@@ -137,7 +137,7 @@
                <td class="text-center" style="width:100px;">XKSDJKS9797987</td>
                <td class="text-center" style="width:80px;">40 000 kg</td>
                <td class="text-center" style="width:90px;">Własnosć</td>
-               <td class="text-center" style="font-size: 11px;color:red;">wycofany z ruchu dn.<br />15-05-2019 r.</td>
+               <td class="text-center" style="font-size: 11px;color:red;">wycofany dn.<br />15-05-2019 r.</td>
              </tr>
              <tr>
                <td class="text-center" style="width:20px;">1</td>
@@ -146,7 +146,7 @@
                <td class="text-center" style="width:100px;">XKSDJKS9797987</td>
                <td class="text-center" style="width:80px;">40 000 kg</td>
                <td class="text-center" style="width:90px;">Własnosć</td>
-               <td class="text-center" style="font-size: 11px;color:red;">wycofany z ruchu dn.<br />15-05-2019 r.</td>
+               <td class="text-center" style="font-size: 11px;color:red;">wycofany dn.<br />15-05-2019 r.</td>
              </tr>
            </table>
          </div>
