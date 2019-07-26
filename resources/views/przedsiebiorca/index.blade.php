@@ -36,7 +36,7 @@
                 
             </strong></td>
             <td>
-             {{$row->nazwa}}
+             {{$row->rodzaj}}
               @endif
               @endforeach
             </td>
