@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/przedsiebiorca/cars/{id}', 'PrzedsiebiorcaController@cars')->name('cars');
+//Route::get('/przedsiebiorca/pojazdy/{id}', 'PrzedsiebiorcaController@pojazdy')->name('pojazdy');
+Route::get('/przedsiebiorca/wypisy/{id}', 'WypisyController@index')->name('index');
 
 Route::get('/przedsiebiorca/pdf/{id}', 'PrzedsiebiorcaController@gPDF');
 
@@ -27,5 +29,9 @@ Route::resource('przedsiebiorca/dokumenty', 'DokPrzedController');
 Route::resource('przedsiebiorca/zarzadzajacy', 'CertController');
 
 Route::resource('przedsiebiorca/zabezpieczenie', 'ZdolnoscController');
+
+Route::resource('przedsiebiorca/wypisy', 'WypisyController');
+
+Route::resource('przedsiebiorca/pojazdy', 'WykazPojController');
 
 Route::resource('przedsiebiorca', 'PrzedsiebiorcaController');
