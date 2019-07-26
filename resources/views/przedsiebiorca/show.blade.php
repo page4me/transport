@@ -47,8 +47,17 @@
               <br />
                <div>
                  <strong>Wydanych wypisów:</strong>
-                   <span class="badge badge-success" style="font-size:12px;"> 11 </span><br />
-                 <strong>W depozycie wypisów: </strong><span class="badge badge-danger" style="font-size:12px;"> 2</span>
+                   <span class="badge badge-warning" style="font-size:13px;">
+                      {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id)->count()}} 
+                    </span><br />
+                 <strong>W depozycie wypisów: </strong><span class="badge badge-danger" style="font-size:12px;">
+                   {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id)->count()}} 
+                 </span><br />
+                 @if($count ==0) 
+                       &nbsp; <a href="/przedsiebiorca/wypisy/{{$przedsiebiorca->id}}" role="button" class="btn btn-success btn-sm">Dodaj wypis</a> 
+                     @else
+                       <a class="btn btn-sm btn-primary" href="/przedsiebiorca/wypisy/{{$przedsiebiorca->id}}">Wypisy</a>
+                   @endif
                </div>
           </div>
           <div class="col-md-3">
@@ -61,20 +70,33 @@
              <div>Umowa do dnia -  @if(!empty($ck->id)) {{$ck->umowa}} @else brak @endif</div> 
              <div><strong>Certyfikat kompetencji:</strong><br />@if(!empty($ck->id))<span style="color:#0041a8;font-weight: bold;">{{$ck->rodzaj}}</span>@else brak @endif / Nr @if(!empty($ck->id)) {{$ck->nr_cert}} @else brak <br /><br /> @endif</div><br />
             
-              <div>
-                 <strong>Ilosć pojazdów:</strong>
-                   <span class="badge badge-success" style="font-size:12px;"> 8 </span><br />&nbsp;
-                     <a class="btn btn-sm btn-primary" href="/przedsiebiorca/cars/{{$przedsiebiorca->id}}">Wykaz pojazdów</a>
+              <div> 
+               
+              
+                      <strong>Ilosć pojazdów:</strong>
+                       <span class="badge badge-warning" style="font-size:13px;">
+                           {{$count = \App\WykazPoj::where('id_przed','=',$przedsiebiorca->id)->where('status','=','1')->count()}} 
+
+                       </span><br />&nbsp;
+                   @if($count ==0) 
+                       &nbsp; <a href="/przedsiebiorca/cars/{{$przedsiebiorca->id}}" role="button" class="btn btn-success btn-sm">Dodaj pojazd</a> 
+                     @else
+                       <a class="btn btn-sm btn-primary" href="/przedsiebiorca/cars/{{$przedsiebiorca->id}}">Wykaz pojazdów</a>
+                   @endif
               </div>
           </div>
           <div class="col-md-3">
+            @foreach ($baza as $bz)
              <div><strong>Baza eksploatacyjna</strong></div>
-              <div><strong>Adres:</strong> <br />ul.Koszalińska 32 <br />75-900 Koszalin</div>
-             <div>Umowa do dnia 25.09.2019 r.</div>
+              <div><strong>Adres:</strong> <br />{{$bz->adres}}<br /> {{$bz->kod_p}} {{$bz->miasto}}</div>
+             <div>Umowa do dnia {{$bz->dat_umowy}} r.</div>
              <br />
-             <div><strong>Zabezpieczenie finansowe:</strong> Bilans</div>
-             <div>19 000 &euro; - 2 pojazdy</div>
-             <div><span class="badge badge-success" style="font-size:14px;">Do dnia 25.09.2020 r.</span></div>
+            @endforeach
+            @foreach ($zab as $zb)
+             <div><strong>Zabezpieczenie finansowe:</strong> {{$zb->nazwa}}s</div>
+             <div>{{$zb->suma_zab}} &euro; - {{$zb->ile_poj}} pojazdy</div>
+             <div><span class="badge badge-success" style="font-size:14px;">Do dnia {{$zb->data_do}} r.</span></div>
+            @endforeach
           </div>
       </div>
     </div>
