@@ -59,8 +59,8 @@
               <label for="imie">Rodzaj:</label>
                <select class="form-control" name="rodzaj" id="rodzaj" >
                  <option value="0"> </option>
-                 <option value="1">Rzeczy</option>
-                 <option value="2">Osób</option>
+                 <option value="rzeczy">Rzeczy</option>
+                 <option value="osoby">Osób</option>
                 
                </select>
           </div>
