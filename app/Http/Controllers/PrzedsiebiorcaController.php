@@ -23,14 +23,14 @@ class PrzedsiebiorcaController extends Controller
         $rodzaje= DB::table('dok_przed')
              ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
              ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
-             //->join('dok_przed_wyp', 'dok_przed_wyp.id', "=", 'dok_przed_wyp.id_przed')
+             //->join('zdol_finans', 'zdol_finans.id_przed', "=", 'przedsiebiorca.id')
              ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
              ->get();
         
         $osobowosc = DB::table('rodzaj_przed')->get();
        
-       // echo '<pre>';
-       // print_r($rodzaje);
+        //echo '<pre>';
+        //print_r($rodzaje);
         
         return view('przedsiebiorca.index', compact('przedsiebiorca','rodzaje'));
     }
@@ -99,10 +99,11 @@ class PrzedsiebiorcaController extends Controller
         $cert = DB::table('cert_komp')->where('id_przed', $przedsiebiorca->id)->get();
 
         $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
+        $zab = DB::table('zdol_finans')->where('id_przed', $przedsiebiorca->id)->get();
+        $baza = DB::table('baza_eksp')->where('id_przed', $przedsiebiorca->id)->get();
+        $cars = DB::table('wykaz_poj')->where('id', $przedsiebiorca->id)->get();
 
-        
-
-        return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert'));
+        return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert','baza','zab','cars'));
     }
 
      /**
@@ -168,13 +169,15 @@ class PrzedsiebiorcaController extends Controller
             return redirect('/przedsiebiorca')->with('danger', 'Dane przedsiębiorcy usunięte');
     }
 
-    public function cars($id)
+    public function cars(Request $request,$id)
     {
         //
         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
         $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
-      
-        return view('przedsiebiorca.cars', compact('przedsiebiorca','dok'));
+        $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
+     
+        $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
+        return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan'));
 
     }
 
@@ -200,6 +203,28 @@ class PrzedsiebiorcaController extends Controller
         
        
         return view('przedsiebiorca.print_cars', compact('przedsiebiorca'));
+        
+
+    }
+
+    public function wypisy($id)
+    {
+        //
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+        $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
+        $wypisy = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->get();
+      
+        return view('przedsiebiorca.wypisy', compact('przedsiebiorca','dok','wypisy'));
+
+    }
+
+     public function pojazdy($id)
+    {
+        //
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+        $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
+       
+        return view('przedsiebiorca.pojazdy.create', compact('przedsiebiorca','dok'));
         
 
     }
