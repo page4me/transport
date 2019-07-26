@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use Alert;
 
 class WypisyController extends Controller
 {
@@ -11,9 +13,14 @@ class WypisyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
+         $przedsiebiorca = \App\Przedsiebiorca::findOrfail($id);
+         $wypisy = \App\Wypisy::all();
+         $dok = DB::table('dok_przed')->get();
+        
+         return view('przedsiebiorca.wypisy.index', compact('przedsiebiorca','wypisy','dok'));
     }
 
     /**
@@ -23,7 +30,10 @@ class WypisyController extends Controller
      */
     public function create()
     {
-        //
+         $przedsiebiorca = \App\Przedsiebiorca::latest()->get();
+         $dok = DB::table('dok_przed')->get();
+        
+         return view('przedsiebiorca.wypisy.create', compact('przedsiebiorca','dok'));
     }
 
     /**
@@ -34,7 +44,22 @@ class WypisyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Alert::success('Dodano nowy wypis', '');
+        $validatedData = $request->validate([
+         'id_przed' => 'required',
+         'id_dok_przed' => 'required',
+         'nazwa' => 'required|max:255',
+         'rodzaj_wyp' => 'required:max:255',
+         'nr_wyp' => 'required|max:255',
+         'nr_druku' => 'required|max:255',
+         'nr_sprawy' => 'required|max:255',
+         'data_wn' => 'required',
+         'data_wyd' => 'required',
+         
+        ]);
+        $dokumenty = \App\Wypisy::create($validatedData);
+
+        return redirect('/przedsiebiorca/wypisy')->with('success', 'Dokument dodany do bazy danych');
     }
 
     /**
