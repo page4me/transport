@@ -19,7 +19,7 @@
           <td>Imię</td>
           <td>Nazwisko</td>
           <td>Adres</td>
-          <td>Miejscowosć</td>
+          <td>Miejscowość</td>
           <td>NIP</td>
           <td>REGON</td>
           <td>Telefon<td>
