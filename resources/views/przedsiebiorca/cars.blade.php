@@ -135,98 +135,7 @@
           </div>
        </div>
        </div>
-         <!-- edit modal -->
-              <!-- Modal -->
-                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header  bg-success">
-                        <div class="card-header bg-success text-light" >
-                           Edycja pojazdu przedsiębiorcy o  -
-                             <span style="color:#000;font-size:15px;"> Nr licencji / zezwolenia:
-                               @foreach($dok as $dk)
-                                 {{ $dk->nr_dok }}
-            
-                             </span><span style="color: #fff;font-size:15px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
-
-                               @endforeach
-                          </div>
-                        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        
-                            
-                          <!-- Form add new car -->
-                              <form method="post" action="{{ route('pojazdy.update','d') }}">
-                            <div class="row">
-                                  @csrf
-                                   @method('GET')
-                               <div class="col-md-12 form-group">
-                                  <label for="nr_rej"><strong>Numer rejestracyjny:</strong></label>
-                                  <input type="text" class="form-control" name="nr_rej" value=""/>
-                              </div>
-                             </div>
-
-                            <div class="row">
-
-                              <div class="col-md-4 form-group">
-                                  <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
-                                  <input type="text" class="form-control" name="rodzaj_poj"/>
-                              </div>
-                              <div class="col-md-4 form-group">
-                                  <label for="kod_p"><strong>Marka:</strong></label>
-                                  <input type="text" class="form-control" name="marka">
-                              </div>
-                               <div class="col-md-4 form-group">
-                                  <label for="nr_druku"><strong>Nr VIN:</strong></label>
-                                  <input type="text" class="form-control" name="nr_vin" maxlength="17" />
-                              </div>
-
-                            </div>
-
-
-                            <div class="row">
-                               <div class="col-md-4 form-group">
-                                  <label for="nr_sprawy"><strong>DMC:</strong></label>
-                                  <input type="text" class="form-control" name="dmc"/>
-                              </div>
-                              <div class="col-md-4 form-group">
-                                  <label for="tel"><strong>Własnosć:</strong></label>
-                                  <input type="text" class="form-control" name="wlasnosc" />
-                              </div>
-                              <div class="col-md-4 form-group">
-                                  <label for="tel"><strong>Data wprowadzenia:</strong></label>
-                                  <input type="date" class="form-control" name="data_wpr" />
-                              </div>
-
-                            </div>
-                            <div class="row">
-                              <div class="col-md-12 form-group">
-                                  <label for="uwagi"><strong>Uwagi:</strong></label>
-                                  <input type="text" class="form-control" name="uwagi"/>
-                              </div>
-                            </div>
-                            <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
-                            <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
-                      </div>
-                      <div class="modal-footer">
-
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
-                        <button type="submit" class="btn btn-success">Zapisz zmiany</button>
-                    
-                      
-                         </form>
-                      </div>
-                    </div>
-                  </div>
-                
-
-                </div>
-             
-             
-         <!-- end edit -->
+         
        <div class="row">
          <div class="col-md-12 text-center">
           <span style="font-size: 20px;"> <strong>WYKAZ POJAZDÓW</strong></span>
@@ -263,8 +172,100 @@
                    <td class="text-center">{{$car->wlasnosc}}</td>
                    <td class="text-center">wprowadzono <br />{{$car->data_wpr}} r.</td>
                    <td class="text-center" colspan="2">
-                    <a href="/przedsiebiorca/pojazdy/{{$car->id}}/edit/" data-toggle="modal" data-target="#editModal" role="button" class="btn btn-success btn-sm" alt="Edycja"><i class="fa fa-edit"></i></a>
+                    <a href="/przedsiebiorca/pojazdy/{{$car->id}}" data-toggle="modal" data-id="{{$car->id}}" data-target="#editModal" role="button" class="btn btn-success btn-sm" alt="Edycja" ><i class="fa fa-edit"></i></a>
                     <a href="#" role="button" class="btn btn-danger btn-sm">Wycofaj</a>
+                                      <!-- edit modal -->
+                                <!-- Modal -->
+                                  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                      <div class="modal-content text-left">
+                                        <div class="modal-header  bg-success">
+                                          <div class="card-header bg-success text-light" >
+                                             Edycja pojazdu przedsiębiorcy o  -
+                                               <span style="color:#000;font-size:15px;"> Nr licencji / zezwolenia:
+                                                 @foreach($dok as $dk)
+                                                   {{ $dk->nr_dok }}
+                              
+                                               </span><span style="color: #fff;font-size:15px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
+
+                                                 @endforeach
+                                            </div>
+                                          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          {{print_r($cid)}}
+                                              {{$car->id}}
+                                            <!-- Form add new car -->
+                                                <form method="post" action="{{ route('pojazdy.update', 'id' ) }}">
+                                              <div class="row">
+                                                    @csrf
+                                                     @method('PATH')
+                                                 <div class="col-md-12 form-group">
+                                                    <label for="nr_rej"><strong>Numer rejestracyjny:</strong></label>
+                                                    <input type="text" class="form-control" name="nr_rej" value="{{$car->nr_rej}}"/>
+                                                </div>
+                                               </div>
+
+                                              <div class="row">
+
+                                                <div class="col-md-4 form-group">
+                                                    <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
+                                                    <input type="text" class="form-control" name="rodzaj_poj" value="{{$car->rodzaj_poj}}" />
+                                                </div>
+                                                <div class="col-md-4 form-group">
+                                                    <label for="kod_p"><strong>Marka:</strong></label>
+                                                    <input type="text" class="form-control" name="marka" value="{{$car->marka}}" />
+                                                </div>
+                                                 <div class="col-md-4 form-group">
+                                                    <label for="nr_druku"><strong>Nr VIN:</strong></label>
+                                                    <input type="text" class="form-control" name="nr_vin" maxlength="17" value="{{$car->nr_vin}}" />
+                                                </div>
+
+                                              </div>
+
+
+                                              <div class="row">
+                                                 <div class="col-md-4 form-group">
+                                                    <label for="nr_sprawy"><strong>DMC:</strong></label>
+                                                    <input type="text" class="form-control" name="dmc" value="{{$car->dmc}}" />
+                                                </div>
+                                                <div class="col-md-4 form-group">
+                                                    <label for="tel"><strong>Własnosć:</strong></label>
+                                                    <input type="text" class="form-control" name="wlasnosc" value="{{$car->wlasnosc}}" />
+                                                </div>
+                                                <div class="col-md-4 form-group">
+                                                    <label for="tel"><strong>Data wprowadzenia:</strong></label>
+                                                    <input type="date" class="form-control" name="data_wpr" value="{{$car->data_wpr}}" />
+                                                </div>
+
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    <label for="uwagi"><strong>Uwagi:</strong></label>
+                                                    <input type="text" class="form-control" name="uwagi" value="{{$car->uwagi}}" />
+                                                </div>
+                                              </div>
+                                              <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                                              <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
+                                        </div>
+                                        <div class="modal-footer">
+
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                                          <button type="submit" class="btn btn-success">Zapisz zmiany</button>
+                                      
+                                        
+                                           </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  
+
+                               
+                               
+                               
+                           <!-- end edit -->
                   </td>
                  </tr>
                  
