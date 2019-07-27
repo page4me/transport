@@ -104,6 +104,7 @@ class WykazPojController extends Controller
     public function update(Request $request, $id)
     {
         //
+        Alert::success('Zapisano zmiany', '');
         $validatedData = $request->validate([
          'id_przed' => 'required',
          'id_dok_przed' => 'required',
@@ -119,7 +120,7 @@ class WykazPojController extends Controller
         ]);
         \App\WykazPoj::whereId($id)->update($validatedData);
 
-        return redirect('/przedsiebiorca/cars/$id')->with('success', 'Dane przedsiębiorcy zmienione');
+        return redirect('/przedsiebiorca/'.$request->id_przed)->with('success', 'Dane przedsiębiorcy zmienione');
     }
 
     /**
