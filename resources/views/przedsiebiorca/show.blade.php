@@ -73,7 +73,7 @@
               <div> 
                
               
-                      <strong>Ilosć pojazdów:</strong>
+                      <strong>Ilość pojazdów:</strong>
                        <span class="badge badge-warning" style="font-size:13px;">
                            {{$count = \App\WykazPoj::where('id_przed','=',$przedsiebiorca->id)->where('status','=','1')->count()}} 
 
