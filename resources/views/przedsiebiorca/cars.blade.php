@@ -60,7 +60,7 @@
                        <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
                          @foreach($dok as $dk)
                            {{ $dk->nr_dok }}
-      
+
                        </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
 
                          @endforeach
@@ -130,12 +130,12 @@
                 </div>
               </div>
             </div>
-          
+
 
           </div>
        </div>
        </div>
-         
+
        <div class="row">
          <div class="col-md-12 text-center">
           <span style="font-size: 20px;"> <strong>WYKAZ POJAZDÓW</strong></span>
@@ -162,22 +162,26 @@
               <p style="font-size:1px;">{{$i=1}}</p>
              @foreach($cars as $car)
                @if(($car->status)==1)
-                 
                  <tr>
                    <td class="text-center">{{$i++}}</td>
                    <td>{{$car->rodzaj_poj}}<br /><strong> {{$car->marka}} </strong></td>
-                   <td class="text-center">{{$car->nr_rej}}</td>
+                   <td class="text-center">{{$car->nr_rej}}<br /><span class="text-primary"><small>{{$car->p_nr_rej}}</small></span></td>
                    <td class="text-center">{{$car->nr_vin}}</td>
                    <td class="text-center">{{$car->dmc}} kg</td>
                    <td class="text-center">{{$car->wlasnosc}}</td>
                    <td class="text-center">wprowadzono <br />{{$car->data_wpr}} r.</td>
                    <td class="text-center" colspan="2">
-                   
-                    <a href="/przedsiebiorca/pojazdy/{{$car->id}}" data-toggle="modal" data-id="{{$car->id}}" data-nr_rej="{{$car->nr_rej}}"  data-marka="{{$car->marka}}" data-nr_vin="{{$car->nr_vin}}" data-wlasnosc="{{$car->wlasnosc}}" data-data_wpr="{{$car->data_wpr}}" data-dmc="{{$car->dmc}}" data-rodzaj_poj="{{$car->rodzaj_poj}}" data-target="#editModal" role="button" class="btn btn-success btn-sm" alt="Edycja" ><i class="fa fa-edit"></i></a>
+                    <button data-toggle="modal" data-id="{{$car->id}}" data-nr_rej="{{$car->nr_rej}}"  data-p_nr_rej="{{$car->p_nr_rej}}" data-marka="{{$car->marka}}" data-nr_vin="{{$car->nr_vin}}" data-wlasnosc="{{$car->wlasnosc}}" data-data_wpr="{{$car->data_wpr}}" data-dmc="{{$car->dmc}}" data-rodzaj_poj="{{$car->rodzaj_poj}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
 
                     <a href="#" role="button" class="btn btn-danger btn-sm">Wycofaj</a>
 
-                                      <!-- edit modal -->
+                  </td>
+                 </tr>
+
+               @endif
+             @endforeach
+
+                                <!-- edit modal -->
                                 <!-- Modal -->
                                   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -188,7 +192,7 @@
                                                <span style="color:#000;font-size:15px;"> Nr licencji / zezwolenia:
                                                  @foreach($dok as $dk)
                                                    {{ $dk->nr_dok }}
-                              
+
                                                </span><span style="color: #fff;font-size:15px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
 
                                                  @endforeach
@@ -198,17 +202,19 @@
                                           </button>
                                         </div>
                                         <div class="modal-body">
-                                          
-                                             
-                                            <!-- Form add new car -->
-                                                <form method="post" action="{{ route('pojazdy.update', $car->id ) }}">
+                                          <!-- Form edit car -->
+                                                <form method="post" action="{{ route('pojazdy.update', 'idcar' ) }}">
                                               <div class="row">
                                                     @csrf
                                                       @method('PATCH')
-                                                 <div class="col-md-12 form-group">
+                                                 <div class="col-md-6 form-group">
                                                     <label for="nr_rej"><strong>Numer rejestracyjny:</strong></label>
                                                     <input type="text" class="form-control" name="nr_rej" id="nr_rej" value="{{$car->nr_rej}}"/>
-                                                </div>
+                                                 </div>
+                                                 <div class="col-md-6 form-group">
+                                                    <label for="p_nr_rej"><strong>Poprzedni numer rejestracyjny:</strong></label>
+                                                    <input type="text" class="form-control" name="p_nr_rej" id="p_nr_rej" value="{{$car->p_nr_rej}}"/>
+                                                 </div>
                                                </div>
 
                                               <div class="row">
@@ -252,55 +258,54 @@
                                               </div>
                                               <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
                                               <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
-                                              <input type="hidden" name="id" id="id" value="{{$car->id}}" />
+                                              <input type="hidden" name="idcar" id="idcar" value="{{$car->id}}" />
                                         </div>
                                         <div class="modal-footer">
 
                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
                                           <button type="submit" class="btn btn-success">Zapisz zmiany</button>
-                                      
-                                        
+
+
                                            </form>
                                         </div>
                                       </div>
                                     </div>
                                   <script type="text/javascript">
-                                     $('#editModal').on('show.bs.modal', function (event) {
-                                              var button = $(event.relatedTarget) 
-                                              var marka = button.data('marka') 
-                                              var nr_rej = button.data('nr_rej') 
-                                              var nr_vin = button.data('nr_vin') 
-                                              var data_wpr = button.data('data_wpr')
-                                              var rodzaj_poj = button.data('rodzaj_poj')
-                                              var wlasnosc = button.data('wlasnosc')
-                                              var dmc = button.data('dmc')
-                                              var uwagi = button.data('uwagi') 
-                                              
-                                              
-                                              var modal = $(this)
-                                              modal.find('.modal-body #marka').val(marka);
-                                              modal.find('.modal-body #nr_rej').val(nr_rej);
-                                              modal.find('.modal-body #nr_vin').val(nr_vin);
-                                              modal.find('.modal-body #data_wpr').val(data_wpr);
-                                              modal.find('.modal-body #rodzaj_poj').val(rodzaj_poj);
-                                              modal.find('.modal-body #dmc').val(dmc);
-                                              modal.find('.modal-body #wlasnosc').val(wlasnosc);
-                                              modal.find('.modal-body #uwagi').val(uwagi);
-                                             
-                                             
-                                             
-                                        })
+                                    $(".carID").click(function () {
+                                        var ids = $(this).attr('data-id');
+                                        var nr_rej = $(this).attr('data-nr_rej');
+                                        var p_nr_rej = $(this).attr('data-p_nr_rej');
+                                        var rodzaj_poj = $(this).attr('data-rodzaj_poj');
+                                        var marka = $(this).attr('data-marka');
+                                        var nr_vin = $(this).attr('data-nr_vin');
+                                        var dmc = $(this).attr('data-dmc');
+                                        var wlasnosc = $(this).attr('data-wlasnosc');
+                                        var data_wpr = $(this).attr('data-data_wpr');
+                                        var uwagi = $(this).attr('data-uwagi');
+
+                                        $("#idcar").val( ids );
+                                        $('#nr_rej').val ( nr_rej);
+                                        $('#p_nr_rej').val ( p_nr_rej);
+                                        $('#rodzaj_poj').val ( rodzaj_poj);
+                                        $('#marka').val ( marka);
+                                        $('#nr_vin').val ( nr_vin);
+                                        $('#dmc').val ( dmc);
+                                        $('#wlasnosc').val ( wlasnosc);
+                                        $('#data_wpr').val ( data_wpr);
+                                        $('#uwagi').val ( uwagi);
+
+                                        $('#editModal').modal('show');
+                                    });
                                   </script>
 
-                               
-                               
-                               
+
+
+
                            <!-- end edit -->
-                  </td>
-                 </tr>
-                 
-               @endif
-             @endforeach
+
+
+
+
            </table>
 
 
