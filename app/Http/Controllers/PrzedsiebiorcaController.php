@@ -176,9 +176,8 @@ class PrzedsiebiorcaController extends Controller
         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
         $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
         $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
-        $cid = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->where('id', $id);
         $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
-        return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan','cid'));
+        return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan'));
 
     }
 
