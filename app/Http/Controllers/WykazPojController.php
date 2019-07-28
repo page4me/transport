@@ -101,11 +101,16 @@ class WykazPojController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
         Alert::success('Zapisano zmiany', '');
-        $validatedData = $request->validate([
+        $cars = \App\WykazPoj::findOrFail($request->idcar);
+        
+        $cars->update($request->all());
+
+        //return back();
+        
+       /* $validatedData = $request->validate([
          'id_przed' => 'required',
          'id_dok_przed' => 'required',
          'rodzaj_poj' => 'required|max:255',
@@ -119,8 +124,8 @@ class WykazPojController extends Controller
                   
         ]);
         \App\WykazPoj::whereId($id)->update($validatedData);
-
-        return redirect('/przedsiebiorca/'.$request->id_przed)->with('success', 'Dane przedsiębiorcy zmienione');
+        */
+        return redirect('/przedsiebiorca/cars/'.$request->id_przed)->with('success', 'Zapisano zmiany');
     }
 
     /**
@@ -133,4 +138,9 @@ class WykazPojController extends Controller
     {
         //
     }
+
+   
+
+
+
 }
