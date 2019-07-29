@@ -139,14 +139,18 @@ class WykazPojController extends Controller
         //
     }
 
-   public function wycofaj($id)
+   public function wycofaj(Request $request)
     {
        
-      //$cars = \App\WykazPoj::findOrFail($id);
+       //return view('przedsiebiorca.pojazdy.wycofaj');
+      $cars = \App\WykazPoj::findOrFail($request->idp);
       
-      //$cars->update(['status'=>'2']);
-      //echo '<pre />';
-      //print_r($cars);
+
+      //$data_wyc = $request->data_wyc;
+      
+      //$cars->update(['status'=>'2','data_wyc'=>$data_wyc]);
+      echo '<pre />';
+      print_r($cars);
 
     }
 
