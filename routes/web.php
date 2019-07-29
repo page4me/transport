@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/przedsiebiorca/cars/{id}', 'PrzedsiebiorcaController@cars')->name('cars');
-Route::get('pojazdy/wycofaj/{id}', 'WykazPojController@wycofaj');
+Route::patch('pojazdy/wycofaj/{id}', 'WykazPojController@wycofaj')->name('wycofaj');
 Route::get('/przedsiebiorca/wypisy/{id}', 'WypisyController@index')->name('index');
 
 Route::get('/przedsiebiorca/pdf/{id}', 'PrzedsiebiorcaController@gPDF');
