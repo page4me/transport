@@ -142,7 +142,7 @@ class WykazPojController extends Controller
    public function wycofaj($id)
     {
        
-      $cars = \App\WykazPoj::findOrFail($id);
+      //$cars = \App\WykazPoj::findOrFail($id);
       
       //$cars->update(['status'=>'2']);
       //echo '<pre />';
