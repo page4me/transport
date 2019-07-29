@@ -173,8 +173,7 @@
                    <td class="text-center" colspan="2">
                     <button data-toggle="modal" data-id="{{$car->id}}" data-nr_rej="{{$car->nr_rej}}"  data-p_nr_rej="{{$car->p_nr_rej}}" data-marka="{{$car->marka}}" data-nr_vin="{{$car->nr_vin}}" data-wlasnosc="{{$car->wlasnosc}}" data-data_wpr="{{$car->data_wpr}}" data-dmc="{{$car->dmc}}" data-rodzaj_poj="{{$car->rodzaj_poj}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
 
-                    <a href="#" role="button" class="btn btn-danger btn-sm">Wycofaj</a>
-
+                  
                   </td>
                  </tr>
 
@@ -298,16 +297,37 @@
                                     });
                                   </script>
 
-
-
-
                            <!-- end edit -->
 
-
-
-
+                            <!-- wycofaj modal -->
+                              
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="wycofaj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            ...
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                    $('#wycofaj').on('click', function() {
+                                        $('#wycofaj').show();
+                                    });
+                                  </script>
+                           <!-- end wycofaj -->
            </table>
-
 
            <table class="table table-striped">
              <thead class="table bg-primary text-light text-center">
