@@ -139,11 +139,11 @@ class WykazPojController extends Controller
         //
     }
 
-   public function wycofaj(Request $request)
+   public function wycofaj(Request $reqest)
     {
        
        //return view('przedsiebiorca.pojazdy.wycofaj');
-      $cars = \App\WykazPoj::findOrFail($request->idp);
+      $cars = \App\WykazPoj::findOrFail($this->route('id'));
       
 
       //$data_wyc = $request->data_wyc;
