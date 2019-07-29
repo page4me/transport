@@ -328,7 +328,7 @@
                                       ID:<input type="text" name="idp" id="idp" value="{{$car->id}}" />
                                       <!-- Modal body -->
                                       <div class="modal-body">
-                                        <form  method="POST" action="{{ route('wycofaj','idp')}}" >
+                                        <form  method="POST" action="{ route('wycofaj', ['id' => $car->id]) }}" >
                                           @csrf
                                           @method('PATCH')
                                         Wprowadź datę wycofania pojazdu: <input type="date" id="data_wyc" name="data_wyc" />
