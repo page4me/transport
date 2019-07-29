@@ -172,7 +172,9 @@
                    <td class="text-center">wprowadzono <br />{{$car->data_wpr}} r.</td>
                    <td class="text-center" colspan="2">
                     <button data-toggle="modal" data-id="{{$car->id}}" data-nr_rej="{{$car->nr_rej}}"  data-p_nr_rej="{{$car->p_nr_rej}}" data-marka="{{$car->marka}}" data-nr_vin="{{$car->nr_vin}}" data-wlasnosc="{{$car->wlasnosc}}" data-data_wpr="{{$car->data_wpr}}" data-dmc="{{$car->dmc}}" data-rodzaj_poj="{{$car->rodzaj_poj}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
+                    
                     {{$car->id}}
+                    
                     <button data-toggle="modal" data-idp="{{$car->id}}" data-target="#myModal" role="button" class="btn btn-danger btn-sm">Wycofaj</button>
 
                            
@@ -326,7 +328,7 @@
                                       ID:<input type="text" name="idp" id="idp" value="{{$car->id}}" />
                                       <!-- Modal body -->
                                       <div class="modal-body">
-                                        <form  method="POST" action="test.php" >
+                                        <form  method="POST" action="{{ route('wycofaj','idp')}}" >
                                           @csrf
                                           @method('PATCH')
                                         Wprowadź datę wycofania pojazdu: <input type="date" id="data_wyc" name="data_wyc" />
