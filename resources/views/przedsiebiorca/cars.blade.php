@@ -172,13 +172,16 @@
                    <td class="text-center">wprowadzono <br />{{$car->data_wpr}} r.</td>
                    <td class="text-center" colspan="2">
                     <button data-toggle="modal" data-id="{{$car->id}}" data-nr_rej="{{$car->nr_rej}}"  data-p_nr_rej="{{$car->p_nr_rej}}" data-marka="{{$car->marka}}" data-nr_vin="{{$car->nr_vin}}" data-wlasnosc="{{$car->wlasnosc}}" data-data_wpr="{{$car->data_wpr}}" data-dmc="{{$car->dmc}}" data-rodzaj_poj="{{$car->rodzaj_poj}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
+                    {{$car->id}}
+                    <button data-toggle="modal" data-idp="{{$car->id}}" data-target="#myModal" role="button" class="btn btn-danger btn-sm">Wycofaj</button>
 
-                  
+                           
                   </td>
                  </tr>
 
                @endif
              @endforeach
+
 
                                 <!-- edit modal -->
                                 <!-- Modal -->
@@ -202,7 +205,7 @@
                                         </div>
                                         <div class="modal-body">
                                           <!-- Form edit car -->
-                                                <form method="post" action="{{ route('pojazdy.update', 'idcar' ) }}">
+                                                <form method="post" name="fwyc" action="{{ route('pojazdy.update', 'idcar' ) }}">
                                               <div class="row">
                                                     @csrf
                                                       @method('PATCH')
@@ -295,39 +298,63 @@
 
                                         $('#editModal').modal('show');
                                     });
+
+                                   
                                   </script>
 
                            <!-- end edit -->
 
                             <!-- wycofaj modal -->
                               
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="wycofaj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                      <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            ...
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <script type="text/javascript">
-                                    $('#wycofaj').on('click', function() {
-                                        $('#wycofaj').show();
-                                    });
-                                  </script>
-                           <!-- end wycofaj -->
+                                                     
+
+
            </table>
+           <!-- Button to Open the Modal -->
+                               
+
+                                <!-- The Modal -->
+                                <div class="modal" id="myModal">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                      <!-- Modal Header -->
+                                      <div class="modal-header bg-danger text-light">
+                                        <h4 class="modal-title">Wycofanie pojazdu</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      </div>
+                                      ID:<input type="text" name="idp" id="idp" value="{{$car->id}}" />
+                                      <!-- Modal body -->
+                                      <div class="modal-body">
+                                        <form  method="POST" action="test.php" >
+                                          @csrf
+                                          @method('PATCH')
+                                        Wprowadź datę wycofania pojazdu: <input type="date" id="data_wyc" name="data_wyc" />
+                                        <input type="hidden" id="idp" name="idp" value="{{$car->id}}" />
+                                      </div>
+
+                                      <!-- Modal footer -->
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Wycofaj</button>
+                                        <input type="hidden" name="idp" id="idp" value="{{$car->id}}" />
+                                      </form>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                                <script type="text/javascript">
+                                   
+                                      $('#myModal').on("show.bs.modal", function (e) {
+                                           
+                                           $("#idp").val($(e.relatedTarget).data('idp'));
+                                           $("#data_wyc").val($(e.relatedTarget).data('data_wyc'));
+                                           
+                                      });
+                                
+                                </script>
+                           <!-- end wycofaj -->
 
            <table class="table table-striped">
              <thead class="table bg-primary text-light text-center">
@@ -363,6 +390,9 @@
        </div>
  </div>
  <div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}" role="button"><i class="fa fa-arrow-left"></i> Szczegóły przedsiębiorcy</a></div><br />
+
+  
+                                 
 </div>
 </div>
 @endsection
