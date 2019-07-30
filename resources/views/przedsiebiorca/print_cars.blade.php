@@ -27,7 +27,7 @@
 <div class="container">
       
         <br />
-        <div class="row" style="text-align: right;">Stan na dzień: 25-05-2019 r.</div>
+        <div class="row" style="text-align: right;">Stan na dzień: @if(empty($stan->data_wpr)) brak danych @else {{$stan->data_wpr}} @endif r.</div>
         <div class="row" style="margin-left: 10px;">
           <div>
               <div style="font-weight: bold;">{{$przedsiebiorca->nazwa_firmy }} <br />{{$przedsiebiorca->adres}}<br />{{$przedsiebiorca->kod_p}} {{$przedsiebiorca->miejscowosc}}
@@ -65,89 +65,66 @@
          <div class="col-md-12">
            <table class="table table-striped table-sm">
              <thead class="table bg-dark text-light text-center">
-             <tr>
-               <th class="text-center">Lp.</th>
+              <tr>
+               <th class="text-center" style="width:30px;">Lp.</th>
                <th>Rodzaj i marka</th>
-               <th class="text-center" style="width:90px;">Nr rej.</th>
+               <th class="text-center" style="width:80px;">Nr rej.</th>
                <th class="text-center" style="width:100px;">Nr VIN</th>
-               <th class="text-center" style="width:60px;">DMC / os.</th>
-               <th class="text-center" style="width:60px;">Własnosć</th>
-               <th class="text-center" style="width:80px;">Data wpr.</th>
+               <th class="text-center" style="width:80px;">DMC / os.</th>
+               <th class="text-center" style="width:80px;">Własnosć</th>
+               <th class="text-center" style="width:90px;">Data wpr.</th>
               </tr>
              </thead>
              <tr><td colspan="7" class="text-center"><strong><span style="font-size: 14px;color:red;">Pojazdy wprowadzone do licencji / zezwolenia
              </span></strong></td></tr>
-             <tr>
-               <td class="text-center" style="width:20px;">1</td>
-               <td style="width:140px;">samochód ciężarowy <br /><strong> SCANIA R420</strong></td>
-               <td class="text-center" style="width:60px;">ZKO R300<br /><span style="color:#3399ff;font-size:10px;">ZK 58798</span></td>
-               <td class="text-center" style="width:100px;">XKSDJKS9797987</td>
-               <td class="text-center" style="width:80px;">40 000 kg</td>
-               <td class="text-center" style="width:90px;">Własnosć</td>
-               <td class="text-center" style="width:80px;">wprowadzono <br />15-05-2019 r.</td>
-             </tr>
-             <tr>
-               <td class="text-center">2</td>
-               <td>samochód ciężarowy <br /> <strong> SCANIA R420</strong></td>
-               <td class="text-center">ZKO R300</td>
-               <td class="text-center">XKSDJKS9797987</td>
-               <td class="text-center">40 000 kg</td>
-               <td class="text-center">Własnosć</td>
-               <td class="text-center">wprowadzono <br />15-05-2019 r.</td>
-             </tr>
-             <tr>
-               <td class="text-center">3</td>
-               <td>samochód ciężarowy <br /><strong> SCANIA R420</strong></td>
-               <td class="text-center">ZKO R300</td>
-               <td class="text-center">XKSDJKS9797987</td>
-               <td class="text-center">40 000 kg</td>
-               <td class="text-center">Własnosć</td>
-               <td class="text-center">wprowadzono <br />15-05-2019 r.</td>
-             </tr>
+              <p style="font-size:1px;">{{$i=1}}</p>
+             @foreach($cars as $car)
+               @if(($car->status)==1)
+                 <tr>
+                   <td class="text-center">{{$i++}}</td>
+                   <td style="width:140px;">{{$car->rodzaj_poj}}<br /><strong> {{$car->marka}} </strong></td>
+                   <td class="text-center">{{$car->nr_rej}}<br /><span class="text-primary"><small style="font-size:11px;">{{$car->p_nr_rej}}</small></span></td>
+                   <td class="text-center">{{$car->nr_vin}}</td>
+                   <td class="text-center">{{$car->dmc}} kg</td>
+                   <td class="text-center">{{$car->wlasnosc}}</td>
+                   <td class="text-center">wprowadzono <br />{{$car->data_wpr}} r.</td>
+                   
+                 </tr>
+
+               @endif
+             @endforeach
            </table>
            
          
            <table class="table table-striped table-sm">
               <thead class="table bg-dark text-light text-center">
-             <tr>
-               <th class="text-center">Lp.</th>
+              <tr>
+               <th class="text-center" style="width:30px;">Lp.</th>
                <th>Rodzaj i marka</th>
-              <th class="text-center" style="width:90px;">Nr rej.</th>
+               <th class="text-center" style="width:80px;">Nr rej.</th>
                <th class="text-center" style="width:100px;">Nr VIN</th>
-               <th class="text-center" style="width:60px;">DMC / os.</th>
-               <th class="text-center" style="width:60px;">Własnosć</th>
-               <th class="text-center" style="width:80px;">Data wpr.</th>
+               <th class="text-center" style="width:80px;">DMC / os.</th>
+               <th class="text-center" style="width:80px;">Własnosć</th>
+               <th class="text-center" style="width:90px;">Data wpr.</th>
               </tr>
              </thead>
              <tr><td colspan="7" class="text-center"><strong><span style="font-size: 14px;color:red;">Pojazdy wycofane z licencji / zezwolenia</span>
              </strong></td></tr>
-             <tr>
-               <td class="text-center" style="width:20px;">1</td>
-               <td style="width:140px;">samochód ciężarowy <br /><strong> SCANIA R420</strong></td>
-               <td class="text-center" style="width:60px;">ZKO R300</td>
-               <td class="text-center" style="width:100px;">XKSDJKS9797987</td>
-               <td class="text-center" style="width:80px;">40 000 kg</td>
-               <td class="text-center" style="width:90px;">Własnosć</td>
-               <td class="text-center" style="font-size: 11px;color:red;">wycofany dn.<br />15-05-2019 r.</td>
-             </tr>
-             <tr>
-               <td class="text-center" style="width:20px;">1</td>
-               <td style="width:140px;">samochód ciężarowy <br /><strong> SCANIA R420</strong></td>
-               <td class="text-center" style="width:60px;">ZKO R300</td>
-               <td class="text-center" style="width:100px;">XKSDJKS9797987</td>
-               <td class="text-center" style="width:80px;">40 000 kg</td>
-               <td class="text-center" style="width:90px;">Własnosć</td>
-               <td class="text-center" style="font-size: 11px;color:red;">wycofany dn.<br />15-05-2019 r.</td>
-             </tr>
-             <tr>
-               <td class="text-center" style="width:20px;">1</td>
-               <td style="width:140px;">samochód ciężarowy <br /><strong> SCANIA R420</strong></td>
-               <td class="text-center" style="width:60px;">ZKO R300</td>
-               <td class="text-center" style="width:100px;">XKSDJKS9797987</td>
-               <td class="text-center" style="width:80px;">40 000 kg</td>
-               <td class="text-center" style="width:90px;">Własnosć</td>
-               <td class="text-center" style="font-size: 11px;color:red;">wycofany dn.<br />15-05-2019 r.</td>
-             </tr>
+              <p style="font-size:1px;">{{$a=1}}</p>
+               @foreach($cars as $car)
+               @if(($car->status)==2)
+                    <tr>
+                     <td class="text-center">{{$a++}}</td>
+                     <td style="width:140px;">{{$car->rodzaj_poj}}<br /><strong> {{$car->marka}} </strong></td>
+                     <td class="text-center">{{$car->nr_rej}}</td>
+                     <td class="text-center">{{$car->nr_vin}}</td>
+                     <td class="text-center">{{$car->dmc}} kg</td>
+                     <td class="text-center">{{$car->wlasnosc}}</td>
+                     <td class="text-center" style="font-size: 12px;color:red;">wycofany dn. <br />{{$car->data_wyc}} r.</td>
+                   </tr>
+                @endif
+             @endforeach
+
            </table>
          </div>
        </div>
