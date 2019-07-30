@@ -26,7 +26,7 @@ class ZdolnoscController extends Controller
     public function create()
     {
         //
-          $przedsiebiorca= DB::table('przedsiebiorca')->get();
+         $przedsiebiorca = \App\Przedsiebiorca::latest()->get();
 
         return view('przedsiebiorca.zabezpieczenie.create', compact('przedsiebiorca'));
     }
