@@ -28,8 +28,8 @@ class PrzedsiebiorcaController extends Controller
              ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
              ->get();
         
-        $osobowosc = DB::table('rodzaj_przed')->get();
-       
+        //$osobowosc = DB::table('rodzaj_przed')->get();
+        
         //echo '<pre>';
         //print_r($rodzaje);
         
@@ -176,7 +176,9 @@ class PrzedsiebiorcaController extends Controller
         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
         $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
         $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
+
         $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
+
         return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan'));
 
     }
@@ -188,9 +190,10 @@ class PrzedsiebiorcaController extends Controller
        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
        //$pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca]);
        $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
-       
+       $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
+       $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
         //$nazwa_firmy = $przedsiebiorca->nazwa_firmy;
-        $pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok] );
+        $pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'cars'=>$cars, 'stan' => $stan ] );
         
         return $pdf->stream('wykazpojazdow.pdf');
 
