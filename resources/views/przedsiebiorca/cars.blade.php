@@ -173,19 +173,14 @@
                    <td class="text-center" colspan="2">
                     <button data-toggle="modal" data-id="{{$car->id}}" data-nr_rej="{{$car->nr_rej}}"  data-p_nr_rej="{{$car->p_nr_rej}}" data-marka="{{$car->marka}}" data-nr_vin="{{$car->nr_vin}}" data-wlasnosc="{{$car->wlasnosc}}" data-data_wpr="{{$car->data_wpr}}" data-dmc="{{$car->dmc}}" data-rodzaj_poj="{{$car->rodzaj_poj}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
                     
-                    {{$car->id}}
-                    
-                    <button data-toggle="modal" data-idp="{{$car->id}}" data-target="#myModal" role="button" class="btn btn-danger btn-sm">Wycofaj</button>
+                    <button data-toggle="modal" data-id="{{$car->id}}" data-target="#myModal" role="button" class="btn btn-danger btn-sm">Wycofaj</button>
 
-                           
                   </td>
                  </tr>
 
                @endif
              @endforeach
-
-
-                                <!-- edit modal -->
+                          <!-- edit modal -->
                                 <!-- Modal -->
                                   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -319,27 +314,29 @@
                                 <div class="modal" id="myModal">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
-
+                                        <input type="hidden" id="idp" name="idp" value="{{$car->id}}" disabled="disabled" />
+                                        <form  method="POST" action="{{ route('wycofaj', 'id' ) }}" >
                                       <!-- Modal Header -->
                                       <div class="modal-header bg-danger text-light">
                                         <h4 class="modal-title">Wycofanie pojazdu</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                       </div>
-                                      ID:<input type="text" name="idp" id="idp" value="{{$car->id}}" />
+                                      
                                       <!-- Modal body -->
                                       <div class="modal-body">
-                                        <form  method="POST" action="{{ URL::to('pojazdy/wycofaj') }}" >
+                                        
                                           @csrf
                                           @method('PATCH')
                                         Wprowadź datę wycofania pojazdu: <input type="date" id="data_wyc" name="data_wyc" />
-                                        <input type="hidden" id="idp" name="idp" value="{{$car->id}}" />
+                                        <input type="hidden" id="id" name="id" value="{{$car->id}}" />
+                                        <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
                                       </div>
 
                                       <!-- Modal footer -->
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-danger">Wycofaj</button>
-                                        <input type="hidden" name="idp" id="idp" value="{{$car->id}}" />
+                                        
                                       </form>
                                       </div>
 
@@ -350,8 +347,7 @@
                                    
                                       $('#myModal').on("show.bs.modal", function (e) {
                                            
-                                           $("#idp").val($(e.relatedTarget).data('idp'));
-                                           $("#data_wyc").val($(e.relatedTarget).data('data_wyc'));
+                                           $("#id").val($(e.relatedTarget).data('id'));
                                            
                                       });
                                 
@@ -382,7 +378,7 @@
                      <td class="text-center">{{$car->nr_vin}}</td>
                      <td class="text-center">{{$car->dmc}} kg</td>
                      <td class="text-center">{{$car->wlasnosc}}</td>
-                     <td class="text-center" style="font-size: 16px;color:red;">wycofany dn. <br />{{$car->data_wpr}} r.</td>
+                     <td class="text-center" style="font-size: 16px;color:red;">wycofany dn. <br />{{$car->data_wyc}} r.</td>
                    </tr>
                 @endif
              @endforeach
