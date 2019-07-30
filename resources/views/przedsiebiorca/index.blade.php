@@ -34,9 +34,12 @@
                 @if($petent->id == $row->id)
                   {{$row->nr_dok}}
                 
+             
             </strong></td>
             <td>
-             {{$row->rodzaj}}
+             
+                  {{$row->nazwa}}
+                
               @endif
               @endforeach
             </td>
@@ -52,7 +55,7 @@
             <td><form action="{{ route('przedsiebiorca.destroy', $petent->id)}}" method="post">
                   @csrf
                   @method('DELETE')
-                  <button class="btn btn-sm btn-danger" type="submit" id="confirm_delete"><i class="fa fa-trash"></i></button>
+                  <button class="btn btn-sm btn-danger" type="submit" id="confirm_deleteXX"><i class="fa fa-trash"></i></button>
                 </form>
             </td>
             <td><a href="{{ route('przedsiebiorca.show',$petent->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></a></td>
