@@ -25,7 +25,7 @@ class BazaController extends Controller
      */
     public function create()
     {
-        $przedsiebiorca= DB::table('przedsiebiorca')->get();
+         $przedsiebiorca = \App\Przedsiebiorca::latest()->get();
          
         return view('przedsiebiorca.baza.create', compact('przedsiebiorca'));
     }
