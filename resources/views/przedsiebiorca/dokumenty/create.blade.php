@@ -59,11 +59,11 @@
               <label for="imie">Nazwa:</label>
                <select class="form-control" name="nazwa">
                  <option value="0"> </option>
-                 <option value="1">Zezwolenie</option>
-                 <option value="2">Licencja</option>
-                 <option value="3">Zaswiadczenie</option>
-                 <option value="4">Licencja 7-9</option>
-                 <option value="5">Licencja Posrednictwo</option>
+                 <option value="Zezwolenie">Zezwolenie</option>
+                 <option value="Licencja">Licencja</option>
+                 <option value="Zaswiadczenie">Zaswiadczenie</option>
+                 <option value="Licencja 7-9">Licencja 7-9</option>
+                 <option value="Licencja Posrednictwo">Licencja Posrednictwo</option>
                </select>
           </div>
         </div>
@@ -112,7 +112,7 @@
           <button type="submit" class="btn btn-success">Utwórz nowy dokument</button>
       </form>
 
-      
+
   </div>
 </div>
 </div>
