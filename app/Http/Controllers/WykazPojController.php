@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use DB;
 use Alert;
 
@@ -139,19 +140,20 @@ class WykazPojController extends Controller
         //
     }
 
-   public function wycofaj(Request $reqest)
+   public function wycofaj(Request $request)
     {
        
        //return view('przedsiebiorca.pojazdy.wycofaj');
-      $cars = \App\WykazPoj::findOrFail($this->route('id'));
+      $cars = \App\WykazPoj::findOrFail($request->id);
       
-
-      //$data_wyc = $request->data_wyc;
-      
-      //$cars->update(['status'=>'2','data_wyc'=>$data_wyc]);
+      $input = Input::all();
+      $data_wyc = Input::get('data_wyc');
+      $id_przed = Input::get('id_przed');
+            
+      $cars->update(['status'=>'2','data_wyc'=>$data_wyc]);
       echo '<pre />';
       print_r($cars);
-
+      return redirect('/przedsiebiorca/cars/'.$id_przed);
     }
 
 
