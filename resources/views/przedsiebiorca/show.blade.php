@@ -75,11 +75,95 @@
               
                       <strong>Ilość pojazdów:</strong>
                        <span class="badge badge-warning" style="font-size:13px;">
-                           {{$count = \App\WykazPoj::where('id_przed','=',$przedsiebiorca->id)->where('status','=','1')->count()}} 
+                    {{$count = \App\WykazPoj::where('id_przed','=',$przedsiebiorca->id)->where('status','=','1')->count()}} 
 
                        </span><br />&nbsp;
                    @if($count ==0) 
-                       &nbsp; <a href="/przedsiebiorca/cars/{{$przedsiebiorca->id}}" role="button" class="btn btn-success btn-sm">Dodaj pojazd</a> 
+                       &nbsp; <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalCenter">Dodaj nowy</button>
+
+                        <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header  bg-dark">
+                  <div class="card-header bg-dark text-light" >
+                     Wykaz pojazdów przedsiębiorcy o  -
+                       <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
+                         @foreach($dok as $dk)
+                           {{ $dk->nr_dok }}
+
+                       </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
+
+                         @endforeach
+                    </div>
+                  <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form add new car -->
+                        <form method="post" action="{{ route('pojazdy.store') }}">
+                      <div class="row">
+                            @csrf
+                         <div class="col-md-12 form-group">
+                            <label for="nr_rej"><strong>Numer rejestracyjny:</strong></label>
+                            <input type="text" class="form-control" name="nr_rej"/>
+                        </div>
+                       </div>
+
+                      <div class="row">
+
+                        <div class="col-md-4 form-group">
+                            <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
+                            <input type="text" class="form-control" name="rodzaj_poj"/>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="kod_p"><strong>Marka:</strong></label>
+                            <input type="text" class="form-control" name="marka">
+                        </div>
+                         <div class="col-md-4 form-group">
+                            <label for="nr_druku"><strong>Nr VIN:</strong></label>
+                            <input type="text" class="form-control" name="nr_vin" maxlength="17" />
+                        </div>
+
+                      </div>
+
+
+                      <div class="row">
+                         <div class="col-md-4 form-group">
+                            <label for="nr_sprawy"><strong>DMC:</strong></label>
+                            <input type="text" class="form-control" name="dmc"/>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="tel"><strong>Własnosć:</strong></label>
+                            <input type="text" class="form-control" name="wlasnosc" />
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="tel"><strong>Data wprowadzenia:</strong></label>
+                            <input type="date" class="form-control" name="data_wpr" />
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label for="uwagi"><strong>Uwagi:</strong></label>
+                            <input type="text" class="form-control" name="uwagi"/>
+                        </div>
+                      </div>
+                      <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                      <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
+                </div>
+                <div class="modal-footer">
+
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                  <button type="submit" class="btn btn-success">Dodaj</button>
+                   </form>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
                      @else
                        <a class="btn btn-sm btn-primary" href="/przedsiebiorca/cars/{{$przedsiebiorca->id}}">Wykaz pojazdów</a>
                    @endif
