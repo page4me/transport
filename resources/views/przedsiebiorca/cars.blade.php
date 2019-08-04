@@ -380,7 +380,7 @@
                      <td class="text-center">{{$car->nr_vin}}</td>
                      <td class="text-center">{{$car->dmc}} kg</td>
                      <td class="text-center">{{$car->wlasnosc}}</td>
-                     <td class="text-center" style="font-size: 16px;color:red;">wycofany dn. <br />{{$car->data_wyc}} r.</td>
+                     <td class="text-center" style="font-size: 12px;color:red;">{{$car->data_wpr}}<br />wycofany dn. <br />{{$car->data_wyc}} r.</td>
                    </tr>
                 @endif
              @endforeach
