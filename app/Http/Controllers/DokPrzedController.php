@@ -16,7 +16,7 @@ class DokPrzedController extends Controller
     public function index()
     {
         //
-    }    
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +26,7 @@ class DokPrzedController extends Controller
     public function create()
     {
         $przedsiebiorca = \App\Przedsiebiorca::latest()->get();
-        
+
         return view('przedsiebiorca.dokumenty.create', compact('przedsiebiorca'));
     }
 
@@ -49,7 +49,7 @@ class DokPrzedController extends Controller
          'data_wn' => 'required',
          'data_wyd' => 'required',
          'data_waz' => 'required',
-         
+
         ]);
         $dokumenty = \App\DokumentyPrzed::create($validatedData);
 
@@ -89,7 +89,7 @@ class DokPrzedController extends Controller
     {
         Alert::success('Zmniany Zapisano', 'Dane dokumentów przedsiębiorcy zmienione');
         $validatedData = $request->validate([
-         
+
          'nazwa' => 'required|max:255',
          'rodz_dok' => 'required:max:255',
          'nr_dok' => 'required|max:255',
@@ -98,9 +98,9 @@ class DokPrzedController extends Controller
          'data_wn' => 'required',
          'data_wyd' => 'required',
          'data_waz' => 'required',
-         
+
         ]);
-       
+
         \App\DokumentyPrzed::whereId($id)->update($validatedData);
 
         return redirect('/przedsiebiorca')->with('success', 'Dane dokumentów przedsiębiorcy zmienione');
