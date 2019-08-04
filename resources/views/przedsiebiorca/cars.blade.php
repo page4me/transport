@@ -104,7 +104,7 @@
                             <input type="text" class="form-control" name="dmc"/>
                         </div>
                         <div class="col-md-4 form-group">
-                            <label for="tel"><strong>Własnosć:</strong></label>
+                            <label for="tel"><strong>Własność:</strong></label>
                             <input type="text" class="form-control" name="wlasnosc" />
                         </div>
                         <div class="col-md-4 form-group">
@@ -151,8 +151,8 @@
                <th>Rodzaj i marka</th>
                <th class="text-center">Nr rejestracjny</th>
                <th class="text-center">Nr VIN</th>
-               <th class="text-center">DMC / Ilosć os.</th>
-               <th class="text-center">Własnoć</th>
+               <th class="text-center">DMC / Ilość os.</th>
+               <th class="text-center">Własność</th>
                <th class="text-center">Data wprowadzenia</th>
                <th class="text-center">Opcja</th>
               </tr>
@@ -242,7 +242,7 @@
                                                     <input type="text" class="form-control" name="dmc" id="dmc" value="{{$car->dmc}}" />
                                                 </div>
                                                 <div class="col-md-4 form-group">
-                                                    <label for="tel"><strong>Własnosć:</strong></label>
+                                                    <label for="tel"><strong>Własność:</strong></label>
                                                     <input type="text" class="form-control" name="wlasnosc" id="wlasnosc" value="{{$car->wlasnosc}}" />
                                                 </div>
                                                 <div class="col-md-4 form-group">
@@ -363,8 +363,8 @@
                <th>Rodzaj i marka</th>
                <th class="text-center">Nr rejestracjny</th>
                <th class="text-center">Nr VIN</th>
-               <th class="text-center">DMC / Ilosć os.</th>
-               <th class="text-center">Własnosć</th>
+               <th class="text-center">DMC / Ilość os.</th>
+               <th class="text-center">Własność</th>
                <th class="text-center">Data wycofania</th>
               </tr>
              </thead>
