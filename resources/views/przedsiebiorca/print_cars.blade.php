@@ -71,7 +71,7 @@
                <th class="text-center" style="width:80px;">Nr rej.</th>
                <th class="text-center" style="width:100px;">Nr VIN</th>
                <th class="text-center" style="width:80px;">DMC / os.</th>
-               <th class="text-center" style="width:80px;">Własnosć</th>
+               <th class="text-center" style="width:80px;">Własność</th>
                <th class="text-center" style="width:90px;">Data wpr.</th>
               </tr>
              </thead>
@@ -104,7 +104,7 @@
                <th class="text-center" style="width:80px;">Nr rej.</th>
                <th class="text-center" style="width:100px;">Nr VIN</th>
                <th class="text-center" style="width:80px;">DMC / os.</th>
-               <th class="text-center" style="width:80px;">Własnosć</th>
+               <th class="text-center" style="width:80px;">Własność</th>
                <th class="text-center" style="width:90px;">Data wpr.</th>
               </tr>
              </thead>
