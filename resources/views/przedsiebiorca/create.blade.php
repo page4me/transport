@@ -79,7 +79,7 @@
               <input type="text" class="form-control" name="kod_p" maxlength="6" placeholder="xx-xxx"/>
           </div>
            <div class="col-md-3 form-group">
-              <label for="miejscowosc">Miejscowosc:</label>
+              <label for="miejscowosc">Miejscowość:</label>
               <input type="text" class="form-control" name="miejscowosc"/>
           </div>
            <div class="col-md-3 form-group">
