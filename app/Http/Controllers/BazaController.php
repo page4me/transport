@@ -16,6 +16,9 @@ class BazaController extends Controller
     public function index()
     {
         //
+        $baza = \App\Baza::all();
+
+
     }
 
     /**
@@ -26,7 +29,7 @@ class BazaController extends Controller
     public function create()
     {
          $przedsiebiorca = \App\Przedsiebiorca::latest()->get();
-         
+
         return view('przedsiebiorca.baza.create', compact('przedsiebiorca'));
     }
 
@@ -48,7 +51,7 @@ class BazaController extends Controller
          'kod_p' => 'required|max:6',
          'wlasnosc' => 'string|max:255|nullable',
          'umowa' => 'string|max:255|nullable',
-         'uwagi' => 'string|max:255|nullable'         
+         'uwagi' => 'string|max:255|nullable'
         ]);
         $baza = \App\Baza::create($validatedData);
 
@@ -87,6 +90,22 @@ class BazaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        Alert::success('Zapisano zmiany', 'Baza eksploatacyjna przedsiębiorcy');
+
+        $validatedData = $request->validate([
+         'id_przed' => 'required|max:1',
+         'rodzaj' => 'string|max:255|nullable',
+         'gmina' => 'string|max:255|nullable',
+         'adres' => 'required|max:255',
+         'miasto' => 'required|max:255',
+         'kod_p' => 'required|max:6',
+         'wlasnosc' => 'string|max:255|nullable',
+         'umowa' => 'string|max:255|nullable',
+         'uwagi' => 'string|max:255|nullable'
+        ]);
+        $baza = \App\Baza::whereId($id)->update($validatedData);
+
+        return redirect('/przedsiebiorca/')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
 
     /**
@@ -97,6 +116,6 @@ class BazaController extends Controller
      */
     public function destroy($id)
     {
-        
+
     }
 }
