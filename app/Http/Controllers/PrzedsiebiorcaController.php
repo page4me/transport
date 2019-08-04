@@ -20,19 +20,19 @@ class PrzedsiebiorcaController extends Controller
         //
 
         $przedsiebiorca = \App\Przedsiebiorca::all();
-      
+
         $rodzaje= DB::table('dok_przed')
              ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
              ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
              //->join('zdol_finans', 'zdol_finans.id_przed', "=", 'przedsiebiorca.id')
              ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
              ->get();
-        
+
         //$osobowosc = DB::table('rodzaj_przed')->get();
-        
+
         //echo '<pre>';
         //print_r($rodzaje);
-        
+
         return view('przedsiebiorca.index', compact('przedsiebiorca','rodzaje'));
     }
 
@@ -45,9 +45,9 @@ class PrzedsiebiorcaController extends Controller
     {
         //
         $rodzaje= DB::table('rodzaj_przed')->get();
-         
+
         return view('przedsiebiorca.create', compact('rodzaje'));
-        
+
     }
 
     /**
@@ -70,7 +70,7 @@ class PrzedsiebiorcaController extends Controller
          'nip' => 'required|max:11',
          'regon' => 'required|max:9',
          'telefon' => 'required|max:10',
-         
+
         ]);
         $przedsiebiorca = \App\Przedsiebiorca::create($validatedData);
 
@@ -93,7 +93,7 @@ class PrzedsiebiorcaController extends Controller
              ->join('dok_przed_wyp', 'dok_przed_wyp.id', "=", 'dok_przed_wyp.id_przed')
              ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*','dok_przed_wyp.*')
              ->get();
-        
+
        // echo '<pre>';
         //print_r($rodzaje);
         $osobowosc = DB::table('rodzaj_przed')->where('id', $przedsiebiorca->id)->get();
@@ -120,8 +120,9 @@ class PrzedsiebiorcaController extends Controller
 
          $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
          $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
+         $baza = DB::table('baza_eksp')->where('id_przed' , $przedsiebiorca->id)->get();
 
-         return view('przedsiebiorca.edit', compact('przedsiebiorca', 'rodzaje','dok'));
+         return view('przedsiebiorca.edit', compact('przedsiebiorca', 'rodzaje','dok','baza'));
 
     }
 
@@ -147,7 +148,7 @@ class PrzedsiebiorcaController extends Controller
          'nip' => 'required|max:11',
          'regon' => 'required|max:9',
          'telefon' => 'required|max:10',
-         
+
      ]);
      \App\Przedsiebiorca::whereId($id)->update($validatedData);
 
@@ -163,7 +164,7 @@ class PrzedsiebiorcaController extends Controller
     public function destroy($id)
     {
         //
-            
+
             $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
             $przedsiebiorca->delete();
 
@@ -194,7 +195,7 @@ class PrzedsiebiorcaController extends Controller
        $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
         //$nazwa_firmy = $przedsiebiorca->nazwa_firmy;
         $pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'cars'=>$cars, 'stan' => $stan ] );
-        
+
         return $pdf->stream('wykazpojazdow.pdf');
 
     }
@@ -203,10 +204,10 @@ class PrzedsiebiorcaController extends Controller
     {
         //
         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
-        
-       
+
+
         return view('przedsiebiorca.print_cars', compact('przedsiebiorca'));
-        
+
 
     }
 
@@ -216,7 +217,7 @@ class PrzedsiebiorcaController extends Controller
         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
         $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
         $wypisy = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->get();
-      
+
         return view('przedsiebiorca.wypisy', compact('przedsiebiorca','dok','wypisy'));
 
     }
@@ -226,9 +227,9 @@ class PrzedsiebiorcaController extends Controller
         //
         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
         $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
-       
+
         return view('przedsiebiorca.pojazdy.create', compact('przedsiebiorca','dok'));
-        
+
 
     }
 }
