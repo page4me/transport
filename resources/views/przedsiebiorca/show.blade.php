@@ -135,7 +135,7 @@
                             <input type="text" class="form-control" name="dmc"/>
                         </div>
                         <div class="col-md-4 form-group">
-                            <label for="tel"><strong>Własnosć:</strong></label>
+                            <label for="tel"><strong>Własność:</strong></label>
                             <input type="text" class="form-control" name="wlasnosc" />
                         </div>
                         <div class="col-md-4 form-group">
@@ -196,7 +196,7 @@
                </span>
              </div>
               <div class="col-md-3">
-               <strong>Ważnsć do dnia: </strong><br /><span class="badge badge-success" style="font-size:14px;"> {{$dk->data_waz}}</span>
+               <strong>Ważnść do dnia: </strong><br /><span class="badge badge-success" style="font-size:14px;"> {{$dk->data_waz}}</span>
              </div>
               <div class="col-md-3">
                <strong>Numer sprawy: </strong><br />  {{$dk->nr_sprawy}}
