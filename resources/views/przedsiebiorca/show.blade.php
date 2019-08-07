@@ -11,7 +11,7 @@
      <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
        @foreach($dok as $dk)
          @if(!empty($dk->nr_dok)) {{ $dk->nr_dok}} @else brak @endif
-       
+
      </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
        @endforeach
   </div>
@@ -31,7 +31,7 @@
                @foreach($osobowosc as $row)
                 {{$row->rodzaj}}
                @endforeach
-             
+
              </label>
               <div>{{$przedsiebiorca->nazwa_firmy }}<br />{{$przedsiebiorca->adres}}<br />{{$przedsiebiorca->kod_p}} {{$przedsiebiorca->miejscowosc}}</div><br />
               <div><strong>NIP:</strong> {{$przedsiebiorca->nip}}</div>
@@ -48,13 +48,100 @@
                <div>
                  <strong>Wydanych wypisów:</strong>
                    <span class="badge badge-warning" style="font-size:13px;">
-                      {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id)->count()}} 
+                      {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id)->count()}}
                     </span><br />
                  <strong>W depozycie wypisów: </strong><span class="badge badge-danger" style="font-size:12px;">
-                   {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id)->count()}} 
+                   {{$count1 = \App\Wypisy::where('status','=','2','AND','id_przed','=',$przedsiebiorca->id)->count()}}
+                {{$count1}}
                  </span><br />
-                 @if($count ==0) 
-                       &nbsp; <a href="/przedsiebiorca/wypisy/{{$przedsiebiorca->id}}" role="button" class="btn btn-success btn-sm">Dodaj wypis</a> 
+                 @if($count ==0)
+                       &nbsp; <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#nowyWypis">Dodaj wypis</button>
+                                     <!-- Modal -->
+                        <div class="modal fade" id="nowyWypis" tabindex="-1" role="dialog" aria-labelledby="nowyWypisCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header  bg-dark">
+                                <div class="card-header bg-dark text-light" >
+                                    Lista wypisów przedsiębiorcy o  -
+                                    <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
+                                        @foreach($dok as $dk)
+                                        {{ $dk->nr_dok }}
+
+                                    </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
+
+                                        @endforeach
+                                    </div>
+                                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form add new car -->
+                                        <form method="post" action="{{ route('wypisy.store') }}">
+                                    <div class="row">
+                                            @csrf
+                                        <div class="col-md-4 form-group">
+                                            <label for="nr_wyp"><strong>Numer wypisu:</strong></label>
+                                            <input type="text" class="form-control" name="nr_wyp"/>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="nr_druk"><strong>Nr druku:</strong></label>
+                                            <input type="text" class="form-control" name="nr_druku"/>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="id_dok_przed"><strong>Nr dokumentu:</strong></label>
+                                            <input type="text" class="form-control" name="_id_dok_przed" placeholder="{{$dk->nr_dok}}" disabled="disabled" />
+                                            <input type="hidden" class="form-control" name="id_dok_przed" value="{{$dk->nr_dok}}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-6 form-group">
+                                         <label for="nazwa"><strong>Nazwa dokumentu:</strong></label>
+                                         <input type="text" class="form-control" name="_nazwa" value="{{$dk->nazwa}}" disabled="disabled" />
+                                         <input type="hidden" class="form-control" name="nazwa" value="{{$dk->nazwa}}" />
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="nazwa_wyp"><strong>Rodzaj dokuemntu:</strong></label>
+                                            <input type="text" class="form-control" name="_nazwa" value="{{$dk->rodz_dok}}" disabled="disabled" />
+                                            <input type="hidden" class="form-control" name="rodzaj_wyp" value="{{$dk->rodz_dok}}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label for="data_wn"><strong>Data wniosku:</strong></label>
+                                            <input type="date" class="form-control" name="data_wn"/>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="data_wyd"><strong>Data wydania:</strong></label>
+                                            <input type="date" class="form-control" name="data_wyd" />
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="nr_sprawy"><strong>Numer sprawy:</strong></label>
+                                            <input type="text" class="form-control" name="nr_sprawy" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <label for="uwagi"><strong>Uwagi:</strong></label>
+                                            <input type="text" class="form-control" name="uwagi"/>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                                    <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
+                                </div>
+                                <div class="modal-footer">
+
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                                <button type="submit" class="btn btn-success">Dodaj</button>
+                                </form>
+                                </div>
+                            </div>
+                            </div>
+
+
+                        </div>
                      @else
                        <a class="btn btn-sm btn-primary" href="/przedsiebiorca/wypisy/{{$przedsiebiorca->id}}">Wypisy</a>
                    @endif
@@ -64,21 +151,21 @@
              <div><strong>Osoba zarządzająca</strong></div>
              <div>
               @foreach($cert as $ck)
-                @if(!empty($ck->id)) {{$ck->imie_os_z}} {{$ck->nazwisko_os_z}} @else brak @endif 
+                @if(!empty($ck->id)) {{$ck->imie_os_z}} {{$ck->nazwisko_os_z}} @else brak @endif
               @endforeach
                          </div>
-             <div>Umowa do dnia -  @if(!empty($ck->id)) {{$ck->umowa}} @else brak @endif</div> 
+             <div>Umowa do dnia -  @if(!empty($ck->id)) {{$ck->umowa}} @else brak @endif</div>
              <div><strong>Certyfikat kompetencji:</strong><br />@if(!empty($ck->id))<span style="color:#0041a8;font-weight: bold;">{{$ck->rodzaj}}</span>@else brak @endif / Nr @if(!empty($ck->id)) {{$ck->nr_cert}} @else brak <br /><br /> @endif</div><br />
-            
-              <div> 
-               
-              
+
+              <div>
+
+
                       <strong>Ilość pojazdów:</strong>
                        <span class="badge badge-warning" style="font-size:13px;">
-                    {{$count = \App\WykazPoj::where('id_przed','=',$przedsiebiorca->id)->where('status','=','1')->count()}} 
+                    {{$count = \App\WykazPoj::where('id_przed','=',$przedsiebiorca->id)->where('status','=','1')->count()}}
 
                        </span><br />&nbsp;
-                   @if($count ==0) 
+                   @if($count ==0)
                        &nbsp; <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalCenter">Dodaj nowy</button>
 
                         <!-- Modal -->
@@ -191,7 +278,7 @@
     <div class="card-body">
            <div class="row">
              <div class="col-md-3">
-               <strong>Data wydania : </strong><br /><span class="badge badge-secondary" style="font-size:14px;"> 
+               <strong>Data wydania : </strong><br /><span class="badge badge-secondary" style="font-size:14px;">
                   {{$dk->data_wyd}}
                </span>
              </div>
