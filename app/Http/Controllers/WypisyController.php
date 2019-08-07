@@ -17,9 +17,9 @@ class WypisyController extends Controller
     {
         //
          $przedsiebiorca = \App\Przedsiebiorca::findOrfail($id);
-         $wypisy = \App\Wypisy::all();
-         $dok = DB::table('dok_przed')->get();
-        
+         $wypisy =  DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->get();
+         $dok = DB::table('dok_przed')->where('id_przed', $przedsiebiorca->id)->get();;
+
          return view('przedsiebiorca.wypisy.index', compact('przedsiebiorca','wypisy','dok'));
     }
 
@@ -32,7 +32,7 @@ class WypisyController extends Controller
     {
          $przedsiebiorca = \App\Przedsiebiorca::latest()->get();
          $dok = DB::table('dok_przed')->get();
-        
+
          return view('przedsiebiorca.wypisy.create', compact('przedsiebiorca','dok'));
     }
 
@@ -50,16 +50,16 @@ class WypisyController extends Controller
          'id_dok_przed' => 'required',
          'nazwa' => 'required|max:255',
          'rodzaj_wyp' => 'required:max:255',
-         'nr_wyp' => 'required|max:255',
-         'nr_druku' => 'required|max:255',
+         'nr_wyp' => 'string|max:255',
+         'nr_druku' => 'string|max:255',
          'nr_sprawy' => 'required|max:255',
          'data_wn' => 'required',
          'data_wyd' => 'required',
-         
+
         ]);
         $dokumenty = \App\Wypisy::create($validatedData);
 
-        return redirect('/przedsiebiorca/wypisy')->with('success', 'Dokument dodany do bazy danych');
+        return redirect('/przedsiebiorca/wypisy/'.$request->id_przed)->with('success', 'Dokument dodany do bazy danych');
     }
 
     /**
