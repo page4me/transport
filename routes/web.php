@@ -20,7 +20,7 @@ Route::patch('/przedsiebiorca/pojazdy/wycofaj/{id}', 'WykazPojController@wycofaj
 Route::get('/przedsiebiorca/wypisy/{id}', 'WypisyController@index')->name('index');
 
 Route::get('/przedsiebiorca/pdf/{id}', 'PrzedsiebiorcaController@gPDF');
-
+Route::get('/przedsiebiorca/wypisyPDF/{id}', 'WypisyController@wypisyPDF');
 
 Route::resource('przedsiebiorca/baza', 'BazaController');
 
