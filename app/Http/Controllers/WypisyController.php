@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Alert;
+use PDF;
 
 class WypisyController extends Controller
 {
@@ -19,8 +20,9 @@ class WypisyController extends Controller
          $przedsiebiorca = \App\Przedsiebiorca::findOrfail($id);
          $wypisy =  DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->get();
          $dok = DB::table('dok_przed')->where('id_przed', $przedsiebiorca->id)->get();;
+         $stan = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
 
-         return view('przedsiebiorca.wypisy.index', compact('przedsiebiorca','wypisy','dok'));
+         return view('przedsiebiorca.wypisy.index', compact('przedsiebiorca','wypisy','dok','stan'));
     }
 
     /**
@@ -105,5 +107,34 @@ class WypisyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function wypisyPDF($id)
+    {
+        //set_time_limit(0);
+
+       $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+       //$pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca]);
+       $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
+       $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
+       $stan = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
+
+       $wypisy = DB::table('dok_przed_wyp')->where('id_przed' , $przedsiebiorca->id)->get();
+        //$nazwa_firmy = $przedsiebiorca->nazwa_firmy;
+        $pdf = PDF::loadView('przedsiebiorca.wypisy.print_wypisy', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'cars'=>$cars, 'stan' => $stan , 'wypisy' => $wypisy] );
+
+        return $pdf->stream('wypisy.pdf');
+
+    }
+
+    public function print_wypisy($id)
+    {
+        //
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+
+
+        return view('przedsiebiorca.print_cars', compact('przedsiebiorca'));
+
+
     }
 }
