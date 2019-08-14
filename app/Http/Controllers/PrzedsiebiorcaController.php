@@ -121,8 +121,9 @@ class PrzedsiebiorcaController extends Controller
          $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
          $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
          $baza = DB::table('baza_eksp')->where('id_przed' , $przedsiebiorca->id)->get();
+         $osz = DB::table('cert_komp')->where('id_przed' , $przedsiebiorca->id)->get();
 
-         return view('przedsiebiorca.edit', compact('przedsiebiorca', 'rodzaje','dok','baza'));
+         return view('przedsiebiorca.edit', compact('przedsiebiorca', 'rodzaje','dok','baza','osz'));
 
     }
 
