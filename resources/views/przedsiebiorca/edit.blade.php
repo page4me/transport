@@ -19,17 +19,17 @@
 
 <div class="card uper">
  <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active bg-warning" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Edycja danych</a>
-    <a class="nav-item nav-link bg-primary text-light" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Edycja dokumentów</a>
-    <a class="nav-item nav-link bg-dark text-light" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Edycja bazy</a>
-    <a class="nav-item nav-link bg-info text-light" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Edycja osoby zarządzającej</a>
-    <a class="nav-item nav-link bg-success text-light" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Edycja zabezpieczenia finansowego</a>
+  <div class="nav nav-pills" id="nav-tab" role="tablist" style="padding: 10px;">
+    <a class="nav-item nav-link bg-dark" style="color:#fff;" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Edycja danych</a>&nbsp;&nbsp;
+    <a class="nav-item nav-link bg-success text-light" style="padding:10px;" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Edycja dokumentów</a>&nbsp;&nbsp;
+    <a class="nav-item nav-link bg-success text-light" style="padding:10px;" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Edycja bazy</a>&nbsp;&nbsp;
+    <a class="nav-item nav-link bg-success text-light" style="padding:10px;" id="nav-osz-tab" data-toggle="tab" href="#nav-osz" role="tab" aria-controls="nav-osz" aria-selected="false">Edycja osoby zarządzającej</a>&nbsp;&nbsp;
+    <a class="nav-item nav-link bg-success text-light" style="padding:10px;" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Edycja zabezpieczenia finansowego</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-    <div class="card-header bg-warning text-dark">
+    <div class="card-header">
    <strong>Edycja danych przedsiębiorcy</strong>
   </div>
 
@@ -126,7 +126,7 @@
 
   </div>
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-    <div class="card-header bg-primary text-light">
+    <div class="card-header">
        <strong>Edycja dokumentów przedsiębiorcy</strong>
       </div>
      <div style="margin: 20px;">
@@ -194,7 +194,7 @@
      </div>
   </div>
   <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-       <div class="card-header bg-dark text-light">
+       <div class="card-header">
        <strong>Edycja bazy eksploatacyjnej przedsiębiorcy</strong>
       </div>
      <div style="margin: 20px;">
@@ -275,6 +275,96 @@
       </form>
   </div>
 </div>
+
+<div class="tab-pane fade" id="nav-osz" role="tabpanel" aria-labelledby="nav-osz-tab">
+       <div class="card-header">
+       <strong>Edycja osoby zarządającej</strong>
+      </div>
+     <div style="margin: 20px;padding-top: 1px;">
+     @foreach($osz as $oz)
+     <form method="post" action="{{ route('zarzadzajacy.update', $oz->id) }}">
+        <div class="row">
+              @csrf
+              @method('PATCH')
+          <div class="col-md-8 form-group">
+              <label for="id_przed">Przedsiębiorca:</label>
+              <input type="text" class="form-control" name="nazwa_firmy" value="{{$przedsiebiorca->nazwa_firmy}}" disabled="disabled"/>
+              <input type="hidden""  name="id_przed" value="{{$przedsiebiorca->id}}"/>
+
+          </div>
+           <div class="col-md-4 form-group">
+              <label for="imie">Rodzaj:</label>
+               <select class="form-control" name="rodzaj" id="rodzaj" value="{{$oz->rodzaj}}">
+                @if($oz->rodzaj =='rzeczy')
+                 <option value="rzeczy">Rzeczy</option>
+                 <option value="osoby">Osoby</option>
+                 @elseif($oz->rodzaj =='osoby')
+                 <option value="osoby">Osoby</option>
+                 <option value="rzeczy">Rzeczy</option>
+                @endif
+               </select>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-3 form-group">
+              <label for="adres"><strong>Nr certyfikatu:</strong></label>
+              <input type="text" class="form-control" name="nr_cert" value="{{$oz->nr_cert}}" />
+          </div>
+          <div class="col-md-3 form-group">
+              <label for="">Imię:</label>
+              <input type="text" class="form-control" name="imie_os_z" value="{{$oz->imie_os_z}}" />
+          </div>
+           <div class="col-md-3 form-group">
+              <label for="miejscowosc">Nazwisko:</label>
+              <input type="text" class="form-control" name="nazwisko_os_z" value="{{$oz->nazwisko_os_z}}" />
+          </div>
+           <div class="col-md-3 form-group">
+              <label for="gmina">Data urodzenia:</label>
+              <input type="date" class="form-control" name="dat_ur" value="{{$oz->dat_ur}}" />
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-4 form-group">
+              <label for="adres">Adres:</label>
+              <input type="text" class="form-control" name="adres" value="{{$oz->adres}}" />
+          </div>
+           <div class="col-md-4 form-group">
+              <label for="miejscowosc">Miejscowosć:</label>
+              <input type="text" class="form-control" name="miasto" value="{{$oz->miasto}}" />
+          </div>
+           <div class="col-md-4 form-group">
+              <label for="data">Data wydania:</label>
+              <input type="date" class="form-control" name="dat_wyd" value="{{$oz->dat_wyd}}" />
+          </div>
+        </div>
+
+        @endforeach
+        <div class="row">
+          <div class="col-md-4 form-group">
+              <label for="tel">Zarządzający:</label>
+              <input type="text" class="form-control" name="os_zarz" value="{{$oz->os_zarz}}" />
+          </div>
+          <div class="col-md-4 form-group">
+              <label for="tel">Umowa:</label>
+              <input type="text" class="form-control" name="umowa" value="{{$oz->umowa}}" />
+          </div>
+          <div class="col-md-4 form-group">
+              <label for="data">Data umowy:</label>
+              <input type="date" class="form-control" name="dat_umowy" value="{{$oz->dat_umowy}}" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 form-group">
+              <label for="uwagi">Uwagi:</label>
+              <input type="text" class="form-control" name="uwagi" value="{{$oz->uwagi}}" />
+          </div>
+        </div>
+          <button type="submit" class="btn btn-success">Zapisz zmiany zarządzającego</button>
+      </form>
 
 
 
