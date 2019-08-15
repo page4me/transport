@@ -172,7 +172,7 @@
                   <td>{{$wp->data_wyd}}</td>
 
                   <td>{{$wp->id}}
-                  <button data-toggle="modal" data-id="{{$wp->id}}" data-nr_wyp="{{$wp->nr_wyp}}"  data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
+                  <button data-toggle="modal" data-id="{{$wp->id}}" data-nr_wyp="{{$wp->nr_wyp}}" data-nr_druku="{{$wp->nr_druku}}" data-nr_sprawy="{{$wp->nr_sprawy}}" data-data_wn="{{$wp->data_wn}}" data-data_wyd="{{$wp->data_wyd}}" data-uwagi="{{$wp->uwagi}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
 
                   <td>
                       <form action="{{ route('przedsiebiorca.destroy', $wp->id)}}" method="post">
@@ -208,17 +208,17 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- Form add new car -->
-                                   <input type="text" id="idwyp" name="idwyp" value="{{$wp->id}}" />
-                                        <form method="post" action="{{ route('wypisy.store') }}">
+                                 <form method="post" action="{{ route('wypisy.update','idwyp') }}">
                                     <div class="row">
                                             @csrf
+                                             @method('PATCH')
                                         <div class="col-md-4 form-group">
                                             <label for="nr_wyp"><strong>Numer wypisu:</strong></label>
                                             <input type="text" class="form-control" id="nr_wyp" name="nr_wyp" value="{{$wp->nr_wyp}}" />
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label for="nr_druk"><strong>Nr druku:</strong></label>
-                                            <input type="text" class="form-control" name="nr_druku"/>
+                                            <input type="text" class="form-control" name="nr_druku" id="nr_druku" />
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label for="id_dok_przed"><strong>Nr dokumentu:</strong></label>
@@ -243,26 +243,26 @@
                                     <div class="row">
                                         <div class="col-md-4 form-group">
                                             <label for="data_wn"><strong>Data wniosku:</strong></label>
-                                            <input type="date" class="form-control" name="data_wn"/>
+                                            <input type="date" class="form-control" name="data_wn" id="data_wn" value="{{$wp->data_wn}}" />
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label for="data_wyd"><strong>Data wydania:</strong></label>
-                                            <input type="date" class="form-control" name="data_wyd" />
+                                            <input type="date" class="form-control" name="data_wyd" id="data_wyd" value="{{$wp->data_wyd}}" />
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label for="nr_sprawy"><strong>Numer sprawy:</strong></label>
-                                            <input type="text" class="form-control" name="nr_sprawy" />
+                                            <input type="text" class="form-control" name="nr_sprawy" id="nr_sprawy" value="{{$wp->nr_sprawy}}" />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 form-group">
                                             <label for="uwagi"><strong>Uwagi:</strong></label>
-                                            <input type="text" class="form-control" name="uwagi"/>
+                                            <input type="text" class="form-control" name="uwagi" id="uwagi" value="{{$wp->uwagi}}" />
                                         </div>
                                     </div>
 
                                     <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
-                                    <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
+
                                     <input type="hidden" name="idwyp" id="idwyp" value="{{$wp->id}}" />
                                 </div>
                                 <div class="modal-footer">
@@ -290,10 +290,19 @@
                                      $(".carID").click(function () {
                                         var idwyp = $(this).attr('data-id');
                                         var nr_wyp = $(this).attr('data-nr_wyp');
-
+                                        var nr_druku = $(this).attr('data-nr_druku');
+                                        var nr_sprawy = $(this).attr('data-nr_sprawy');
+                                        var data_wn = $(this).attr('data-data_wn');
+                                        var data_wyd = $(this).attr('data-data_wyd');
+                                        var uwagi = $(this).attr('data-uwagi');
 
                                         $("#idwyp").val(idwyp);
                                         $('#nr_wyp').val(nr_wyp);
+                                        $('#nr_druku').val(nr_druku);
+                                        $('#nr_sprawy').val(nr_sprawy);
+                                        $('#data_wn').val(data_wn);
+                                        $('#data_wyd').val(data_wyd);
+                                        $('#uwagi').val(uwagi);
 
                                         $('#edycjaWypis').modal('show');
                                     });
