@@ -171,7 +171,7 @@
                   <td>{{$wp->data_wn}}</td>
                   <td>{{$wp->data_wyd}}</td>
 
-                  <td>{{$wp->id}}
+                  <td>
                   <button data-toggle="modal" data-id="{{$wp->id}}" data-nr_wyp="{{$wp->nr_wyp}}" data-nr_druku="{{$wp->nr_druku}}" data-nr_sprawy="{{$wp->nr_sprawy}}" data-data_wn="{{$wp->data_wn}}" data-data_wyd="{{$wp->data_wyd}}" data-uwagi="{{$wp->uwagi}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
 
                   <td>
