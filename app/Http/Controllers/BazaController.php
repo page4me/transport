@@ -118,4 +118,9 @@ class BazaController extends Controller
     {
 
     }
+
+    public function bz()
+    {
+
+    }
 }
