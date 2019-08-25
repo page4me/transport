@@ -90,6 +90,21 @@ class ZdolnoscController extends Controller
     public function update(Request $request, $id)
     {
         //
+        Alert::success('Zapisano zmiany', 'Dane zdolności finansowej zmienione');
+        $validatedData = $request->validate([
+            'id_przed' => 'required|max:1',
+            'nazwa' => 'string|max:255|nullable',
+            'numer' => 'string|max:255|nullable',
+            'data_od' => 'string|max:255|nullable',
+            'data_do' => 'string|max:255|nullable',
+            'ile_poj' => 'required|max:255',
+            'suma_zab' => 'required|max:255',
+            'status' => 'required|max:16|nullable',
+            'uwagi' => 'string|max:255|nullable'
+           ]);
+
+           \App\Zdolnosc::whereId($id)->update($validatedData);
+        return redirect('/przedsiebiorca')->with('success', 'Dane osoby zarządającej zmienione');
     }
 
     /**
