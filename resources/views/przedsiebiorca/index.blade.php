@@ -4,8 +4,8 @@
 @section('content')
 <div class="container-fluid">
 <div><br />
-   
- 
+
+
   <div class="card bg-dark text-white">
     <div class="card-body">Przedsiębiorcy - <a href="przedsiebiorca/create" role="button" class="btn btn-success">Dodaj nowego</a></div>
   </div>
@@ -21,7 +21,6 @@
           <td>Adres</td>
           <td>Miejscowość</td>
           <td>NIP</td>
-          <td>REGON</td>
           <td>Telefon<td>
           <td colspan="3">Akcja</td>
         </tr>
@@ -33,24 +32,23 @@
               @foreach($rodzaje as $row)
                 @if($petent->id == $row->id)
                   {{$row->nr_dok}}
-                
-             
+
+
             </strong></td>
             <td>
-             
+
                   {{$row->nazwa}}
-                
+
               @endif
               @endforeach
             </td>
-            <td>{{$petent->nazwa_firmy}}</td>
+            <td style="width:250px;">{{$petent->nazwa_firmy}}</td>
             <td>{{$petent->imie}}</td>
             <td>{{$petent->nazwisko}}</td>
             <td>{{$petent->adres}}</td>
             <td>{{$petent->miejscowosc}}</td>
             <td>{{$petent->nip}}</td>
-            <td>{{$petent->regon}}</td>
-            <td>+48 {{$petent->telefon}}</td>
+            <td>{{$petent->telefon}}</td>
             <td><a href="{{ route('przedsiebiorca.edit',$petent->id)}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></a></td>
             <td><form action="{{ route('przedsiebiorca.destroy', $petent->id)}}" method="post">
                   @csrf
