@@ -172,17 +172,11 @@
                   <td>{{$wp->data_wyd}}</td>
 
                   <td>
-                  <button data-toggle="modal" data-id="{{$wp->id}}" data-nr_wyp="{{$wp->nr_wyp}}" data-nr_druku="{{$wp->nr_druku}}" data-nr_sprawy="{{$wp->nr_sprawy}}" data-data_wn="{{$wp->data_wn}}" data-data_wyd="{{$wp->data_wyd}}" data-uwagi="{{$wp->uwagi}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
-
+                    <button class="btn btn-success carID"  data-toggle="modal" data-id="{{$wp->id}}" data-nr_wyp="{{$wp->nr_wyp}}" data-nr_druku="{{$wp->nr_druku}}" data-nr_sprawy="{{$wp->nr_sprawy}}" data-data_wn="{{$wp->data_wn}}" data-data_wyd="{{$wp->data_wyd}}" data-uwagi="{{$wp->uwagi}}" data-target="#editModal" alt="Edycja" ><i class="fa fa-edit"></i></button>
                   <td>
-                      <form action="{{ route('przedsiebiorca.destroy', $wp->id)}}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger" type="submit" id="confirm_delete btn-sm"><i class="fa fa-trash"></i></button>
-                      </form>
+                    <button class="btn btn-danger" type="submit" id="confirm_delete"><i class="fa fa-trash"></i></button>
                   </td>
-
-                  <td><button class="btn btn-sm btn-warning btn-sm">Depozyt</button></td>
+                  <td><button class="btn btn-danger btn-sm">Depozyt</button></td>
               </tr>
               @endforeach
           </tbody>
