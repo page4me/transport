@@ -43,7 +43,7 @@ class CertController extends Controller
          'id_przed' => 'required|max:1',
          'rodzaj' => 'string|max:255|nullable',
          'nr_cert' => 'string|max:255|nullable',
-         'imnie_os_z' => 'string|max:255|nullable',
+         'imie_os_z' => 'string|max:255|nullable',
          'nazwisko_os_z' => 'string|max:255|nullable',
          'adres' => 'required|max:255',
          'miasto' => 'required|max:255',
@@ -55,6 +55,7 @@ class CertController extends Controller
          'uwagi' => 'string|max:255|nullable'
         ]);
         $baza = \App\Certyfikat::create($validatedData);
+
 
         return redirect('/przedsiebiorca/zabezpieczenie/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
@@ -96,7 +97,7 @@ class CertController extends Controller
          'id_przed' => 'required|max:1',
          'rodzaj' => 'string|max:255|nullable',
          'nr_cert' => 'string|max:255|nullable',
-         'imnie_os_z' => 'string|max:255|nullable',
+         'imie_os_z' => 'string|max:255|nullable',
          'nazwisko_os_z' => 'string|max:255|nullable',
          'adres' => 'required|max:255',
          'miasto' => 'required|max:255',
