@@ -19,21 +19,15 @@ class PrzedsiebiorcaController extends Controller
     {
         //
 
-        $przedsiebiorca = \App\Przedsiebiorca::all();
+        //$przedsiebiorca = \App\Przedsiebiorca::all();
 
         $rodzaje= DB::table('dok_przed')
              ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
              ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
-             //->join('zdol_finans', 'zdol_finans.id_przed', "=", 'przedsiebiorca.id')
              ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
-             ->get();
+             ->paginate(5);
 
-        //$osobowosc = DB::table('rodzaj_przed')->get();
-
-        //echo '<pre>';
-        //print_r($rodzaje);
-
-        return view('przedsiebiorca.index', compact('przedsiebiorca','rodzaje'));
+        return view('przedsiebiorca.index', compact('rodzaje'));
     }
 
     /**
@@ -196,7 +190,13 @@ class PrzedsiebiorcaController extends Controller
        $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
        $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
         //$nazwa_firmy = $przedsiebiorca->nazwa_firmy;
+
         $pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'cars'=>$cars, 'stan' => $stan ] );
+        //$pdf->output();
+        //$dom_pdf = $pdf->getDomPDF();
+
+        //$canvas = $dom_pdf ->get_canvas();
+        //$canvas->page_text(10, 10, "Strona {PAGE_NUM} z {PAGE_COUNT}", null, 10, array(0, 0, 0));
 
         return $pdf->stream('wykazpojazdow.pdf');
 
