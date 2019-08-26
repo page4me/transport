@@ -22,7 +22,7 @@ class CreatePrzedsiebiorcaTable extends Migration
             $table->string('adres');
             $table->string('miejscowosc');
             $table->string('kod_p');
-            $table->string('gmina')->nullable();
+            $table->string('gmina')->default(null);
             $table->integer('nip')->default(0);
             $table->integer('regon')->default(0);
             $table->integer('telefon')->default(0);
