@@ -13,19 +13,28 @@
             body {
           font-family: DejaVu Sans;
           font-size: 12px;
-          margin: 10px 10px 0 0; 
+          margin: 10px 10px 0 0;
       }
             @page {
-               margin: 10px 10px 0 0; 
-               
+               margin: 10px 10px 0 0;
+
             }
 
         </style>
 </head>
 <body>
-
+    <script type="text/php">
+        if (isset($pdf)) {
+            $pdf->page_script('
+                 if ($PAGE_COUNT > 1) {
+                     $font = $fontMetrics->getFont("Lato", "regular");
+                     $pdf->page_text(522, 770, "Page {PAGE_NUM} / {PAGE_COUNT}", $font, 8, array(.5,.5,.5));
+                }
+            ');
+       }
+    </script>
 <div class="container">
-      
+
         <br />
         <div class="row" style="text-align: right;">Stan na dzień: @if(empty($stan->data_wpr)) brak danych @else {{$stan->data_wpr}} @endif r.</div>
         <div class="row" style="margin-left: 10px;">
@@ -47,7 +56,7 @@
               @endif</p>
 
           </div>
-         
+
        </div>
          <div class="row">
            <div class="text-center"> <span style="font-size:16px;font-weight: bold;">Wykaz pojazdów</span> <br/>
@@ -55,13 +64,13 @@
                   @foreach($dok as $dk)
                      {{ $dk->nr_dok }}
                   @endforeach
-             </span> 
+             </span>
 
           </div>
         </div>
-               
+
        <div class="row" style="margin-left: 10px;">
-         
+
          <div class="col-md-12">
            <table class="table table-striped table-sm">
              <thead class="table bg-dark text-light text-center">
@@ -88,14 +97,14 @@
                    <td class="text-center">{{$car->dmc}} kg</td>
                    <td class="text-center">{{$car->wlasnosc}}</td>
                    <td class="text-center">wprowadzono <br />{{$car->data_wpr}} r.</td>
-                   
+
                  </tr>
 
                @endif
              @endforeach
            </table>
-           
-         
+
+
            <table class="table table-striped table-sm">
               <thead class="table bg-dark text-light text-center">
               <tr>
@@ -120,7 +129,7 @@
                      <td class="text-center">{{$car->nr_vin}}</td>
                      <td class="text-center">{{$car->dmc}} kg</td>
                      <td class="text-center">{{$car->wlasnosc}}</td>
-                     <td class="text-center" style="font-size: 12px;color:red;">wycofany dn. <br />{{$car->data_wyc}} r.</td>
+                     <td class="text-center" style="font-size: 10px;color:red;">{{$car->data_wyc}} <br/>wycofany dn. <br />{{$car->data_wyc}} r.</td>
                    </tr>
                 @endif
              @endforeach
