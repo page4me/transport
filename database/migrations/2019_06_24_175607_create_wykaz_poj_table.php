@@ -14,7 +14,7 @@ class CreateWykazPojTable extends Migration
     public function up()
     {
         Schema::create('wykaz_poj', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unsigned();
             $table->bigInteger('id_przed')->nullable();
             $table->bigInteger('id_dok_przed')->nullable();
             $table->string('rodzaj_poj')->nullable();

@@ -14,7 +14,7 @@ class CreateCertKompTable extends Migration
     public function up()
     {
         Schema::create('cert_komp', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unsigned();
             $table->bigInteger('id_przed')->nullable();
             $table->string('rodzaj')->nullable();
             $table->string('nr_cert')->nullable();

@@ -14,7 +14,7 @@ class CreateBazaEkspTable extends Migration
     public function up()
     {
         Schema::create('baza_eksp', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unsigned();
             $table->bigInteger('id_przed')->nullable();
             $table->string('rodzaj')->nullable();
             $table->string('adres')->nullable();

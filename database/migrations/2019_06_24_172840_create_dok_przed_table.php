@@ -14,7 +14,7 @@ class CreateDokPrzedTable extends Migration
     public function up()
     {
         Schema::create('dok_przed', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unsigned();
             $table->bigInteger('id_przed')->nullable();
             $table->string('nazwa')->nullable();
             $table->string('nr_dok')->nullable();

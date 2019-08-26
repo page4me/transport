@@ -14,7 +14,7 @@ class CreateDecyzjeTable extends Migration
     public function up()
     {
         Schema::create('decyzje', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unsigned();
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class CreateHistZmianPrzedTable extends Migration
     public function up()
     {
         Schema::create('hist_zmian_przed', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unsigned();
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class CreateZdolFinansTable extends Migration
     public function up()
     {
         Schema::create('zdol_finans', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->unsigned();
             $table->bigInteger('id_przed')->nullable();
             $table->string('nazwa', 255)->nullable();
             $table->string('numer', 100)->nullable();
