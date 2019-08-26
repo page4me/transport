@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($przedsiebiorca as $petent)
+        @foreach($rodzaje as $petent)
         <tr>
             <td><strong>
               @foreach($rodzaje as $row)
@@ -61,6 +61,7 @@
         @endforeach
     </tbody>
   </table>
+  <div>{{ $rodzaje->links() }}</div>
   <div class="text-center"><a href="/" role="button" class="btn btn-primary"><i class="fas fa-home fa-lg"></i> Home </a></div>
 </div>
 <div>
