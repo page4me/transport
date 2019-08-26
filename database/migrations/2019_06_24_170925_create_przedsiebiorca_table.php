@@ -16,6 +16,7 @@ class CreatePrzedsiebiorcaTable extends Migration
         Schema::create('przedsiebiorca', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->string('nazwa_firmy');
+            $table->intiger('id_osf');
             $table->string('imie');
             $table->string('nazwisko');
             $table->string('adres');
