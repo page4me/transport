@@ -111,7 +111,6 @@
                         </div>
                         <div class="col-md-4 form-group">
                             <label for="tel"><strong>Własność:</strong></label>
-                            <input type="text" class="form-control" name="wlasnosc" />
                             <select name="wlasnosc" class="form-control">
                               <option value="własność">własność</option>
                               <option value="leasing">leasing</option>
