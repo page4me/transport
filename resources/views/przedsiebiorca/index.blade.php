@@ -5,6 +5,10 @@
 <div class="container-fluid">
 <div><br />
 
+    <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+        Zabezpieczenie finansowe po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
+        <span class="sr-only">unread messages</span>
+    </a>
 
   <div class="card bg-dark text-white">
     <div class="card-body">Przedsiębiorcy - <a href="przedsiebiorca/create" role="button" class="btn btn-success">Dodaj nowego</a></div>
