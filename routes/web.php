@@ -21,6 +21,8 @@ Route::get('/przedsiebiorca/wypisy/{id}', 'WypisyController@index')->name('index
 
 Route::get('/przedsiebiorca/pdf/{id}', 'PrzedsiebiorcaController@gPDF');
 Route::get('/przedsiebiorca/wypisyPDF/{id}', 'WypisyController@wypisyPDF');
+Route::get('/przedsiebiorca/zabezpieczenie/stare', 'PrzedsiebiorcaController@stare_zf')->name('stare_zf');
+
 
 Route::resource('przedsiebiorca/baza', 'BazaController');
 
