@@ -234,6 +234,17 @@
                                                 <div class="col-md-4 form-group">
                                                     <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
                                                     <input type="text" class="form-control" name="rodzaj_poj" id="rodzaj_poj" value="{{$car->rodzaj_poj}}" />
+                                                    <select name="rodzaj_poj" class="form-control" id="rodzaj_poj">
+                                                       @if($car->rodzaj_poj == 'samochód ciężarowy') 
+                                                         <option value="{{$car->rodzaj_poj}}">{{$car->rodzja_poj}}</option>
+                                                         <option value="ciągnik samochdowy">ciągnik samochdowy</option>
+                                                       @elseif($car->rodzaj_poj == 'ciągnik samochodowy')
+                                                         <option value="{{$car->rodzaj_poj}}">{{$car->rodzja_poj}}</option>
+                                                         <option value="samochód ciężarowy">
+                                                         samochód ciężarowy</option>
+                                                      @endif
+
+                                                    </select>
 
                                                 </div>
                                                 <div class="col-md-4 form-group">
