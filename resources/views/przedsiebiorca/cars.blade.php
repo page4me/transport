@@ -183,16 +183,16 @@
                        <td class="text-center">wprowadzono <br />{{$car->data_wpr}} r.</td>
                        <td class="text-center" colspan="2">
                         <button data-toggle="modal" data-id="{{$car->id}}" data-nr_rej="{{$car->nr_rej}}"  data-p_nr_rej="{{$car->p_nr_rej}}" data-marka="{{$car->marka}}" data-nr_vin="{{$car->nr_vin}}" data-wlasnosc="{{$car->wlasnosc}}" data-data_wpr="{{$car->data_wpr}}" data-dmc="{{$car->dmc}}" data-rodzaj_poj="{{$car->rodzaj_poj}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
-                        
+
                         <button data-toggle="modal" data-id="{{$car->id}}" data-target="#myModal" role="button" class="btn btn-danger btn-sm">Wycofaj</button>
 
                       </td>
                      </tr>
 
                    @endif
-               
+
              @endforeach
-                  
+
                           <!-- edit modal -->
                                 <!-- Modal -->
                                   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -294,8 +294,11 @@
                                         </div>
                                       </div>
                                     </div>
-                                  <script type="text/javascript">
+
+                                  <script>
+
                                     $(".carID").click(function () {
+
                                         var ids = $(this).attr('data-id');
                                         var nr_rej = $(this).attr('data-nr_rej');
                                         var p_nr_rej = $(this).attr('data-p_nr_rej');
@@ -321,19 +324,19 @@
                                         $('#editModal').modal('show');
                                     });
 
-                                   
+
                                   </script>
 
                            <!-- end edit -->
 
                             <!-- wycofaj modal -->
-                              
-                                                     
+
+
 
 
            </table>
            <!-- Button to Open the Modal -->
-                               
+
 
                                 <!-- The Modal -->
                                 <div class="modal" id="myModal">
@@ -346,10 +349,10 @@
                                         <h4 class="modal-title">Wycofanie pojazdu</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                       </div>
-                                      
+
                                       <!-- Modal body -->
                                       <div class="modal-body">
-                                        
+
                                           @csrf
                                           @method('PATCH')
                                         Wprowadź datę wycofania pojazdu: <input type="date" id="data_wyc" name="data_wyc" />
@@ -361,7 +364,7 @@
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-danger">Wycofaj</button>
-                                        
+
                                       </form>
                                       </div>
 
@@ -369,16 +372,16 @@
                                   </div>
                                 </div>
                                 <script type="text/javascript">
-                                   
+
                                       $('#myModal').on("show.bs.modal", function (e) {
-                                           
+
                                            $("#id").val($(e.relatedTarget).data('id'));
-                                           
+
                                       });
-                                
+
                                 </script>
                            <!-- end wycofaj -->
-                
+
            <table class="table table-striped">
              <thead class="table bg-primary text-light text-center">
               <tr>
@@ -414,8 +417,8 @@
  </div>
  <div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}" role="button"><i class="fa fa-arrow-left"></i> Szczegóły przedsiębiorcy</a></div><br />
 
-  
-                                 
+
+
 </div>
 </div>
 @endsection
