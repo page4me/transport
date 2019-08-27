@@ -27,7 +27,9 @@ class PrzedsiebiorcaController extends Controller
              ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
              ->paginate(5);
 
-        return view('przedsiebiorca.index', compact('rodzaje'));
+        $zdolnosc = \App\Zdolnosc::all();
+
+        return view('przedsiebiorca.index', compact('rodzaje','zdolnosc'));
     }
 
     /**
@@ -97,6 +99,8 @@ class PrzedsiebiorcaController extends Controller
         $zab = DB::table('zdol_finans')->where('id_przed', $przedsiebiorca->id)->get();
         $baza = DB::table('baza_eksp')->where('id_przed', $przedsiebiorca->id)->get();
         $cars = DB::table('wykaz_poj')->where('id', $przedsiebiorca->id)->get();
+
+
 
         return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert','baza','zab','cars'));
     }
@@ -233,5 +237,12 @@ class PrzedsiebiorcaController extends Controller
         return view('przedsiebiorca.pojazdy.create', compact('przedsiebiorca','dok'));
 
 
+    }
+
+    public function stare_zf()
+    {
+        $zdolnosc = \App\Zdolnosc::all();
+
+        return view('przedsiebiorca.zabezpieczenie.stare', compact('zdolnosc'));
     }
 }
