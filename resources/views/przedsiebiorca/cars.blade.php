@@ -85,6 +85,12 @@
                         <div class="col-md-4 form-group">
                             <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
                             <input type="text" class="form-control" name="rodzaj_poj"/>
+                            <select name="rodzaj_poj">
+                              <option value="samochód ciężarowy">samochód ciężarowy</option>
+                              <option value="ciągnik samochodowy">ciągnik samochodowy</option>
+                              <option value="samochód specjany">samochód specjalny</option>
+                              <option value="autobus">autobus</option>
+                            </select>
                         </div>
                         <div class="col-md-4 form-group">
                             <label for="kod_p"><strong>Marka:</strong></label>
@@ -223,6 +229,7 @@
                                                 <div class="col-md-4 form-group">
                                                     <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
                                                     <input type="text" class="form-control" name="rodzaj_poj" id="rodzaj_poj" value="{{$car->rodzaj_poj}}" />
+
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                     <label for="kod_p"><strong>Marka:</strong></label>
