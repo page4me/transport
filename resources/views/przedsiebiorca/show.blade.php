@@ -266,7 +266,15 @@
                         @foreach ($zab as $zb)
                         <div><strong>Zabezpieczenie finansowe:</strong> {{$zb->nazwa}}s</div>
                         <div>{{$zb->suma_zab}} &euro; - {{$zb->ile_poj}} pojazdy</div>
-                        <div><span class="badge badge-success" style="font-size:14px;">Do dnia {{$zb->data_do}} r.</span></div>
+                        <div>
+                          @if($zb->data_do < date('Y-m-d'))
+                            <h5><span class="badge badge-danger">Do dnia {{$zb->data_do}} r.
+                               <br /> po terminie {{$dni = (strtotime($zb->data_do) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
+                             </span></h5>
+                          @else
+                             <span class="badge badge-success" style="font-size:14px;">Do dnia {{$zb->data_do}} r.</span>
+                          @endif
+                        </div>
                         @endforeach
                     </div>
                 </div>
