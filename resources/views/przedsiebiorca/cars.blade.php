@@ -236,10 +236,10 @@
                                                     <input type="text" class="form-control" name="rodzaj_poj" id="rodzaj_poj" value="{{$car->rodzaj_poj}}" />
                                                     <select name="rodzaj_poj" class="form-control" id="rodzaj_poj">
                                                        @if($car->rodzaj_poj == 'samochód ciężarowy') 
-                                                         <option value="{{$car->rodzaj_poj}}">{{$car->rodzja_poj}}</option>
+                                                         <option value="{{$car->rodzaj_poj}}">{{$car->rodzaj_poj}}</option>
                                                          <option value="ciągnik samochdowy">ciągnik samochdowy</option>
                                                        @elseif($car->rodzaj_poj == 'ciągnik samochodowy')
-                                                         <option value="{{$car->rodzaj_poj}}">{{$car->rodzja_poj}}</option>
+                                                         <option value="{{$car->rodzaj_poj}}">{{$car->rodzaj_poj}}</option>
                                                          <option value="samochód ciężarowy">
                                                          samochód ciężarowy</option>
                                                       @endif
