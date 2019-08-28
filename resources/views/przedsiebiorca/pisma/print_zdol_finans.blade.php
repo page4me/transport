@@ -23,9 +23,9 @@
         </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" style="font-size: 14px;font-family: Arial;">
   	 <div>
-  	 	Starosta Koszaliński na podstawie  art. 83 ust. 1 ustawy z dnia 6 września 2001 r. o transporcie drogowym (Dz. U. z 2019 r., poz. 58 z późn. zm.) oraz § 2 ust. 3 rozporządzenia Ministra Infrastruktury i Rozwoju z dnia 8 września 2014 roku w sprawie danych i informacji, które przewoźnik drogowy jest obowiązany przekazywać do organu w związku z prowadzoną działalnością w zakresie przewozu drogowego (Dz.U. z 2014 r., poz.1217) nakłada na Pana obowiązek  przedłożenia w terminie 21 dni od dnia otrzymania tego pisma, dokumentów potwierdzających spełnienie wymagań ustawowych do otrzymanego „zezwolenia na wykonywanie zawodu przewoźnika drogowego” wyrażonego  licencją:
+  	 	Starosta Koszaliński na podstawie  art. 83 ust. 1 ustawy z dnia 6 września 2001 r. o transporcie drogowym (Dz. U. z 2019 r., poz. 58 z późn. zm.) oraz § 2 ust. 3 rozporządzenia Ministra Infrastruktury i Rozwoju z dnia 8 września 2014 roku w sprawie danych i informacji, które przewoźnik drogowy jest obowiązany przekazywać do organu w związku z prowadzoną działalnością w zakresie przewozu drogowego (Dz.U. z 2014 r., poz.1217) nakłada na Pana obowiązek <strong> przedłożenia w terminie 21 dni od dnia otrzymania tego pisma</strong>, dokumentów potwierdzających spełnienie wymagań ustawowych do otrzymanego „zezwolenia na wykonywanie zawodu przewoźnika drogowego” wyrażonego  licencją:
   	 </div>
   	 <div>
   	 	nr 0139330 udzieloną dnia 1 czerwca 2016 roku na wykonywanie krajowego transportu drogowego rzeczy. tj.:
@@ -47,7 +47,7 @@
   	 <div>
   	 	W drodze odstępstwa właściwy organ może zgodzić się lub wymagać, aby przedsiębiorca wykazał swoją zdolność finansową za pomocą zabezpieczenia, takiego jak gwarancja bankowa lub ubezpieczenie, w tym ubezpieczenie odpowiedzialności zawodowej z jednego lub kilku banków lub innych instytucji finansowych, w tym przedsiębiorstw ubezpieczeniowych, składających solidarną gwarancję za przedsiębiorstwo na kwoty określone przy posiadaniu pojazdów samochodowych przeznaczonych do transportu drogowego.
   	 </div>
-  	 <div>Pouczenie</div>
+  	 <div><strong>Pouczenie</strong></div>
   	 <div>
   	 	Jednocześnie informuję, że jeśli organ udzielający „zezwolenia na wykonywanie zawodu przewoźnika drogowego” wyrażonego licencją na wykonywanie krajowego transportu drogowego rzeczy, stwierdzi  niespełnienie przez przedsiębiorcę wymogów będących podstawą do wydania tego dokumentu, organ ten zawiesza lub cofa zezwolenie (licencję) na wykonywanie zawodu przewoźnika drogowego.
   	 </div>
