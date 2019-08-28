@@ -245,4 +245,9 @@ class PrzedsiebiorcaController extends Controller
 
         return view('przedsiebiorca.zabezpieczenie.stare', compact('zdolnosc'));
     }
+
+    public function print_zdol_finans()
+     {
+        return view('przedsiebiorca.pisma.print_zdol_finans');
+     }
 }
