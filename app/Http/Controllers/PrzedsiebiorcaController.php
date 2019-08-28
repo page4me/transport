@@ -178,7 +178,7 @@ class PrzedsiebiorcaController extends Controller
         $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
         $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
 
-        $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
+        $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('stan', 'desc')->first();
 
         return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan'));
 
