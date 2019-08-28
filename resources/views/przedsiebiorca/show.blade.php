@@ -257,12 +257,14 @@
                         </div>
                     </div>
                     <div class="col-md-3">
+
                         @foreach ($baza as $bz)
                         <div><strong>Baza eksploatacyjna</strong></div>
                         <div><strong>Adres:</strong> <br />{{$bz->adres}}<br /> {{$bz->kod_p}} {{$bz->miasto}}</div>
                         <div>Umowa do dnia {{$bz->dat_umowy}} r.</div>
                         <br />
                         @endforeach
+
                         @foreach ($zab as $zb)
                         <div><strong>Zabezpieczenie finansowe:</strong> {{$zb->nazwa}}s</div>
                         <div>{{$zb->suma_zab}} &euro; - {{$zb->ile_poj}} pojazdy</div>
@@ -271,12 +273,13 @@
                             <h5><span class="badge badge-danger">Do dnia {{$zb->data_do}} r.
                                <br /> po terminie {{$dni = (strtotime($zb->data_do) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
                              </span></h5>
-                             <a href="pisma/print_zdol_finans" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
+                             <a href="{{ url('/przedsiebiorca/pisma/print_zdol_finans/' . $przedsiebiorca->id)}}" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
                           @else
                              <span class="badge badge-success" style="font-size:14px;">Do dnia {{$zb->data_do}} r.</span>
                           @endif
                         </div>
                         @endforeach
+
                     </div>
                 </div>
                 </div>
