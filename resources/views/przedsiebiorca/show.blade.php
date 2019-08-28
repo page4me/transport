@@ -271,6 +271,7 @@
                             <h5><span class="badge badge-danger">Do dnia {{$zb->data_do}} r.
                                <br /> po terminie {{$dni = (strtotime($zb->data_do) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
                              </span></h5>
+                             <a href="przedsiebiorca/pisma/print_zdol_finas" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
                           @else
                              <span class="badge badge-success" style="font-size:14px;">Do dnia {{$zb->data_do}} r.</span>
                           @endif
