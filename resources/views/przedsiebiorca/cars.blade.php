@@ -44,7 +44,7 @@
 
           </div>
           <div class="col-md-4">
-            <span class="badge badge-success" style="font-size:14px;">Stan na dzień: @if(empty($stan->data_wpr)) brak danych @else {{$stan->data_wpr}} @endif r.</span>
+            <span class="badge badge-success" style="font-size:14px;">Stan na dzień: @if(empty($stan->data_wpr)) brak danych @else {{$stan->updated_at}} @endif r.</span>
             <br /><br /><a href="{{ url('/przedsiebiorca/pdf/' . $przedsiebiorca->id)}}" target="_blank" role="button" class="btn btn-warning">Wykaz w PDF</a>&nbsp;<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
             Dodaj nowy pojazd
           </button>
