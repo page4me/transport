@@ -23,7 +23,7 @@
         </style>
 </head>
 <body>
-  <div class="container" style="font-size: 14px;font-family: Arial;">
+  <div class="container" style="font-size: 14px;font-family: Arial;width:900px;">
   	 <div>
   	 	Starosta Koszaliński na podstawie  art. 83 ust. 1 ustawy z dnia 6 września 2001 r. o transporcie drogowym (Dz. U. z 2019 r., poz. 58 z późn. zm.) oraz § 2 ust. 3 rozporządzenia Ministra Infrastruktury i Rozwoju z dnia 8 września 2014 roku w sprawie danych i informacji, które przewoźnik drogowy jest obowiązany przekazywać do organu w związku z prowadzoną działalnością w zakresie przewozu drogowego (Dz.U. z 2014 r., poz.1217) nakłada na Pana obowiązek <strong> przedłożenia w terminie 21 dni od dnia otrzymania tego pisma</strong>, dokumentów potwierdzających spełnienie wymagań ustawowych do otrzymanego „zezwolenia na wykonywanie zawodu przewoźnika drogowego” wyrażonego  licencją:
   	 </div>
