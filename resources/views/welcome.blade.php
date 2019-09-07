@@ -18,13 +18,31 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-       
-            <div class="content text-center" style="margin-top: 350px;font-size: 30px;">
-                <div>
-                   <a href="/przedsiebiorca" role="button" class="btn btn-primary" style="font-size:30px;">PRZEDSIĘBIORCY</a> / <a href="#" role="button" class="btn btn-success" style="font-size:30px;">OSK i INTRUKTORZY</a> / <a href="#" role="button" class="btn btn-warning" style="font-size:30px;">SKP i DIAGNOŚCI</a>
+
+            <div class="container" style="margin-top: 320px;font-size: 30px;">
+                <div class="row">
+                   <div class="col-md-4">
+                       <div>
+                         <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+                        Zarzenia&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
+                        <span class="sr-only">unread messages</span>
+                         </a>
+                       </div>
+                       <a href="/przedsiebiorca" role="button" class="btn btn-primary" style="font-size:30px;">PRZEDSIĘBIORCY</a>
+                   </div>
+                   <div class="col-md-4">
+                        <div>
+                           &nbsp;
+                        </div>
+                        <a href="#" role="button" class="btn btn-success" style="font-size:30px;">OSK i INTRUKTORZY</a></div>
+                   <div class="col-md-4">
+                        <div>
+                           &nbsp;
+                         </div>
+                        <a href="#" role="button" class="btn btn-warning" style="font-size:30px;">SKP i DIAGNOŚCI</a></div>
                 </div>
             </div>
-      
+
 
     </body>
 </html>
