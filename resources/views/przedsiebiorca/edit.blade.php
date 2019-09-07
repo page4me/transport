@@ -116,7 +116,7 @@
         <div class="row">
           <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
-              <input type="text" class="form-control" name="uwagi" value="{{$przedsiebiorca->uwagi}}"/>
+              <textarea class="form-control" id="pp" name="uwagi" value="{{$przedsiebiorca->uwagi}}" />{{$przedsiebiorca->uwagi}}</textarea>
           </div>
         </div>
           <button type="submit" class="btn btn-success">Zapisz zmiany przedsiębiorcy</button>
@@ -186,7 +186,7 @@
         <div class="row">
           <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
-              <input type="text" class="form-control" name="uwagi" value="{{$row->uwagi}}" />
+              <textarea class="form-control" id="dk" name="uwagi" value="{{$row->uwagi}}" />{{$row->uwagi}}</textarea>
           </div>
         </div>
           <button type="submit" class="btn btn-success">Zapisz zmiany dokumentów</button>
@@ -268,7 +268,7 @@
         <div class="row">
           <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
-              <input type="text" class="form-control" name="uwagi" value="{{$bz->uwagi}}" />
+              <textarea class="form-control" id="bz" name="uwagi" value="{{$bz->uwagi}}" />{{$bz->uwagi}}</textarea>
           </div>
         </div>
           <button type="submit" class="btn btn-success">Zapisz zmiany bazy</button>
@@ -360,7 +360,7 @@
         <div class="row">
           <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
-              <input type="text" class="form-control" name="uwagi" value="{{$oz->uwagi}}" />
+              <textarea class="form-control" id="osz" name="uwagi" value="{{$oz->uwagi}}" />{{$oz->uwagi}}</textarea>
           </div>
         </div>
           <button type="submit" class="btn btn-success">Zapisz zmiany zarządzającego</button>
@@ -439,7 +439,7 @@
             <div class="row">
               <div class="col-md-12 form-group">
                   <label for="uwagi">Uwagi:</label>
-                  <input type="text" class="form-control" name="uwagi" value="{{$zf->uwagi}}" />
+                  <textarea class="form-control" id="zf" name="uwagi" value="{{$zf->uwagi}}" />{{$zf->uwagi}}</textarea>
               </div>
             </div>
             @endforeach
@@ -447,6 +447,28 @@
           </form>
        </div>
    </div>
+   <script type="text/javascript">
+    tinymce.init({
+      selector: '#zf',
+      language: 'pl'
+    });
+    tinymce.init({
+      selector: '#osz',
+      language: 'pl'
+    });
+    tinymce.init({
+      selector: '#bz',
+      language: 'pl'
+    });
+    tinymce.init({
+      selector: '#dk',
+      language: 'pl'
+    });
+    tinymce.init({
+      selector: '#pp',
+      language: 'pl'
+    });
+    </script>
 <div class="text-center"><a href="/przedsiebiorca" role="button" class="btn btn-primary"><i class="fas fa-home fa-lg"></i> Przedsiębiorcy </a></div>
 </div>
 @endsection
