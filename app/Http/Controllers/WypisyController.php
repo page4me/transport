@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use DB;
 use Alert;
 use PDF;
+
 
 class WypisyController extends Controller
 {
@@ -141,5 +143,39 @@ class WypisyController extends Controller
         return view('przedsiebiorca.print_cars', compact('przedsiebiorca'));
 
 
+    }
+
+    public function depozyt(Request $request)
+    {
+
+
+      $wypisy = \App\Wypisy::findOrFail($request->id);
+
+      $input = Input::all();
+      $data_wyc = Input::get('dat_dep_wp');
+      $id_przed = Input::get('id_przed');
+
+
+      $wypisy->update(['status'=>'2','dat_dep_wp'=>$data_wyc]);
+      echo '<pre />';
+      print_r($wypisy);
+      return redirect('/przedsiebiorca/wypisy/'.$id_przed);
+    }
+
+    public function depozytwyd(Request $request)
+    {
+
+
+      $wypisy = \App\Wypisy::findOrFail($request->id);
+
+      $input = Input::all();
+      $data_wyc = Input::get('dat_dep_wyd');
+      $id_przed = Input::get('id_przed');
+      $dat_wp = NULL;
+
+      $wypisy->update(['status'=>'1','dat_dep_wp'=>$dat_wp,'dat_dep_wyd'=>$data_wyc]);
+      echo '<pre />';
+      print_r($wypisy);
+      return redirect('/przedsiebiorca/wypisy/'.$id_przed);
     }
 }
