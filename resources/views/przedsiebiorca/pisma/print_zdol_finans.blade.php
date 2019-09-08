@@ -6,9 +6,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-      <style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="{{asset("/vendor/tinymce/tinymce.min.js")}}"></script>
+     <style>
             /** Define the margins of your page **/
             body {
           font-family: DejaVu Sans;
@@ -25,12 +26,30 @@
 <body>
   <div class="container" style="font-size: 14px;font-family: Arial;width:900px;">
      <div> <img src="{{URL::asset('/img/starostwo.png')}}" alt="profile Pic" width="900px;"></div>
+     <div><textarea class="form-control" id="pismo" name="uwagi" />
      <div class="text-right">Koszalin dn. 30.08.2019 r.</div>
      <div class="text-left">KD.7252.105.2019.EZ</div>
      <div class="row col-4" style="float:right;margin-top: 40px;margin-right: 80px;">
      <strong>{{$przedsiebiorca->nazwa_firmy}}<br/>{{$przedsiebiorca->adres}}<br />{{$przedsiebiorca->kod_p}} {{$przedsiebiorca->miejscowosc}}</strong>
      </div>
-  	 <div style="clear:both;">
+
+    </textarea></div>
+  </div>
+
+  <script type="text/javascript">
+    tinymce.init({
+      selector: '#pismo',
+      language: 'pl'
+    });
+
+    </script>
+    <!--
+        <div class="text-right">Koszalin dn. 30.08.2019 r.</div>
+     <div class="text-left">KD.7252.105.2019.EZ</div>
+     <div class="row col-4" style="float:right;margin-top: 40px;margin-right: 80px;">
+     <strong>//$przedsiebiorca->miejscowosc}}</strong>
+     </div>
+        <div style="clear:both;">
            <br /><br />
   	 	<p class="text-justify"><span style="padding-right:50px;">&nbsp;</span>Starosta Koszaliński na podstawie  art. 83 ust. 1 ustawy z dnia 6 września 2001 r. o transporcie drogowym (Dz. U. z 2019 r., poz. 58 z późn. zm.) oraz § 2 ust. 3 rozporządzenia Ministra Infrastruktury i Rozwoju z dnia 8 września 2014 roku w sprawie danych i informacji, które przewoźnik drogowy jest obowiązany przekazywać do organu w związku z prowadzoną działalnością w zakresie przewozu drogowego (Dz.U. z 2014 r., poz.1217) nakłada na Pana obowiązek <strong> przedłożenia w terminie 21 dni od dnia otrzymania tego pisma</strong>, dokumentów potwierdzających spełnienie wymagań ustawowych do otrzymanego „zezwolenia na wykonywanie zawodu przewoźnika drogowego” wyrażonego  licencją:</p>
   	 </div>
@@ -69,9 +88,9 @@
           <p class="text-justify">Jednocześnie informuję, że jeśli organ udzielający „zezwolenia na wykonywanie zawodu przewoźnika drogowego” wyrażonego licencją
            na wykonywanie krajowego transportu drogowego rzeczy, stwierdzi  niespełnienie przez przedsiębiorcę wymogów będących podstawą
            do wydania tego dokumentu, organ ten zawiesza lub cofa zezwolenie (licencję) na wykonywanie zawodu przewoźnika drogowego.</p>
-  	 </div>
-  </div>
+       </div>
 
+    -->
 </body>
 </html>
 
