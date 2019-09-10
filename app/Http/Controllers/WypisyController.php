@@ -159,8 +159,10 @@ class WypisyController extends Controller
 
 
       $wypisy->update(['status'=>'2','dat_dep_wp'=>$data_wyc]);
-      echo '<pre />';
-      print_r($wypisy);
+      //echo '<pre />';
+      //print_r($wypisy);
+      $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Zgłoszenie do depozytu wypisu o numerze - '.$request->nr_wyp, 'data_zm' => $data_wyc]);
+
       return redirect('/przedsiebiorca/wypisy/'.$id_przed);
     }
 
@@ -176,8 +178,8 @@ class WypisyController extends Controller
       $dat_wp = NULL;
 
       $wypisy->update(['status'=>'1','dat_dep_wp'=>$dat_wp,'dat_dep_wyd'=>$data_wyc]);
-      echo '<pre />';
-      print_r($wypisy);
+      $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Wydanie z depozytu wypisu o numerze - '.$request->nr_wyp, 'data_zm' => $data_wyc]);
+
       return redirect('/przedsiebiorca/wypisy/'.$id_przed);
     }
 }
