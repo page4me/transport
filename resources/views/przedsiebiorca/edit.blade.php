@@ -119,6 +119,7 @@
               <textarea class="form-control" id="pp" name="uwagi" value="{{$przedsiebiorca->uwagi}}" />{{$przedsiebiorca->uwagi}}</textarea>
           </div>
         </div>
+          <input type="hidden" name="id" value="{{$przedsiebiorca->id}}" />
           <button type="submit" class="btn btn-success">Zapisz zmiany przedsiębiorcy</button>
       </form>
       <br />
