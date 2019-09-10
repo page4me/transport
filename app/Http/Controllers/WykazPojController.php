@@ -22,7 +22,7 @@ class WykazPojController extends Controller
        // $cars = DB::table('wykaz_poj')->where('id', $przedsiebiorca->id)->get();
 
        // return view('przedsiebiorca.show', compact('przedsiebiorca','cars'));
-        
+
     }
 
     /**
@@ -34,7 +34,7 @@ class WykazPojController extends Controller
     {
         //
         $przedsiebiorca= DB::table('wykaz_poj')->get();
-         
+
         return view('przedsiebiorca.cars', compact('przedsiebiorca'));
     }
 
@@ -60,11 +60,10 @@ class WykazPojController extends Controller
          'wlasnosc' => 'required|max:255',
          'data_wpr' => 'required|max:11',
          'status' => 'default|1',
-                  
+
         ]);
         $pojazdy = \App\WykazPoj::create($validatedData);
-       
-       // $dok = DB::table('wykaz_poj')->where('id_przed' , $przed->id)->get();
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Zgłoszenie nowego pojazdu o numerze rejestracyjnym - '.$request->nr_rej, 'data_zm' => $request->data_wpr]);
 
         return redirect('przedsiebiorca/cars/'.$request->id_przed)->with('success', 'Przedsiebiorca dodany do bazy danych');
     }
@@ -106,11 +105,11 @@ class WykazPojController extends Controller
     {
         Alert::success('Zapisano zmiany', '');
         $cars = \App\WykazPoj::findOrFail($request->idcar);
-        
+
         $cars->update($request->all());
 
         //return back();
-        
+
        /* $validatedData = $request->validate([
          'id_przed' => 'required',
          'id_dok_przed' => 'required',
@@ -122,7 +121,7 @@ class WykazPojController extends Controller
          'wlasnosc' => 'required|max:255',
          'data_wpr' => 'required|max:11',
          'status' => 'default|1',
-                  
+
         ]);
         \App\WykazPoj::whereId($id)->update($validatedData);
         */
@@ -142,14 +141,14 @@ class WykazPojController extends Controller
 
    public function wycofaj(Request $request)
     {
-       
+
        //return view('przedsiebiorca.pojazdy.wycofaj');
       $cars = \App\WykazPoj::findOrFail($request->id);
-      
+
       $input = Input::all();
       $data_wyc = Input::get('data_wyc');
       $id_przed = Input::get('id_przed');
-            
+
       $cars->update(['status'=>'2','data_wyc'=>$data_wyc]);
       echo '<pre />';
       print_r($cars);
