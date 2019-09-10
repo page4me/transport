@@ -315,7 +315,7 @@
                <strong>Numer dokumentu: </strong><br /><strong> <span style="color:#17aa06;"> {{$dk->nr_dok}}
               </span> /   {{$dk->nr_druku}} </strong></span>
              </div>
-             <div class="col-md-12 text-center"><br /><a href="{{ url('ganerate-pdf')}}" role="button" class="btn btn-primary btn-sm">Historia zmian</a></div>
+             <div class="col-md-12 text-center"><br /><a href="{{ url('/przedsiebiorca/' . $przedsiebiorca->id.'/zmiany')}}" role="button" class="btn btn-primary btn-sm">Historia zmian</a></div>
            </div>
     </div>
     <div class="card-header bg-dark text-light">
