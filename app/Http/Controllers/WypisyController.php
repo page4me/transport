@@ -21,7 +21,7 @@ class WypisyController extends Controller
         //
          $przedsiebiorca = \App\Przedsiebiorca::findOrfail($id);
          $wypisy =  DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->get();
-         $dok = DB::table('dok_przed')->where('id_przed', $przedsiebiorca->id)->get();;
+         $dok = DB::table('dok_przed')->where('id_przed', $przedsiebiorca->id)->get();
          $stan = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
 
          return view('przedsiebiorca.wypisy.index', compact('przedsiebiorca','wypisy','dok','stan'));
@@ -62,6 +62,8 @@ class WypisyController extends Controller
 
         ]);
         $dokumenty = \App\Wypisy::create($validatedData);
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Zgłoszenie nowego wypisu o numerze - '.$request->nr_wyp, 'data_zm' => $request->data_wn]);
+
 
         return redirect('/przedsiebiorca/wypisy/'.$request->id_przed)->with('success', 'Dokument dodany do bazy danych');
     }
