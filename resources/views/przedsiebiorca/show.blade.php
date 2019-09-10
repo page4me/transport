@@ -51,8 +51,8 @@
                       {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id)->count()}}
                     </span><br />
                  <strong>W depozycie wypisów: </strong><span class="badge badge-danger" style="font-size:12px;">
-                   {{$count1 = \App\Wypisy::where('status','=','2','AND','id_przed','=',$przedsiebiorca->id)->count()}}
-                {{$count1}}
+                   {{$count1 = \App\Wypisy::where('status','=','2')->where('id_przed','=',$przedsiebiorca->id)->count()}}
+
                  </span><br />
                  @if($count ==0)
                        &nbsp; <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#nowyWypis">Dodaj wypis</button>
@@ -202,7 +202,13 @@
 
                                             <div class="col-md-4 form-group">
                                                 <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
-                                                <input type="text" class="form-control" name="rodzaj_poj"/>
+
+                                                <select name="rodzaj_poj" class="form-control">
+                                                  <option value="samochód ciężarowy">samochód ciężarowy</option>
+                                                  <option value="ciągnik samochodowy">ciągnik samochodowy</option>
+                                                  <option value="samochód specjany">samochód specjalny</option>
+                                                  <option value="autobus">autobus</option>
+                                                </select>
                                             </div>
                                             <div class="col-md-4 form-group">
                                                 <label for="kod_p"><strong>Marka:</strong></label>
@@ -222,8 +228,13 @@
                                                 <input type="text" class="form-control" name="dmc"/>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <label for="tel"><strong>Własność:</strong></label>
-                                                <input type="text" class="form-control" name="wlasnosc" />
+                                                <label for="tel"><strong>Prawo do dysponowania:</strong></label>
+                                                <select name="wlasnosc" class="form-control">
+                                                    <option value="wlasność">własność</option>
+                                                    <option value="leasing">leasing</option>
+                                                    <option value="najem">najem</option>
+                                                    <option value="użyczenie">użyczenie</option>
+                                                  </select>
                                             </div>
                                             <div class="col-md-4 form-group">
                                                 <label for="tel"><strong>Data wprowadzenia:</strong></label>
