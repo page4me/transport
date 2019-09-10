@@ -251,4 +251,21 @@ class PrzedsiebiorcaController extends Controller
         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
         return view('przedsiebiorca.pisma.print_zdol_finans', compact('przedsiebiorca'));
      }
+
+     public function search(Request $request){
+        $search = $request->get('search');
+        //$przedsiebiorca = DB::Table('przedsiebiorca')->where('nazwisko','like','%'.$search.'%')->paginate(5);
+        $rodzaje= DB::table('dok_przed')
+             ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
+             ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
+             ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
+             ->where('nazwisko','like','%'.$search.'%')
+             ->orWhere('nazwa_firmy','like','%'.$search.'%')
+             ->orWhere('nip','like','%'.$search.'%')
+             ->orWhere('nr_dok','like','%'.$search.'%')
+             ->paginate(5);
+
+        return view('przedsiebiorca.index', ['rodzaje' => $rodzaje]);
+
+     }
 }
