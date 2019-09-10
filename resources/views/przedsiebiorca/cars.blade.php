@@ -84,7 +84,7 @@
 
                         <div class="col-md-4 form-group">
                             <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
-                           
+
                             <select name="rodzaj_poj" class="form-control">
                               <option value="samochód ciężarowy">samochód ciężarowy</option>
                               <option value="ciągnik samochodowy">ciągnik samochodowy</option>
@@ -233,19 +233,7 @@
 
                                                 <div class="col-md-4 form-group">
                                                     <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
-                                                    <input type="text" class="form-control" name="rodzaj_poj" id="rodzaj_poj" value="{{$car->rodzaj_poj}}" />
-                                                    <select name="rodzaj_poj" class="form-control" id="rodzaj_poj">
-                                                       @if($car->rodzaj_poj == 'samochód ciężarowy') 
-                                                         <option value="{{$car->rodzaj_poj}}">{{$car->rodzaj_poj}}</option>
-                                                         <option value="ciągnik samochdowy">ciągnik samochdowy</option>
-                                                       @elseif($car->rodzaj_poj == 'ciągnik samochodowy')
-                                                         <option value="{{$car->rodzaj_poj}}">{{$car->rodzaj_poj}}</option>
-                                                         <option value="samochód ciężarowy">
-                                                         samochód ciężarowy</option>
-                                                      @endif
-
-                                                    </select>
-
+                                                    <input type="text" name="rodzaj_poj" class="form-control" id="rodzaj_poj" value="{{$car->rodzaj_poj}}">
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                     <label for="kod_p"><strong>Marka:</strong></label>
