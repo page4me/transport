@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+
 
 class ZmianyPrzedController extends Controller
 {
@@ -11,9 +13,13 @@ class ZmianyPrzedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $przedsiebiorca = \App\Przedsiebiorca::findOrfail($id);
+        $dok = DB::table('dok_przed')->where('id_przed', $przedsiebiorca->id)->get();
+        $historia = DB::table('hist_zmian_przed')->where('id_przed', $przedsiebiorca->id)->get();
+
+        return view('przedsiebiorca.zmiany.index', compact('przedsiebiorca', 'dok', 'historia'));
     }
 
     /**
@@ -46,6 +52,7 @@ class ZmianyPrzedController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
