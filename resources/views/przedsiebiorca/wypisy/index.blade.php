@@ -297,6 +297,7 @@
                       Wprowadź datę depozytu: <input type="date" id="dat_dep_wp" name="dat_dep_wp" />
                       <input type="hidden" id="idw" name="id" value="{{$wp->id}}" />
                       <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                      <input type="hidden" name="nr_wyp" value="{{$wp->nr_wyp}}" />
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -335,6 +336,7 @@
                           Wprowadź datę depozytu: <input type="date" id="dat_dep_wyd" name="dat_dep_wyd" />
                           <input type="hidden" id="idwyd" name="id" value="{{$wp->id}}" />
                           <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                        <input type="hidden" name="nr_wyp" value="{{$wp->nr_wyp}}" />
                         </div>
                         <!-- Modal footer -->
                         <div class="modal-footer">
