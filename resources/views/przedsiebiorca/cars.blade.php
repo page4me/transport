@@ -343,14 +343,14 @@
 
                                           @csrf
                                           @method('PATCH')
-                                        Wprowadź datę wycofania pojazdu: <input type="date" id="data_wyc" name="data_wyc" />
+                                        Wprowadź datę wycofania pojazdu: <input class="form-group" type="date" id="data_wyc" name="data_wyc" />
                                         <input type="hidden" id="id" name="id" value="{{$car->id}}" />
                                         <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
                                       </div>
 
                                       <!-- Modal footer -->
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Zamknij</button>
                                         <button type="submit" class="btn btn-danger">Wycofaj</button>
 
                                       </form>
