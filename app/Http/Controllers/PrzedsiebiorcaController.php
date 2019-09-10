@@ -150,7 +150,25 @@ class PrzedsiebiorcaController extends Controller
          'telefon' => 'required|max:10',
 
      ]);
+
+     $przedsiebiorca = DB::table('przedsiebiorca')->where('id' , $id)->get();
+
+     foreach($przedsiebiorca as $przed){
+        $firma = $przed->nazwa_firmy;
+     }
+
+
+     $data_zm = date('Y-m-d');
+
+
+    if($request->nazwa_firmy <> $firma) {
+    $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => null, 'nazwa_zm' => 'Zmiana nazwy firmy z '. $firma .' na '.$request->nazwa_firmy, 'data_zm' => $data_zm]);
+    }
+
      \App\Przedsiebiorca::whereId($id)->update($validatedData);
+
+
+
 
      return redirect('/przedsiebiorca')->with('success', 'Dane przedsiębiorcy zmienione');
     }
