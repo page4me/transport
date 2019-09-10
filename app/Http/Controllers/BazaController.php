@@ -54,6 +54,10 @@ class BazaController extends Controller
          'uwagi' => 'string|max:255|nullable'
         ]);
         $baza = \App\Baza::create($validatedData);
+        $data_bz = date('Y-m-d');
+
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Zgłoszenie nowej bazy eksploatacyjnej', 'data_zm' => $request->data_bz]);
+
 
         return redirect('/przedsiebiorca/zarzadzajacy/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
@@ -104,6 +108,7 @@ class BazaController extends Controller
          'uwagi' => 'string|max:255|nullable'
         ]);
         $baza = \App\Baza::whereId($id)->update($validatedData);
+
 
         return redirect('/przedsiebiorca/')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
