@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <div class="container">
     <div class="card uper">
   <div class="card-header bg-dark text-light" >
@@ -162,8 +162,8 @@
           <tbody class="text-center">
               @foreach($wypisy as $wp)
               <tr>
-                  <td>{{$wp->nr_wyp}}</td>
-                  <td>{{$wp->nr_druku}}</td>
+                  <td  @if($wp->status=='2') class="bg-danger text-light" @else  @endif>{{$wp->nr_wyp}}<br /> <span style="font-size: 11px;color: yellow">{{$wp->dat_dep_wp}}</span></td>
+                  <td  @if($wp->status=='2') class="bg-danger text-light" @else  @endif>{{$wp->nr_druku}}</td>
                   <td>@foreach($dok as $dk) {{$dk->nr_dok}} @endforeach</td>
                   <td>{{$wp->nazwa}}</td>
 
@@ -176,8 +176,15 @@
                   <td>
                     <button class="btn btn-danger" type="submit" id="confirm_delete"><i class="fa fa-trash"></i></button>
                   </td>
-                  <td><button class="btn btn-danger btn-sm">Depozyt</button></td>
+                  <td>
+                    @if($wp->status=='1')
+                     <a data-toggle="modal" data-id="{{$wp->id}}" role="button" class="open-AddBookDialog btn btn-danger btn-sm" href="#depozyt">Depozyt</a>
+                    @else
+                     <a data-toggle="modal" data-id="{{$wp->id}}" role="button" class="open-AddBookDialog btn btn-success btn-sm" href="#depozytwyd">Wydaj</a>
+                    @endif
+                 </td>
               </tr>
+
               @endforeach
           </tbody>
         </table>
@@ -273,13 +280,89 @@
 
                         </div>
 
+                        <!-- The Modal -->
+             <div class="modal" id="depozyt">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form  method="POST" action="{{ route('depozyt', 'id' ) }}" >
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-danger text-light">
+                      <h4 class="modal-title">Dodanie wypis do depozytu</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        @csrf
+                        @method('PATCH')
+                      Wprowadź datę depozytu: <input type="date" id="dat_dep_wp" name="dat_dep_wp" />
+                      <input type="hidden" id="idw" name="id" value="{{$wp->id}}" />
+                      <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-dark" data-dismiss="modal">Zamknij</button>
+                      <button type="submit" class="btn btn-danger">Depozyt</button>
+
+                    </div>
+                   </form>
+                  </div>
+                </div>
+              </div>
+              <script>
+                    $(document).on("click", ".open-AddBookDialog", function () {
+                          var myBookId = $(this).data('id');
+                          $(".modal-body #idw").val( myBookId );
+                          // As pointed out in comments,
+                          // it is unnecessary to have to manually call the modal.
+                          // $('#addBookDialog').modal('show');
+                      });
+                 </script>
+
+                         <!-- The Modal -->
+             <div class="modal" id="depozytwyd">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <form  method="POST" action="{{ route('depozytwyd', 'id' ) }}" >
+                        <!-- Modal Header -->
+                        <div class="modal-header bg-success text-light">
+                          <h4 class="modal-title">Wydanie z depozytu</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            @csrf
+                            @method('PATCH')
+                          Wprowadź datę depozytu: <input type="date" id="dat_dep_wyd" name="dat_dep_wyd" />
+                          <input type="hidden" id="idwyd" name="id" value="{{$wp->id}}" />
+                          <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-dark" data-dismiss="modal">Zamknij</button>
+                          <button type="submit" class="btn btn-success">Wydaj</button>
+
+                        </div>
+                       </form>
+                      </div>
+                    </div>
+                  </div>
+                  <script>
+                        $(document).on("click", ".open-AddBookDialog", function () {
+                              var wydId = $(this).data('id');
+                              $(".modal-body #idwyd").val( wydId );
+                              // As pointed out in comments,
+                              // it is unnecessary to have to manually call the modal.
+                              // $('#addBookDialog').modal('show');
+                          });
+                     </script>
+
          </div>
        </div>
  </div>
  <div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}" role="button"><i class="fa fa-arrow-left"></i> Szczegóły przedsiębiorcy</a></div><br />
 </div>
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
                                 <script type="text/javascript">
                                      $(".carID").click(function () {
                                         var idwyp = $(this).attr('data-id');
@@ -302,5 +385,7 @@
                                     });
 
 
-                                  </script>
+
+
+                              </script>
 
