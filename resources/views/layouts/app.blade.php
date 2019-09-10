@@ -18,6 +18,7 @@
         <script src="https://kit.fontawesome.com/24f75c5d02.js"></script>
         <script src="{{asset("/vendor/tinymce/tinymce.min.js")}}"></script>
 
+
     </head>
     <body>
         <div>
