@@ -11,22 +11,38 @@
     </a>
 
   <div class="card bg-dark text-white">
-    <div class="card-body">Przedsiębiorcy - <a href="przedsiebiorca/create" role="button" class="btn btn-success">Dodaj nowego</a></div>
+    <div class="row card-body">
+       <div class="col-md-3">Przedsiębiorcy - <a href="przedsiebiorca/create" role="button" class="btn btn-success">Dodaj nowego</a></div>
+       <div class="col-md-6">
+           <form action="/search" method="get">
+            <div class="input-group">
+                @csrf
+               <input type="search" name="search" class="form-control" placeholder="wpisz nr licencji, zezwolenia, zaświadczenia, nip, nazwisko, nazwę firmy">
+               <div class="input-group-append">
+                 <button class="btn btn-success" type="submit">
+                   <i class="fa fa-search"></i>
+                 </button>
+               </div>
+             </div>
+            </form>
+        </div>
+    </div>
+
   </div>
  <div class="table-responsive">
-  <table class="table table-bordered table-striped table-sm">
+  <table class="table table-striped table-sm">
     <thead class="table-primary" style="font-weight:bold;">
         <tr>
-          <td>Nr licencji</td>
-          <td>Rodzaj</td>
-          <td>Nazwa firmy</td>
-          <td>Imię</td>
-          <td>Nazwisko</td>
-          <td>Adres</td>
-          <td>Miejscowość</td>
-          <td>NIP</td>
-          <td>Telefon<td>
-          <td colspan="3">Akcja</td>
+          <th>Nr licencji</th>
+          <th>Rodzaj</th>
+          <th>Nazwa firmy</th>
+          <th>Imię</th>
+          <th>Nazwisko</th>
+          <th>Adres</th>
+          <th>Miejscowość</th>
+          <th>NIP</th>
+          <th>Telefon</th>
+          <th colspan="3">Akcja</th>
         </tr>
     </thead>
     <tbody>
@@ -97,6 +113,8 @@
             })
         });
     });
+
+
 </script>
 
 @endsection
