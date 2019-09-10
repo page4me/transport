@@ -157,18 +157,16 @@ class PrzedsiebiorcaController extends Controller
         $firma = $przed->nazwa_firmy;
      }
 
-
      $data_zm = date('Y-m-d');
 
-
+    // zapisanie historii wykonanych zmian danych przedsiebiorcy
     if($request->nazwa_firmy <> $firma) {
     $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => null, 'nazwa_zm' => 'Zmiana nazwy firmy z '. $firma .' na '.$request->nazwa_firmy, 'data_zm' => $data_zm]);
     }
 
-     \App\Przedsiebiorca::whereId($id)->update($validatedData);
+    // koniec zapisu historii zmian
 
-
-
+     \App\Przedsiebiorca::whereId($id)->update($validatedData); //update danych przedsiebiorcy
 
      return redirect('/przedsiebiorca')->with('success', 'Dane przedsiębiorcy zmienione');
     }
