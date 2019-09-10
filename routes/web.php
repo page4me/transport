@@ -26,7 +26,10 @@ Route::get('/przedsiebiorca/wypisyPDF/{id}', 'WypisyController@wypisyPDF');
 Route::get('/przedsiebiorca/zabezpieczenie/stare', 'PrzedsiebiorcaController@stare_zf')->name('stare_zf');
 Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PrzedsiebiorcaController@print_zdol_finans');
 Route::get('/search', 'PrzedsiebiorcaController@search');
+Route::get('/przedsiebiorca/{id}/zmiany/', 'ZmianyPrzedController@index')->name('index');
 
+
+Route::resource('przedsiebiorca/zmiany', 'ZmianyPrzedController');
 
 Route::resource('przedsiebiorca/baza', 'BazaController');
 
