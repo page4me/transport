@@ -168,8 +168,6 @@ class WypisyController extends Controller
 
     public function depozytwyd(Request $request)
     {
-
-
       $wypisy = \App\Wypisy::findOrFail($request->id);
 
       $input = Input::all();
