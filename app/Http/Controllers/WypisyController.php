@@ -104,7 +104,7 @@ class WypisyController extends Controller
 
          $wypisy->update($request->all());
 
-           return redirect('przedsiebiorca/wypisy/'.$request->id_przed)->with('success', 'Dane zapisano');
+         return redirect('przedsiebiorca/wypisy/'.$request->id_przed)->with('success', 'Dane zapisano');
     }
 
     /**
@@ -159,9 +159,16 @@ class WypisyController extends Controller
 
 
       $wypisy->update(['status'=>'2','dat_dep_wp'=>$data_wyc]);
-      //echo '<pre />';
-      //print_r($wypisy);
-      $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Zgłoszenie do depozytu wypisu o numerze - '.$request->nr_wyp, 'data_zm' => $data_wyc]);
+
+      $wyp = DB::table('dok_przed_wyp')->where('id',$request->id)->get();
+
+      foreach($wyp as $wp)
+      {
+          $nr_wyp = $wp->nr_wyp;
+      }
+
+
+      $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Zgłoszenie do depozytu wypisu o numerze - '.$nr_wyp, 'data_zm' => $data_wyc]);
 
       return redirect('/przedsiebiorca/wypisy/'.$id_przed);
     }
@@ -175,8 +182,16 @@ class WypisyController extends Controller
       $id_przed = Input::get('id_przed');
       $dat_wp = NULL;
 
+
+      $wyp = DB::table('dok_przed_wyp')->where('id',$request->id)->get();
+
+      foreach($wyp as $wp)
+      {
+          $nr_wyp = $wp->nr_wyp;
+      }
+
       $wypisy->update(['status'=>'1','dat_dep_wp'=>$dat_wp,'dat_dep_wyd'=>$data_wyc]);
-      $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Wydanie z depozytu wypisu o numerze - '.$request->nr_wyp, 'data_zm' => $data_wyc]);
+      $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Wydanie z depozytu wypisu o numerze - '.$nr_wyp, 'data_zm' => $data_wyc]);
 
       return redirect('/przedsiebiorca/wypisy/'.$id_przed);
     }
