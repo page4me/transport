@@ -107,6 +107,24 @@ class BazaController extends Controller
          'umowa' => 'string|max:255|nullable',
          'uwagi' => 'string|max:255|nullable'
         ]);
+
+        $baza = DB::table('baza_eksp')->where('id' , $id)->get();
+
+        foreach($baza as $bz){
+
+            $adres = $bz->adres;
+            $wlasnosc = $bz->wlasnosc;
+        }
+
+        $data_zm = date('Y-m-d');
+
+        // zapisanie historii wykonanych zmian danych przedsiebiorcy
+        if($request->nazwa_firmy <> $adres) {
+            $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => null, 'nazwa_zm' => 'Zmiana adresu bazy eksploatacyjnej z '. $adres .' na '.$request->adres, 'data_zm' => $data_zm]);
+        }elseif($request->wlasnosc <> $wlasnosc) {
+            $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => null, 'nazwa_zm' => 'Zmiana prawa własności z '. $wlasnosc .' na '.$request->wlasnosc, 'data_zm' => $data_zm]);
+        }
+
         $baza = \App\Baza::whereId($id)->update($validatedData);
 
 
