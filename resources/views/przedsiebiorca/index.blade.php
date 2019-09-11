@@ -9,6 +9,13 @@
         Zabezpieczenie finansowe po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
         <span class="sr-only">unread messages</span>
     </a>
+    @if(\App\Baza::where('dat_umowy','<',date('Y-m-d'))->count() != 0)
+    <a href="przedsiebiorca/baza/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+        Umowa bazy po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Baza::where('dat_umowy','<',date('Y-m-d'))->count()}}</span>
+        <span class="sr-only">unread messages</span>
+    </a>
+    @else
+    @endif
 
   <div class="card bg-dark text-white">
     <div class="row card-body">
