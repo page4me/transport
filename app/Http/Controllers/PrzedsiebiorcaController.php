@@ -155,13 +155,16 @@ class PrzedsiebiorcaController extends Controller
 
      foreach($przedsiebiorca as $przed){
         $firma = $przed->nazwa_firmy;
+        $adres = $przed->adres;
      }
 
      $data_zm = date('Y-m-d');
 
     // zapisanie historii wykonanych zmian danych przedsiebiorcy
     if($request->nazwa_firmy <> $firma) {
-    $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => null, 'nazwa_zm' => 'Zmiana nazwy firmy z '. $firma .' na '.$request->nazwa_firmy, 'data_zm' => $data_zm]);
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => null, 'nazwa_zm' => 'Zmiana nazwy firmy z '. $firma .' na '.$request->nazwa_firmy, 'data_zm' => $data_zm]);
+    }elseif($request->adres <> $adres) {
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => null, 'nazwa_zm' => 'Zmiana adresu firmy z '. $adres .' na '.$request->adres, 'data_zm' => $data_zm]);
     }
 
     // koniec zapisu historii zmian
@@ -260,6 +263,13 @@ class PrzedsiebiorcaController extends Controller
         $zdolnosc = \App\Zdolnosc::all();
 
         return view('przedsiebiorca.zabezpieczenie.stare', compact('zdolnosc'));
+    }
+
+    public function stare_bz()
+    {
+        $baza = \App\Baza::all();
+
+        return view('przedsiebiorca.baza.stare', compact('baza'));
     }
 
     public function print_zdol_finans($id)
