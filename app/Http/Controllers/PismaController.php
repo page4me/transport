@@ -82,4 +82,23 @@ class PismaController extends Controller
     {
         //
     }
+    
+    public function zf_pdf($id)
+    {
+        //set_time_limit(0);
+
+       $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+       //$pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca]);
+       $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
+       $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
+       $stan = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
+
+       $wypisy = DB::table('dok_przed_wyp')->where('id_przed' , $przedsiebiorca->id)->get();
+    
+        //$nazwa_firmy = $przedsiebiorca->nazwa_firmy;
+        $pdf = PDF::loadView('przedsiebiorca.pisma.zf_pdf', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'cars'=>$cars, 'stan' => $stan , 'wypisy' => $wypisy] );
+
+        return $pdf->stream('pismo_zdolnosc_finansowa.pdf');
+
+    }
 }
