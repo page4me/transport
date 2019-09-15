@@ -55,21 +55,18 @@
     <tbody>
         @foreach($rodzaje as $petent)
         <tr>
-            <td><strong>
-              @foreach($rodzaje as $row)
-                @if($petent->id == $row->id)
-                  {{$row->nr_dok}}
-
-
-            </strong></td>
+            <td style="width:150px;">
+              <strong>
+                @foreach($rodzaje as $row)
+                  @if($petent->id == $row->id)
+                    {{$row->nr_dok}}
+              </strong></td>
             <td>
-
-                  {{$row->nazwa}}
-
-              @endif
-              @endforeach
+               {{$row->nazwa}}
+                @endif
+               @endforeach
             </td>
-            <td style="width:250px;">{{$petent->nazwa_firmy}}</td>
+            <td style="width:280px;">{{$petent->nazwa_firmy}}</td>
             <td>{{$petent->imie}}</td>
             <td>{{$petent->nazwisko}}</td>
             <td>{{$petent->adres}}</td>
