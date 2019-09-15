@@ -25,7 +25,7 @@ class PrzedsiebiorcaController extends Controller
              ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
              ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
              ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
-             ->paginate(5);
+             ->paginate(15);
 
         $zdolnosc = \App\Zdolnosc::all();
 
@@ -287,9 +287,10 @@ class PrzedsiebiorcaController extends Controller
              ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
              ->where('nazwisko','like','%'.$search.'%')
              ->orWhere('nazwa_firmy','like','%'.$search.'%')
+             ->orWhere('nazwa','like','%'.$search.'%')
              ->orWhere('nip','like','%'.$search.'%')
              ->orWhere('nr_dok','like','%'.$search.'%')
-             ->paginate(5);
+             ->paginate(15);
 
         return view('przedsiebiorca.index', ['rodzaje' => $rodzaje]);
 
