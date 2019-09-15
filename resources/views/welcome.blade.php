@@ -19,12 +19,13 @@
     </head>
     <body>
 
-            <div class="container" style="margin-top: 320px;font-size: 30px;">
-                <div class="row">
+            <div class="container" style="font-size: 30px;">
+                <div class="text-center" style="margin: 0 auto;"><img src="img/logo.jpg" style="height:250px;padding: 20px;" /></div>
+                <div class="row" style="margin-top: 80px;">
                    <div class="col-md-4">
                        <div>
                          <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
-                        Zarzenia&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
+                        Zdarzenia&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
                         <span class="sr-only">unread messages</span>
                          </a>
                        </div>
