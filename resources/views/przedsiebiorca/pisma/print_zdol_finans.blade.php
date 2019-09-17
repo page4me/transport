@@ -24,21 +24,29 @@
         </style>
 </head>
 <body>
+    @foreach($pisma as $ps)
+
+    @endforeach
   <div class="container" style="font-size: 14px;font-family: Arial;width:900px;">
+    <form action="#" method="post">
+     <div><input class="btn btn-success" type="submit" value="Zapisz zmiany" /></div>
      <div> <img src="{{URL::asset('/img/starostwo.png')}}" alt="profile Pic" width="900px;"></div>
-     <div><textarea class="form-control" id="pismo" name="uwagi" />
-     <div class="text-right">Koszalin dn. 30.08.2019 r.</div>
-     <div class="text-left">KD.7252.105.2019.EZ</div>
+     <div><textarea class="form-control" id="pismo" name="uwagi" style="height: 100%;" />
+     <div style="float:right;">Koszalin dn. {{$data_p = $_GET['data_p']}} r.</div>
+     <div style="text-align:left;margin-top:30px;clear:both;">{{ $nr_sprawy = $_GET['nr_sprawy']}}</div>
      <div class="row col-4" style="float:right;margin-top: 40px;margin-right: 80px;">
      <strong>{{$przedsiebiorca->nazwa_firmy}}<br/>{{$przedsiebiorca->adres}}<br />{{$przedsiebiorca->kod_p}} {{$przedsiebiorca->miejscowosc}}</strong>
      </div>
-
+    <div class="row" style="margin-top:150px;">{{$ps->tresc}}</div>
     </textarea></div>
+
+   </form>
   </div>
 
   <script type="text/javascript">
     tinymce.init({
       selector: '#pismo',
+      plugins: "autoresize",
       language: 'pl'
     });
 
@@ -57,7 +65,7 @@
       <style>
             /** Define the margins of your page **/
             body {
-          
+
           font-size: 12px;
           padding-left: .5in;
           padding-right: .5in;
@@ -65,7 +73,7 @@
           padding-bottom: .3in;
 
 
-          ul, ul >li { 
+          ul, ul >li {
             list-style: none;
           }
 
@@ -93,7 +101,7 @@
      <div class="row col-5" style="float:right;margin-top: 40px;margin-right: 40px;">
        <div>
               <div style="font-weight: bold;font-size:12px;"><br />{{$przedsiebiorca->nazwa_firmy }} <br />{{$przedsiebiorca->adres}}<br />{{$przedsiebiorca->kod_p}} {{$przedsiebiorca->miejscowosc}}
-               
+
               </div>
         </div>
      </div>
@@ -141,7 +149,7 @@
          <strong>Otrzymuje:</strong>
      </div>
      <div>
-        <ul> 
+        <ul>
           <li> 1. Adresat</li>
           <li> 2. a/a</li>
         </ul>
