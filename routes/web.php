@@ -29,6 +29,8 @@ Route::get('/search', 'PrzedsiebiorcaController@search');
 Route::get('/przedsiebiorca/{id}/zmiany/', 'ZmianyPrzedController@index')->name('index');
 Route::get('/przedsiebiorca/baza/stare', 'PrzedsiebiorcaController@stare_bz')->name('stare_bz');
 Route::get('/przedsiebiorca/pisma/zf_pdf/{id}', 'PismaController@zf_pdf');
+Route::patch('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PismaController@print_zdol_finans');
+Route::get('/przedsiebiorca/pisma/tresc/{id}', 'PismaController@tresc');
 
 
 Route::resource('przedsiebiorca/zmiany', 'ZmianyPrzedController');
