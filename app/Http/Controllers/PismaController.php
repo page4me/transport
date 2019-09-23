@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pisma;
 use Illuminate\Http\Request;
 use DB;
+use PDF;
 
 class PismaController extends Controller
 {
@@ -86,20 +87,21 @@ class PismaController extends Controller
 
     public function zf_pdf($id)
     {
-        //set_time_limit(0);
+        set_time_limit(0);
 
        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
        //$pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca]);
        $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
-       $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
-       $stan = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
+      // $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
+       //$stan = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
 
-       $wypisy = DB::table('dok_przed_wyp')->where('id_przed' , $przedsiebiorca->id)->get();
+       //$wypisy = DB::table('dok_przed_wyp')->where('id_przed' , $przedsiebiorca->id)->get();
+       $pisma = DB::table('pisma')->where('id_przed' , $przedsiebiorca->id)->get();
 
         //$nazwa_firmy = $przedsiebiorca->nazwa_firmy;
-        $pdf = PDF::loadView('przedsiebiorca.pisma.zf_pdf', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'cars'=>$cars, 'stan' => $stan , 'wypisy' => $wypisy] );
+        $pdf = PDF::loadView('przedsiebiorca.pisma.zf_pdf', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'pisma' =>$pisma] );
 
-        return $pdf->stream('pismo_zdolnosc_finansowa.pdf');
+        return $pdf->download('pismo_zdolnosc_finansowa.pdf');
 
     }
 
@@ -115,4 +117,34 @@ class PismaController extends Controller
 
         return view('przedsiebiorca.pisma.pismo', compact('przedsiebiorca'));
     }
+
+    public function print_zdol_finans(Request $request, $id)
+     {
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+        $pisma = \App\Pisma::all();
+        $pismo = new Pisma;
+        $pismo->id_przed = $request->id;
+        //$pismo->nazwa = 'Zdolność finansowa';
+        $pismo->nr_sprawy = $request->get('nr_sprawy');
+        $pismo->data_p = $request->get('data_p');
+        $dok = DB::table('dok_przed')->where('id_przed' , $request->id)->get();
+
+
+        return view('przedsiebiorca.pisma.print_zdol_finans', compact('przedsiebiorca','pisma','dok'));
+     }
+
+     public function pismo_gotowe(Request $request, $id)
+     {
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+        $pisma = \App\Pisma::all();
+        $pismo = new Pisma;
+        $pismo->id_przed = $request->id;
+        //$pismo->nazwa = 'Zdolność finansowa';
+        $pismo->nr_sprawy = $request->get('nr_sprawy');
+        $pismo->data_p = $request->get('data_p');
+        $pismo->tresc = $request->get('tresc');
+        $pismo->update();
+
+        return view('przedsiebiorca.pisma.podglad', compact('przedsiebiorca','pisma','dok'));
+     }
 }
