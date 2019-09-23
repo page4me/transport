@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pisma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use DB;
 use PDF;
 
@@ -87,7 +88,7 @@ class PismaController extends Controller
 
     public function zf_pdf($id)
     {
-        set_time_limit(0);
+       // ini_set('max_execution_time', 0); // 0 = Unlimited
 
        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
        //$pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca]);
@@ -101,7 +102,7 @@ class PismaController extends Controller
         //$nazwa_firmy = $przedsiebiorca->nazwa_firmy;
         $pdf = PDF::loadView('przedsiebiorca.pisma.zf_pdf', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'pisma' =>$pisma] );
 
-        return $pdf->download('pismo_zdolnosc_finansowa.pdf');
+        return $pdf->stream('pismo_zdolnosc_finansowa.pdf');
 
     }
 
@@ -143,8 +144,14 @@ class PismaController extends Controller
         $pismo->nr_sprawy = $request->get('nr_sprawy');
         $pismo->data_p = $request->get('data_p');
         $pismo->tresc = $request->get('tresc');
-        $pismo->update();
 
-        return view('przedsiebiorca.pisma.podglad', compact('przedsiebiorca','pisma','dok'));
+        if(empty($pismo->id_przed == $request->id))
+         {
+            $pismo->save();
+         }else {
+            $pismo->update(Input::all());
+         }
+
+       return view('przedsiebiorca.pisma.podglad', compact('przedsiebiorca','pisma','dok'));
      }
 }
