@@ -32,7 +32,7 @@
         @csrf
         <input type="hidden" name="data_p" value="{{$_GET['data_p']}}" />
         <input type="hidden" name="nr_sprawy" value="{{$_GET['nr_sprawy']}}" />
-     <div><input class="btn btn-success" type="submit" value="Zapisz zmiany" /></div>
+     <div><!--<input class="btn btn-success" type="submit" value="Zapisz zmiany" />--></div>
      <div> <img src="{{URL::asset('/img/starostwo.png')}}" alt="profile Pic" width="900px;"></div>
      <div><textarea class="form-control" id="pismo" name="tresc" style="height: 100%;" />
      <div style="float:right;">Koszalin dn. {{$data_p = $_GET['data_p']}} r.</div>
@@ -101,7 +101,8 @@
     tinymce.init({
       selector: '#pismo',
       plugins: "autoresize",
-      language: 'pl'
+      language: 'pl',
+      plugins: "print, autoresize"
     });
 
     </script>
