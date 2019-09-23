@@ -10,34 +10,44 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
      <style>
-            /** Define the margins of your page **/
-            body {
+          body {
           font-family: DejaVu Sans;
           font-size: 12px;
-          margin: 10px 10px 0 0;
-      }
-            @page {
-               margin: 10px 10px 0 0;
+          padding-left: .5in;
+          padding-right: .5in;
+          padding-top: .2in;
+          padding-bottom: .3in;
 
+          }
+
+          ul, ul >li {
+            list-style: none;
+          }
+
+          @page {
+               margin: 0;
+               size: 21cm 29.7cm;
             }
 
         </style>
 </head>
 <body>
 
-  <div class="container" style="font-size: 14px;font-family: Arial;width:900px;">
+  <div class="container" style="font-size: 13px;font-family: Arial;width:620px;">
 
-
-     <div> <img src="{{URL::asset('/img/starostwo.png')}}" alt="profile Pic" width="900px;"></div>
-     <div>
-
+    @php ini_set('max_execution_time', 0); // 0 = Unlimited
+    @endphp
+     <div></div>
+     <div class="page">
+        <div> <img src="{{public_path('/img/starostwo.png')}}" alt="profile Pic" width="620px;"></div>
           @foreach ($pisma as $ps)
+
             {{$ps->tresc}}
+
           @endforeach
      </div>
 
   </div>
-
 
 </body>
 </html>
