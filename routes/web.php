@@ -24,14 +24,15 @@ Route::get('/przedsiebiorca/wypisy/{id}', 'WypisyController@index')->name('index
 Route::get('/przedsiebiorca/pdf/{id}', 'PrzedsiebiorcaController@gPDF');
 Route::get('/przedsiebiorca/wypisyPDF/{id}', 'WypisyController@wypisyPDF');
 Route::get('/przedsiebiorca/zabezpieczenie/stare', 'PrzedsiebiorcaController@stare_zf')->name('stare_zf');
-Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PrzedsiebiorcaController@print_zdol_finans');
+//Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PrzedsiebiorcaController@print_zdol_finans');
 Route::get('/search', 'PrzedsiebiorcaController@search');
 Route::get('/przedsiebiorca/{id}/zmiany/', 'ZmianyPrzedController@index')->name('index');
 Route::get('/przedsiebiorca/baza/stare', 'PrzedsiebiorcaController@stare_bz')->name('stare_bz');
-Route::get('/przedsiebiorca/pisma/zf_pdf/{id}', 'PismaController@zf_pdf');
-Route::patch('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PismaController@print_zdol_finans');
-Route::get('/przedsiebiorca/pisma/tresc/{id}', 'PismaController@tresc');
 
+Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PismaController@print_zdol_finans');
+Route::get('/przedsiebiorca/pisma/tresc/{id}', 'PismaController@tresc');
+Route::post('/przedsiebiorca/pisma/podglad/{id}', 'PismaController@pismo_gotowe')->name('pismo_gotowe');
+Route::get('/przedsiebiorca/pisma/zf_pdf/{id}', 'PismaController@zf_pdf');
 
 Route::resource('przedsiebiorca/zmiany', 'ZmianyPrzedController');
 
