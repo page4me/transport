@@ -273,49 +273,7 @@ class PrzedsiebiorcaController extends Controller
         return view('przedsiebiorca.baza.stare', compact('baza'));
     }
 
-    public function print_zdol_finans(Request $request, $id)
-     {
-        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
-        $pisma = \App\Pisma::all();
-        $pismo = new Pisma;
-        $pismo->id_przed = $request->id;
-        //$pismo->nazwa = 'Zdolność finansowa';
-        $pismo->nr_sprawy = $request->get('nr_sprawy');
-        $pismo->data_p = $request->get('data_p');
-       /*$pismo->tresc = '
-        <p>Starosta Koszaliński na podstawie art. 83 ust. 1 ustawy z dnia 6 września 2001 r. o transporcie drogowym (Dz. U. z 2019 r., poz. 58 z późn. zm.)
-        oraz § 2 ust. 3 rozporządzenia Ministra Infrastruktury i Rozwoju z dnia 8 września 2014 roku w sprawie danych i informacji, które przewoźnik
-        drogowy jest obowiązany przekazywać do organu w związku z prowadzoną działalnością w zakresie przewozu drogowego (Dz.U. z 2014 r., poz.1217)
-        nakłada na Pana obowiązek przedłożenia w terminie 21 dni od dnia otrzymania tego pisma, dokumentów potwierdzających spełnienie wymagań
-        ustawowych do otrzymanego „zezwolenia na wykonywanie zawodu przewoźnika drogowego” </p>
-        <p> wyrażonego licencją: nr udzieloną dnia 31 stycznia
-        2011 roku na wykonywanie krajowego transportu drogowego rzeczy. tj.: </p>
-        <p>- dokumenty potwierdzające spełnienie warunków, o których mowa w
-        art. 7 rozporządzenia (WE) nr 1071/2009 związane z wymogiem zdolności finansowej. Przedsiębiorca musi być w stanie w każdym momencie roku
-        finansowego spełnić swoje zobowiązania finansowe. W tym celu przedsiębiorca wykazuje na podstawie poświadczonych przez audytora lub odpowiednio
-        upoważnioną osobę rocznych sprawozdań finansowych, że co roku dysponuje kapitałem i rezerwami o wartości co najmniej równej 9 000 EUR w przypadku
-        wykorzystywania tylko jednego pojazdu i 5 000 EUR na każdy dodatkowy wykorzystywany pojazd. </p>
-        <p>- wykaz pojazdów zawierający następujące informacje:
-            markę, typ; 2) rodzaj/przeznaczenie; 3) numer rejestracyjny; 4) numer VIN; wskazanie rodzaju tytułu prawnego do dysponowania pojazdem wraz z
-            kserokopiami dowodów rejestracyjnych, z aktualnymi badaniami technicznymi; W drodze odstępstwa właściwy organ może zgodzić się lub wymagać,
-            aby przedsiębiorca wykazał swoją zdolność finansową za pomocą zabezpieczenia, takiego jak gwarancja bankowa lub ubezpieczenie, w tym
-            ubezpieczenie odpowiedzialności zawodowej z jednego lub kilku banków lub innych instytucji finansowych, w tym przedsiębiorstw ubezpieczeniowych,
-            składających solidarną gwarancję za przedsiębiorstwo na kwoty określone przy posiadaniu pojazdów samochodowych przeznaczonych do transportu
-            drogowego.</p>
-        <p>Pouczenie</p>
-        <p>Jednocześnie informuję, że jeśli organ udzielający „zezwolenia na wykonywanie zawodu przewoźnika drogowego” wyrażonego licencją na
-        wykonywanie krajowego transportu drogowego rzeczy, stwierdzi niespełnienie przez przedsiębiorcę wymogów będących podstawą do wydania
-        tego dokumentu, organ ten zawiesza lub cofa zezwolenie (licencję) na wykonywanie zawodu przewoźnika drogowego.</p><br /><br /><br />
-        <p>Otrzymuje:</p>
-        <p>1. Adresat</p>
-        <p>2. A/a</p>
-        <p>UWAGA: wszelkie informacje można uzyskać pod nr telefonu 94 71 40 116 lub w pokoju nr 116 w Wydziale Komunikacji i Dróg Starostwa
-        Powiatowego w Koszalinie</p>
-        ';*/
-        //$pismo->save();
 
-        return view('przedsiebiorca.pisma.print_zdol_finans', compact('przedsiebiorca','pisma'));
-     }
 
      public function search(Request $request){
         $search = $request->get('search');
