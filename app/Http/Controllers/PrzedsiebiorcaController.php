@@ -8,6 +8,7 @@ use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 use \App\WykazPoj;
 use \App\Pisma;
+use Carbon\Carbon;
 
 class PrzedsiebiorcaController extends Controller
 {
@@ -55,7 +56,7 @@ class PrzedsiebiorcaController extends Controller
      */
     public function store(Request $request)
     {
-        Alert::success('Dodano nowego przedsiębiorcę', '');
+
         $validatedData = $request->validate([
          'id_osf' => 'required',
          'nazwa_firmy' => 'required|max:255',
@@ -71,7 +72,13 @@ class PrzedsiebiorcaController extends Controller
         ]);
         $przedsiebiorca = \App\Przedsiebiorca::create($validatedData);
 
-        return redirect('/przedsiebiorca/dokumenty/create')->with('success', 'Przedsiebiorca dodany do bazy danych');
+        if(!$validatedData->fails()){
+            Alert::success('Zmniany Zapisano', 'Dane przedsiębiorcy zmienione');
+        }else {
+            Alert::danger('Zmniany nie zostały zapisane', 'Powstał błąd spróbuj ponownie.');
+        }
+
+        return redirect('/przedsiebiorca/dokumenty/create');
     }
 
     /**
@@ -100,6 +107,9 @@ class PrzedsiebiorcaController extends Controller
         $zab = DB::table('zdol_finans')->where('id_przed', $przedsiebiorca->id)->get();
         $baza = DB::table('baza_eksp')->where('id_przed', $przedsiebiorca->id)->get();
         $cars = DB::table('wykaz_poj')->where('id', $przedsiebiorca->id)->get();
+
+        //
+        //$n_kont = $p_kont->addDay(30);
 
 
 
@@ -137,7 +147,7 @@ class PrzedsiebiorcaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        Alert::success('Zmniany Zapisano', 'Dane przedsiębiorcy zmienione');
+
          $validatedData = $request->validate([
          'id_osf' => 'required|max:2',
          'nazwa_firmy' => 'required|max:255',
@@ -172,7 +182,13 @@ class PrzedsiebiorcaController extends Controller
 
      \App\Przedsiebiorca::whereId($id)->update($validatedData); //update danych przedsiebiorcy
 
-     return redirect('/przedsiebiorca')->with('success', 'Dane przedsiębiorcy zmienione');
+    if(!$validatedData->fails()){
+        Alert::success('Zmniany Zapisano', 'Dane przedsiębiorcy zmienione');
+    }else {
+        Alert::danger('Zmniany nie zostały zapisane', 'Powstał błąd spróbuj ponownie.');
+    }
+
+     return redirect('/przedsiebiorca');//->with('success', 'Dane przedsiębiorcy zmienione');
     }
 
     /**
