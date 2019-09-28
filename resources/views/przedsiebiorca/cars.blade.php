@@ -180,7 +180,7 @@
                        <td class="text-center">{{$car->nr_vin}}</td>
                        <td class="text-center">{{$car->dmc}} kg</td>
                        <td class="text-center">{{$car->wlasnosc}}</td>
-                       <td class="text-center">wprowadzono <br />{{$car->data_wpr}} r.</td>
+                       <td class="text-center">{{$car->data_wpr}} r.</td>
                        <td class="text-center" colspan="2">
                         <button data-toggle="modal" data-id="{{$car->id}}" data-nr_rej="{{$car->nr_rej}}"  data-p_nr_rej="{{$car->p_nr_rej}}" data-marka="{{$car->marka}}" data-nr_vin="{{$car->nr_vin}}" data-wlasnosc="{{$car->wlasnosc}}" data-data_wpr="{{$car->data_wpr}}" data-dmc="{{$car->dmc}}" data-rodzaj_poj="{{$car->rodzaj_poj}}" data-target="#editModal" role="button" class="btn btn-success btn-sm carID" alt="Edycja" ><i class="fa fa-edit"></i></button>
 
