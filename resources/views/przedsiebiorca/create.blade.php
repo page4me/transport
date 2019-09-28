@@ -32,6 +32,7 @@
     Nowy Przedsiebiorca - KROK 1
   </div>
   <div class="card-body" >
+        @include('flash-message')
     @if ($errors->any())
       <div class="alert alert-danger">
         <ul>
@@ -44,7 +45,7 @@
       <form method="post" action="{{ route('przedsiebiorca.store') }}">
         <div class="row">
               @csrf
-              
+
           <div class="col-md-12 form-group">
               <label for="Nazwa firmy"><B>Nazwa firmy - zgodnie z CEIDG:</B></label>
               <input type="text" class="form-control" name="nazwa_firmy"/>
@@ -54,7 +55,7 @@
           <div class="col-md-4 form-group">
               <label for="rodzaj">Rodzaj przedsiębiorcy:</label>
               <select class="form-control" name="id_osf" id="id_osf" >
-                 @foreach($rodzaje as $rodzaj)                                  
+                 @foreach($rodzaje as $rodzaj)
                      <option value="{{$rodzaj->id}}">{{$rodzaj->rodzaj}}</option>
                  @endforeach
               </select>
@@ -69,7 +70,7 @@
           </div>
         </div>
         <div class="row">
-          
+
           <div class="col-md-3 form-group">
               <label for="adres">Adres:</label>
               <input type="text" class="form-control" name="adres"/>
@@ -87,7 +88,7 @@
               <input type="text" class="form-control" name="gmina"/>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="col-md-6 form-group">
               <label for="nip">NIP:</label>
