@@ -42,7 +42,7 @@
      tinymce.init({
       selector: '#pismo',
       language: 'pl',
-      readonly: 0,
+      readonly: 1,
       plugins: "print, autoresize"
 
     });
