@@ -96,7 +96,7 @@
                    <td class="text-center">{{$car->nr_vin}}</td>
                    <td class="text-center">{{$car->dmc}} kg</td>
                    <td class="text-center">{{$car->wlasnosc}}</td>
-                   <td class="text-center">wprowadzono <br />{{$car->data_wpr}} r.</td>
+                   <td class="text-center">{{$car->data_wpr}} r.</td>
 
                  </tr>
 
