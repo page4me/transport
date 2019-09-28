@@ -318,11 +318,11 @@
            <div class="row">
              <div class="col-md-3">
                <strong>Data wydania : </strong><br /><span class="badge badge-secondary" style="font-size:14px;">
-                  {{$dk->data_wyd}}
+                  {{$dk->data_wyd}} r.
                </span>
              </div>
               <div class="col-md-3">
-               <strong>Ważnść do dnia: </strong><br /><span class="badge badge-success" style="font-size:14px;"> {{$dk->data_waz}}</span>
+               <strong>Ważnść do dnia: </strong><br /><span class="badge badge-success" style="font-size:14px;"> {{$dk->data_waz}} r.</span>
              </div>
               <div class="col-md-3">
                <strong>Numer sprawy: </strong><br />  {{$dk->nr_sprawy}}
@@ -341,10 +341,10 @@
     <div class="card-body">
            <div class="row">
              <div class="col-md-3">
-               <strong>Przeprowadzenie kontroli: </strong><br /><span class="badge badge-secondary" style="font-size:14px;"> 25.05.2019 r. </span>
+               <strong>Ostatnia kontrola: </strong><br /><span class="badge badge-secondary" style="font-size:14px;"> {{$p_kont = \Carbon\Carbon::createFromFormat('Y-m-d',$dk->data_wyd)->addYear(5) }} r. </span>
              </div>
               <div class="col-md-3">
-               <strong>Kolejna kontrola: </strong><br /><span class="badge badge-warning" style="font-size:14px;"> 25.05.2024 r.</span>
+               <strong>Następna kontrola: </strong><br /><span class="badge badge-warning" style="font-size:14px;"> {{ $n_kont = $p_kont->addYear(5)}} r.</span>
              </div>
               <div class="col-md-3">
                <strong>Wyniki kontroli: </strong><br /><span class="badge badge-success" style="font-size:14px;"> Spełnia wymagania </span>
