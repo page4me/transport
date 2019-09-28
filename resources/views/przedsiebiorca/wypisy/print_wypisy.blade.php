@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wykaz pojazdów</title>
+  <title>Wypisy z licencji / zezwolenia</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -62,8 +62,8 @@
         </div>
        </div>
          <div class="row">
-           <div class="text-center"> <span style="font-size:16px;font-weight: bold;">Wykaz pojazdów</span> <br/>
-             <span style="font-size:13px;font-weight: bold;"> Nr licencji / zezwolenia:
+           <div class="text-center"> <span style="font-size:16px;font-weight: bold;">Wypisy z licencji / zezwolenia</span> <br/>
+             <span style="font-size:13px;font-weight: bold;"> Nr:
                   @foreach($dok as $dk)
                      {{ $dk->nr_dok }}
                   @endforeach
@@ -88,8 +88,8 @@
 
               @foreach($wypisy as $wp)
               <tr>
-                  <td>{{$wp->nr_wyp}}</td>
-                  <td>{{$wp->nr_druku}}</td>
+                <td  @if($wp->status=='2') class="bg-danger text-light" @else  @endif>{{$wp->nr_wyp}}<br /> <span style="font-size: 10px;color: #ffe100;">{{$wp->dat_dep_wp}}</span></td>
+                <td  @if($wp->status=='2') class="bg-danger text-light" @else  @endif>{{$wp->nr_druku}}</td>
                   <td>{{$wp->nazwa}}</td>
                   <td>{{$wp->rodzaj_wyp}}</td>
                   <td>{{$wp->data_wn}}</td>
@@ -99,7 +99,6 @@
               @endforeach
           </tbody>
         </table>
-
 
          </div>
        </div>
