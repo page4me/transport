@@ -17,6 +17,14 @@
     @else
     @endif
 
+    @if(\App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count() != 0)
+    <a href="przedsiebiorca/zarzadzajacy/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+        Umowa z osobą zarządzającą po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count()}}</span>
+        <span class="sr-only">unread messages</span>
+    </a>
+    @else
+    @endif
+
   <div class="card bg-dark text-white">
     <div class="row card-body">
        <div class="col-md-3">Przedsiębiorcy - <a href="przedsiebiorca/create" role="button" class="btn btn-success">Dodaj nowego</a></div>
@@ -32,6 +40,10 @@
                </div>
              </div>
             </form>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-warning" >Harmonogram kontroli</button>
+            &nbsp; <button class="btn btn-info" >Raporty</button>
         </div>
     </div>
 
