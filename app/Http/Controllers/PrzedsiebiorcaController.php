@@ -289,7 +289,12 @@ class PrzedsiebiorcaController extends Controller
         return view('przedsiebiorca.baza.stare', compact('baza'));
     }
 
+    public function stare_oz()
+    {
+        $certyfikat = \App\Certyfikat::all();
 
+        return view('przedsiebiorca.zarzadzajacy.stare', compact('certyfikat'));
+    }
 
      public function search(Request $request){
         $search = $request->get('search');
@@ -307,5 +312,14 @@ class PrzedsiebiorcaController extends Controller
 
         return view('przedsiebiorca.index', ['rodzaje' => $rodzaje]);
 
+     }
+
+     public function zdarzenia(){
+
+        $zdolnosc = \App\Zdolnosc::all();
+        $baza = \App\Baza::all();
+        $certyfikat = \App\Certyfikat::all();
+
+        return view('przedsiebiorca.zdarzenia', ['zdolnosc' => $zdolnosc, 'baza' => $baza, 'certyfikat' => $certyfikat]);
      }
 }
