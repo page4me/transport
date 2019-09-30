@@ -28,11 +28,13 @@ Route::get('/przedsiebiorca/zabezpieczenie/stare', 'PrzedsiebiorcaController@sta
 Route::get('/search', 'PrzedsiebiorcaController@search');
 Route::get('/przedsiebiorca/{id}/zmiany/', 'ZmianyPrzedController@index')->name('index');
 Route::get('/przedsiebiorca/baza/stare', 'PrzedsiebiorcaController@stare_bz')->name('stare_bz');
+Route::get('/przedsiebiorca/zarzadzajacy/stare', 'PrzedsiebiorcaController@stare_oz')->name('stare_oz');
 
 Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PismaController@print_zdol_finans');
 Route::get('/przedsiebiorca/pisma/tresc/{id}', 'PismaController@tresc');
 Route::post('/przedsiebiorca/pisma/podglad/{id}', 'PismaController@pismo_gotowe')->name('pismo_gotowe');
 Route::get('/przedsiebiorca/pisma/zf_pdf/{id}', 'PismaController@zf_pdf');
+Route::get('/przedsiebiorca/zdarzenia', 'PrzedsiebiorcaController@zdarzenia');
 
 Route::resource('przedsiebiorca/zmiany', 'ZmianyPrzedController');
 
