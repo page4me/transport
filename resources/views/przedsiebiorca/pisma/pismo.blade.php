@@ -27,6 +27,8 @@
                 </div>
             </div>
           </form>
+          <div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}" role="button"><i class="fa fa-arrow-left"></i> Szczegóły przedsiębiorcy</a></div><br />
         </div>
+
 @endsection
 
