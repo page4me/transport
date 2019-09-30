@@ -158,7 +158,8 @@
                 @if(!empty($ck->id)) {{$ck->imie_os_z}} {{$ck->nazwisko_os_z}} @else brak @endif
               @endforeach
                          </div>
-             <div>Umowa do dnia -  @if(!empty($ck->id)) {{$ck->umowa}} @else brak @endif</div>
+             <div>Umowa do dnia -  @if(!empty($ck->id))
+                 {{$ck->dat_umowy}} <br/> {{$ck->umowa}}  @else brak @endif</div>
              <div><strong>Certyfikat kompetencji:</strong><br />@if(!empty($ck->id))<span style="color:#0041a8;font-weight: bold;">{{$ck->rodzaj}}</span>@else brak @endif / Nr @if(!empty($ck->id)) {{$ck->nr_cert}} @else brak <br /><br /> @endif</div><br />
 
               <div>
@@ -352,7 +353,7 @@
               <div class="col-md-3">
                <strong>Zalecenia pokontrolne: </strong><br /><span class="badge badge-success" style="font-size:14px;"> Nie </span>
              </div>
-             <div class="col-md-12 text-center"><br /><a href="#" role="button" class="btn btn-primary btn-sm">Podgląd wyników kontroli</a></div>
+             <div class="col-md-12 text-center"><br /><a href="#" role="button" class="btn btn-primary btn-sm">Podglądaj kontrole</a></div>
            </div>
     </div>
 
