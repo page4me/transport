@@ -24,9 +24,17 @@
                 <div class="row" style="margin-top: 80px;">
                    <div class="col-md-4">
                        <div>
-                         <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
-                        Zdarzenia&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
+                            @php
+                            $zdolnosc = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count();
+                            $os_zarzzdajaca = \App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count();
+                            $baza = \App\Baza::where('dat_umowy','<',date('Y-m-d'))->count();
+
+
+                           @endphp
+                         <a href="przedsiebiorca/zdarzenia" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+                         Zdarzenia&nbsp;<span class="badge badge-light">{{ $zdarzenia = $zdolnosc + $os_zarzzdajaca + $baza}}</span>
                         <span class="sr-only">unread messages</span>
+
                          </a>
                        </div>
                        <a href="/przedsiebiorca" role="button" class="btn btn-primary" style="font-size:30px;">PRZEDSIĘBIORCY</a>
