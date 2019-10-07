@@ -4,15 +4,16 @@
 @section('content')
 <div class="container">
 <div class="card uper">
-  <div class="card-header bg-dark text-light" >
-  @foreach($rodzaje as $petent)
-       @endforeach
+        @foreach($rodzaje as $petent)
+        @endforeach
+  <div @if($przedsiebiorca->status =="0") class="card-header bg-dark text-light" @elseif($przedsiebiorca->status =="2") class="card-header bg-warning"  @elseif($przedsiebiorca->status =="3") class="card-header bg-danger text-light" @endif>
+
    Dane szczegółowe przedsiębiorcy -
-     <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
+     <span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #00ddff;font-size:16px;"  @endif > Nr licencji / zezwolenia:
        @foreach($dok as $dk)
          @if(!empty($dk->nr_dok)) {{ $dk->nr_dok}} @else brak @endif
 
-     </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
+     </span><span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #fff;font-size:16px;" @endif>wydano dn. {{ $dk->data_wyd}}   r.</span>
        @endforeach
   </div>
   <div class="card-body">
