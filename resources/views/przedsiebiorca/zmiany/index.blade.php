@@ -26,7 +26,7 @@
                          <tr>
                             <td>{{$a++}}</td>
                             <td>{{$hzm->nazwa_zm}}</td>
-                            <td>{{$hzm->data_zm}}</td>
+                            <td style="width:120px;">{{$hzm->data_zm}}</td>
                          </tr>
                         @endforeach
                 </tbody>
