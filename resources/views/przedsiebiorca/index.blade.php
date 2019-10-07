@@ -61,38 +61,50 @@
           <th>Miejscowość</th>
           <th>NIP</th>
           <th>Telefon</th>
-          <th colspan="3">Akcja</th>
+          <th colspan="4">Akcja</th>
         </tr>
     </thead>
     <tbody>
         @foreach($rodzaje as $petent)
         <tr>
-            <td style="width:150px;">
+            <td style="width:150px;" @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>
               <strong>
                 @foreach($rodzaje as $row)
                   @if($petent->id == $row->id)
                     {{$row->nr_dok}}
               </strong></td>
-            <td>
+            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>
                {{$row->nazwa}}
+                <br />
+                  @if($row->powod != null && $petent->status =='2') <p class="text small"><strong>{{$row->powod}} od {{$row->dat_zaw}}</strong></p> @else @endif
+                  @if($row->powod != null && $petent->status =='3') <p class="text small"><strong>{{$row->powod}} </strong></p> @else @endif
                 @endif
                @endforeach
             </td>
-            <td style="width:280px;">{{$petent->nazwa_firmy}}</td>
-            <td>{{$petent->imie}}</td>
-            <td>{{$petent->nazwisko}}</td>
-            <td>{{$petent->adres}}</td>
-            <td>{{$petent->miejscowosc}}</td>
-            <td>{{$petent->nip}}</td>
-            <td>{{$petent->telefon}}</td>
-            <td><a href="{{ route('przedsiebiorca.edit',$petent->id)}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></a></td>
-            <td><form action="{{ route('przedsiebiorca.destroy', $petent->id)}}" method="post">
+            <td style="width:280px;" @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->nazwa_firmy}}</td>
+            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else @endif>{{$petent->imie}}</td>
+            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->nazwisko}}</td>
+            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->adres}}</td>
+            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->miejscowosc}}</td>
+            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->nip}}</td>
+            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->telefon}}</td>
+            <td style="width:30px;"><a  @if($petent->status == '3')  style = "display:none;" @endif href="{{ route('przedsiebiorca.edit',$petent->id)}}" class="btn btn-sm btn-success" title="Edycja"><i class="fa fa-edit"></a></td>
+            <td style="width:40px;text-align:center;">
+              @if($petent->status != '2')
+                <form  method="get" action="{{ route('zawies', $petent->id) }}">
                   @csrf
-                  @method('DELETE')
-                  <button class="btn btn-sm btn-danger" type="submit" id="confirm_deleteXX"><i class="fa fa-trash"></i></button>
+                    <a  @if($petent->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->id}}" role="button" class="openZawies btn btn-warning btn-sm" href="#zawies" title="Zawieszenie"><i class="fa fa-history"></i></a>
+
                 </form>
+              @else
+              <a  @if($petent->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->id}}" role="button" class="openOdwies btn btn-info btn-sm" href="#odwies" title="Odwieś"><i class="fa fa-recycle"></i></a>
+
+              @endif
+
+
             </td>
-            <td><a href="{{ route('przedsiebiorca.show',$petent->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></a></td>
+            <td style="width:30px;"><a @if($petent->status == '3')  style = "display:none;" @else @endif data-toggle="modal" data-id="{{$petent->id}}" role="button" class="openRezygnuj btn btn-danger btn-sm" href="#rezygnacja" title="Rezygnacja"><i class="fa fa-user-slash fa-1x"></a></td>
+            <td><a href="{{ route('przedsiebiorca.show',$petent->id)}}" class="btn btn-sm btn-primary" title="Podgląd"><i class="fa fa-eye"></a></td>
         </tr>
         @endforeach
     </tbody>
@@ -102,35 +114,118 @@
 </div>
 <div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $( "#confirm_delete" ).submit(function( event ) {
-            event.preventDefault();
-            swal({
-                title: 'Are you sure?',
-                text: "Please click confirm to delete this item",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: true
-            }).then(function() {
-                    $("#confirm_delete").off("submit").submit();
-            }, function(dismiss) {
-                // dismiss can be 'cancel', 'overlay',
-                // 'close', and 'timer'
-                if (dismiss === 'cancel') {
-                    swal('Cancelled', 'Delete Cancelled :)', 'error');
-                }
-            })
-        });
-    });
+
+     <div class="modal fade" id="zawies">
+        <div class="modal-dialog" style="margin:0 auto;top:25%;">
+          <div class="modal-content">
+            <form  method="POST" action="{{ route('zawies', 'id' ) }}" >
+            <!-- Modal Header -->
+
+            <div class="modal-header bg-warning">
+              <h4 class="modal-title">Zawieszenie licencji / zezwolenia</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                @csrf
+                @method('PATCH')
+              Wprowadź datę zawieszenia: <input class="form-control" type="date" id="dat_zaw" name="dat_zaw" /><br />
+              Podaj powód zawieszenia: <textarea class="form-control" id="powod" name="powod"></textarea><br />
+              <input type="hidden" id="idz" name="id" value="{{$petent->id}}" />
 
 
-</script>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark" data-dismiss="modal">Zamknij</button>
+              <button type="submit" class="btn btn-warning">Zawieś</button>
+
+            </div>
+           </form>
+          </div>
+        </div>
+      </div>
+      <script>
+            $(document).on("click", ".openZawies", function () {
+                  var zawId = $(this).data('id');
+                  $(".modal-body #idz").val( zawId );
+
+              });
+         </script>
+
+    <div class="modal fade" id="odwies">
+        <div class="modal-dialog" style="margin:0 auto;top:25%;">
+          <div class="modal-content">
+            <form  method="POST" action="{{ route('odwies', 'id' ) }}" >
+            <!-- Modal Header -->
+
+            <div class="modal-header bg-warning">
+              <h5 class="modal-title">Przywrócenie po zawieszeniu licencji / zezwolenia</h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                @csrf
+                @method('PATCH')
+              Wprowadź datę odwieszenia: <input class="form-control" type="date" id="dat_odw" name="dat_odw" /><br />
+              <input type="hidden" id="ido" name="id" value="{{$petent->id}}" />
+
+
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark" data-dismiss="modal">Zamknij</button>
+              <button type="submit" class="btn btn-success">Odwieś</button>
+
+            </div>
+           </form>
+          </div>
+        </div>
+      </div>
+      <script>
+            $(document).on("click", ".openOdwies", function () {
+                  var odwId = $(this).data('id');
+                  $(".modal-body #ido").val( odwId );
+
+              });
+         </script>
+
+        <div class="modal fade" id="rezygnacja">
+            <div class="modal-dialog" style="margin:0 auto;top:25%;">
+            <div class="modal-content">
+                <form  method="POST" action="{{ route('rezygnacja', 'id' ) }}" >
+                <!-- Modal Header -->
+
+                <div class="modal-header bg-danger text-light">
+                <h5 class="modal-title">Rezygnacja - Wycofanie z licencji / zezwolenia</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    @csrf
+                    @method('PATCH')
+                Wprowadź datę z decyzji: <input class="form-control" type="date" id="dat_rez" name="dat_rez" /><br />
+                Podaj powód rezygnacji/wycofania: <textarea class="form-control" id="powod" name="powod"></textarea><br />
+                <input type="hidden" id="idr" name="id" value="{{$petent->id}}" />
+
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Zamknij</button>
+                <button type="submit" class="btn btn-danger">Rezygnuj/Wycofaj</button>
+
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+        <script>
+                $(document).on("click", ".openRezygnuj", function () {
+                    var rezId = $(this).data('id');
+                    $(".modal-body #idr").val( rezId );
+
+                });
+            </script>
 
 @endsection
