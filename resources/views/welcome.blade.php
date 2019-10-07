@@ -51,7 +51,11 @@
                         <a href="#" role="button" class="btn btn-warning" style="font-size:30px;">SKP i DIAGNOŚCI</a></div>
                 </div>
             </div>
-
+            <div style="margin: 0 auto;padding-top: 40px;" class="row">
+                <p class="bg-primary col-md-4" style="height:8px;"></p>
+                <p class="bg-success col-md-4" style="height:8px;"></p>
+                <p class="bg-warning col-md-4" style="height:8px;"></p>
+            </div>
 
     </body>
 </html>
