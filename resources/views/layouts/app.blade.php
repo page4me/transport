@@ -17,14 +17,33 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/24f75c5d02.js"></script>
         <script src="{{asset("/vendor/tinymce/tinymce.min.js")}}"></script>
+        <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
+        <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
+     <style>
+
+                      body {
+              margin-bottom: $height-footer;
+            }
+            #footer {
+              bottom: 0;
+              width: 98.5%;
+              position: absolute;
+              height: $height-footer;
+
+              .footer-block {
+                margin: 20px;
+              }
+            }
 
 
+     </style>
     </head>
     <body>
         <div>
             @include('sweetalert::alert')
 
             @yield('content')
+
         </div>
 
     </body>
