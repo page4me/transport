@@ -35,6 +35,9 @@ Route::get('/przedsiebiorca/pisma/tresc/{id}', 'PismaController@tresc');
 Route::post('/przedsiebiorca/pisma/podglad/{id}', 'PismaController@pismo_gotowe')->name('pismo_gotowe');
 Route::get('/przedsiebiorca/pisma/zf_pdf/{id}', 'PismaController@zf_pdf');
 Route::get('/przedsiebiorca/zdarzenia', 'PrzedsiebiorcaController@zdarzenia');
+Route::patch('/przedsiebiorca/zawies/{id}', 'PrzedsiebiorcaController@zawies')->name('zawies');
+Route::patch('/przedsiebiorca/odwies/{id}', 'PrzedsiebiorcaController@odwies')->name('odwies');
+Route::patch('/przedsiebiorca/rezygnacja/{id}', 'PrzedsiebiorcaController@rezygnacja')->name('rezygnacja');
 
 Route::resource('przedsiebiorca/zmiany', 'ZmianyPrzedController');
 
