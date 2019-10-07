@@ -8,7 +8,9 @@ use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 use \App\WykazPoj;
 use \App\Pisma;
+use \App\Http\Controllers\DokPrzedCotroller;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
 
 class PrzedsiebiorcaController extends Controller
 {
@@ -182,10 +184,10 @@ class PrzedsiebiorcaController extends Controller
 
      \App\Przedsiebiorca::whereId($id)->update($validatedData); //update danych przedsiebiorcy
 
-    if(!$validatedData->fails()){
-        Alert::success('Zmniany Zapisano', 'Dane przedsiębiorcy zmienione');
+    if($validatedData){
+        Alert::success('Zmiany Zapisano', 'Dane przedsiębiorcy zmienione');
     }else {
-        Alert::danger('Zmniany nie zostały zapisane', 'Powstał błąd spróbuj ponownie.');
+        Alert::error('Zmiany nie zostały zapisane', 'Powstał błąd spróbuj ponownie.');
     }
 
      return redirect('/przedsiebiorca');//->with('success', 'Dane przedsiębiorcy zmienione');
@@ -202,9 +204,65 @@ class PrzedsiebiorcaController extends Controller
         //
 
             $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
-            $przedsiebiorca->delete();
+           // $przedsiebiorca->delete();
 
             return redirect('/przedsiebiorca')->with('danger', 'Dane przedsiębiorcy usunięte');
+    }
+
+    public function zawies(Request $request)
+    {
+        Alert::warning('Zawieszono licencję/zezwolenie przedsiębiorcy', '');
+        $zawies = \App\Przedsiebiorca::findOrFail($request->id);
+
+
+        $input = Input::all();
+        $id = Input::get('idz');
+
+
+        $zawies->update(['status'=>'2']);
+
+        $zawies_lic = DB::table('dok_przed')->where('id_przed' , $request->id)->get();
+        foreach($zawies_lic as $li){
+            $li->id;
+        }
+        $powod = Input::get('powod');
+        $dat_zaw = Input::get('dat_zaw');
+        $lic = \App\DokumentyPrzed::findOrFail($li->id);
+        $lic->update(['status'=>'2','dat_zaw'=> $dat_zaw,'powod'=>$powod]);
+
+
+        $data_zm = date('Y-m-d');
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Zawieszenie dokumentu przedsiębiorcy','data_zm' => $dat_zaw]);
+
+
+        return redirect('/przedsiebiorca');
+    }
+
+    public function odwies(Request $request)
+    {
+        Alert::warning('Odwieszono licencję/zezwolenie przedsiębiorcy', '');
+        $odwies = \App\Przedsiebiorca::findOrFail($request->id);
+
+
+        $input = Input::all();
+        $id = Input::get('ido');
+        $dat_odw = Input::get('dat_odw');
+
+        $odwies->update(['status'=>'0']);
+
+        $odwies_lic = DB::table('dok_przed')->where('id_przed' , $id)->get();
+
+        $lic = \App\DokumentyPrzed::findOrFail($request->id);
+        $lic->update(['status'=>'0','dat_odw'=> $dat_odw,'powod'=>null]);
+
+        foreach($odwies_lic as $lic){
+            $lic->id;
+        }
+
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id, 'id_dok_przed' => $lic->id, 'nazwa_zm' => 'Przywrócenie dokumentu przedsiębiorcy po zawieszeniu ','data_zm' => $dat_odw]);
+
+
+        return redirect('/przedsiebiorca');
     }
 
     public function cars(Request $request,$id)
@@ -296,7 +354,8 @@ class PrzedsiebiorcaController extends Controller
         return view('przedsiebiorca.zarzadzajacy.stare', compact('certyfikat'));
     }
 
-     public function search(Request $request){
+     public function search(Request $request)
+     {
         $search = $request->get('search');
         //$przedsiebiorca = DB::Table('przedsiebiorca')->where('nazwisko','like','%'.$search.'%')->paginate(5);
         $rodzaje= DB::table('dok_przed')
@@ -314,7 +373,8 @@ class PrzedsiebiorcaController extends Controller
 
      }
 
-     public function zdarzenia(){
+     public function zdarzenia()
+     {
 
         $zdolnosc = \App\Zdolnosc::all();
         $baza = \App\Baza::all();
@@ -322,4 +382,35 @@ class PrzedsiebiorcaController extends Controller
 
         return view('przedsiebiorca.zdarzenia', ['zdolnosc' => $zdolnosc, 'baza' => $baza, 'certyfikat' => $certyfikat]);
      }
+
+     public function rezygnacja(Request $request)
+     {
+        Alert::error('Rezygnacja z licencji/zezwolenia przedsiębiorcy', '');
+        $rezygnuj = \App\Przedsiebiorca::findOrFail($request->id);
+
+
+        $input = Input::all();
+        $id = Input::get('idr');
+
+
+        $rezygnuj->update(['status'=>'3']);
+
+        $rezygnuj_lic = DB::table('dok_przed')->where('id_przed' , $request->id)->get();
+        foreach($rezygnuj_lic as $li){
+            $li->id;
+        }
+        $powod = Input::get('powod');
+        $dat_rez = Input::get('dat_rez');
+        $lic = \App\DokumentyPrzed::findOrFail($li->id);
+        $lic->update(['status'=>'3','dat_rez'=> $dat_rez,'powod'=>$powod]);
+
+
+        $data_zm = date('Y-m-d');
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Rezygnacja - Wycofanie z licencji/zezwolenia decyzja z dn. '.$dat_rez,'data_zm' => $dat_rez]);
+
+
+        return redirect('/przedsiebiorca');
+    }
+
+
 }
