@@ -5,25 +5,26 @@
 <div class="container-fluid">
 <div><br />
 
-    <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
-        Zabezpieczenie finansowe po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
-        <span class="sr-only">unread messages</span>
-    </a>
-    @if(\App\Baza::where('dat_umowy','<',date('Y-m-d'))->count() != 0)
-    <a href="przedsiebiorca/baza/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
-        Umowa bazy po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Baza::where('dat_umowy','<',date('Y-m-d'))->count()}}</span>
-        <span class="sr-only">unread messages</span>
-    </a>
-    @else
-    @endif
+            <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+                Zabezpieczenie finansowe po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
+                <span class="sr-only">unread messages</span>
+            </a>
+            @if(\App\Baza::where('dat_umowy','<',date('Y-m-d'))->count() != 0)
+            <a href="przedsiebiorca/baza/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+                Umowa bazy po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Baza::where('dat_umowy','<',date('Y-m-d'))->count()}}</span>
+                <span class="sr-only">unread messages</span>
+            </a>
+            @else
+            @endif
 
-    @if(\App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count() != 0)
-    <a href="przedsiebiorca/zarzadzajacy/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
-        Umowa z osobą zarządzającą po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count()}}</span>
-        <span class="sr-only">unread messages</span>
-    </a>
-    @else
-    @endif
+            @if(\App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count() != 0)
+            <a href="przedsiebiorca/zarzadzajacy/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+                Umowa z osobą zarządzającą po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count()}}</span>
+                <span class="sr-only">unread messages</span>
+            </a>
+            @else
+            @endif
+
 
   <div class="card bg-dark text-white">
     <div class="row card-body">
@@ -49,6 +50,11 @@
 
   </div>
  <div class="table-responsive">
+
+    <div class="col-md-12">
+       @if(empty($wyniki) or $wyniki ==0 )<div class='text-danger text-center col-md-12'> <strong>@if(!empty($brak)) {{$brak}} @else @endif</strong></div>  @else <div class="bg bg-light text-center p-2 text-success">Znalezionych wyników: <strong>{{ $wyniki }}</strong></div>  @endif
+    </div>
+
   <table class="table table-striped table-sm">
     <thead class="table-primary" style="font-weight:bold;">
         <tr>
@@ -74,7 +80,7 @@
                     {{$row->nr_dok}}
               </strong></td>
             <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>
-               {{$row->nazwa}}
+               {{$row->nazwa}} - {{$row->rodz_dok}}
                 <br />
                   @if($row->powod != null && $petent->status =='2') <p class="text small"><strong>{{$row->powod}} od {{$row->dat_zaw}}</strong></p> @else @endif
                   @if($row->powod != null && $petent->status =='3') <p class="text small"><strong>{{$row->powod}} </strong></p> @else @endif
@@ -131,7 +137,7 @@
                 @method('PATCH')
               Wprowadź datę zawieszenia: <input class="form-control" type="date" id="dat_zaw" name="dat_zaw" /><br />
               Podaj powód zawieszenia: <textarea class="form-control" id="powod" name="powod"></textarea><br />
-              <input type="hidden" id="idz" name="id" value="{{$petent->id}}" />
+              <input type="hidden" id="idz" name="id" value="@foreach($rodzaje as $petent) {{$petent->id}} @endforeach" />
 
 
             </div>
@@ -168,7 +174,7 @@
                 @csrf
                 @method('PATCH')
               Wprowadź datę odwieszenia: <input class="form-control" type="date" id="dat_odw" name="dat_odw" /><br />
-              <input type="hidden" id="ido" name="id" value="{{$petent->id}}" />
+              <input type="hidden" id="ido" name="id" value="@foreach($rodzaje as $petent) {{$petent->id}} @endforeach" />
 
 
             </div>
@@ -206,7 +212,7 @@
                     @method('PATCH')
                 Wprowadź datę z decyzji: <input class="form-control" type="date" id="dat_rez" name="dat_rez" /><br />
                 Podaj powód rezygnacji/wycofania: <textarea class="form-control" id="powod" name="powod"></textarea><br />
-                <input type="hidden" id="idr" name="id" value="{{$petent->id}}" />
+                <input type="hidden" id="idr" name="id" value="@foreach($rodzaje as $petent) {{$petent->id}} @endforeach" />
 
 
                 </div>
