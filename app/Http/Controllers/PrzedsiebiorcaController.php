@@ -367,9 +367,22 @@ class PrzedsiebiorcaController extends Controller
              ->orWhere('nazwa','like','%'.$search.'%')
              ->orWhere('nip','like','%'.$search.'%')
              ->orWhere('nr_dok','like','%'.$search.'%')
+             ->orWhere('rodz_dok','like','%'.$search.'%')
              ->paginate(15);
 
-        return view('przedsiebiorca.index', ['rodzaje' => $rodzaje]);
+        if($search == null) {
+            Alert::error('Proszę wpisać szukane wyrażenie. Pole nie może być puste !', '');
+            $wyniki = '0';
+            $brak = "";
+
+        }elseif(count($rodzaje) == 0){
+            $wyniki = 0;
+            $brak = "Nie znaleziono wyrażenia: '".$search."' ";
+        }elseif(count($rodzaje) > 0) {
+            $wyniki = count($rodzaje);
+            $brak = "";
+        }
+        return view('przedsiebiorca.index', ['rodzaje' => $rodzaje, 'wyniki' =>$wyniki, 'brak' =>$brak]);
 
      }
 
