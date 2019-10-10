@@ -61,9 +61,10 @@
                  <option value="0"> </option>
                  <option value="Zezwolenie">Zezwolenie</option>
                  <option value="Licencja">Licencja</option>
-                 <option value="Zaswiadczenie">Zaswiadczenie</option>
+                 <option value="Licencja">Licencja - spedycja</option>
                  <option value="Licencja 7-9">Licencja 7-9</option>
-                 <option value="Licencja Posrednictwo">Licencja Posrednictwo</option>
+                 <option value="Licencja Posrednictwo">Licencja Pośrednictwo</option>
+                 <option value="Zaswiadczenie">Zaświadczenie</option>
                </select>
           </div>
         </div>
