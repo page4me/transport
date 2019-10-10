@@ -159,8 +159,28 @@
                 @if(!empty($ck->id)) {{$ck->imie_os_z}} {{$ck->nazwisko_os_z}} @else brak @endif
               @endforeach
                          </div>
-             <div>Umowa do dnia -  @if(!empty($ck->id))
-                 {{$ck->dat_umowy}} <br/> {{$ck->umowa}}  @else brak @endif</div>
+             <div>
+                  @if(!empty($ck->id))
+                      @if(!empty($ck->dat_umowy))
+                            @if($ck->dat_umowy < date('Y-m-d'))
+                            Umowa do dnia -
+                            <span class="badge badge-danger" style="font-size:11px;">
+                            {{$ck->dat_umowy}} r.<br/>
+                            {{$ck->umowa}} <br />
+                            po terminie {{$dni = (strtotime($ck->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
+                            </span>
+                            @else
+                            Umowa do dnia -
+                            <span class="badge badge-success" style="font-size:13px;">    {{$ck->dat_umowy}} r.</span> <br/>
+                                {{$ck->umowa}}
+                            @endif
+                       @else
+                            Zarządzający: Właściciel
+                       @endif
+                  @else
+                      brak
+                  @endif
+            </div>
              <div><strong>Certyfikat kompetencji:</strong><br />@if(!empty($ck->id))<span style="color:#0041a8;font-weight: bold;">{{$ck->rodzaj}}</span>@else brak @endif / Nr @if(!empty($ck->id)) {{$ck->nr_cert}} @else brak <br /><br /> @endif</div><br />
 
               <div>
@@ -285,7 +305,24 @@
                         @foreach ($baza as $bz)
                         <div><strong>Baza eksploatacyjna</strong></div>
                         <div><strong>Adres:</strong> <br />{{$bz->adres}}<br /> {{$bz->kod_p}} {{$bz->miasto}}</div>
-                        <div>Umowa do dnia {{$bz->dat_umowy}} r.</div>
+                        <div>
+                          @if(!empty($bz->dat_umowy))
+                            @if($bz->dat_umowy < date('Y-m-d'))
+                            Umowa do dnia
+                                <span class="badge badge-danger" style="font-size:11px;">
+                                {{$bz->dat_umowy}} r.<br/>
+
+                                po terminie {{$dni = (strtotime($bz->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
+                                </span>
+                                @else
+                                Umowa do dnia
+                                <span class="badge badge-success" style="font-size:11px;">  {{$bz->dat_umowy}} r.</span>
+                                @endif
+                          @else
+                            {{$bz->wlasnosc}}
+                          @endif
+
+                        </div>
                         <br />
                         @endforeach
 
