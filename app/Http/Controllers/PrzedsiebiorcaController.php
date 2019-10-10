@@ -227,8 +227,11 @@ class PrzedsiebiorcaController extends Controller
         }
         $powod = Input::get('powod');
         $dat_zaw = Input::get('dat_zaw');
-        $lic = \App\DokumentyPrzed::findOrFail($li->id);
-        $lic->update(['status'=>'2','dat_zaw'=> $dat_zaw,'powod'=>$powod]);
+
+        $dat_zaw_new = Carbon::createFromDate($dat_zaw)->addYear()->format('Y-m-d');
+
+       $lic = \App\DokumentyPrzed::findOrFail($li->id);
+        $lic->update(['status'=>'2','dat_zaw'=> $dat_zaw_new,'powod'=>$powod]);
 
 
         $data_zm = date('Y-m-d');
