@@ -82,7 +82,7 @@
             <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>
                {{$row->nazwa}} - {{$row->rodz_dok}}
                 <br />
-                  @if($row->powod != null && $petent->status =='2') <p class="text small"><strong>{{$row->powod}} od {{$row->dat_zaw}}</strong></p> @else @endif
+                  @if($row->powod != null && $petent->status =='2') <p class="text small"><strong>{{$row->powod}} do {{$row->dat_zaw}}</strong></p> @else @endif
                   @if($row->powod != null && $petent->status =='3') <p class="text small"><strong>{{$row->powod}} </strong></p> @else @endif
                 @endif
                @endforeach
