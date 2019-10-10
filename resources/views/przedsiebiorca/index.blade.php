@@ -3,7 +3,8 @@
 
 @section('content')
 <div class="container-fluid">
-<div><br />
+    <div class="col-md-12 text-center bg bg-primary p-3 text-light rounded"><h3>PRZEDSIĘBIORCY</h3></div>
+<div class="p-2">
 
             <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
                 Zabezpieczenie finansowe po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
@@ -28,7 +29,7 @@
 
   <div class="card bg-dark text-white">
     <div class="row card-body">
-       <div class="col-md-3">Przedsiębiorcy - <a href="przedsiebiorca/create" role="button" class="btn btn-success">Dodaj nowego</a></div>
+       <div class="col-md-3"><a href="przedsiebiorca/create" role="button" class="btn btn-success">Nowy przedsiębiorca</a> <a href="przedsiebiorca/dokumenty/create" role="button" class="btn btn-success">Nowy dokument</a></div>
        <div class="col-md-6">
            <form action="/search" method="get">
             <div class="input-group">
