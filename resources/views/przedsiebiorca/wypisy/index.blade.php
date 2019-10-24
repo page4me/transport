@@ -5,6 +5,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <div class="container">
     <div class="card uper">
+
   <div class="card-header bg-dark text-light" >
    Wypisy z   @foreach($dok as $dk){{$dk->nazwa}}@endforeach -
      <span style="color: #00ddff;font-size:16px;"> Nr:
@@ -361,7 +362,7 @@
          </div>
        </div>
  </div>
- <div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}" role="button"><i class="fa fa-arrow-left"></i> Szczegóły przedsiębiorcy</a></div><br />
+ <div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}/dokument/" role="button"><i class="fa fa-arrow-left"></i> Szczegóły przedsiębiorcy</a></div><br />
 </div>
 </div>
 

@@ -1,31 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\skp;
 
 use Illuminate\Http\Request;
-use DB;
+use App\Http\Controllers\Controller;
 
-
-class ZmianyPrzedController extends Controller
+class SkpController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $id)
+    public function index()
     {
-        $przedsiebiorca = \App\Przedsiebiorca::findOrfail($id);
-        $dok = DB::table('dok_przed')->where('id_przed', $przedsiebiorca->id)->where('nr_dok', $request->route('nr_dok'))->get();
-
-        $dok_id = DB::table('dok_przed')->where('nr_dok', $request->route('nr_dok'))->get();
-
-        foreach($dok_id as $id){
-            $id_dok = $id->id;
-        }
-        $historia = DB::table('hist_zmian_przed')->where('id_przed', $przedsiebiorca->id)->where('id_dok_przed', '=', $id_dok)->get();
-
-        return view('przedsiebiorca.zmiany.index', compact('przedsiebiorca', 'dok', 'historia'));
+        //
+        return view('skp.index');
     }
 
     /**
@@ -58,7 +48,6 @@ class ZmianyPrzedController extends Controller
     public function show($id)
     {
         //
-
     }
 
     /**

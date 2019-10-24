@@ -11,6 +11,7 @@ use \App\Pisma;
 use \App\Http\Controllers\DokPrzedCotroller;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
+use \App\DokumentyPrzed;
 
 class PrzedsiebiorcaController extends Controller
 {
@@ -21,9 +22,6 @@ class PrzedsiebiorcaController extends Controller
      */
     public function index()
     {
-        //
-
-        //$przedsiebiorca = \App\Przedsiebiorca::all();
 
         $rodzaje= DB::table('dok_przed')
              ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
@@ -89,31 +87,43 @@ class PrzedsiebiorcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $przedsiebiorca = \App\Przedsiebiorca::findOrfail($id);
+        //$przedsiebiorca = DB::table('przedsiebiorca')->where('id' , $request->route('id'))->get();
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($request->route('id'));
 
         $rodzaje= DB::table('dok_przed')
-             ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
-             ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
-             ->join('dok_przed_wyp', 'dok_przed_wyp.id', "=", 'dok_przed_wyp.id_przed')
-             ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*','dok_przed_wyp.*')
-             ->get();
-
-       // echo '<pre>';
-        //print_r($rodzaje);
-        $osobowosc = DB::table('rodzaj_przed')->where('id', $przedsiebiorca->id)->get();
-        $cert = DB::table('cert_komp')->where('id_przed', $przedsiebiorca->id)->get();
-
-        $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
-        $zab = DB::table('zdol_finans')->where('id_przed', $przedsiebiorca->id)->get();
-        $baza = DB::table('baza_eksp')->where('id_przed', $przedsiebiorca->id)->get();
-        $cars = DB::table('wykaz_poj')->where('id', $przedsiebiorca->id)->get();
-
-        //
-        //$n_kont = $p_kont->addDay(30);
+        ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
+        ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
+        ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
+        ->where('dok_przed.id_przed', '=', $request->route('id'))
+        ->where('dok_przed.nr_dok', '=', $request->route('nr_dok'))
+        ->get();
 
 
+
+        $osobowosc = DB::table('rodzaj_przed')->where('id', $request->route('id'))->get();
+
+
+        $dok = DB::table('dok_przed')->where('id_przed' , $request->route('id'))->get();
+
+        $nr_dok = DB::table('dok_przed')->where('nr_dok', $request->route('nr_dok'))->get();
+
+        foreach($nr_dok as $nr)
+        {
+            $id = $nr->id;
+            $nr_dok = $nr->nr_dok;
+        }
+
+        $baza = DB::table('baza_eksp')->where('id_przed', $request->route('id'))->where('id_dok_przed', '=', $id)->get();
+
+        $zab = DB::table('zdol_finans')->where('id_przed', $request->route('id'))->where('id_dok_przed', '=', $id)->get();
+
+        $cert = DB::table('cert_komp')->where('id_przed', $request->route('id'))->where('id_dok_przed', '=', $id)->get();
+        //echo '<pre/>';
+        ///print_r($cert);
+        //exit;
+        $cars = DB::table('wykaz_poj')->where('id', $request->route('id'))->get();
 
         return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert','baza','zab','cars'));
     }
@@ -268,16 +278,37 @@ class PrzedsiebiorcaController extends Controller
         return redirect('/przedsiebiorca');
     }
 
-    public function cars(Request $request,$id)
+    public function cars(Request $request, $id)
     {
         //
-        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
-        $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
-        $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($request->route('id'));
 
-        $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('stan', 'desc')->first();
+        $rodzaje= DB::table('dok_przed')
+        ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
+        ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
+        ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
+        ->where('dok_przed.id_przed', '=', $request->route('id'))
+        ->where('dok_przed.nr_dok', '=', $request->route('nr_dok'))
+        ->get();
 
-        return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan'));
+        $dok = DB::table('dok_przed')->where('id_przed' , $request->route('id'))->where('nr_dok', $request->route('nr_dok'))->get();
+        foreach($dok as $dkp)
+        {
+          $id_dok_przed = $dkp->id;
+        }
+
+        $cars = DB::table('wykaz_poj')->where('id_przed', $request->route('id'))->where('id_dok_przed', $id_dok_przed)->get();
+
+        if(count($cars) > 0)
+         {
+            //print_r($cars);
+         }else {
+            return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan','rodzaje'));
+         }
+
+         $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('stan', 'desc')->first();
+
+        return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan','rodzaje'));
 
     }
 

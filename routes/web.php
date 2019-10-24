@@ -15,29 +15,34 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/przedsiebiorca/cars/{id}', 'PrzedsiebiorcaController@cars')->name('cars');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/cars', 'PrzedsiebiorcaController@cars')->name('cars');
 Route::patch('/przedsiebiorca/pojazdy/wycofaj/{id}', 'WykazPojController@wycofaj')->name('wycofaj');
 Route::patch('/przedsiebiorca/wypisy/depozyt/{id}', 'WypisyController@depozyt')->name('depozyt');
 Route::patch('/przedsiebiorca/wypisy/depozytwyd/{id}', 'WypisyController@depozytwyd')->name('depozytwyd');
-Route::get('/przedsiebiorca/wypisy/{id}', 'WypisyController@index')->name('index');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/wypisy/', 'WypisyController@index')->name('index');
 
 Route::get('/przedsiebiorca/pdf/{id}', 'PrzedsiebiorcaController@gPDF');
 Route::get('/przedsiebiorca/wypisyPDF/{id}', 'WypisyController@wypisyPDF');
 Route::get('/przedsiebiorca/zabezpieczenie/stare', 'PrzedsiebiorcaController@stare_zf')->name('stare_zf');
-//Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PrzedsiebiorcaController@print_zdol_finans');
+
 Route::get('/search', 'PrzedsiebiorcaController@search');
-Route::get('/przedsiebiorca/{id}/zmiany/', 'ZmianyPrzedController@index')->name('index');
+Route::get('/przedsiebiorca/{id}/zmiany/{nr_dok}', 'ZmianyPrzedController@index')->name('index');
 Route::get('/przedsiebiorca/baza/stare', 'PrzedsiebiorcaController@stare_bz')->name('stare_bz');
 Route::get('/przedsiebiorca/zarzadzajacy/stare', 'PrzedsiebiorcaController@stare_oz')->name('stare_oz');
 
 Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PismaController@print_zdol_finans');
-Route::get('/przedsiebiorca/pisma/tresc/{id}', 'PismaController@tresc');
+Route::get('/przedsiebiorca/{id}/pisma/tresc/', 'PismaController@tresc');
 Route::post('/przedsiebiorca/pisma/podglad/{id}', 'PismaController@pismo_gotowe')->name('pismo_gotowe');
 Route::get('/przedsiebiorca/pisma/zf_pdf/{id}', 'PismaController@zf_pdf');
 Route::get('/przedsiebiorca/zdarzenia', 'PrzedsiebiorcaController@zdarzenia');
 Route::patch('/przedsiebiorca/zawies/{id}', 'PrzedsiebiorcaController@zawies')->name('zawies');
 Route::patch('/przedsiebiorca/odwies/{id}', 'PrzedsiebiorcaController@odwies')->name('odwies');
 Route::patch('/przedsiebiorca/rezygnacja/{id}', 'PrzedsiebiorcaController@rezygnacja')->name('rezygnacja');
+
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}', 'PrzedsiebiorcaController@show')->name('show');
+
+Route::resource('kontrole', 'kontrole\Kontrole');
+Route::resource('raporty', 'raporty\Raporty');
 
 Route::resource('przedsiebiorca/zmiany', 'ZmianyPrzedController');
 
@@ -54,3 +59,11 @@ Route::resource('przedsiebiorca/wypisy', 'WypisyController');
 Route::resource('przedsiebiorca/pojazdy', 'WykazPojController');
 
 Route::resource('przedsiebiorca', 'PrzedsiebiorcaController');
+
+// Routing - OSK
+
+Route::resource('osk', 'osk\OskController');
+
+// Routing - SKP
+
+Route::resource('skp', 'skp\SkpController');

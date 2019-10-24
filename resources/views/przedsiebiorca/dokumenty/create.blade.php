@@ -28,7 +28,7 @@
   </div>
 <div class="card uper">
   <div class="card-header bg-primary text-light">
-    Nowy Przedsiebiorca - Licencja / Zezwolenie / Zaswiadczenie - KROK 2
+    Nowy Przedsiębiorca - Licencja / Zezwolenie / Zaświadczenie - KROK 2
   </div>
   <div class="card-body" >
     @if ($errors->any())
@@ -100,7 +100,7 @@
               <input type="date" class="form-control" name="data_wyd" />
           </div>
           <div class="col-md-4 form-group">
-              <label for="tel">Data ważnoci:</label>
+              <label for="tel">Data ważności:</label>
               <input type="date" class="form-control" name="data_waz" />
           </div>
         </div>

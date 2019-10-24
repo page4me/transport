@@ -2,17 +2,26 @@
 @extends('layouts.app')
 
 @section('content')
+@foreach ($rodzaje as $rodz)
+@endforeach
+@foreach($dok as $dk)
+@endforeach
+
+
+
 
 <div class="container">
     <div class="card uper">
-  <div class="card-header bg-dark text-light" >
-   Wykaz pojazdów przedsiębiorcy o  -
-     <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
-       @foreach($dok as $dk)
-         {{ $dk->nr_dok }}
-     </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
-       @endforeach
-  </div>
+        <div @if($przedsiebiorca->status =="0") class="card-header bg-dark text-light" @elseif($przedsiebiorca->status =="2") class="card-header bg-warning"  @elseif($przedsiebiorca->status =="3") class="card-header bg-danger text-light" @endif>
+
+            Dane szczegółowe przedsiębiorcy -
+              <span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #00ddff;font-size:16px;"  @endif > Nr licencji / zezwolenia:
+
+                  @if(!empty($rodz->nr_dok)) {{ $rodz->nr_dok}} @else brak @endif
+
+              </span><span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #fff;font-size:16px;" @endif>wydano dn. {{ $rodz->data_wyd}}   r.</span>
+
+           </div>
   <div class="card-body">
     @if ($errors->any())
       <div class="alert alert-danger">
@@ -58,12 +67,12 @@
                   <div class="card-header bg-dark text-light" >
                      Wykaz pojazdów przedsiębiorcy o  -
                        <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
-                         @foreach($dok as $dk)
-                           {{ $dk->nr_dok }}
 
-                       </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
+                           {{ $rodz->nr_dok }}
 
-                         @endforeach
+                       </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $rodz->data_wyd}}   r.</span>
+
+
                     </div>
                   <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -202,12 +211,12 @@
                                           <div class="card-header bg-success text-light" >
                                              Edycja pojazdu przedsiębiorcy o  -
                                                <span style="color:#000;font-size:15px;"> Nr licencji / zezwolenia:
-                                                 @foreach($dok as $dk)
-                                                   {{ $dk->nr_dok }}
 
-                                               </span><span style="color: #fff;font-size:15px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
+                                                   {{ $rodz->nr_dok }}
 
-                                                 @endforeach
+                                               </span><span style="color: #fff;font-size:15px;">wydano dn. {{ $rodz->data_wyd}}   r.</span>
+
+
                                             </div>
                                           <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -221,11 +230,11 @@
                                                       @method('PATCH')
                                                  <div class="col-md-6 form-group">
                                                     <label for="nr_rej"><strong>Numer rejestracyjny:</strong></label>
-                                                    <input type="text" class="form-control" name="nr_rej" id="nr_rej" value="{{$car->nr_rej}}"/>
+                                                    <input type="text" class="form-control" name="nr_rej" id="nr_rej" value="@if(count($cars) >0) {{$car->nr_rej}} @else @endif"/>
                                                  </div>
                                                  <div class="col-md-6 form-group">
                                                     <label for="p_nr_rej"><strong>Poprzedni numer rejestracyjny:</strong></label>
-                                                    <input type="text" class="form-control" name="p_nr_rej" id="p_nr_rej" value="{{$car->p_nr_rej}}"/>
+                                                    <input type="text" class="form-control" name="p_nr_rej" id="p_nr_rej" value="@if(count($cars) >0) {{$car->p_nr_rej}} @else @endif"/>
                                                  </div>
                                                </div>
 
@@ -233,15 +242,15 @@
 
                                                 <div class="col-md-4 form-group">
                                                     <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
-                                                    <input type="text" name="rodzaj_poj" class="form-control" id="rodzaj_poj" value="{{$car->rodzaj_poj}}">
+                                                    <input type="text" name="rodzaj_poj" class="form-control" id="rodzaj_poj" value="@if(count($cars) >0) {{$car->rodzaj_poj}} @else @endif">
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                     <label for="kod_p"><strong>Marka:</strong></label>
-                                                    <input type="text" class="form-control" name="marka" id="marka" value="{{$car->marka}}" />
+                                                    <input type="text" class="form-control" name="marka" id="marka" value="@if(count($cars) >0) {{$car->marka}} @else @endif" />
                                                 </div>
                                                  <div class="col-md-4 form-group">
                                                     <label for="nr_druku"><strong>Nr VIN:</strong></label>
-                                                    <input type="text" class="form-control" name="nr_vin" id="nr_vin" maxlength="17" value="{{$car->nr_vin}}" />
+                                                    <input type="text" class="form-control" name="nr_vin" id="nr_vin" maxlength="17" value="@if(count($cars) >0) {{$car->nr_vin}} @else @endif" />
                                                 </div>
 
                                               </div>
@@ -250,27 +259,27 @@
                                               <div class="row">
                                                  <div class="col-md-4 form-group">
                                                     <label for="nr_sprawy"><strong>DMC:</strong></label>
-                                                    <input type="text" class="form-control" name="dmc" id="dmc" value="{{$car->dmc}}" />
+                                                    <input type="text" class="form-control" name="dmc" id="dmc" value="@if(count($cars) >0) {{$car->dmc}} @else @endif" />
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                     <label for="tel"><strong>Własność:</strong></label>
-                                                    <input type="text" class="form-control" name="wlasnosc" id="wlasnosc" value="{{$car->wlasnosc}}" />
+                                                    <input type="text" class="form-control" name="wlasnosc" id="wlasnosc" value="@if(count($cars) >0) {{$car->wlasnosc}} @else @endif" />
                                                 </div>
                                                 <div class="col-md-4 form-group">
                                                     <label for="tel"><strong>Data wprowadzenia:</strong></label>
-                                                    <input type="date" class="form-control" name="data_wpr" id="data_wpr" value="{{$car->data_wpr}}" />
+                                                    <input type="date" class="form-control" name="data_wpr" id="data_wpr" value="@if(count($cars) >0) {{$car->data_wpr}} @else @endif" />
                                                 </div>
 
                                               </div>
                                               <div class="row">
                                                 <div class="col-md-12 form-group">
                                                     <label for="uwagi"><strong>Uwagi:</strong></label>
-                                                    <input type="text" class="form-control" name="uwagi" id="uwagi" value="{{$car->uwagi}}" />
+                                                    <input type="text" class="form-control" name="uwagi" id="uwagi" value="@if(count($cars) >0) {{$car->uwagi}} @else @endif" />
                                                 </div>
                                               </div>
-                                              <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                                              <input type="hidden" name="id_przed" value="{{$rodz->id_przed}}" />
                                               <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
-                                              <input type="hidden" name="idcar" id="idcar" value="{{$car->id}}" />
+                                              <input type="hidden" name="idcar" id="idcar" value="@if(count($cars) >0) {{$car->id}} @else @endif" />
                                         </div>
                                         <div class="modal-footer">
 
@@ -330,7 +339,7 @@
                                 <div class="modal" id="myModal">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <input type="hidden" id="idp" name="idp" value="{{$car->id}}" disabled="disabled" />
+                                        <input type="hidden" id="idp" name="idp" value="@if(count($cars) >0) {{$car->id}}@else @endif" disabled="disabled" />
                                         <form  method="POST" action="{{ route('wycofaj', 'id' ) }}" >
                                       <!-- Modal Header -->
                                       <div class="modal-header bg-danger text-light">
@@ -344,8 +353,8 @@
                                           @csrf
                                           @method('PATCH')
                                         Wprowadź datę wycofania pojazdu: <input class="form-group" type="date" id="data_wyc" name="data_wyc" />
-                                        <input type="hidden" id="id" name="id" value="{{$car->id}}" />
-                                        <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                                        <input type="hidden" id="id" name="id" value="@if(count($cars) >0) {{$car->id}}@else @endif" />
+                                        <input type="hidden" name="id_przed" value="@if(count($cars) >0) {{$dk->id_przed}}@else @endif" />
                                       </div>
 
                                       <!-- Modal footer -->
@@ -403,7 +412,7 @@
          </div>
        </div>
  </div>
- <div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}" role="button"><i class="fa fa-arrow-left"></i> Szczegóły przedsiębiorcy</a></div><br />
+<div><a class="btn btn-primary" href="/przedsiebiorca/{{$przedsiebiorca->id}}/dokument/{{$rodz->nr_dok}}" role="button"><i class="fa fa-arrow-left"></i> Szczegóły przedsiębiorcy</a></div><br />
 
 
 

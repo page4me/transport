@@ -62,10 +62,16 @@ class WykazPojController extends Controller
          'status' => 'default|1',
 
         ]);
+        $dok = DB::table('dok_przed')->where('id_przed','=', $request->id_przed)->where('id','=',$request->id_dok_przed)->get();
+          //  echo $request->id_dok_przed;
+        foreach($dok as $dkp)
+          {
+              $nr_dok = $dkp->nr_dok;
+          }
         $pojazdy = \App\WykazPoj::create($validatedData);
         $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Zgłoszenie nowego pojazdu o numerze rejestracyjnym - '.$request->nr_rej, 'data_zm' => $request->data_wpr]);
-
-        return redirect('przedsiebiorca/cars/'.$request->id_przed)->with('success', 'Przedsiebiorca dodany do bazy danych');
+        Alert::success('Dodano nowy pojazd', '');
+        return redirect('przedsiebiorca/'.$request->id_przed.'/dokument/'.$nr_dok.'/cars');
     }
 
     /**

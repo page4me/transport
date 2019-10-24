@@ -4,17 +4,26 @@
 @section('content')
 <div class="container">
 <div class="card uper">
-        @foreach($rodzaje as $petent)
+        @foreach ($rodzaje as $rodz)
         @endforeach
+        @foreach($dok as $dk)
+        @endforeach
+
+        @php $id_dok = \App\DokumentyPrzed::all()->where('nr_dok','=',$rodz->nr_dok); @endphp
+
+        @foreach($id_dok as $id)
+         @php $id_d = $id->id @endphp
+        @endforeach
+
   <div @if($przedsiebiorca->status =="0") class="card-header bg-dark text-light" @elseif($przedsiebiorca->status =="2") class="card-header bg-warning"  @elseif($przedsiebiorca->status =="3") class="card-header bg-danger text-light" @endif>
 
    Dane szczegółowe przedsiębiorcy -
      <span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #00ddff;font-size:16px;"  @endif > Nr licencji / zezwolenia:
-       @foreach($dok as $dk)
-         @if(!empty($dk->nr_dok)) {{ $dk->nr_dok}} @else brak @endif
 
-     </span><span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #fff;font-size:16px;" @endif>wydano dn. {{ $dk->data_wyd}}   r.</span>
-       @endforeach
+         @if(!empty($rodz->nr_dok)) {{ $rodz->nr_dok}} @else brak @endif
+
+     </span><span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #fff;font-size:16px;" @endif>wydano dn. {{ $rodz->data_wyd}}   r.</span>
+
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -49,14 +58,15 @@
                <div>
                  <strong>Wydanych wypisów:</strong>
                    <span class="badge badge-warning" style="font-size:13px;">
-                      {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id)->count()}}
+                      {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id)->where('id_dok_przed','=', $id_d)->count()}}
                     </span><br />
                  <strong>W depozycie wypisów: </strong><span class="badge badge-danger" style="font-size:12px;">
-                   {{$count1 = \App\Wypisy::where('status','=','2')->where('id_przed','=',$przedsiebiorca->id)->count()}}
+                   {{$count1 = \App\Wypisy::where('status','=','2')->where('id_przed','=',$przedsiebiorca->id)->where('id_dok_przed','=', $id_d)->count()}}
 
                  </span><br />
                  @if($dk->nazwa == 'Licencja Pośrednictwo')
                        <span class="badge badge-warning" style="font-size:13px;"> nie dotyczny</span>
+
                  @else
                             @if($count ==0)
                                 &nbsp; <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#nowyWypis">Dodaj wypis</button>
@@ -147,48 +157,59 @@
 
                                     </div>
                                 @else
-                                <a class="btn btn-sm btn-primary" href="/przedsiebiorca/wypisy/{{$przedsiebiorca->id}}">Wypisy</a>
+                                <a class="btn btn-sm btn-primary" href="/przedsiebiorca/{{$rodz->id}}/dokument/{{$rodz->nr_dok}}/wypisy/">Wypisy</a>
                             @endif
                     @endif
                </div>
           </div>
           <div class="col-md-3">
-             <div><strong>Osoba zarządzająca</strong></div>
-             <div>
-              @foreach($cert as $ck)
-                @if(!empty($ck->id)) {{$ck->imie_os_z}} {{$ck->nazwisko_os_z}} @else brak @endif
-              @endforeach
-                         </div>
-             <div>
-                  @if(!empty($ck->id))
-                      @if(!empty($ck->dat_umowy))
-                            @if($ck->dat_umowy < date('Y-m-d'))
-                            Umowa do dnia -
-                            <span class="badge badge-danger" style="font-size:11px;">
-                            {{$ck->dat_umowy}} r.<br/>
-                            {{$ck->umowa}} <br />
-                            po terminie {{$dni = (strtotime($ck->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
-                            </span>
+            <!-- Dane dotyczace Certyfikatu Kompetencji Zawodowych -->
+            @foreach($cert as $ck)
+               @if($ck->nr_cert == 'b/d')
+
+               @else
+                    <div><strong>Osoba zarządzająca</strong></div>
+                    <div>
+
+                        @if(!empty($ck->id)) {{$ck->imie_os_z}} {{$ck->nazwisko_os_z}} @else brak @endif
+
+                    </div>
+                    <div>
+                        @if(!empty($ck->id))
+                            @if(!empty($ck->dat_umowy))
+                                    @if($ck->dat_umowy < date('Y-m-d'))
+                                    Umowa do dnia -
+                                    <span class="badge badge-danger" style="font-size:11px;">
+                                    {{$ck->dat_umowy}} r.<br/>
+                                    {{$ck->umowa}} <br />
+                                    po terminie {{$dni = (strtotime($ck->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
+                                    </span> <br /><a href="/przedsiebiorca/{{$rodz->id}}/dokumenty/{{$rodz->nr_dok}}/pisma/zarzadzajacy/tresc/" role="button" class="btn btn-warning btn-sm" style="font-size:10px;">przygotuj pismo inf.</a>
+                                    @else
+                                    Umowa do dnia -
+                                    <span class="badge badge-success" style="font-size:13px;">    {{$ck->dat_umowy}} r.</span> <br/>
+                                        {{$ck->umowa}}
+                                    @endif
                             @else
-                            Umowa do dnia -
-                            <span class="badge badge-success" style="font-size:13px;">    {{$ck->dat_umowy}} r.</span> <br/>
-                                {{$ck->umowa}}
+                                    Zarządzający: Właściciel
                             @endif
-                       @else
-                            Zarządzający: Właściciel
-                       @endif
-                  @else
-                      brak
-                  @endif
-            </div>
-             <div><strong>Certyfikat kompetencji:</strong><br />@if(!empty($ck->id))<span style="color:#0041a8;font-weight: bold;">{{$ck->rodzaj}}</span>@else brak @endif / Nr @if(!empty($ck->id)) {{$ck->nr_cert}} @else brak <br /><br /> @endif</div><br />
+                        @else
+                            brak
+                        @endif
+                    </div>
 
+
+
+                <div><strong>Certyfikat kompetencji:</strong><br />@if(!empty($ck->id))<span style="color:#0041a8;font-weight: bold;">{{$ck->rodzaj}}</span>@else brak @endif / Nr @if(!empty($ck->id)) {{$ck->nr_cert}} @else brak <br /><br /> @endif</div><br />
+                @endif
+
+            @endforeach
+
+             <!-- Koniec Dane dotyczace Certyfikatu Kompetencji Zawodowych -->
               <div>
-
 
                       <strong>Ilość pojazdów:</strong>
                        <span class="badge badge-warning" style="font-size:13px;">
-                          {{$count = \App\WykazPoj::where('id_przed','=',$przedsiebiorca->id)->where('status','=','1')->count()}}
+                          {{$count = \App\WykazPoj::where('id_przed','=',$rodz->id_przed)->where('status','=','1')->where('id_dok_przed','=', $id_d)->count()}}
 
                        </span><br />&nbsp;
                            @if($dk->nazwa == 'Licencja Pośrednictwo')
@@ -205,12 +226,15 @@
                                                 <div class="card-header bg-dark text-light" >
                                                     Wykaz pojazdów przedsiębiorcy o  -
                                                     <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
-                                                        @foreach($dok as $dk)
-                                                        {{ $dk->nr_dok }}
 
-                                                    </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
+                                                        {{ $rodz->nr_dok }}
+                                                        @php $dok_przed = \App\DokumentyPrzed::where('nr_dok','=', $rodz->nr_dok)->get()   @endphp
+                                                       @foreach($dok_przed as $dkp)
 
-                                                        @endforeach
+                                                       @endforeach
+                                                    </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $rodz->data_wyd}}   r.</span>
+
+
                                                     </div>
                                                 <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -277,8 +301,11 @@
                                                             <input type="text" class="form-control" name="uwagi"/>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
-                                                    <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
+                                                    <input type="hidden" name="id_przed" value="{{$rodz->id_przed}}" />
+
+
+                                                <input type="hidden" name="id_dok_przed" value="{{$dkp->id}}" />
+
                                                 </div>
                                                 <div class="modal-footer">
 
@@ -294,51 +321,61 @@
                                 @else
 
 
-                                    <a class="btn btn-sm btn-primary" href="/przedsiebiorca/cars/{{$przedsiebiorca->id}}">Wykaz pojazdów</a>
+                                    <a class="btn btn-sm btn-primary" href="{{route('cars',['id'=>$rodz->id_przed, 'nr_dok'=>$rodz->nr_dok])}}">Wykaz pojazdów</a>
                                 @endif
                             @endif
 
                         </div>
                     </div>
                     <div class="col-md-3">
-
+                        <!-- Dane dotyczace Bazy eksploatacyjnej -->
                         @foreach ($baza as $bz)
-                        <div><strong>Baza eksploatacyjna</strong></div>
-                        <div><strong>Adres:</strong> <br />{{$bz->adres}}<br /> {{$bz->kod_p}} {{$bz->miasto}}</div>
-                        <div>
-                          @if(!empty($bz->dat_umowy))
-                            @if($bz->dat_umowy < date('Y-m-d'))
-                            Umowa do dnia
-                                <span class="badge badge-danger" style="font-size:11px;">
-                                {{$bz->dat_umowy}} r.<br/>
+                          @if($bz->adres == 'b/d')
 
-                                po terminie {{$dni = (strtotime($bz->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
-                                </span>
-                                @else
+                          @else
+                            <div><strong>Baza eksploatacyjna</strong></div>
+                            <div><strong>Adres:</strong> <br />{{$bz->adres}}<br /> {{$bz->kod_p}} {{$bz->miasto}}</div>
+                            <div>
+                            @if(!empty($bz->dat_umowy))
+                                @if($bz->dat_umowy < date('Y-m-d'))
                                 Umowa do dnia
-                                <span class="badge badge-success" style="font-size:11px;">  {{$bz->dat_umowy}} r.</span>
-                                @endif
-                          @else
-                            {{$bz->wlasnosc}}
-                          @endif
+                                    <span class="badge badge-danger" style="font-size:11px;">
+                                    {{$bz->dat_umowy}} r.<br/>
 
-                        </div>
-                        <br />
+                                    po terminie {{$dni = (strtotime($bz->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
+                                    </span>
+                                    @else
+                                    Umowa do dnia
+                                    <span class="badge badge-success" style="font-size:11px;">  {{$bz->dat_umowy}} r.</span>
+                                    @endif
+                            @else
+                                {{$bz->wlasnosc}}
+                            @endif
+
+                            </div>
+                            <br />
+                          @endif
                         @endforeach
+                        <!-- koniec danych Bazy Eksploatacyjnej -->
 
+                        <!-- Dane dotyczace Zabezpieczenia Fianansowego -->
                         @foreach ($zab as $zb)
-                        <div><strong>Zabezpieczenie finansowe:</strong> {{$zb->nazwa}}s</div>
-                        <div>{{$zb->suma_zab}} &euro; - {{$zb->ile_poj}} pojazdy</div>
-                        <div>
-                          @if($zb->data_do < date('Y-m-d'))
-                            <h5><span class="badge badge-danger">Do dnia {{$zb->data_do}} r.
-                               <br /> po terminie {{$dni = (strtotime($zb->data_do) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
-                             </span></h5>
-                             <a href="{{ url('/przedsiebiorca/pisma/tresc/' . $przedsiebiorca->id)}}" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
-                          @else
-                             <span class="badge badge-success" style="font-size:14px;">Do dnia {{$zb->data_do}} r.</span>
-                          @endif
-                        </div>
+                            @if($zb->nazwa == 'b/d')
+
+                            @else
+                                <div><strong>Zabezpieczenie finansowe:</strong> {{$zb->nazwa}}s</div>
+                                <div>{{$zb->suma_zab}} &euro; - {{$zb->ile_poj}} pojazdy</div>
+                                <div>
+                                @if($zb->data_do < date('Y-m-d'))
+                                    <h5><span class="badge badge-danger">Do dnia {{$zb->data_do}} r.
+                                    <br /> po terminie {{$dni = (strtotime($zb->data_do) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
+                                    </span></h5>
+                                    <a href="{{ url('/przedsiebiorca/'.$przedsiebiorca->id.'/dokument/'.$rodz->nr_dok.'/pisma/zabezpieczenie/tresc/')}}" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
+                                @else
+                                    <span class="badge badge-success" style="font-size:14px;">Do dnia {{$zb->data_do}} r.</span>
+                                @endif
+                                </div>
+                            @endif
                         @endforeach
 
                     </div>
@@ -347,8 +384,8 @@
      <div class="card-header bg-dark text-light">
 
            <div class="col-md-12 bg-dark" style="color:#fff;font-size: 15px;">Dane licencji / zezwolenia</strong>
-            - <span class="badge badge-warning" style="font-size:13px;">  {{strtoupper($dk->rodz_dok)}} </span>
-           @if($dk->nazwa == 'Licencja Pośrednictwo')
+            - <span @if($rodz->rodz_dok =='rzeczy') class="badge badge-success"  @else class="badge badge-warning" @endif  style="font-size:13px;">  {{strtoupper($rodz->rodz_dok)}} </span>
+           @if($rodz->nazwa == 'Licencja Pośrednictwo')
               <span class="badge badge-danger" style="font-size:13px;"> SPEDYCJA </span>
            @endif
            </div>
@@ -357,20 +394,20 @@
            <div class="row">
              <div class="col-md-3">
                <strong>Data wydania : </strong><br /><span class="badge badge-secondary" style="font-size:14px;">
-                  {{$dk->data_wyd}} r.
+                  {{$rodz->data_wyd}} r.
                </span>
              </div>
               <div class="col-md-3">
-               <strong>Ważnść do dnia: </strong><br /><span class="badge badge-success" style="font-size:14px;"> {{$dk->data_waz}} r.</span>
+               <strong>Ważnść do dnia: </strong><br /><span class="badge badge-success" style="font-size:14px;"> {{$rodz->data_waz}} r.</span>
              </div>
               <div class="col-md-3">
-               <strong>Numer sprawy: </strong><br />  {{$dk->nr_sprawy}}
+               <strong>Numer sprawy: </strong><br />  {{$rodz->nr_sprawy}}
              </div>
               <div class="col-md-3">
-               <strong>Numer dokumentu: </strong><br /><strong> <span style="color:#17aa06;"> {{$dk->nr_dok}}
-              </span> /   {{$dk->nr_druku}} </strong></span>
+               <strong>Numer dokumentu: </strong><br /><strong> <span style="color:#17aa06;"> {{$rodz->nr_dok}}
+              </span> /   {{$rodz->nr_druku}} </strong></span>
              </div>
-             <div class="col-md-12 text-center"><br /><a href="{{ url('/przedsiebiorca/' . $przedsiebiorca->id.'/zmiany')}}" role="button" class="btn btn-primary btn-sm">Historia zmian</a></div>
+             <div class="col-md-12 text-center"><br /><a href="{{ url('/przedsiebiorca/' . $przedsiebiorca->id.'/zmiany/'.$rodz->nr_dok)}}" role="button" class="btn btn-primary btn-sm">Historia zmian</a></div>
            </div>
     </div>
     <div class="card-header bg-dark text-light">
@@ -396,7 +433,7 @@
     </div>
 
     </div>
-    <div><a class="btn btn-primary" href="/przedsiebiorca" role="button">Powrót do listy przedsiębiorców</a></div>
+<div><a class="btn btn-primary" href="/przedsiebiorca" role="button">Powrót do listy przedsiębiorców</a></div>
   </div>
 </div>
 </div>

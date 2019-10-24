@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
      <style>
 
-                      body {
+            body {
               margin-bottom: $height-footer;
             }
             #footer {

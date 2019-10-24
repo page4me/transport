@@ -43,12 +43,12 @@
                         <div>
                            &nbsp;
                         </div>
-                        <a href="#" role="button" class="btn btn-success" style="font-size:30px;">OSK i INTRUKTORZY</a></div>
+                        <a href="/osk" role="button" class="btn btn-success" style="font-size:30px;">OSK i INTRUKTORZY</a></div>
                    <div class="col-md-4">
                         <div>
                            &nbsp;
                          </div>
-                        <a href="#" role="button" class="btn btn-warning" style="font-size:30px;">SKP i DIAGNOŚCI</a></div>
+                        <a href="/skp" role="button" class="btn btn-warning" style="font-size:30px;">SKP i DIAGNOŚCI</a></div>
                 </div>
             </div>
             <div style="margin: 0 auto;padding-top: 40px;" class="row">

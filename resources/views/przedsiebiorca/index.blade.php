@@ -3,9 +3,11 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="col-md-12 text-center bg bg-primary p-3 text-light rounded"><h3>PRZEDSIĘBIORCY</h3></div>
+    <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
+    <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY</h3></div>
 <div class="p-2">
-
+    <div class="row">
+           <div class="col-md-6">
             <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
                 Zabezpieczenie finansowe po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
                 <span class="sr-only">unread messages</span>
@@ -26,8 +28,19 @@
             @else
             @endif
 
-
-  <div class="card bg-dark text-white">
+           </div>
+           <div class="col-md-6 text-right">
+              <span class="badge badge-warning" style="font-size:13px;"> L-O: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','osoby')->where('nazwa','=','Licencja')->count()}}</span>
+              <span class="badge badge-success" style="font-size:13px;"> L-R: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','rzeczy')->where('nazwa','=','Licencja')->count()}}</span>
+              <span class="badge badge-danger" style="font-size:13px;"> L-S: 2</span>
+              <span class="badge badge-secondary" style="font-size:13px;"> L 7-9: {{$count = \App\DokumentyPrzed::where('nazwa','=','Licencja 7-9')->count()}}</span>
+              <span class="badge badge-warning" style="font-size:13px;"> Z-O: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','osoby')->where('nazwa','=','Zezwolenie')->count()}}</span>
+              <span class="badge badge-success" style="font-size:13px;"> Z-R: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','rzeczy')->where('nazwa','=','Zezwolenie')->count()}}</span>
+              <span class="badge badge-info" style="font-size:13px;"> P: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','rzeczy')->where('nazwa','=','Licencja Pośrednictwo')->count()}}</span>
+              <span class="badge badge-primary" style="font-size:13px;"> ZAŚ: {{$count = \App\DokumentyPrzed::where('nazwa','=','Zaświadczenie')->count()}}</span>
+           </div>
+    </div>
+  <div class="">
     <div class="row card-body">
        <div class="col-md-3"><a href="przedsiebiorca/create" role="button" class="btn btn-success">Nowy przedsiębiorca</a> <a href="przedsiebiorca/dokumenty/create" role="button" class="btn btn-success">Nowy dokument</a></div>
        <div class="col-md-6">
@@ -44,8 +57,8 @@
             </form>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-warning" >Harmonogram kontroli</button>
-            &nbsp; <button class="btn btn-info" >Raporty</button>
+            <a class="btn btn-warning" href="/kontrole" role="button" >Harmonogram kontroli</a>
+            &nbsp; <a class="btn btn-info" href="/raporty" role="button" >Raporty</a>
         </div>
     </div>
 
@@ -73,20 +86,24 @@
     </thead>
     <tbody>
         @foreach($rodzaje as $petent)
+
         <tr>
             <td style="width:150px;" @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>
               <strong>
-                @foreach($rodzaje as $row)
-                  @if($petent->id == $row->id)
-                    {{$row->nr_dok}}
+                    @php $id_dok = \App\DokumentyPrzed::all(); @endphp
+                    @foreach($id_dok as $id)
+                       @if($id->id == $petent->id)
+                         {{$petent->nr_dok}}
+                       @endif
+                    @endforeach
+
               </strong></td>
             <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>
-               {{$row->nazwa}} - {{$row->rodz_dok}}
+               {{$petent->nazwa}} - {{$petent->rodz_dok}}
                 <br />
-                  @if($row->powod != null && $petent->status =='2') <p class="text small"><strong>{{$row->powod}} do {{$row->dat_zaw}}</strong></p> @else @endif
-                  @if($row->powod != null && $petent->status =='3') <p class="text small"><strong>{{$row->powod}} </strong></p> @else @endif
-                @endif
-               @endforeach
+                  @if($petent->powod != null && $petent->status =='2') <p class="text small"><strong>{{$petent->powod}} do {{$petent->dat_zaw}}</strong></p> @else @endif
+                  @if($petent->powod != null && $petent->status =='3') <p class="text small"><strong>{{$petent->powod}} </strong></p> @else @endif
+
             </td>
             <td style="width:280px;" @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->nazwa_firmy}}</td>
             <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else @endif>{{$petent->imie}}</td>
@@ -111,7 +128,7 @@
 
             </td>
             <td style="width:30px;"><a @if($petent->status == '3')  style = "display:none;" @else @endif data-toggle="modal" data-id="{{$petent->id}}" role="button" class="openRezygnuj btn btn-danger btn-sm" href="#rezygnacja" title="Rezygnacja"><i class="fa fa-user-slash fa-1x"></a></td>
-            <td><a href="{{ route('przedsiebiorca.show',$petent->id)}}" class="btn btn-sm btn-primary" title="Podgląd"><i class="fa fa-eye"></a></td>
+            <td><a href="{{ route('show',['id'=>$petent->id, 'nr_dok'=>$petent->nr_dok])}}" class="btn btn-sm btn-primary" title="Podgląd"><i class="fa fa-eye"></a></td>
         </tr>
         @endforeach
     </tbody>
