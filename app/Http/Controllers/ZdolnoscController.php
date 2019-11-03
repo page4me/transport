@@ -40,10 +40,9 @@ class ZdolnoscController extends Controller
     public function store(Request $request)
     {
         //
-
-        Alert::success('Dodano nowe zabezpieczenie', 'Zdolnosć finansowa przypisana do przedsiębiorcy');
         $validatedData = $request->validate([
          'id_przed' => 'required|max:1',
+         'id_dok_przed' => 'required|nullable',
          'nazwa' => 'string|max:255|nullable',
          'numer' => 'string|max:255|nullable',
          'data_od' => 'string|max:255|nullable',
@@ -55,6 +54,12 @@ class ZdolnoscController extends Controller
         ]);
         $baza = \App\Zdolnosc::create($validatedData);
 
+        $data_bz = date('Y-m-d');
+
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Dodanie nowego zabezpieczenia finansowego', 'data_zm' => $request->data_bz]);
+
+
+        Alert::success('Dodano nowe zabezpieczenie', 'Zdolnosć finansowa przypisana do przedsiębiorcy');
         return redirect('/przedsiebiorca')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
 
@@ -90,9 +95,10 @@ class ZdolnoscController extends Controller
     public function update(Request $request, $id)
     {
         //
-        Alert::success('Zapisano zmiany', 'Dane zdolności finansowej zmienione');
+
         $validatedData = $request->validate([
             'id_przed' => 'required|max:1',
+            'id_dok_przed' => 'required|nullable',
             'nazwa' => 'string|max:255|nullable',
             'numer' => 'string|max:255|nullable',
             'data_od' => 'string|max:255|nullable',
@@ -104,6 +110,7 @@ class ZdolnoscController extends Controller
            ]);
 
            \App\Zdolnosc::whereId($id)->update($validatedData);
+           Alert::success('Zapisano zmiany', 'Dane zdolności finansowej zmienione');
         return redirect('/przedsiebiorca')->with('success', 'Dane osoby zarządającej zmienione');
     }
 

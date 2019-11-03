@@ -2,9 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-<div class="card uper">
-        @foreach ($rodzaje as $rodz)
+@foreach ($rodzaje as $rodz)
         @endforeach
         @foreach($dok as $dk)
         @endforeach
@@ -14,16 +12,44 @@
         @foreach($id_dok as $id)
          @php $id_d = $id->id @endphp
         @endforeach
+<div class="container">
+            <nav >
+                <div class="nav nav-pills" id="edytuj" role="tablist" style="padding: 5px;">
+                <a class="nav-item nav-link bg-success text-light btn-sm" style="color:#fff;" href="{{route('przedsiebiorca.edit', ['id'=>$id->id_przed ,'nr_dok' =>$id->nr_dok])}}" >Edycja danych</a>&nbsp;&nbsp;
+                  <a class="nav-item nav-link bg-success text-light btn-sm"  href="{{route('dokumenty.edit', ['id'=>$id->id_przed ,'nr_dok' =>$id->nr_dok])}}" >Edycja dokumentów</a>&nbsp;&nbsp;
+                  <a class="nav-item nav-link bg-success text-light btn-sm"  href="{{route('baza.edit', ['id'=>$id->id_przed ,'nr_dok' =>$id->nr_dok])}}"  >Edycja bazy</a>&nbsp;&nbsp;
+                  <a class="nav-item nav-link bg-success text-light btn-sm"  href="{{route('zarzadzajacy.edit', ['id'=>$id->id_przed ,'nr_dok' =>$id->nr_dok])}}" >Edycja osoby zarządzającej</a>&nbsp;&nbsp;
+                  <a class="nav-item nav-link bg-success text-light btn-sm"  href="{{route('zabezpieczenie.edit', ['id'=>$id->id_przed ,'nr_dok' =>$id->nr_dok])}}" >Edycja zabezpieczenia finansowego</a>
+                  &nbsp;<a href="#" id="close" role="button" class="nav-item nav-link bg-dark text-light btn-sm" >Zamknij</a>
+                </div>
+              </nav>
+<div class="card uper">
+
 
   <div @if($przedsiebiorca->status =="0") class="card-header bg-dark text-light" @elseif($przedsiebiorca->status =="2") class="card-header bg-warning"  @elseif($przedsiebiorca->status =="3") class="card-header bg-danger text-light" @endif>
 
    Dane szczegółowe przedsiębiorcy -
-     <span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #00ddff;font-size:16px;"  @endif > Nr licencji / zezwolenia:
+     <span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #00ddff;font-size:16px;"  @endif > {{$rodz->nazwa}} Nr
 
          @if(!empty($rodz->nr_dok)) {{ $rodz->nr_dok}} @else brak @endif
 
      </span><span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #fff;font-size:16px;" @endif>wydano dn. {{ $rodz->data_wyd}}   r.</span>
+     <span class="float-right"><a href="#" id="clickme" role="button" class="btn btn-success btn-sm">Edytuj dane</a></span>
+     <script>
+          $( "nav" ).hide( "slow", function() {
 
+            });
+         $( "#clickme" ).click(function() {
+            $( "nav" ).show( "slow", function() {
+
+            });
+            });
+            $( "#close" ).click(function() {
+            $( "nav" ).hide( "slow", function() {
+
+            });
+            });
+     </script>
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -64,7 +90,7 @@
                    {{$count1 = \App\Wypisy::where('status','=','2')->where('id_przed','=',$przedsiebiorca->id)->where('id_dok_przed','=', $id_d)->count()}}
 
                  </span><br />
-                 @if($dk->nazwa == 'Licencja Pośrednictwo')
+                 @if($id->nazwa == 'Licencja Pośrednictwo')
                        <span class="badge badge-warning" style="font-size:13px;"> nie dotyczny</span>
 
                  @else
@@ -212,7 +238,7 @@
                           {{$count = \App\WykazPoj::where('id_przed','=',$rodz->id_przed)->where('status','=','1')->where('id_dok_przed','=', $id_d)->count()}}
 
                        </span><br />&nbsp;
-                           @if($dk->nazwa == 'Licencja Pośrednictwo')
+                           @if($id->nazwa == 'Licencja Pośrednictwo')
                              <span class="badge badge-warning" style="font-size:13px;"> nie dotyczny</span>
                            @else
                                 @if($count ==0)

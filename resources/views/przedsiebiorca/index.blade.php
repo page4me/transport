@@ -8,12 +8,16 @@
 <div class="p-2">
     <div class="row">
            <div class="col-md-6">
-            <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+           @if(\App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count() != 0)
+            <a href="przedsiebiorca/zabezpieczenie/stare" role="button" class="btn btn-danger btn-sm" style="margin-bottom:5px;">
                 Zabezpieczenie finansowe po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count()}}</span>
                 <span class="sr-only">unread messages</span>
             </a>
+            @else
+            @endif
+
             @if(\App\Baza::where('dat_umowy','<',date('Y-m-d'))->count() != 0)
-            <a href="przedsiebiorca/baza/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
+            <a href="przedsiebiorca/baza/stare" role="button" class="btn btn-danger btn-sm" style="margin-bottom:5px;">
                 Umowa bazy po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Baza::where('dat_umowy','<',date('Y-m-d'))->count()}}</span>
                 <span class="sr-only">unread messages</span>
             </a>
@@ -21,8 +25,8 @@
             @endif
 
             @if(\App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count() != 0)
-            <a href="przedsiebiorca/zarzadzajacy/stare" role="button" class="btn btn-danger" style="margin-bottom:5px;">
-                Umowa z osobą zarządzającą po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count()}}</span>
+            <a href="przedsiebiorca/zarzadzajacy/stare" role="button" class="btn btn-danger btn-sm" style="margin-bottom:5px;">
+                Umowa z zarządzającym po terminie&nbsp;<span class="badge badge-light">{{$count = \App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count()}}</span>
                 <span class="sr-only">unread messages</span>
             </a>
             @else
@@ -42,14 +46,14 @@
     </div>
   <div class="">
     <div class="row card-body">
-       <div class="col-md-3"><a href="przedsiebiorca/create" role="button" class="btn btn-success">Nowy przedsiębiorca</a> <a href="przedsiebiorca/dokumenty/create" role="button" class="btn btn-success">Nowy dokument</a></div>
+       <div class="col-md-3"><a href="przedsiebiorca/create" role="button" class="btn btn-success btn-sm">Nowy przedsiębiorca</a> <a href="przedsiebiorca/dokumenty/create" role="button" class="btn btn-success btn-sm">Nowy dokument</a></div>
        <div class="col-md-6">
            <form action="/search" method="get">
             <div class="input-group">
                 @csrf
                <input type="search" name="search" class="form-control" placeholder="wpisz nr licencji, zezwolenia, zaświadczenia, nip, nazwisko, nazwę firmy">
                <div class="input-group-append">
-                 <button class="btn btn-success" type="submit">
+                 <button class="btn btn-success btn-sm" type="submit">
                    <i class="fa fa-search"></i>
                  </button>
                </div>
@@ -57,8 +61,8 @@
             </form>
         </div>
         <div class="col-md-3">
-            <a class="btn btn-warning" href="/kontrole" role="button" >Harmonogram kontroli</a>
-            &nbsp; <a class="btn btn-info" href="/raporty" role="button" >Raporty</a>
+            <a class="btn btn-warning btn-sm" href="/kontrole" role="button" >Harmonogram kontroli</a>
+            &nbsp; <a class="btn btn-info btn-sm" href="/raporty" role="button" >Raporty</a>
         </div>
     </div>
 
@@ -112,7 +116,6 @@
             <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->miejscowosc}}</td>
             <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->nip}}</td>
             <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->telefon}}</td>
-            <td style="width:30px;"><a  @if($petent->status == '3')  style = "display:none;" @endif href="{{ route('przedsiebiorca.edit',$petent->id)}}" class="btn btn-sm btn-success" title="Edycja"><i class="fa fa-edit"></a></td>
             <td style="width:40px;text-align:center;">
               @if($petent->status != '2')
                 <form  method="get" action="{{ route('zawies', $petent->id) }}">

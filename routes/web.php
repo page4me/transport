@@ -31,7 +31,7 @@ Route::get('/przedsiebiorca/baza/stare', 'PrzedsiebiorcaController@stare_bz')->n
 Route::get('/przedsiebiorca/zarzadzajacy/stare', 'PrzedsiebiorcaController@stare_oz')->name('stare_oz');
 
 Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PismaController@print_zdol_finans');
-Route::get('/przedsiebiorca/{id}/pisma/tresc/', 'PismaController@tresc');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/zabezpieczenie/tresc/', 'PismaController@tresc');
 Route::post('/przedsiebiorca/pisma/podglad/{id}', 'PismaController@pismo_gotowe')->name('pismo_gotowe');
 Route::get('/przedsiebiorca/pisma/zf_pdf/{id}', 'PismaController@zf_pdf');
 Route::get('/przedsiebiorca/zdarzenia', 'PrzedsiebiorcaController@zdarzenia');
@@ -40,6 +40,7 @@ Route::patch('/przedsiebiorca/odwies/{id}', 'PrzedsiebiorcaController@odwies')->
 Route::patch('/przedsiebiorca/rezygnacja/{id}', 'PrzedsiebiorcaController@rezygnacja')->name('rezygnacja');
 
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}', 'PrzedsiebiorcaController@show')->name('show');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/edit', 'PrzedsiebiorcaController@edit')->name('edit');
 
 Route::resource('kontrole', 'kontrole\Kontrole');
 Route::resource('raporty', 'raporty\Raporty');

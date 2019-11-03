@@ -53,6 +53,11 @@ class DokPrzedController extends Controller
         ]);
         $dokumenty = \App\DokumentyPrzed::create($validatedData);
 
+        $data_bz = date('Y-m-d');
+
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Dodanie nowego dokumentu o numerze '.$request->nr_dok, 'data_zm' => $request->data_bz]);
+
+
         return redirect('/przedsiebiorca/baza/create')->with('success', 'Dokument dodany do bazy danych');
     }
 

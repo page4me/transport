@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Http\Controllers\DokPrzedCotroller;
+use \App\DokumentyPrzed;
 use DB;
 use Alert;
 
@@ -41,25 +43,42 @@ class BazaController extends Controller
      */
     public function store(Request $request)
     {
-        Alert::success('Dodano nową bazę', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
-        $validatedData = $request->validate([
-         'id_przed' => 'required|max:1',
-         'rodzaj' => 'string|max:255|nullable',
-         'gmina' => 'string|max:255|nullable',
-         'adres' => 'required|max:255',
-         'miasto' => 'required|max:255',
-         'kod_p' => 'required|max:6',
-         'wlasnosc' => 'string|max:255|nullable',
-         'umowa' => 'string|max:255|nullable',
-         'uwagi' => 'string|max:255|nullable'
-        ]);
-        $baza = \App\Baza::create($validatedData);
-        $data_bz = date('Y-m-d');
+        $dok = DB::table('dok_przed')->latest()->get();
 
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Zgłoszenie nowej bazy eksploatacyjnej', 'data_zm' => $request->data_bz]);
+        foreach($dok as $dk)
+         {
+         $nr_dok = $dk->nr_dok;
+         }
+
+        if(count($dok) > 0){
+            $validatedData = $request->validate([
+                'id_przed' => 'required|max:1',
+                'id_dok_przed' => 'required|nullable',
+                'rodzaj' => 'string|max:255|nullable',
+                'gmina' => 'string|max:255|nullable',
+                'adres' => 'required|max:255',
+                'miasto' => 'required|max:255',
+                'kod_p' => 'required|max:6',
+                'wlasnosc' => 'string|max:255|nullable',
+                'umowa' => 'string|max:255|nullable',
+                'uwagi' => 'string|max:255|nullable'
+               ]);
+               $baza = \App\Baza::create($validatedData);
+
+              $data_bz = date('Y-m-d');
+
+               $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $nr_dok, 'nazwa_zm' => 'Zgłoszenie nowej bazy eksploatacyjnej', 'data_zm' => $request->data_bz]);
+
+               Alert::success('Dodano nową bazę', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
+               return redirect('/przedsiebiorca/zarzadzajacy/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
+        }
+
+        else {
+            Alert::error('Brak danych w bazie');
+            return redirect('/przedsiebiorca/baza/create');
+        }
 
 
-        return redirect('/przedsiebiorca/zarzadzajacy/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
 
     /**

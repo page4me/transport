@@ -38,9 +38,10 @@ class CertController extends Controller
      */
     public function store(Request $request)
     {
-        Alert::success('Dodano nowego zarządzającego', 'Zarządzający przypisany do przedsiębiorcy');
+
         $validatedData = $request->validate([
          'id_przed' => 'required|max:1',
+         'id_dok_przed' => 'required|nullable',
          'rodzaj' => 'string|max:255|nullable',
          'nr_cert' => 'string|max:255|nullable',
          'imie_os_z' => 'string|max:255|nullable',
@@ -56,7 +57,12 @@ class CertController extends Controller
         ]);
         $baza = \App\Certyfikat::create($validatedData);
 
+        $data_bz = date('Y-m-d');
 
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Dodanie nowej osoby zarządzającej', 'data_zm' => $request->data_bz]);
+
+
+        Alert::success('Dodano nowego zarządzającego', 'Zarządzający przypisany do przedsiębiorcy');
         return redirect('/przedsiebiorca/zabezpieczenie/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
 

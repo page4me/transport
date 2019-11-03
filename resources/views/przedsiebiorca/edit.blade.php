@@ -3,6 +3,12 @@
 @extends('layouts.app')
 
 @section('content')
+@php $id_dok = \App\DokumentyPrzed::all()->where('nr_dok','=',$_GET['nr_dok']); @endphp
+
+@foreach($id_dok as $id)
+
+@endforeach
+
 <div class="container-fluid">
     <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
     <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY</h3></div>
@@ -41,7 +47,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('przedsiebiorca.update', $przedsiebiorca->id) }}">
+      <form method="post" action="{{ route('przedsiebiorca.update', $id->id_przed) }}">
         <div class="row">
               @csrf
                @method('PATCH')
@@ -141,7 +147,7 @@
 
            <div class="col-md-4 form-group">
               <label for="nazwa">Nazwa dokumentu:</label>
-              <input type="text" class="form-control" name="nazwa" value="{{$row->nazwa}}"  />
+              <input type="text" class="form-control" name="nazwa" value="{{$id->nazwa}}"  />
           </div>
           @endforeach
         </div>
@@ -150,19 +156,19 @@
 
           <div class="col-md-3 form-group">
               <label for="adres"><strong>Nr dokumentu:</strong></label>
-              <input type="text" class="form-control" name="nr_dok" value="{{$row->nr_dok}}" />
+              <input type="text" class="form-control" name="nr_dok" value="{{$id->nr_dok}}" />
           </div>
           <div class="col-md-3 form-group">
               <label for="kod_p">Rodzaj:</label>
-              <input type="text" class="form-control" name="rodz_dok" maxlength="6" placeholder="osoby/rzeczy" value="{{$row->rodz_dok}}" />
+              <input type="text" class="form-control" name="rodz_dok" maxlength="6" placeholder="osoby/rzeczy" value="{{$id->rodz_dok}}" />
           </div>
            <div class="col-md-3 form-group">
               <label for="miejscowosc">Nr druku:</label>
-              <input type="text" class="form-control" name="nr_druku" value="{{$row->nr_druku}}" />
+              <input type="text" class="form-control" name="nr_druku" value="{{$id->nr_druku}}" />
           </div>
            <div class="col-md-3 form-group">
               <label for="gmina">Nr sprawy:</label>
-              <input type="text" class="form-control" name="nr_sprawy" value="{{$row->nr_sprawy}}" />
+              <input type="text" class="form-control" name="nr_sprawy" value="{{$id->nr_sprawy}}" />
           </div>
         </div>
 
@@ -170,21 +176,21 @@
         <div class="row">
           <div class="col-md-4 form-group">
               <label for="tel">Data wniosku:</label>
-              <input type="date" class="form-control" name="data_wn" value="{{$row->data_wn}}" />
+              <input type="date" class="form-control" name="data_wn" value="{{$id->data_wn}}" />
           </div>
           <div class="col-md-4 form-group">
               <label for="tel">Data wydania:</label>
-              <input type="date" class="form-control" name="data_wyd" value="{{$row->data_wyd}}" />
+              <input type="date" class="form-control" name="data_wyd" value="{{$id->data_wyd}}" />
           </div>
           <div class="col-md-4 form-group">
               <label for="tel">Data ważności:</label>
-              <input type="date" class="form-control" name="data_waz" value="{{$row->data_waz}}" />
+              <input type="date" class="form-control" name="data_waz" value="{{$id->data_waz}}" />
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
-              <textarea class="form-control" id="dk" name="uwagi" value="{{$row->uwagi}}" />{{$row->uwagi}}</textarea>
+              <textarea class="form-control" id="dk" name="uwagi" value="{{$id->uwagi}}" />{{$id->uwagi}}</textarea>
           </div>
         </div>
           <button type="submit" class="btn btn-success">Zapisz zmiany dokumentów</button>

@@ -116,7 +116,7 @@ class PismaController extends Controller
 
         $wypisy = DB::table('dok_przed_wyp')->where('id_przed' , $przedsiebiorca->id)->get();
 
-        return view('przedsiebiorca.pisma.pismo', compact('przedsiebiorca'));
+        return view('przedsiebiorca.pisma.pismo', compact('przedsiebiorca','dok'));
     }
 
     public function print_zdol_finans(Request $request, $id)
@@ -128,7 +128,7 @@ class PismaController extends Controller
         //$pismo->nazwa = 'Zdolność finansowa';
         $pismo->nr_sprawy = $request->get('nr_sprawy');
         $pismo->data_p = $request->get('data_p');
-        $dok = DB::table('dok_przed')->where('id_przed' , $request->id)->get();
+        $dok = DB::table('dok_przed')->where('id_przed' , $request->id)->where('nr_dok', $request->nr_dok)->get();
 
 
         return view('przedsiebiorca.pisma.print_zdol_finans', compact('przedsiebiorca','pisma','dok'));

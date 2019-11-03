@@ -72,11 +72,12 @@ class PrzedsiebiorcaController extends Controller
         ]);
         $przedsiebiorca = \App\Przedsiebiorca::create($validatedData);
 
-        if(!$validatedData->fails()){
+        if($validatedData){
             Alert::success('Zmniany Zapisano', 'Dane przedsiębiorcy zmienione');
         }else {
             Alert::danger('Zmniany nie zostały zapisane', 'Powstał błąd spróbuj ponownie.');
         }
+
 
         return redirect('/przedsiebiorca/dokumenty/create');
     }
@@ -370,22 +371,25 @@ class PrzedsiebiorcaController extends Controller
     public function stare_zf()
     {
         $zdolnosc = \App\Zdolnosc::all();
+        $dok = \App\DokumentyPrzed::all();
 
-        return view('przedsiebiorca.zabezpieczenie.stare', compact('zdolnosc'));
+        return view('przedsiebiorca.zabezpieczenie.stare', compact('zdolnosc','dok'));
     }
 
     public function stare_bz()
     {
         $baza = \App\Baza::all();
+        $dok = \App\DokumentyPrzed::all();
 
-        return view('przedsiebiorca.baza.stare', compact('baza'));
+        return view('przedsiebiorca.baza.stare', compact('baza','dok'));
     }
 
     public function stare_oz()
     {
         $certyfikat = \App\Certyfikat::all();
+        $dok = \App\DokumentyPrzed::all();
 
-        return view('przedsiebiorca.zarzadzajacy.stare', compact('certyfikat'));
+        return view('przedsiebiorca.zarzadzajacy.stare', compact('certyfikat','dok'));
     }
 
      public function search(Request $request)
@@ -426,8 +430,9 @@ class PrzedsiebiorcaController extends Controller
         $zdolnosc = \App\Zdolnosc::all();
         $baza = \App\Baza::all();
         $certyfikat = \App\Certyfikat::all();
+        $dok = \App\DokumentyPrzed::all();
 
-        return view('przedsiebiorca.zdarzenia', ['zdolnosc' => $zdolnosc, 'baza' => $baza, 'certyfikat' => $certyfikat]);
+        return view('przedsiebiorca.zdarzenia', ['zdolnosc' => $zdolnosc, 'baza' => $baza, 'certyfikat' => $certyfikat, 'dok'=>$dok]);
      }
 
      public function rezygnacja(Request $request)

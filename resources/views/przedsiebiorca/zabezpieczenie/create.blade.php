@@ -55,7 +55,11 @@
                  @endforeach
               </select>
           </div>
-          
+          <div class="col-md-4 form-group">
+
+            <label for="">Numer polisy:</label>
+            <input type="text" class="form-control" name="numer" />
+         </div>
         </div>
 
         <div class="row">
@@ -71,7 +75,7 @@
               <label for="">Data do:</label>
               <input type="date" class="form-control" name="data_do" />
           </div>
-           
+
         </div>
 
         <div class="row">
@@ -84,10 +88,9 @@
               <label for="gmina">Suma zabezpieczenia w &euro;:</label>
               <input type="text" class="form-control" name="suma_zab"/>
           </div>
-           <div class="col-md-4 form-group">
-              <label for="gmina">Status</label>
-              <input type="text" class="form-control" name="status"/>
-          </div>
+
+              <input type="hidden" class="form-control" name="status" value="1"/>
+
         </div>
         <div class="row">
           <div class="col-md-12 form-group">
@@ -95,6 +98,10 @@
               <input type="text" class="form-control" name="uwagi"/>
           </div>
         </div>
+        @php $dok = \App\DokumentyPrzed::where('id_przed', $row->id)->latest()->get(); @endphp
+            @foreach($dok as $dk)
+            @endforeach
+          <input type="hidden" name="id_dok_przed" value="{{$dk->nr_dok}}" />
           <button type="submit" class="btn btn-success">Dodaj zabezpieczenie finansowe</button>
       </form>
   </div>
