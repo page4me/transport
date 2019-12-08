@@ -43,7 +43,9 @@ class BazaController extends Controller
      */
     public function store(Request $request)
     {
-        $dok = DB::table('dok_przed')->latest()->get();
+        $dok = DB::table('dok_przed')->latest()->limit(1)->get();
+
+
 
         foreach($dok as $dk)
          {
