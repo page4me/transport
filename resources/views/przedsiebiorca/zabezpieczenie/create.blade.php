@@ -14,6 +14,7 @@
   }
 
 </style>
+{{print_r($przedsiebiorca)}}
 <div class="container">
    <div style="padding-top: 20px;margin: 0 auto; text-align: center;">
     <i class="fa fa-truck-monster fa-3x"></i>&nbsp;&nbsp;
@@ -54,6 +55,9 @@
 
                  @endforeach
               </select>
+              @php $dok = \App\DokumentyPrzed::get()->last()->id; @endphp
+
+              <input type="hidden" name="id_dok_przed" value="{{$dok}}" />
           </div>
           <div class="col-md-4 form-group">
 
@@ -98,10 +102,7 @@
               <input type="text" class="form-control" name="uwagi"/>
           </div>
         </div>
-        @php $dok = \App\DokumentyPrzed::where('id_przed', $row->id)->latest()->get(); @endphp
-            @foreach($dok as $dk)
-            @endforeach
-          <input type="hidden" name="id_dok_przed" value="{{$dk->nr_dok}}" />
+
           <button type="submit" class="btn btn-success">Dodaj zabezpieczenie finansowe</button>
       </form>
   </div>

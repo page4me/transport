@@ -62,12 +62,20 @@
         </div>
        </div>
          <div class="row">
-           <div class="text-center"> <span style="font-size:16px;font-weight: bold;">Wypisy z licencji / zezwolenia</span> <br/>
-             <span style="font-size:13px;font-weight: bold;"> Nr:
-                  @foreach($dok as $dk)
-                     {{ $dk->nr_dok }}
-                  @endforeach
-             </span>
+             @foreach($dok as $dk)
+
+             @endforeach
+           <div class="text-center">
+             @if($dk->nazwa == 'Zezwolenie')
+             <span style="font-size:16px;font-weight: bold;"> Wypisy z zezwolenia </span> <br/>
+             @elseif($dk->nazwa == 'Licencja')
+             <span style="font-size:16px;font-weight: bold;"> Wypisy z licencji </span> <br/>
+             @elseif($dk->nazwa == 'Licencja osób 7-9')
+             <span style="font-size:16px;font-weight: bold;"> Wypisy z licencji osób 7-9</span> <br/>
+             @elseif($dk->nazwa == 'Zaświadczenie')
+             <span style="font-size:16px;font-weight: bold;"> Wypisy z zaświadczenia </span> <br/>
+             @endif
+             <span style="font-size:13px;font-weight: bold;"> Nr:  {{ $dk->nr_dok }}</span>
           </div>
         </div>
         <div class="row">&nbsp;</div>

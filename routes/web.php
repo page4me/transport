@@ -17,12 +17,13 @@ Route::get('/', function () {
 
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/cars', 'PrzedsiebiorcaController@cars')->name('cars');
 Route::patch('/przedsiebiorca/pojazdy/wycofaj/{id}', 'WykazPojController@wycofaj')->name('wycofaj');
-Route::patch('/przedsiebiorca/wypisy/depozyt/{id}', 'WypisyController@depozyt')->name('depozyt');
-Route::patch('/przedsiebiorca/wypisy/depozytwyd/{id}', 'WypisyController@depozytwyd')->name('depozytwyd');
+Route::patch('/przedsiebiorca/{id}/dokument/{nr_dok}/wypisy/depozyt/', 'WypisyController@depozyt')->name('depozyt');
+Route::patch('/przedsiebiorca/{id}/dokument/{nr_dok}/wypisy/depozytwyd/', 'WypisyController@depozytwyd')->name('depozytwyd');
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/wypisy/', 'WypisyController@index')->name('index');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/wypisy/edit', 'WypisyController@update')->name('update');
 
-Route::get('/przedsiebiorca/pdf/{id}', 'PrzedsiebiorcaController@gPDF');
-Route::get('/przedsiebiorca/wypisyPDF/{id}', 'WypisyController@wypisyPDF');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pdf/', 'PrzedsiebiorcaController@gPDF');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/wypisyPDF/', 'WypisyController@wypisyPDF');
 Route::get('/przedsiebiorca/zabezpieczenie/stare', 'PrzedsiebiorcaController@stare_zf')->name('stare_zf');
 
 Route::get('/search', 'PrzedsiebiorcaController@search');
@@ -34,13 +35,19 @@ Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PismaController@prin
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/zabezpieczenie/tresc/', 'PismaController@tresc');
 Route::post('/przedsiebiorca/pisma/podglad/{id}', 'PismaController@pismo_gotowe')->name('pismo_gotowe');
 Route::get('/przedsiebiorca/pisma/zf_pdf/{id}', 'PismaController@zf_pdf');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/zarzadzajacy/tresc/', 'PismaController@pismo_zarzadzajacy')->name('pismo_zarzadzajacy');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/zarzadzajacy/printPDF/', 'PismaController@print_zarzadzajacy')->name('print_zarzadzajacy');
+
 Route::get('/przedsiebiorca/zdarzenia', 'PrzedsiebiorcaController@zdarzenia');
-Route::patch('/przedsiebiorca/zawies/{id}', 'PrzedsiebiorcaController@zawies')->name('zawies');
+Route::patch('/przedsiebiorca/{id}/dokument/{nr_dok}/zawies/', 'PrzedsiebiorcaController@zawies')->name('zawies');
 Route::patch('/przedsiebiorca/odwies/{id}', 'PrzedsiebiorcaController@odwies')->name('odwies');
 Route::patch('/przedsiebiorca/rezygnacja/{id}', 'PrzedsiebiorcaController@rezygnacja')->name('rezygnacja');
 
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}', 'PrzedsiebiorcaController@show')->name('show');
-Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/edit', 'PrzedsiebiorcaController@edit')->name('edit');
+
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/edit/', 'PrzedsiebiorcaController@edit');
+
+Route::post('destroy/{id}', 'WypisyController@destroy');
 
 Route::resource('kontrole', 'kontrole\Kontrole');
 Route::resource('raporty', 'raporty\Raporty');

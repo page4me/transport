@@ -23,6 +23,13 @@
         </style>
 </head>
 <body>
+        @foreach ($rodzaje as $rodz)
+        @endforeach
+        @php $id_dok = \App\DokumentyPrzed::all()->where('nr_dok','=',$rodz->nr_dok); @endphp
+
+        @foreach($id_dok as $id)
+         @php $id_d = $id->id @endphp
+        @endforeach
     <script type="text/php">
         if (isset($pdf)) {
             $pdf->page_script('
@@ -36,7 +43,7 @@
 <div class="container">
 
         <br />
-        <div class="row" style="text-align: right;">Stan na dzień: @if(empty($stan->data_wpr)) brak danych @else {{$stan->data_wpr}} @endif r.</div>
+        <div class="row" style="text-align: right;">Stan na dzień: @if(empty($stan->data_wpr)) brak danych @else {{ Carbon\Carbon::parse($stan->updated_at)->format('d-m-Y') }} @endif r.</div>
         <div class="row" style="margin-left: 10px;">
           <div>
               <div style="font-weight: bold;">{{$przedsiebiorca->nazwa_firmy }} <br />{{$przedsiebiorca->adres}}<br />{{$przedsiebiorca->kod_p}} {{$przedsiebiorca->miejscowosc}}
@@ -59,11 +66,18 @@
 
        </div>
          <div class="row">
-           <div class="text-center"> <span style="font-size:16px;font-weight: bold;">Wykaz pojazdów</span> <br/>
-             <span style="font-size:13px;font-weight: bold;"> Nr licencji / zezwolenia:
-                  @foreach($dok as $dk)
-                     {{ $dk->nr_dok }}
-                  @endforeach
+           <div class="text-center">
+             <span style="font-size:13px;font-weight: bold;">
+                    @if($id->nazwa == 'Zezwolenie')
+                    <span style="font-size:16px;font-weight: bold;"> Wykaz pojazdów z zezwolenia </span> <br/>
+                    @elseif($id->nazwa == 'Licencja')
+                    <span style="font-size:16px;font-weight: bold;"> Wykaz pojazdów z licencji </span> <br/>
+                    @elseif($id->nazwa == 'Licencja osób 7-9')
+                    <span style="font-size:16px;font-weight: bold;"> Wykaz pojazdów z licencji osób 7-9</span> <br/>
+                    @elseif($id->nazwa == 'Zaświadczenie')
+                    <span style="font-size:16px;font-weight: bold;"> Wykaz pojazdów z zaświadczenia </span> <br/>
+                    @endif
+                    <span style="font-size:13px;font-weight: bold;"> Nr:  {{ $id->nr_dok }}</span>
              </span>
 
           </div>

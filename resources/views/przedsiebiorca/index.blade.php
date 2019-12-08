@@ -118,13 +118,12 @@
             <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->telefon}}</td>
             <td style="width:40px;text-align:center;">
               @if($petent->status != '2')
-                <form  method="get" action="{{ route('zawies', $petent->id) }}">
+                <form  method="get" action="{{ route('zawies', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok]) }}">
                   @csrf
-                    <a  @if($petent->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->id}}" role="button" class="openZawies btn btn-warning btn-sm" href="#zawies" title="Zawieszenie"><i class="fa fa-history"></i></a>
-
+                    <a  @if($petent->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->nr_dok}}" role="button" class="openZawies btn btn-warning btn-sm" href="#zawies" title="Zawieszenie"><i class="fa fa-history"></i></a>
                 </form>
               @else
-              <a  @if($petent->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->id}}" role="button" class="openOdwies btn btn-info btn-sm" href="#odwies" title="Odwieś"><i class="fa fa-recycle"></i></a>
+              <a  @if($petent->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->nr_dok}}" role="button" class="openOdwies btn btn-info btn-sm" href="#odwies" title="Odwieś"><i class="fa fa-recycle"></i></a>
 
               @endif
 
@@ -145,7 +144,7 @@
      <div class="modal fade" id="zawies">
         <div class="modal-dialog" style="margin:0 auto;top:25%;">
           <div class="modal-content">
-            <form  method="POST" action="{{ route('zawies', 'id' ) }}" >
+            <form  method="POST" action="{{ route('zawies', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok] ) }}" >
             <!-- Modal Header -->
 
             <div class="modal-header bg-warning">
@@ -158,8 +157,7 @@
                 @method('PATCH')
               Wprowadź datę zawieszenia: <input class="form-control" type="date" id="dat_zaw" name="dat_zaw" /><br />
               Podaj powód zawieszenia: <textarea class="form-control" id="powod" name="powod"></textarea><br />
-              <input type="hidden" id="idz" name="id" value="@foreach($rodzaje as $petent) {{$petent->id}} @endforeach" />
-
+              <input type="hidden" id="idz" name="nr_dok" value="{{$petent->nr_dok}} " />
 
             </div>
             <!-- Modal footer -->

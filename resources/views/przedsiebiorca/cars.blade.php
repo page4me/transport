@@ -7,6 +7,10 @@
 @foreach($dok as $dk)
 @endforeach
 
+<div class="container-fluid">
+        <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
+        <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY</h3></div>
+    <div class="p-2">
 
 
 
@@ -53,8 +57,9 @@
 
           </div>
           <div class="col-md-4">
-            <span class="badge badge-success" style="font-size:14px;">Stan na dzień: @if(empty($stan->data_wpr)) brak danych @else {{$stan->stan}} @endif r.</span>
-            <br /><br /><a href="{{ url('/przedsiebiorca/pdf/' . $przedsiebiorca->id)}}" target="_blank" role="button" class="btn btn-warning">Wykaz w PDF</a>&nbsp;<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+
+            <span class="badge badge-success" style="font-size:14px;">Stan na dzień: @if(empty($stan->updated_at)) brak danych @else {{ Carbon\Carbon::parse($stan->updated_at)->format('d-m-Y') }} @endif r.</span>
+            <br /><br /><a href="{{ url('/przedsiebiorca/'.$rodz->id_przed.'/dokument/'.$rodz->nr_dok.'/pdf/' )}}" target="_blank" role="button" class="btn btn-warning">Wykaz w PDF</a>&nbsp;<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
             Dodaj nowy pojazd
           </button>
           </div>
@@ -416,6 +421,7 @@
 
 
 
+</div>
 </div>
 </div>
 @endsection

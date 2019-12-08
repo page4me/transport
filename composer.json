@@ -32,7 +32,13 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [],
+            "providers": [
+                "RealRashid\\SweetAlert\\SweetAlertServiceProvider"
+            ],
+            "aliases": {
+                "Alert": "RealRashid\\SweetAlert\\Facades\\Alert"
+            }
         }
     },
     "autoload": {

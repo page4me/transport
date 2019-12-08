@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-@foreach ($rodzaje as $rodz)
+        @foreach ($rodzaje as $rodz)
         @endforeach
         @foreach($dok as $dk)
         @endforeach
@@ -12,10 +12,18 @@
         @foreach($id_dok as $id)
          @php $id_d = $id->id @endphp
         @endforeach
+
+        <div class="container-fluid">
+                <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
+                <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY</h3></div>
+            <div class="p-2">
+
+
+
 <div class="container">
             <nav >
                 <div class="nav nav-pills" id="edytuj" role="tablist" style="padding: 5px;">
-                <a class="nav-item nav-link bg-success text-light btn-sm" style="color:#fff;" href="{{route('przedsiebiorca.edit', ['id'=>$id->id_przed ,'nr_dok' =>$id->nr_dok])}}" >Edycja danych</a>&nbsp;&nbsp;
+                <a class="nav-item nav-link bg-success text-light btn-sm" style="color:#fff;" href="{{route('przedsiebiorca.edit', ['id'=>$id->id_przed, 'nr_dok'=>$id->nr_dok])}}" >Edycja danych</a>&nbsp;&nbsp;
                   <a class="nav-item nav-link bg-success text-light btn-sm"  href="{{route('dokumenty.edit', ['id'=>$id->id_przed ,'nr_dok' =>$id->nr_dok])}}" >Edycja dokumentów</a>&nbsp;&nbsp;
                   <a class="nav-item nav-link bg-success text-light btn-sm"  href="{{route('baza.edit', ['id'=>$id->id_przed ,'nr_dok' =>$id->nr_dok])}}"  >Edycja bazy</a>&nbsp;&nbsp;
                   <a class="nav-item nav-link bg-success text-light btn-sm"  href="{{route('zarzadzajacy.edit', ['id'=>$id->id_przed ,'nr_dok' =>$id->nr_dok])}}" >Edycja osoby zarządzającej</a>&nbsp;&nbsp;
@@ -84,11 +92,18 @@
                <div>
                  <strong>Wydanych wypisów:</strong>
                    <span class="badge badge-warning" style="font-size:13px;">
-                      {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id)->where('id_dok_przed','=', $id_d)->count()}}
+                     @if($id->nazwa == 'Licencja Pośrednictwo')
+                        0
+                     @else
+                       {{$count = \App\Wypisy::where('id_przed','=',$przedsiebiorca->id, 'AND', 'id_dok_przed','=', $id_d)->count()}}
+                     @endif
                     </span><br />
                  <strong>W depozycie wypisów: </strong><span class="badge badge-danger" style="font-size:12px;">
-                   {{$count1 = \App\Wypisy::where('status','=','2')->where('id_przed','=',$przedsiebiorca->id)->where('id_dok_przed','=', $id_d)->count()}}
-
+                        @if($id->nazwa == 'Licencja Pośrednictwo')
+                        0
+                         @else
+                            {{$count1 = \App\Wypisy::where('status','=','2')->where('id_przed','=',$id->id_przed, 'AND', 'id_dok_przed','=', $id_d)->count()}}
+                        @endif
                  </span><br />
                  @if($id->nazwa == 'Licencja Pośrednictwo')
                        <span class="badge badge-warning" style="font-size:13px;"> nie dotyczny</span>
@@ -102,14 +117,11 @@
                                         <div class="modal-content">
                                             <div class="modal-header  bg-dark">
                                             <div class="card-header bg-dark text-light" >
-                                                Lista wypisów przedsiębiorcy o  -
-                                                <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
-                                                    @foreach($dok as $dk)
-                                                    {{ $dk->nr_dok }}
+                                                Lista wypisów przedsiębiorcy -
+                                                <span style="color: #00ddff;font-size:16px;"> {{$id->nazwa}} nr {{$id->nr_dok}}
 
-                                                </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
+                                                </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $id->data_wyd}}   r.</span>
 
-                                                    @endforeach
                                                 </div>
                                             <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -130,8 +142,8 @@
                                                     </div>
                                                     <div class="col-md-4 form-group">
                                                         <label for="id_dok_przed"><strong>Nr dokumentu:</strong></label>
-                                                        <input type="text" class="form-control" name="_id_dok_przed" placeholder="{{$dk->nr_dok}}" disabled="disabled" />
-                                                        <input type="hidden" class="form-control" name="id_dok_przed" value="{{$dk->nr_dok}}" />
+                                                        <input type="text" class="form-control" name="_id_dok_przed" placeholder="{{$id->nr_dok}}" disabled="disabled" />
+                                                        <input type="hidden" class="form-control" name="id_dok_przed" value="{{$id->nr_dok}}" />
                                                     </div>
                                                 </div>
 
@@ -139,13 +151,13 @@
 
                                                     <div class="col-md-6 form-group">
                                                     <label for="nazwa"><strong>Nazwa dokumentu:</strong></label>
-                                                    <input type="text" class="form-control" name="_nazwa" value="{{$dk->nazwa}}" disabled="disabled" />
-                                                    <input type="hidden" class="form-control" name="nazwa" value="{{$dk->nazwa}}" />
+                                                    <input type="text" class="form-control" name="_nazwa" value="{{$id->nazwa}}" disabled="disabled" />
+                                                    <input type="hidden" class="form-control" name="nazwa" value="{{$id->nazwa}}" />
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label for="nazwa_wyp"><strong>Rodzaj dokuemntu:</strong></label>
-                                                        <input type="text" class="form-control" name="_nazwa" value="{{$dk->rodz_dok}}" disabled="disabled" />
-                                                        <input type="hidden" class="form-control" name="rodzaj_wyp" value="{{$dk->rodz_dok}}" />
+                                                        <input type="text" class="form-control" name="_nazwa" value="{{$id->rodz_dok}}" disabled="disabled" />
+                                                        <input type="hidden" class="form-control" name="rodzaj_wyp" value="{{$id->rodz_dok}}" />
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -168,8 +180,8 @@
                                                         <input type="text" class="form-control" name="uwagi"/>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
-                                                <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
+                                                <input type="hidden" name="id_przed" value="{{$id->id_przed}}" />
+                                                <input type="hidden" name="id_dok_przed" value="{{$id->id}}" />
                                             </div>
                                             <div class="modal-footer">
 
@@ -209,7 +221,7 @@
                                     {{$ck->dat_umowy}} r.<br/>
                                     {{$ck->umowa}} <br />
                                     po terminie {{$dni = (strtotime($ck->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
-                                    </span> <br /><a href="/przedsiebiorca/{{$rodz->id}}/dokumenty/{{$rodz->nr_dok}}/pisma/zarzadzajacy/tresc/" role="button" class="btn btn-warning btn-sm" style="font-size:10px;">przygotuj pismo inf.</a>
+                                    </span> <br /><a href="/przedsiebiorca/{{$rodz->id}}/dokument/{{$rodz->nr_dok}}/pisma/zarzadzajacy/tresc/" role="button" class="btn btn-warning btn-sm" style="font-size:10px;">przygotuj pismo inf.</a>
                                     @else
                                     Umowa do dnia -
                                     <span class="badge badge-success" style="font-size:13px;">    {{$ck->dat_umowy}} r.</span> <br/>
@@ -461,6 +473,7 @@
     </div>
 <div><a class="btn btn-primary" href="/przedsiebiorca" role="button">Powrót do listy przedsiębiorców</a></div>
   </div>
+</div>
 </div>
 </div>
 @endsection

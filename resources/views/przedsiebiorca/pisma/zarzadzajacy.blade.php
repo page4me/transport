@@ -12,6 +12,7 @@
     }
 
     </style>
+     @php $nr_dok = \App\DokumentyPrzed::find($przedsiebiorca->id)->nr_dok; @endphp
      <div class="container-fluid">
             <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
             <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY</h3></div>
@@ -19,12 +20,12 @@
 
         <div class="container">
 
-        <form action="{{ url('/przedsiebiorca/pisma/print_zdol_finans/' . $przedsiebiorca->id)}}" method="get">
+        <form action="{{ url('/przedsiebiorca/' . $przedsiebiorca->id.'/dokument/'.$nr_dok.'/pisma/zarzadzajacy/printPDF')}}" method="get">
             @csrf
-            @php $nr_dok = \App\DokumentyPrzed::find($przedsiebiorca->id)->nr_dok; @endphp
+
             <div class="card">
                 <div class="card-header bg-dark text-light" >
-                    <span style="color: #00ddff;font-size:16px;">Przygotowanie pisma o nieaktualnej zdolności finansowej</span>
+                    <span style="color: #00ddff;font-size:16px;">Przygotowanie pisma o nieaktualnej umowie z osobą zarządzającą</span>
                 </div>
                 <div class="card-body">
                     <div class="col-md-4"><label>Wpisz numer sprawy:</label> <input class="form-control" type="text" name="nr_sprawy" /></div>

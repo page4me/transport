@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wydruk pisma - zdolność finansowa po terminie</title>
+  <title>Wydruk pisma - umowa z zarządzającym po terminie</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -24,10 +24,6 @@
         </style>
 </head>
 <body>
-    @foreach($pisma as $ps)
-
-    @endforeach
-
 
   <div class="container" style="font-size: 14px;font-family: Arial;width:900px;">
     <form action="{{ url('przedsiebiorca/pisma/podglad', $przedsiebiorca->id)}}" method="post">
@@ -44,13 +40,12 @@
      </div>
             <div style="clear:both;">
                 <br /><br />
-                <p style="text-align: justify;padding-left:40px;padding-right:40px;"><span style="padding-left:50px;">&nbsp;</span>Starosta Koszaliński
-                    na podstawie  art. 83 ust. 1 ustawy z dnia 6 września 2001 r. o transporcie drogowym (Dz. U. z 2019 r., poz. 2140 z późn. zm.) oraz
-                    § 2 ust. 3 rozporządzenia Ministra Infrastruktury i Rozwoju z dnia 8 września 2014 roku w sprawie danych i informacji, które
-                    przewoźnik drogowy jest obowiązany przekazywać do organu w związku z prowadzoną działalnością w zakresie przewozu
-                    drogowego (Dz.U. z 2014 r., poz.1217) nakłada na Pana obowiązek <strong> przedłożenia w terminie 21 dni od dnia
-                        otrzymania tego pisma</strong>, dokumentów potwierdzających spełnienie wymagań ustawowych do
-                        otrzymanego „zezwolenia na wykonywanie zawodu przewoźnika drogowego” wyrażonego  licencją:</p>
+                <p style="text-align: justify;padding-left:40px;padding-right:40px;"><span style="padding-left:50px;">&nbsp;</span>Starosta Koszaliński na
+                    podstawie  art. 83 ust. 1 ustawy z dnia 6 września 2001 r. o transporcie drogowym (Dz. U. z 2019 r., poz. 2140 z późn. zm.) oraz § 2 ust. 3 rozporządzenia
+                    Ministra Infrastruktury i Rozwoju z dnia 8 września 2014 roku w sprawie danych i informacji, które przewoźnik drogowy jest obowiązany przekazywać
+                    do organu w związku z prowadzoną działalnością w zakresie przewozu drogowego (Dz.U. z 2014 r., poz.1217) nakłada na Pana obowiązek
+                    <strong> przedłożenia w terminie 21 dni od dnia otrzymania tego pisma</strong>, dokumentów potwierdzających spełnienie wymagań
+                    ustawowych do otrzymanego „zezwolenia na wykonywanie zawodu przewoźnika drogowego” wyrażonego  licencją:</p>
             </div>
             <div style="padding-left:40px;">
                 <strong>nr @foreach($dok as $dk) {{$dk->nr_dok}}@endforeach</strong> udzieloną dnia {{$dk->data_wyd}} roku na wykonywanie krajowego transportu drogowego {{$dk->rodz_dok}}. tj.:
@@ -59,20 +54,10 @@
                 <br />
             <ul style="list-style: none;">
             <li>
-            <p style="text-align: justify;padding-left:40px;padding-right:40px;"><strong>1)</strong> dokumenty potwierdzające spełnienie warunków, o których mowa w art. 7 rozporządzenia (WE) nr 1071/2009 związane z
-                wymogiem zdolności finansowej. Przedsiębiorca musi być w stanie w każdym momencie roku finansowego spełnić swoje zobowiązania
-                finansowe. W tym celu przedsiębiorca wykazuje na podstawie poświadczonych przez audytora lub odpowiednio upoważnioną osobę
-                rocznych sprawozdań finansowych, że co roku dysponuje kapitałem i rezerwami o wartości co  najmniej równej 9 000 EUR w
-                przypadku wykorzystywania tylko jednego pojazdu i 5 000 EUR na każdy dodatkowy wykorzystywany pojazd.</p>
+            <p style="text-align: justify;padding-left:40px;padding-right:40px;"><strong>1)</strong> przynajmniej jedna z osób zarządzających przedsiębiorstwem lub osoba zarządzająca w przedsiębiorstwie
+                transportem drogowym legitymuje się certyfikatem kompetencji zawodowych;</p>
             </li>
-            <li>
-            <p style="text-align: justify;padding-left:40px;padding-right:40px;">
-            <strong>2)</strong> wykaz pojazdów zawierający następujące informacje:
-            5) markę, typ; 2) rodzaj/przeznaczenie;  3) numer rejestracyjny;  4) numer
-                VIN; wskazanie rodzaju tytułu prawnego do dysponowania pojazdem wraz
-                z kserokopiami dowodów rejestracyjnych, z aktualnymi badaniami
-                technicznymi;</p>
-            </li>
+
         </ul>
             </div>
             <div>

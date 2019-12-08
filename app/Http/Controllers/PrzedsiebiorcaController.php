@@ -66,18 +66,15 @@ class PrzedsiebiorcaController extends Controller
          'miejscowosc' => 'required|max:255',
          'kod_p' => 'required|max:6',
          'nip' => 'required|max:11',
+         'gmina' => 'required|max:255',
          'regon' => 'required|max:9',
          'telefon' => 'required|max:10',
 
         ]);
         $przedsiebiorca = \App\Przedsiebiorca::create($validatedData);
 
-        if($validatedData){
-            Alert::success('Zmniany Zapisano', 'Dane przedsiębiorcy zmienione');
-        }else {
-            Alert::danger('Zmniany nie zostały zapisane', 'Powstał błąd spróbuj ponownie.');
-        }
 
+            Alert::success('', 'Dodano nowego przedsiębiorcę');
 
         return redirect('/przedsiebiorca/dokumenty/create');
     }
@@ -168,6 +165,7 @@ class PrzedsiebiorcaController extends Controller
          'nazwisko' => 'required|max:255',
          'adres' => 'required|max:255',
          'miejscowosc' => 'required|max:255',
+         'gmina' => 'required|max:255',
          'kod_p' => 'required|max:6',
          'nip' => 'required|max:11',
          'regon' => 'required|max:9',
@@ -201,7 +199,7 @@ class PrzedsiebiorcaController extends Controller
         Alert::error('Zmiany nie zostały zapisane', 'Powstał błąd spróbuj ponownie.');
     }
 
-     return redirect('/przedsiebiorca');//->with('success', 'Dane przedsiębiorcy zmienione');
+     return back();//->with('success', 'Dane przedsiębiorcy zmienione');
     }
 
     /**
@@ -222,7 +220,9 @@ class PrzedsiebiorcaController extends Controller
 
     public function zawies(Request $request)
     {
-        Alert::warning('Zawieszono licencję/zezwolenie przedsiębiorcy', '');
+
+
+
         $zawies = \App\Przedsiebiorca::findOrFail($request->id);
 
 
@@ -232,24 +232,26 @@ class PrzedsiebiorcaController extends Controller
 
         $zawies->update(['status'=>'2']);
 
-        $zawies_lic = DB::table('dok_przed')->where('id_przed' , $request->id)->get();
+        $zawies_lic = DB::table('dok_przed')->where('nr_dok', $request->nr_dok)->get();
         foreach($zawies_lic as $li){
             $li->id;
         }
+
+
         $powod = Input::get('powod');
         $dat_zaw = Input::get('dat_zaw');
 
         $dat_zaw_new = Carbon::createFromDate($dat_zaw)->addYear()->format('Y-m-d');
 
-       $lic = \App\DokumentyPrzed::findOrFail($li->id);
-        $lic->update(['status'=>'2','dat_zaw'=> $dat_zaw_new,'powod'=>$powod]);
+        $lic = \App\DokumentyPrzed::findOrFail($li->id);
 
+        $lic->update(['status'=>'2','dat_zaw'=> $dat_zaw_new,'powod'=>$powod]);
 
         $data_zm = date('Y-m-d');
         $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Zawieszenie dokumentu przedsiębiorcy','data_zm' => $dat_zaw]);
 
-
-        return redirect('/przedsiebiorca');
+        Alert::warning('Zawieszono licencję/zezwolenie przedsiębiorcy', '');
+        return redirect('/przedsiebiorca', compact('lic' ));
     }
 
     public function odwies(Request $request)
@@ -300,6 +302,8 @@ class PrzedsiebiorcaController extends Controller
 
         $cars = DB::table('wykaz_poj')->where('id_przed', $request->route('id'))->where('id_dok_przed', $id_dok_przed)->get();
 
+        $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('updated_at', 'desc')->first();
+
         if(count($cars) > 0)
          {
             //print_r($cars);
@@ -307,13 +311,13 @@ class PrzedsiebiorcaController extends Controller
             return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan','rodzaje'));
          }
 
-         $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('stan', 'desc')->first();
+
 
         return view('przedsiebiorca.cars', compact('przedsiebiorca','dok','cars','stan','rodzaje'));
 
     }
 
-    public function gPDF($id)
+    public function gPDF(Request $request, $id)
     {
         //set_time_limit(0);
 
@@ -322,26 +326,38 @@ class PrzedsiebiorcaController extends Controller
        $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
        $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
        $stan = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
-        //$nazwa_firmy = $przedsiebiorca->nazwa_firmy;
 
-        $pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'cars'=>$cars, 'stan' => $stan ] );
-        //$pdf->output();
-        //$dom_pdf = $pdf->getDomPDF();
+       $rodzaje= DB::table('dok_przed')
+        ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
+        ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
+        ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
+        ->where('dok_przed.id_przed', '=', $request->route('id'))
+        ->where('dok_przed.nr_dok', '=', $request->route('nr_dok'))
+        ->get();
 
-        //$canvas = $dom_pdf ->get_canvas();
-        //$canvas->page_text(10, 10, "Strona {PAGE_NUM} z {PAGE_COUNT}", null, 10, array(0, 0, 0));
+        $pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'cars'=>$cars, 'stan' => $stan, 'rodzaje' =>$rodzaje ] );
 
-        return $pdf->stream('wykazpojazdow.pdf');
+        return $pdf->download('wykazpojazdow.pdf');
 
     }
 
-    public function print_cars($id)
+    public function print_cars(Request $request, $id)
     {
         //
         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
 
 
-        return view('przedsiebiorca.print_cars', compact('przedsiebiorca'));
+        $rodzaje= DB::table('dok_przed')
+        ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
+        ->join('rodzaj_przed', 'rodzaj_przed.id', "=", 'przedsiebiorca.id_osf')
+        ->select('rodzaj_przed.*','dok_przed.*','przedsiebiorca.*')
+        ->where('dok_przed.id_przed', '=', $request->route('id'))
+        ->where('dok_przed.nr_dok', '=', $request->route('nr_dok'))
+        ->get();
+
+
+
+        return view('przedsiebiorca.print_cars', compact('przedsiebiorca','rodzaje'));
 
 
     }

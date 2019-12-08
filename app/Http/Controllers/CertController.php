@@ -59,7 +59,7 @@ class CertController extends Controller
 
         $data_bz = date('Y-m-d');
 
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Dodanie nowej osoby zarządzającej', 'data_zm' => $request->data_bz]);
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Dodanie nowej osoby zarządzającej', 'data_zm' => $request->data_bz]);
 
 
         Alert::success('Dodano nowego zarządzającego', 'Zarządzający przypisany do przedsiębiorcy');
@@ -83,9 +83,23 @@ class CertController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
+        $rodzaje= DB::table('rodzaj_przed')->get();
+
+         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+
+         $dok = DB::table('dok_przed')->where('id_przed' , $id)->where('nr_dok' , $request->nr_dok)->get();
+
+         foreach($dok as $dk)
+         {
+             $dk->id;
+         }
+
+         $osz = DB::table('cert_komp')->where('id_przed' , $id)->where('id_dok_przed' , $dk->id)->get();
+
+         return view('przedsiebiorca.zarzadzajacy.edit', compact('przedsiebiorca', 'rodzaje','osz'));
     }
 
     /**
@@ -98,7 +112,7 @@ class CertController extends Controller
     public function update(Request $request, $id)
     {
         //
-        Alert::success('Zapisano zmiany', 'Dane osoby zarządającej zmienione');
+
         $validatedData = $request->validate([
          'id_przed' => 'required|max:1',
          'rodzaj' => 'string|max:255|nullable',
@@ -116,7 +130,9 @@ class CertController extends Controller
         ]);
 
         \App\Certyfikat::whereId($id)->update($validatedData);
-        return redirect('/przedsiebiorca')->with('success', 'Dane osoby zarządającej zmienione');
+        //return redirect('/przedsiebiorca')->with('success', 'Dane osoby zarządającej zmienione');
+        Alert::success('Zapisano zmiany', 'Dane osoby zarządającej zmienione');
+        return back();
     }
 
     /**

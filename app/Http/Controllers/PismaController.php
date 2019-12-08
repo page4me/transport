@@ -154,4 +154,33 @@ class PismaController extends Controller
 
        return view('przedsiebiorca.pisma.podglad', compact('przedsiebiorca','pisma','dok'));
      }
+
+     public function pismo_zarzadzajacy($id)
+    {
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+        //$pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca]);
+        $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
+        $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
+        $stan = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
+
+        $wypisy = DB::table('dok_przed_wyp')->where('id_przed' , $przedsiebiorca->id)->get();
+
+        return view('przedsiebiorca.pisma.zarzadzajacy', compact('przedsiebiorca'));
+    }
+
+    public function print_zarzadzajacy(Request $request, $id)
+     {
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+        $pisma = \App\Pisma::all();
+        $pismo = new Pisma;
+        $pismo->id_przed = $request->id;
+        //$pismo->nazwa = 'Zdolność finansowa';
+        $pismo->nr_sprawy = $request->get('nr_sprawy');
+        $pismo->data_p = $request->get('data_p');
+        $dok = DB::table('dok_przed')->where('id_przed' , $request->id)->where('nr_dok', $request->nr_dok)->get();
+
+
+        return view('przedsiebiorca.pisma.print_zarzadzajacy', compact('przedsiebiorca','pisma','dok'));
+     }
+
 }

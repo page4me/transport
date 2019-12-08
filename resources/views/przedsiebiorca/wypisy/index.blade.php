@@ -2,7 +2,14 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+<div class="container-fluid">
+        <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
+        <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY</h3></div>
+    <div class="p-2">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <div class="container">
     <div class="card uper">
 
@@ -48,7 +55,7 @@
           </div>
           <div class="col-md-4">
             <span class="badge badge-success" style="font-size:14px;">Stan na dzień: @if(empty($stan->data_wyd)) brak danych @else {{$stan->data_wyd}} @endif r.</span>
-            <br /><br /><a href="{{ url('/przedsiebiorca/wypisyPDF/' . $przedsiebiorca->id) }}" target="_blank" role="button" class="btn btn-warning">Wypisy PDF</a>
+            <br /><br /><a href="{{ url('/przedsiebiorca/' . $dk->id_przed. '/dokument/' . $dk->nr_dok. '/wypisyPDF/') }}" target="_blank" role="button" class="btn btn-warning">Wypisy PDF</a>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nowyWypis">Dodaj nowy wypis</button>
                                      <!-- Modal -->
                         <div class="modal fade" id="nowyWypis" tabindex="-1" role="dialog" aria-labelledby="nowyWypisCenterTitle" aria-hidden="true">
@@ -56,14 +63,11 @@
                             <div class="modal-content">
                                 <div class="modal-header  bg-dark">
                                 <div class="card-header bg-dark text-light" >
-                                    Lista wypisów przedsiębiorcy o  -
-                                    <span style="color: #00ddff;font-size:16px;"> Nr licencji / zezwolenia:
-                                        @foreach($dok as $dk)
-                                        {{ $dk->nr_dok }}
+                                    Lista wypisów przedsiębiorcy
+                                    <span style="color: #00ddff;font-size:16px;"> {{$dk->nazwa}} o Nr: {{ $dk->nr_dok }}
 
                                     </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
 
-                                        @endforeach
                                     </div>
                                 <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -161,6 +165,8 @@
               </tr>
           </thead>
           <tbody class="text-center">
+             @if(count($wypisy) > 0)
+
               @foreach($wypisy as $wp)
               <tr>
                   <td  @if($wp->status=='2') class="bg-danger text-light" @else  @endif>{{$wp->nr_wyp}}<br /> <span style="font-size: 11px;color: yellow">{{$wp->dat_dep_wp}}</span></td>
@@ -175,7 +181,8 @@
                   <td>
                     <button class="btn btn-success carID"  data-toggle="modal" data-id="{{$wp->id}}" data-nr_wyp="{{$wp->nr_wyp}}" data-nr_druku="{{$wp->nr_druku}}" data-nr_sprawy="{{$wp->nr_sprawy}}" data-data_wn="{{$wp->data_wn}}" data-data_wyd="{{$wp->data_wyd}}" data-uwagi="{{$wp->uwagi}}" data-target="#editModal" alt="Edycja" ><i class="fa fa-edit"></i></button>
                   <td>
-                    <button class="btn btn-danger" type="submit" id="confirm_delete"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-danger" onclick="deleteData({{$wp->id}})"><i class="fa fa-trash"></i></button>
+
                   </td>
                   <td>
                     @if($wp->status=='1')
@@ -187,6 +194,10 @@
               </tr>
 
               @endforeach
+
+              @else
+                 <div class="row">Brak wypisów</div>
+              @endif
           </tbody>
         </table>
                                <!-- Modal -->
@@ -195,14 +206,14 @@
                             <div class="modal-content">
                                 <div class="modal-header  bg-success">
                                 <div class="card-header bg-success text-light" >
-                                    Lista wypisów przedsiębiorcy o  -
-                                    <span style="color: #000;font-size:16px;"> Nr licencji / zezwolenia:
-                                        @foreach($dok as $dk)
+                                    Lista wypisów przedsiębiorcy z {{$dk->nazwa}}
+                                    <span style="color: #000;font-size:16px;"> Nr :
+
                                         {{ $dk->nr_dok }}
 
                                     </span><span style="color: #fff;font-size:16px;">wydano dn. {{ $dk->data_wyd}}   r.</span>
 
-                                        @endforeach
+
                                     </div>
                                 <button type="button" class="close text-light" data-dismiss="modal" aria-label="Zamknij">
                                     <span aria-hidden="true">&times;</span>
@@ -210,7 +221,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- Form add new car -->
-                                 <form method="post" action="{{ route('wypisy.update','idwyp') }}">
+                                 <form method="post" action="{{ route('wypisy.update', 'idwyp') }}">
                                     <div class="row">
                                             @csrf
                                              @method('PATCH')
@@ -225,7 +236,7 @@
                                         <div class="col-md-4 form-group">
                                             <label for="id_dok_przed"><strong>Nr dokumentu:</strong></label>
                                             <input type="text" class="form-control" name="_id_dok_przed" placeholder="{{$dk->nr_dok}}" disabled="disabled" />
-                                            <input type="hidden" class="form-control" name="id_dok_przed" value="{{$dk->nr_dok}}" />
+                                            <input type="hidden" class="form-control" name="nr_dok" value="{{$dk->nr_dok}}" />
                                         </div>
                                     </div>
 
@@ -285,7 +296,7 @@
              <div class="modal" id="depozyt">
                 <div class="modal-dialog">
                   <div class="modal-content">
-                    <form  method="POST" action="{{ route('depozyt', 'id' ) }}" >
+                    <form  method="POST" action="{{ route('depozyt', ['id', 'nr_dok'=>$dk->nr_dok] ) }}" >
                     <!-- Modal Header -->
                     <div class="modal-header bg-danger text-light">
                       <h4 class="modal-title">Dodanie wypis do depozytu</h4>
@@ -298,6 +309,7 @@
                       Wprowadź datę depozytu: <input type="date" id="dat_dep_wp" name="dat_dep_wp" />
                       <input type="hidden" id="idw" name="id" value="{{$wp->id}}" />
                       <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                      <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
                       <input type="hidden" name="nr_wyp" value="{{$wp->nr_wyp}}" />
                     </div>
                     <!-- Modal footer -->
@@ -314,9 +326,7 @@
                     $(document).on("click", ".open-AddBookDialog", function () {
                           var myBookId = $(this).data('id');
                           $(".modal-body #idw").val( myBookId );
-                          // As pointed out in comments,
-                          // it is unnecessary to have to manually call the modal.
-                          // $('#addBookDialog').modal('show');
+
                       });
                  </script>
 
@@ -324,7 +334,7 @@
              <div class="modal" id="depozytwyd">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <form  method="POST" action="{{ route('depozytwyd', 'id' ) }}" >
+                        <form  method="POST" action="{{ route('depozytwyd', ['id', 'nr_dok'=>$dk->nr_dok]) }}" >
                         <!-- Modal Header -->
                         <div class="modal-header bg-success text-light">
                           <h4 class="modal-title">Wydanie z depozytu</h4>
@@ -337,6 +347,7 @@
                           Wprowadź datę depozytu: <input type="date" id="dat_dep_wyd" name="dat_dep_wyd" />
                           <input type="hidden" id="idwyd" name="id" value="{{$wp->id}}" />
                           <input type="hidden" name="id_przed" value="{{$dk->id_przed}}" />
+                          <input type="hidden" name="id_dok_przed" value="{{$dk->id}}" />
                         <input type="hidden" name="nr_wyp" value="{{$wp->nr_wyp}}" />
                         </div>
                         <!-- Modal footer -->
@@ -387,8 +398,45 @@
                                         $('#edycjaWypis').modal('show');
                                     });
 
+                                    //method delete wypis
+                                    function deleteData(id) {
+                                        swal.fire({
+                                            title: "Usunąć wypis?",
+                                            text: "Upewnij się czy chcesz usunąć wypis!",
+                                            type: "warning",
+                                            showCancelButton: !0,
+                                            confirmButtonText: "Tak, usuń go!",
+                                            cancelButtonText: "Nie, anuluj!",
+                                            reverseButtons: !0
+                                        }).then(function (e) {
 
+                                            if (e.value === true) {
+                                                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: "{{url('/destroy')}}/" + id,
+                                                    data: {_token: CSRF_TOKEN},
+                                                    dataType: 'JSON',
+                                                    success: function (results) {
 
-                              </script>
+                                                        if (results.success === true) {
+                                                            swal.fire("Usunięto!", results.message, "success");
+                                                            location.reload();
+                                                        } else {
+                                                            swal.fire("Błąd!", results.message, "error");
+                                                            location.reload();
+                                                        }
+                                                    }
+                                                });
 
+                                            } else {
+                                                e.dismiss;
+                                            }
+
+                                        }, function (dismiss) {
+                                            return false;
+                                        })
+                                    }
+                                    </script>
+    </div>

@@ -109,29 +109,25 @@ class WykazPojController extends Controller
      */
     public function update(Request $request)
     {
-        Alert::success('Zapisano zmiany', '');
+
         $cars = \App\WykazPoj::findOrFail($request->idcar);
+
+
 
         $cars->update($request->all());
 
-        //return back();
+        $dok = DB::table('dok_przed')->where('id_przed','=', $request->id_przed)->where('id','=',$request->id_dok_przed)->get();
+        //  echo $request->id_dok_przed;
+        foreach($dok as $dkp)
+            {
+                $nr_dok = $dkp->nr_dok;
+            }
 
-       /* $validatedData = $request->validate([
-         'id_przed' => 'required',
-         'id_dok_przed' => 'required',
-         'rodzaj_poj' => 'required|max:255',
-         'marka' => 'required|max:255',
-         'nr_rej' => 'required|max:255',
-         'nr_vin' => 'required|max:255',
-         'dmc' => 'required|max:255',
-         'wlasnosc' => 'required|max:255',
-         'data_wpr' => 'required|max:11',
-         'status' => 'default|1',
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Zmiana danych pojazdu o numerze rejestracyjnym - '.$request->nr_rej, 'data_zm' => $request->data_wpr]);
 
-        ]);
-        \App\WykazPoj::whereId($id)->update($validatedData);
-        */
-        return redirect('/przedsiebiorca/cars/'.$request->id_przed)->with('success', 'Zapisano zmiany');
+
+        Alert::success('Zapisano zmiany', 'Dane pojazdu zostały zmienione');
+        return back();
     }
 
     /**
@@ -156,9 +152,8 @@ class WykazPojController extends Controller
       $id_przed = Input::get('id_przed');
 
       $cars->update(['status'=>'2','data_wyc'=>$data_wyc]);
-      echo '<pre />';
-      print_r($cars);
-      return redirect('/przedsiebiorca/cars/'.$id_przed);
+
+      return back();
     }
 
 

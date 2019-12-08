@@ -47,7 +47,10 @@ class BazaController extends Controller
 
         foreach($dok as $dk)
          {
-         $nr_dok = $dk->nr_dok;
+
+          $dk->nr_dok;
+
+          $dk->id;
          }
 
         if(count($dok) > 0){
@@ -67,7 +70,7 @@ class BazaController extends Controller
 
               $data_bz = date('Y-m-d');
 
-               $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $nr_dok, 'nazwa_zm' => 'Zgłoszenie nowej bazy eksploatacyjnej', 'data_zm' => $request->data_bz]);
+               $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $dk->id, 'nazwa_zm' => 'Zgłoszenie nowej bazy eksploatacyjnej', 'data_zm' => $request->data_bz]);
 
                Alert::success('Dodano nową bazę', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
                return redirect('/przedsiebiorca/zarzadzajacy/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
@@ -98,9 +101,23 @@ class BazaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
+        $rodzaje= DB::table('rodzaj_przed')->get();
+
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+
+        $dok = DB::table('dok_przed')->where('id_przed' , $id)->where('nr_dok' , $request->nr_dok)->get();
+
+        foreach($dok as $dk)
+        {
+            $dk->id;
+        }
+
+        $baza = DB::table('baza_eksp')->where('id_przed' , $id)->where('id_dok_przed' , $dk->id)->get();
+
+       return view('przedsiebiorca.baza.edit', compact('przedsiebiorca', 'rodzaje','baza'));
     }
 
     /**
@@ -113,7 +130,7 @@ class BazaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        Alert::success('Zapisano zmiany', 'Baza eksploatacyjna przedsiębiorcy');
+
 
         $validatedData = $request->validate([
          'id_przed' => 'required|max:1',
@@ -146,8 +163,9 @@ class BazaController extends Controller
 
         $baza = \App\Baza::whereId($id)->update($validatedData);
 
-
-        return redirect('/przedsiebiorca/')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
+        Alert::success('Zapisano zmiany', 'Baza eksploatacyjna przedsiębiorcy');
+        return back();
+        //return redirect('/przedsiebiorca/')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
     }
 
     /**

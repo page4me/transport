@@ -27,6 +27,8 @@ class DokPrzedController extends Controller
     {
         $przedsiebiorca = \App\Przedsiebiorca::latest()->get();
 
+        //echo "<pre />";
+        //print_r($przedsiebiorca);
         return view('przedsiebiorca.dokumenty.create', compact('przedsiebiorca'));
     }
 
@@ -38,7 +40,7 @@ class DokPrzedController extends Controller
      */
     public function store(Request $request)
     {
-        Alert::success('Dodano nowy dokument', '');
+
         $validatedData = $request->validate([
          'id_przed' => 'required',
          'nazwa' => 'required|max:255',
@@ -57,7 +59,7 @@ class DokPrzedController extends Controller
 
         $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Dodanie nowego dokumentu o numerze '.$request->nr_dok, 'data_zm' => $request->data_bz]);
 
-
+        Alert::success('Dodano nowy dokument', '');
         return redirect('/przedsiebiorca/baza/create')->with('success', 'Dokument dodany do bazy danych');
     }
 
@@ -70,6 +72,7 @@ class DokPrzedController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -78,9 +81,19 @@ class DokPrzedController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
+        $rodzaje= DB::table('rodzaj_przed')->get();
+
+         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+
+
+         $dok = DB::table('dok_przed')->where('id_przed' , $id)->where('nr_dok' , $request->nr_dok)->get();
+
+
+
+        return view('przedsiebiorca.dokumenty.edit', compact('przedsiebiorca', 'rodzaje','dok'));
     }
 
     /**
@@ -92,7 +105,7 @@ class DokPrzedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Alert::success('Zmniany Zapisano', 'Dane dokumentów przedsiębiorcy zmienione');
+
         $validatedData = $request->validate([
 
          'nazwa' => 'required|max:255',
@@ -107,9 +120,10 @@ class DokPrzedController extends Controller
         ]);
 
         \App\DokumentyPrzed::whereId($id)->update($validatedData);
+        Alert::success('Zmniany Zapisano', 'Dane dokumentów przedsiębiorcy zmienione');
 
-        return redirect('/przedsiebiorca')->with('success', 'Dane dokumentów przedsiębiorcy zmienione');
-
+        //return redirect('/przedsiebiorca/'.$id.'/dokument/'.$request->nr_dok)->with('success', 'Dane dokumentów przedsiębiorcy zmienione');
+        return back();
     }
 
     /**

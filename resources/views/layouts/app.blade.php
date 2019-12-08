@@ -19,8 +19,8 @@
         <script src="{{asset("/js/all.js")}}"></script>
         <link href="{{asset("/css/all.css")}}" rel="stylesheet">
         <script src="{{asset("/vendor/tinymce/tinymce.min.js")}}"></script>
-        <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
-        <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
+
+
      <style>
 
             body {
@@ -42,7 +42,7 @@
     </head>
     <body>
         <div>
-            @include('sweetalert::alert')
+                @include('sweetalert::alert')
 
             @yield('content')
 

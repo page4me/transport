@@ -14,6 +14,10 @@
   }
 
 </style>
+<div class="container-fluid">
+    <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
+    <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY</h3></div>
+<div class="p-2">
 <div class="container">
    <div style="padding-top: 20px;margin: 0 auto; text-align: center;">
     <i class="fa fa-truck-monster fa-3x"></i>&nbsp;&nbsp;
@@ -115,6 +119,8 @@
 
 
   </div>
+</div>
+</div>
 </div>
 </div>
 @endsection

@@ -54,6 +54,9 @@
 
                  @endforeach
               </select>
+              @php $dok = \App\DokumentyPrzed::get()->last()->id; @endphp
+
+              <input type="hidden" name="id_dok_przed" value="{{$dok}}" />
           </div>
            <div class="col-md-4 form-group">
               <label for="imie">Rodzaj:</label>
@@ -123,10 +126,7 @@
               <input type="text" class="form-control" name="uwagi"/>
           </div>
         </div>
-        @php $dok = \App\DokumentyPrzed::where('id_przed', $row->id)->latest()->get(); @endphp
-            @foreach($dok as $dk)
-            @endforeach
-          <input type="hidden" name="id_dok_przed" value="{{$dk->nr_dok}}" />
+
           <button type="submit" class="btn btn-success">Dodaj osobę zarządzającą</button>
       </form>
   </div>
