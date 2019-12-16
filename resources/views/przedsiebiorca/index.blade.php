@@ -2,6 +2,9 @@
 @extends('layouts.app')
 
 @section('content')
+@php $id_dok = \App\DokumentyPrzed::all(); @endphp
+@foreach($id_dok as $id)
+@endforeach
 <div class="container-fluid">
     <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
     <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY</h3></div>
@@ -92,9 +95,9 @@
         @foreach($rodzaje as $petent)
 
         <tr>
-            <td style="width:150px;" @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>
+            <td style="width:150px;" @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >
               <strong>
-                    @php $id_dok = \App\DokumentyPrzed::all(); @endphp
+
                     @foreach($id_dok as $id)
                        @if($id->id == $petent->id)
                          {{$petent->nr_dok}}
@@ -102,34 +105,59 @@
                     @endforeach
 
               </strong></td>
-            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>
+
+            <td @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >
                {{$petent->nazwa}} - {{$petent->rodz_dok}}
                 <br />
-                  @if($petent->powod != null && $petent->status =='2') <p class="text small"><strong>{{$petent->powod}} do {{$petent->dat_zaw}}</strong></p> @else @endif
-                  @if($petent->powod != null && $petent->status =='3') <p class="text small"><strong>{{$petent->powod}} </strong></p> @else @endif
-
+                    @foreach($id_dok as $id)
+                       @if($id->nr_dok == $petent->nr_dok && $id->status == '2')
+            <span class="text small p-0"><strong> {{$id->powod}} do </strong></span> <span class="badge badge-danger text-wrap">{{ \Carbon\Carbon::createFromDate($id->dat_zaw_do)->format('d-m-Y')}} r.</span>
+                       @endif
+                    @endforeach
             </td>
-            <td style="width:280px;" @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->nazwa_firmy}}</td>
-            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else @endif>{{$petent->imie}}</td>
-            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->nazwisko}}</td>
-            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->adres}}</td>
-            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->miejscowosc}}</td>
-            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->nip}}</td>
-            <td @if($petent->status == '2') class="bg-warning" @elseif($petent->status == '3') class="bg-danger text-light" @else  @endif>{{$petent->telefon}}</td>
+            <td style="width:280px;" @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >{{$petent->nazwa_firmy}}</td>
+            <td @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >{{$petent->imie}}</td>
+            <td @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >{{$petent->nazwisko}}</td>
+            <td @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >{{$petent->adres}}</td>
+            <td @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >{{$petent->miejscowosc}}</td>
+            <td @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >{{$petent->nip}}</td>
+            <td @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >{{$petent->telefon}}</td>
             <td style="width:40px;text-align:center;">
-              @if($petent->status != '2')
-                <form  method="get" action="{{ route('zawies', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok]) }}">
-                  @csrf
-                    <a  @if($petent->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->nr_dok}}" role="button" class="openZawies btn btn-warning btn-sm" href="#zawies" title="Zawieszenie"><i class="fa fa-history"></i></a>
-                </form>
-              @else
-              <a  @if($petent->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->nr_dok}}" role="button" class="openOdwies btn btn-info btn-sm" href="#odwies" title="Odwieś"><i class="fa fa-recycle"></i></a>
 
-              @endif
+                @foreach($id_dok as $id)
 
+                  @if($id->nr_dok == $petent->nr_dok)
+
+                  @if($id->status !="2")
+
+                  @if($petent->nazwa == 'Licencja Pośrednictwo' or $petent->nazwa == 'Zaświadczenie')
+                  <a  @if($id->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->nr_dok}}" role="button" class="openZawies btn btn-secondary btn-sm disabled" href="#zawies" title="Zawieszenie"><i class="fa fa-history"></i></a>
+
+                  @else
+
+                        <form  method="get" action="{{ route('zawies', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok]) }}">
+                        @csrf
+                            <a  @if($id->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->nr_dok}}" role="button" class="openZawies btn btn-warning btn-sm" href="#zawies" title="Zawieszenie"><i class="fa fa-history"></i></a>
+                        </form>
+                    @endif
+                  @else
+
+                    <a  @if($id->status == '3')  style = "display:none;" @endif data-toggle="modal" data-id="{{$petent->nr_dok}}" role="button" class="openOdwies btn btn-success btn-sm" href="#odwies" title="Odwieś"><i class="fa fa-recycle"></i></a>
+                  @endif
+                 @endif
+                @endforeach
 
             </td>
-            <td style="width:30px;"><a @if($petent->status == '3')  style = "display:none;" @else @endif data-toggle="modal" data-id="{{$petent->id}}" role="button" class="openRezygnuj btn btn-danger btn-sm" href="#rezygnacja" title="Rezygnacja"><i class="fa fa-user-slash fa-1x"></a></td>
+            <td style="width:30px;">
+                @foreach($id_dok as $id)
+
+                    @if($id->nr_dok == $petent->nr_dok)
+                        @if($id->status =='3')
+                        @else
+                        <a data-toggle="modal" data-id="{{$petent->id}}" role="button" class="openRezygnuj btn btn-danger btn-sm"  href="#rezygnacja" title="Rezygnacja"><i class="fa fa-user-slash fa-1x"></a></td>
+                        @endif
+                    @endif
+               @endforeach
             <td><a href="{{ route('show',['id'=>$petent->id, 'nr_dok'=>$petent->nr_dok])}}" class="btn btn-sm btn-primary" title="Podgląd"><i class="fa fa-eye"></a></td>
         </tr>
         @endforeach
@@ -155,7 +183,8 @@
             <div class="modal-body">
                 @csrf
                 @method('PATCH')
-              Wprowadź datę zawieszenia: <input class="form-control" type="date" id="dat_zaw" name="dat_zaw" /><br />
+              Data zawieszenia od: <input class="form-control" type="date" id="dat_zaw" name="dat_zaw" /><br />
+              Data zawieszenia do: <input class="form-control" type="date" id="dat_zaw_do" name="dat_zaw_do" /><br />
               Podaj powód zawieszenia: <textarea class="form-control" id="powod" name="powod"></textarea><br />
               <input type="hidden" id="idz" name="nr_dok" value="{{$petent->nr_dok}} " />
 
@@ -181,7 +210,7 @@
     <div class="modal fade" id="odwies">
         <div class="modal-dialog" style="margin:0 auto;top:25%;">
           <div class="modal-content">
-            <form  method="POST" action="{{ route('odwies', 'id' ) }}" >
+            <form  method="POST" action="{{ route('odwies', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok] ) }}" >
             <!-- Modal Header -->
 
             <div class="modal-header bg-warning">
@@ -192,8 +221,8 @@
             <div class="modal-body">
                 @csrf
                 @method('PATCH')
-              Wprowadź datę odwieszenia: <input class="form-control" type="date" id="dat_odw" name="dat_odw" /><br />
-              <input type="hidden" id="ido" name="id" value="@foreach($rodzaje as $petent) {{$petent->id}} @endforeach" />
+              Wprowadź datę odwieszenia: <input class="form-control" type="date"  name="dat_odw" /><br />
+              <input type="hidden" id="ido" name="nr_dok" value="@foreach($rodzaje as $petent) {{$petent->id}} @endforeach" />
 
 
             </div>
@@ -218,7 +247,7 @@
         <div class="modal fade" id="rezygnacja">
             <div class="modal-dialog" style="margin:0 auto;top:25%;">
             <div class="modal-content">
-                <form  method="POST" action="{{ route('rezygnacja', 'id' ) }}" >
+                <form  method="POST" action="{{ route('rezygnacja', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok] ) }}" >
                 <!-- Modal Header -->
 
                 <div class="modal-header bg-danger text-light">

@@ -7,11 +7,14 @@
         @foreach($dok as $dk)
         @endforeach
 
-        @php $id_dok = \App\DokumentyPrzed::all()->where('nr_dok','=',$rodz->nr_dok); @endphp
 
-        @foreach($id_dok as $id)
-         @php $id_d = $id->id @endphp
-        @endforeach
+            @php
+
+               $id_dok = \App\DokumentyPrzed::all()->where('nr_dok','=',$rodz->nr_dok); @endphp
+
+                @foreach($id_dok as $id)
+                @php $id_d = $id->id @endphp
+                @endforeach
 
         <div class="container-fluid">
                 <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
@@ -34,14 +37,14 @@
 <div class="card uper">
 
 
-  <div @if($przedsiebiorca->status =="0") class="card-header bg-dark text-light" @elseif($przedsiebiorca->status =="2") class="card-header bg-warning"  @elseif($przedsiebiorca->status =="3") class="card-header bg-danger text-light" @endif>
+  <div @if($id->status =="0") class="card-header bg-dark text-light" @elseif($id->status =="2") class="card-header bg-warning"  @elseif($id->status =="3") class="card-header bg-danger text-light" @endif>
 
    Dane szczegółowe przedsiębiorcy -
-     <span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #00ddff;font-size:16px;"  @endif > {{$rodz->nazwa}} Nr
+     <span @if($id->status =="2") style="color: red;font-size:16px;" @else style="color: #00ddff;font-size:16px;"  @endif >{{$rodz->nazwa}} Nr
 
          @if(!empty($rodz->nr_dok)) {{ $rodz->nr_dok}} @else brak @endif
 
-     </span><span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #fff;font-size:16px;" @endif>wydano dn. {{ $rodz->data_wyd}}   r.</span>
+     </span><span @if($id->status =="2") style="color: #000000;font-size:16px;" @else style="color: #fff;font-size:16px;" @endif>wydano dn. {{ $rodz->data_wyd}}   r.</span>
      <span class="float-right"><a href="#" id="clickme" role="button" class="btn btn-success btn-sm">Edytuj dane</a></span>
      <script>
           $( "nav" ).hide( "slow", function() {
@@ -476,4 +479,5 @@
 </div>
 </div>
 </div>
+
 @endsection

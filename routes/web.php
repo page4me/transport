@@ -40,8 +40,8 @@ Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/zarzadzajacy/printPDF/'
 
 Route::get('/przedsiebiorca/zdarzenia', 'PrzedsiebiorcaController@zdarzenia');
 Route::patch('/przedsiebiorca/{id}/dokument/{nr_dok}/zawies/', 'PrzedsiebiorcaController@zawies')->name('zawies');
-Route::patch('/przedsiebiorca/odwies/{id}', 'PrzedsiebiorcaController@odwies')->name('odwies');
-Route::patch('/przedsiebiorca/rezygnacja/{id}', 'PrzedsiebiorcaController@rezygnacja')->name('rezygnacja');
+Route::patch('/przedsiebiorca/{id}/dokument/{nr_dok}/odwies/', 'PrzedsiebiorcaController@odwies')->name('odwies');
+Route::patch('/przedsiebiorca/{id}/dokument/{nr_dok}/rezygnacja/', 'PrzedsiebiorcaController@rezygnacja')->name('rezygnacja');
 
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}', 'PrzedsiebiorcaController@show')->name('show');
 

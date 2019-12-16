@@ -99,7 +99,6 @@ class PrzedsiebiorcaController extends Controller
         ->get();
 
 
-
         $osobowosc = DB::table('rodzaj_przed')->where('id', $request->route('id'))->get();
 
 
@@ -220,64 +219,51 @@ class PrzedsiebiorcaController extends Controller
 
     public function zawies(Request $request)
     {
-
-
-
         $zawies = \App\Przedsiebiorca::findOrFail($request->id);
-
 
         $input = Input::all();
         $id = Input::get('idz');
 
-
-        $zawies->update(['status'=>'2']);
-
         $zawies_lic = DB::table('dok_przed')->where('nr_dok', $request->nr_dok)->get();
         foreach($zawies_lic as $li){
             $li->id;
+            $li->id_przed;
         }
-
 
         $powod = Input::get('powod');
         $dat_zaw = Input::get('dat_zaw');
-
+        $dat_zaw_do = Input::get('dat_zaw_do');
         $dat_zaw_new = Carbon::createFromDate($dat_zaw)->addYear()->format('Y-m-d');
-
         $lic = \App\DokumentyPrzed::findOrFail($li->id);
-
-        $lic->update(['status'=>'2','dat_zaw'=> $dat_zaw_new,'powod'=>$powod]);
+        $lic->update(['status'=>'2','dat_zaw'=> $dat_zaw_new,'dat_zaw_do'=> $dat_zaw_do,'powod'=>$powod]);
 
         $data_zm = date('Y-m-d');
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Zawieszenie dokumentu przedsiębiorcy','data_zm' => $dat_zaw]);
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $li->id_przed, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Zawieszenie dokumentu przedsiębiorcy od'.$dat_zaw.' do '.$dat_zaw_do,'data_zm' => $dat_zaw]);
 
         Alert::warning('Zawieszono licencję/zezwolenie przedsiębiorcy', '');
-        return redirect('/przedsiebiorca', compact('lic' ));
+        return redirect('/przedsiebiorca')->with('lic');
     }
 
     public function odwies(Request $request)
     {
-        Alert::warning('Odwieszono licencję/zezwolenie przedsiębiorcy', '');
-        $odwies = \App\Przedsiebiorca::findOrFail($request->id);
-
 
         $input = Input::all();
         $id = Input::get('ido');
-        $dat_odw = Input::get('dat_odw');
-
-        $odwies->update(['status'=>'0']);
-
-        $odwies_lic = DB::table('dok_przed')->where('id_przed' , $id)->get();
-
-        $lic = \App\DokumentyPrzed::findOrFail($request->id);
-        $lic->update(['status'=>'0','dat_odw'=> $dat_odw,'powod'=>null]);
+        $odwies_lic = DB::table('dok_przed')->where('nr_dok', $request->nr_dok)->get();
 
         foreach($odwies_lic as $lic){
-            $lic->id;
+          $lic->id;
         }
+        $dat_odw = Input::get('dat_odw');
 
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id, 'id_dok_przed' => $lic->id, 'nazwa_zm' => 'Przywrócenie dokumentu przedsiębiorcy po zawieszeniu ','data_zm' => $dat_odw]);
+        $dat_odw_new = Carbon::createFromDate($dat_odw)->format('Y-m-d');
+        $lico = \App\DokumentyPrzed::findOrFail($lic->id);
+        $lico->update(['dat_odw'=> $dat_odw, 'status'=>'0', 'dat_zaw'=>null,'powod'=>null]);
 
 
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $lic->id, 'id_dok_przed' => $lic->id, 'nazwa_zm' => 'Przywrócenie dokumentu przedsiębiorcy po zawieszeniu ','data_zm' => $dat_odw]);
+
+        Alert::warning('Odwieszono licencję/zezwolenie przedsiębiorcy', '');
         return redirect('/przedsiebiorca');
     }
 
@@ -453,15 +439,12 @@ class PrzedsiebiorcaController extends Controller
 
      public function rezygnacja(Request $request)
      {
-        Alert::error('Rezygnacja z licencji/zezwolenia przedsiębiorcy', '');
+
         $rezygnuj = \App\Przedsiebiorca::findOrFail($request->id);
 
 
         $input = Input::all();
         $id = Input::get('idr');
-
-
-        $rezygnuj->update(['status'=>'3']);
 
         $rezygnuj_lic = DB::table('dok_przed')->where('id_przed' , $request->id)->get();
         foreach($rezygnuj_lic as $li){
@@ -474,9 +457,9 @@ class PrzedsiebiorcaController extends Controller
 
 
         $data_zm = date('Y-m-d');
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Rezygnacja - Wycofanie z licencji/zezwolenia decyzja z dn. '.$dat_rez,'data_zm' => $dat_rez]);
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $li->id_przed, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Rezygnacja - Wycofanie z licencji/zezwolenia decyzja z dn. '.$dat_rez,'data_zm' => $data_zm]);
 
-
+        Alert::error('Rezygnacja z licencji/zezwolenia przedsiębiorcy', '');
         return redirect('/przedsiebiorca');
     }
 
