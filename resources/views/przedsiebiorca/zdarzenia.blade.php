@@ -19,13 +19,11 @@
                 <div class="col-md-4 text-left">
                     <div class="bg-warning p-3 text-center"><strong>Zdarzenia - zabezpieczenie finansowe</strong> </div>
                         <p style="font-size:1px;">{{$i=1}}</p>
-                        @foreach($dok as $dk)
-                        @endforeach
+
                         @foreach($zdolnosc as $zdl)
                           @if($zdl->data_do < date('Y-m-d'))
+                          @php $nr_dok = \App\DokumentyPrzed::find($zdl->id_dok_przed)->nr_dok; @endphp
 
-                                 @php $nr_dok = \App\DokumentyPrzed::find($zdl->id_przed)->nr_dok; @endphp
-                                 @php echo $id_p = \App\DokumentyPrzed::where('nr_dok',$nr_dok)->id; @endphp
 
                                     <div class="alert alert-danger">
                                         <strong>{{$i++}}</strong> - Nr dok: <strong>{{$nr_dok}}</strong> - {{$ilosc_zdlolnosci_po_terminie= \App\Przedsiebiorca::find($zdl->id_przed)->nazwa_firmy}}

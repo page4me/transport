@@ -49,6 +49,8 @@ Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/edit/', 'PrzedsiebiorcaContro
 
 Route::post('destroy/{id}', 'WypisyController@destroy');
 
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/kontrole/edit/', 'kontrole\Kontrole@edit');
+
 Route::resource('kontrole', 'kontrole\Kontrole');
 Route::resource('raporty', 'raporty\Raporty');
 

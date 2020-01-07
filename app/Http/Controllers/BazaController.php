@@ -143,6 +143,7 @@ class BazaController extends Controller
          'kod_p' => 'required|max:6',
          'wlasnosc' => 'string|max:255|nullable',
          'umowa' => 'string|max:255|nullable',
+         'dat_umowy' => 'string|max:255|nullable',
          'uwagi' => 'string|max:255|nullable'
         ]);
 

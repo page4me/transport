@@ -139,6 +139,7 @@
       selector: '#pp',
       language: 'pl'
     });
+
     </script>
 <div class="text-center"><a href="/przedsiebiorca/{{$id->id_przed}}/dokument/{{$id->nr_dok}}" role="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Szczegóły przedsiębiorcy</a></div>
 </div>

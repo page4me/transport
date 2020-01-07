@@ -4,6 +4,8 @@ namespace App\Http\Controllers\kontrole;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
+use Alert;
 
 class Kontrole extends Controller
 {
@@ -23,9 +25,12 @@ class Kontrole extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $dok = DB::table('dok_przed')->where('id_przed' , $request->id_przed)->where('nr_dok' , $request->nr_dok)->get();
+
+        return view('przedsiebiorca.kontrole.create', compact('dok'));
     }
 
     /**
@@ -37,6 +42,27 @@ class Kontrole extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'id_przed' => 'required|max:1',
+            'id_dok_przed' => 'required|nullable',
+            'nazwa' => 'string|max:255|nullable',
+            'nr_sprawy' => 'string|max:255|nullable',
+            'dat_zawiad' => 'required',
+            'dat_roz' => 'required',
+            'dat_zak' => 'required',
+            'nr_upo' => 'required|max:255',
+            'kto' => 'required|max:255',
+            'wynik' => 'string|max:255|nullable',
+            'zalecenia' => 'string|max:1000|nullable',
+            'uwagi' => 'string|max:255|nullable'
+           ]);
+           $kontrole = \App\Kontrole::create($validatedData);
+
+           $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Zaplanowano nową kontrolę przedsiębiorcy od '.$request->dat_roz.' do '.$request->dat_zak, 'data_zm' => $request->dat_zawiad]);
+
+        Alert::success('Dodano nową kontrolę', 'Zaplanowano kontrolę przedsiębiorcy');
+        return view('/przedsiebiorca/'.$request->id_przed.'/dokumenty/'.$request->nr_dok.'/show');
+
     }
 
     /**
@@ -56,9 +82,10 @@ class Kontrole extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
+        return view('przedsiebiorca.kontrole.edit');
     }
 
     /**

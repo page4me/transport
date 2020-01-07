@@ -86,7 +86,7 @@
                    </div>
                    <div class="col-md-4 form-group">
                        <label for="tel">Data umowy:</label>
-                       <input type="text" class="form-control" name="dat_umowy" value="{{$bz->dat_umowy}}" />
+                       <input type="date" class="form-control" name="dat_umowy" value="{{$bz->dat_umowy}}" />
                    </div>
                  </div>
                  <div class="row">
