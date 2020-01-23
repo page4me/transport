@@ -73,7 +73,7 @@
  <div class="table-responsive">
 
     <div class="col-md-12">
-       @if(empty($wyniki) or $wyniki ==0 )<div class='text-danger text-center col-md-12'> <strong>@if(!empty($brak)) {{$brak}} @else @endif</strong></div>  @else <div class="bg bg-light text-center p-2 text-success">Znalezionych wyników: <strong>{{ $wyniki }}</strong></div>  @endif
+       @if(empty($wyniki) or $wyniki ==0 )<div class='text-danger text-center col-md-12 p-2'> <strong>@if(!empty($brak)) {{$brak}} @else  @endif</strong></div>  @else <div class="bg text-center p-2 text-success">Znalezionych wyników: <strong>{{ $wyniki }}</strong></div>  @endif
     </div>
 
   <table class="table table-striped table-sm">
@@ -172,6 +172,7 @@
      <div class="modal fade" id="zawies">
         <div class="modal-dialog" style="margin:0 auto;top:25%;">
           <div class="modal-content">
+            @foreach($rodzaje as $petent)
             <form  method="POST" action="{{ route('zawies', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok] ) }}" >
             <!-- Modal Header -->
 
@@ -196,6 +197,7 @@
 
             </div>
            </form>
+           @endforeach
           </div>
         </div>
       </div>
@@ -210,6 +212,7 @@
     <div class="modal fade" id="odwies">
         <div class="modal-dialog" style="margin:0 auto;top:25%;">
           <div class="modal-content">
+            @foreach($rodzaje as $petent)
             <form  method="POST" action="{{ route('odwies', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok] ) }}" >
             <!-- Modal Header -->
 
@@ -233,6 +236,7 @@
 
             </div>
            </form>
+           @endforeach
           </div>
         </div>
       </div>
@@ -247,6 +251,7 @@
         <div class="modal fade" id="rezygnacja">
             <div class="modal-dialog" style="margin:0 auto;top:25%;">
             <div class="modal-content">
+                @foreach($rodzaje as $petent)
                 <form  method="POST" action="{{ route('rezygnacja', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok] ) }}" >
                 <!-- Modal Header -->
 
@@ -271,6 +276,7 @@
 
                 </div>
             </form>
+            @endforeach
             </div>
             </div>
         </div>

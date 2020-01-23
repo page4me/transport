@@ -61,7 +61,7 @@ class Kontrole extends Controller
            $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Zaplanowano nową kontrolę przedsiębiorcy od '.$request->dat_roz.' do '.$request->dat_zak, 'data_zm' => $request->dat_zawiad]);
 
         Alert::success('Dodano nową kontrolę', 'Zaplanowano kontrolę przedsiębiorcy');
-        return view('/przedsiebiorca/'.$request->id_przed.'/dokumenty/'.$request->nr_dok.'/show');
+        return back();
 
     }
 
@@ -71,9 +71,26 @@ class Kontrole extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
+        $dok = DB::table('dok_przed')->where('nr_dok' , $request->nr_dok)->get();
+        $przedsiebiorca = DB::table('przedsiebiorca')->where('id' , $id)->get();
+
+        //print_r($przedsiebiorca);
+        //exit;
+        foreach($dok as $dk){
+            $id_dok = $dk->id;
+        }
+
+        $kontrole = DB::table('kontrole')->where('id_dok_przed' , $id_dok)->get();
+
+        //echo "<pre />";
+        //print_r($kontrole);
+
+        return view('/przedsiebiorca.kontrole.show', compact('dok', 'kontrole','przedsiebiorca'));
+
+
     }
 
     /**
@@ -109,5 +126,18 @@ class Kontrole extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function create_harmo()
+    {
+        $przedsiebiorca = \App\Przedsiebiorca::all();
+
+        foreach($przedsiebiorca as $pr)
+        {
+          $id = $pr->id;
+        }
+        $dok = DB::table('dok_przed')->where('id_przed' ,$id);
+
+        return view('przedsiebiorca.kontrole.new_harmo', compact('przedsiebiorca','dok'));
     }
 }

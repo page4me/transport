@@ -111,6 +111,8 @@ class PrzedsiebiorcaController extends Controller
             $id = $nr->id;
             $nr_dok = $nr->nr_dok;
         }
+        $kontrole = DB::table('kontrole')->where('id_przed' , $request->route('id'))->where('id_dok_przed', '=', $id)->get();
+
 
         $baza = DB::table('baza_eksp')->where('id_przed', $request->route('id'))->where('id_dok_przed', '=', $id)->get();
 
@@ -122,7 +124,7 @@ class PrzedsiebiorcaController extends Controller
         //exit;
         $cars = DB::table('wykaz_poj')->where('id', $request->route('id'))->get();
 
-        return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert','baza','zab','cars'));
+        return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert','baza','zab','cars','kontrole'));
     }
 
      /**
@@ -241,7 +243,7 @@ class PrzedsiebiorcaController extends Controller
         $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $li->id_przed, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Zawieszenie dokumentu przedsiębiorcy od'.$dat_zaw.' do '.$dat_zaw_do,'data_zm' => $dat_zaw]);
 
         Alert::warning('Zawieszono licencję/zezwolenie przedsiębiorcy', '');
-        return redirect('/przedsiebiorca')->with('lic');
+        return redirect('/przedsiebiorca', compact('zawies_lic'))->with('lic');
     }
 
     public function odwies(Request $request)
@@ -415,12 +417,16 @@ class PrzedsiebiorcaController extends Controller
             $wyniki = '0';
             $brak = "";
 
+
         }elseif(count($rodzaje) == 0){
-            $wyniki = 0;
+            $wyniki ='0';
             $brak = "Nie znaleziono wyrażenia: '".$search."' ";
+
+            return view('przedsiebiorca.index', ['rodzaje' => $rodzaje, 'wyniki' =>$wyniki, 'brak' =>$brak]);
         }elseif(count($rodzaje) > 0) {
             $wyniki = count($rodzaje);
             $brak = "";
+            return view('przedsiebiorca.index', ['rodzaje' => $rodzaje, 'wyniki' =>$wyniki, 'brak' =>$brak]);
         }
         return view('przedsiebiorca.index', ['rodzaje' => $rodzaje, 'wyniki' =>$wyniki, 'brak' =>$brak]);
 

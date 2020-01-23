@@ -458,23 +458,26 @@
            <div class="col-md-12 bg-dark" style="color:#fff;font-size: 15px;">Kontrole</strong></div>
     </div>
     <div class="card-body">
+        @foreach($kontrole as $kt)
+        @endforeach
            <div class="row">
              <div class="col-md-3">
-               <strong>Ostatnia kontrola: </strong><br /><span class="badge badge-secondary" style="font-size:14px;"> {{$p_kont = \Carbon\Carbon::createFromFormat('Y-m-d',$dk->data_wyd)->addYear(5) }} r. </span>
+               <strong>Ostatnia kontrola: </strong><br /><span class="badge badge-secondary" style="font-size:14px;"> @if(empty($kt->dat_ost_kont)) brak @else {{ $kt->dat_ost_kont }} r. @endif </span>
              </div>
               <div class="col-md-3">
-               <strong>Następna kontrola: </strong><br /><span class="badge badge-warning" style="font-size:14px;"> {{ $n_kont = $p_kont->addYear(5)}} r.</span>
+              <strong>Następna kontrola: </strong><br /><span class="badge badge-warning" style="font-size:14px;">@if(empty($kt->dat_ost_kont)) brak @else @php $p_kont = \Carbon\Carbon::createFromFormat('Y-m-d',$kt->dat_ost_kont)->addYear(5) @endphp {{$p_kont->format('Y-m-d')}} r. @endif</span>
              </div>
               <div class="col-md-3">
-               <strong>Wyniki kontroli: </strong><br /><span class="badge badge-success" style="font-size:14px;"> Spełnia wymagania </span>
+               <strong>Wyniki kontroli: </strong><br />@if(empty($kt->wynik))<span class="badge badge-secondary" style="font-size:14px;"> brak</span> @else <span class="badge badge-success" style="font-size:14px;"> {{$kt->wynik}} </span> @endif
              </div>
               <div class="col-md-3">
-               <strong>Zalecenia pokontrolne: </strong><br /><span class="badge badge-success" style="font-size:14px;"> Nie </span>
+               <strong>Zalecenia pokontrolne: </strong><br />@if(empty($kt->zalecenia))<span class="badge badge-secondary" style="font-size:14px;"> brak</span> @else <span class="badge badge-success" style="font-size:14px;"> Nie @endif</span>
              </div>
-             <div class="col-md-12 text-center"><br /><a href="/kontrole/" role="button" class="btn btn-primary btn-sm">Podgląd kontroli</a>
+             <div class="col-md-12 text-center"><br /><a href="{{route('kontrole.show', ['id_przed'=>$przedsiebiorca->id, 'nr_dok'=>$rodz->nr_dok])}}" role="button" class="btn btn-primary btn-sm">Podgląd kontroli</a>
                 <a href="{{route('kontrole.create', ['id_przed'=>$przedsiebiorca->id, 'nr_dok'=>$rodz->nr_dok])}}" role="button" class="btn btn-success btn-sm">Dodaj kontrolę</a>
             </div>
            </div>
+
     </div>
 
     </div>

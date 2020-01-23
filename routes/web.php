@@ -54,6 +54,8 @@ Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/kontrole/edit/', 'kontrole\Ko
 Route::resource('kontrole', 'kontrole\Kontrole');
 Route::resource('raporty', 'raporty\Raporty');
 
+Route::get('/przedsiebiorca/kontrole/new_harmo', 'kontrole\Kontrole@create_harmo')->name('create_harmo');
+
 Route::resource('przedsiebiorca/zmiany', 'ZmianyPrzedController');
 
 Route::resource('przedsiebiorca/baza', 'BazaController');
