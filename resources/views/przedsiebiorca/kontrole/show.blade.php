@@ -22,7 +22,6 @@
               <th>Nr sprawy</th>
               <th>Upoważnienie</th>
               <th>Kto</th>
-              <th>Zalecenia</th>
               <th>Wynik</th>
               <th>Data ost. kontroli</th>
               <th colspan="4">Akcja</th>
@@ -41,14 +40,13 @@
                    <td>{{$kt->nr_sprawy}}</td>
                    <td>{{$kt->nr_upo}}</td>
                    <td>{{$kt->kto}}</td>
-                   <td>@if(!empty($kt->zalecenia)) {{$kt->zalecenia}} @else brak zaleceń @endif</td>
                    <td>{{$kt->wynik}}</td>
                    <td>{{$kt->dat_ost_kont}}</td>
 
                    <td> <a href="{{route('kontrole.edit', ['id'=>$kt->id, 'id_dok_przed'=>$kt->id_dok_przed])}}" title="Edycja" class="btn btn-success btn-sm" role="button"><i class="fa fa-edit"></i></a>
                    <a href="{{ route('details',['id'=>$kt->id, 'id_przed'=>$kt->id_przed, 'nr_dok'=>$dk->nr_dok])}}" title="Szczegóły" class="btn btn-primary btn-sm" role="button"><i class="fa fa-eye"></i></a>
-                    <a href="#" class="btn btn-warning btn-sm" role="button" title="Zawiadomienie"><i class="fa fa-bars"></i></a>
-                    <a href="#" class="btn btn-sm btn-info" title="Upoważnienie" role="button"><i class="fa fa-user"></i></a>
+                    <a href="{{ route('new_zaw',['id'=>$kt->id, 'id_przed'=>$kt->id_przed, 'nr_dok'=>$dk->nr_dok])}}" class="btn btn-warning btn-sm" role="button" title="Zawiadomienie"><i class="fa fa-bars"></i></a>
+                    <a href="{{ route('new_upo',['id'=>$kt->id, 'id_przed'=>$kt->id_przed, 'nr_dok'=>$dk->nr_dok])}}" class="btn btn-sm btn-info" title="Upoważnienie" role="button"><i class="fa fa-user"></i></a>
                     <a href="#" class="btn btn-danger btn-sm" role="button">protokół</a>
                    </td>
 

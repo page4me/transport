@@ -441,7 +441,7 @@
                </span>
              </div>
               <div class="col-md-3">
-               <strong>Ważnść do dnia: </strong><br /><span class="badge badge-success" style="font-size:14px;"> {{$rodz->data_waz}} r.</span>
+               <strong>Ważnść do dnia: </strong><br />@if($rodz->data_waz <= date('Y-m-d'))<span class="badge badge-danger" style="font-size:14px;"> {{$rodz->data_waz}} r.</span> @else <span class="badge badge-success" style="font-size:14px;"> {{$rodz->data_waz}} r.</span>@endif
              </div>
               <div class="col-md-3">
                <strong>Numer sprawy: </strong><br />  {{$rodz->nr_sprawy}}

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Alert;
+use \Carbon\Carbon;
 
 class Kontrole extends Controller
 {
@@ -157,13 +158,14 @@ class Kontrole extends Controller
     {
         $przedsiebiorca = \App\Przedsiebiorca::all();
 
-        foreach($przedsiebiorca as $pr)
-        {
-          $id = $pr->id;
-        }
-        $dok = DB::table('dok_przed')->where('id_przed' ,$id);
+        $dok= DB::table('dok_przed')
+             ->join('przedsiebiorca', 'przedsiebiorca.id', '=' ,'dok_przed.id_przed')
+             ->select('dok_przed.*','przedsiebiorca.*')->get();
 
-        return view('przedsiebiorca.kontrole.new_harmo', compact('przedsiebiorca','dok'));
+        $newyear = date('Y')+1;
+        //print_r($dok);
+
+        return view('przedsiebiorca.kontrole.new_harmo', compact('przedsiebiorca','dok','newyear'));
     }
 
     public function details(Request $request, $id)
@@ -179,5 +181,31 @@ class Kontrole extends Controller
 
 
         return view('przedsiebiorca.kontrole.details', compact('dok','kontrole','przedsiebiorca'));
+    }
+
+    public function new_zaw(Request $request, $id)
+    {
+        $dok = DB::table('dok_przed')->where('nr_dok' , $request->nr_dok)->get();
+        $przedsiebiorca = DB::table('przedsiebiorca')->where('id' , $request->id_przed)->get();
+
+        foreach($dok as $dk){
+            $id_dok = $dk->id;
+        }
+
+        $kontrole = DB::table('kontrole')->where('id' , $request->id)->get();
+        return view('przedsiebiorca.kontrole.nowe_zaw', compact('dok','kontrole','przedsiebiorca'));
+    }
+
+    public function new_upo(Request $request, $id)
+    {
+        $dok = DB::table('dok_przed')->where('nr_dok' , $request->nr_dok)->get();
+        $przedsiebiorca = DB::table('przedsiebiorca')->where('id' , $request->id_przed)->get();
+
+        foreach($dok as $dk){
+            $id_dok = $dk->id;
+        }
+
+        $kontrole = DB::table('kontrole')->where('id' , $request->id)->get();
+        return view('przedsiebiorca.kontrole.nowe_upo', compact('dok','kontrole','przedsiebiorca'));
     }
 }

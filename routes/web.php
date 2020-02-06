@@ -56,6 +56,8 @@ Route::resource('raporty', 'raporty\Raporty');
 
 Route::get('/przedsiebiorca/kontrole/new_harmo', 'kontrole\Kontrole@create_harmo')->name('create_harmo');
 Route::get('/przedsiebiorca/kontrole/{id}/{nr_dok}/', 'kontrole\Kontrole@details')->name('details');
+Route::get('/przedsiebiorca/kontrole/new_zaw/{id}/{nr_dok}/', 'kontrole\Kontrole@new_zaw')->name('new_zaw');
+Route::get('/przedsiebiorca/kontrole/new_upo/{id}/{nr_dok}/', 'kontrole\Kontrole@new_upo')->name('new_upo');
 
 Route::resource('przedsiebiorca/zmiany', 'ZmianyPrzedController');
 
