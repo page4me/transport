@@ -16,7 +16,7 @@
     <div class="p-3"><a href="/" role="button" class="btn btn-primary"><i class="fa fa-home"></i>Home</a></div>
         <div class="row">
 
-                <div class="col-md-4 text-left">
+                <div class="col-md-3 text-left">
                     <div class="bg-warning p-3 text-center"><strong>Zdarzenia - zabezpieczenie finansowe</strong> </div>
                         <p style="font-size:1px;">{{$i=1}}</p>
 
@@ -34,7 +34,7 @@
                           @endif
                         @endforeach
                                 </div>
-                <div class="col-md-4 text-left">
+                <div class="col-md-3 text-left">
                         <div class="bg-warning p-3 text-center"><strong>Zdarzenia - osoba zarządzająca</strong></div>
                         <p style="font-size:1px;">{{$i=1}}</p>
                         @foreach($certyfikat as $oz)
@@ -49,7 +49,7 @@
                           @endif
                         @endforeach
                             </div>
-                <div class="col-md-4 text-left">
+                <div class="col-md-3 text-left">
                         <div class="bg-warning p-3 text-center"><strong>Zdarzenia - baza eksploatacyjna</strong></div>
                         <p style="font-size:1px;">{{$i=1}}</p>
                         @foreach($baza as $bz)
@@ -64,6 +64,22 @@
                             @endif
                         @endforeach
                             </div>
+                <div class="col-md-3 text-left">
+                                <div class="bg-warning p-3 text-center"><strong>Zdarzenia - wygaśnięcie licencji</strong></div>
+                                <p style="font-size:1px;">{{$i=1}}</p>
+
+                                @foreach($dok as $dk)
+                                    @if($dk->data_waz != null && $dk->data_waz < date('Y-m-d'))
+
+                                    <div class="alert alert-danger">
+                                        <strong>{{$i++}}</strong> - Nr dok: <strong>{{$dk->nr_dok}}</strong> - {{$ilosc_lic_po_terminie= \App\Przedsiebiorca::find($dk->id_przed)->nazwa_firmy}}
+                                        - <strong> {{$dk->data_waz}} po terminie {{$dni = (strtotime($dk->data_waz) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni</strong>
+                                        <a role="button" class="btn btn-danger btn-sm text-light" href="{{ route('przedsiebiorca.show',$dk->id_przed.'/dokument/'.$nr_dok)}}">Podgląd</a>
+                                        </div>
+
+                                    @endif
+                                @endforeach
+                                    </div>
         </div>
 </div>
 

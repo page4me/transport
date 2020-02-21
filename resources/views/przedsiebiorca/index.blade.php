@@ -36,7 +36,7 @@
             @endif
 
             @if(\App\DokumentyPrzed::where('data_waz','<',date('Y-m-d'))->count() != 0)
-            <a href="przedsiebiorca/licencje/stare" role="button" class="btn btn-danger btn-sm" style="margin-bottom:5px;">
+            <a href="przedsiebiorca/dokumenty/stare" role="button" class="btn btn-danger btn-sm" style="margin-bottom:5px;">
                 Licencja wygasła&nbsp;<span class="badge badge-light">{{$count = \App\DokumentyPrzed::where('data_waz','<',date('Y-m-d'))->count()}}</span>
                 <span class="sr-only">unread messages</span>
             </a>

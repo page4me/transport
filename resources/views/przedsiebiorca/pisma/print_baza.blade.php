@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wydruk pisma - umowa z osobą zarządzającą</title>
+  <title>Wydruk pisma - umowa o bazę eksploatacyjną</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -54,8 +54,7 @@
                 <br />
             <ul style="list-style: none;">
             <li>
-            <p style="text-align: justify;padding-left:40px;padding-right:40px;"><strong>1)</strong> przynajmniej jedna z osób zarządzających przedsiębiorstwem lub osoba zarządzająca w przedsiębiorstwie
-                transportem drogowym legitymuje się certyfikatem kompetencji zawodowych;</p>
+            <p style="text-align: justify;padding-left:40px;padding-right:40px;"><strong>1)</strong> oświadczenie przedsiębiorcy, że dysponuje bazą eksploatacyjną wraz ze wskazaniem adresu bazy, jeżeli adres ten jest inny niż adres wskazany zgodnie z ust. 2 pkt 1;</p>
             </li>
 
         </ul>

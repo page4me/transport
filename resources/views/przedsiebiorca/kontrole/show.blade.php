@@ -5,13 +5,14 @@
 <div class="container-fluid">
         <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
         <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY - <span class="text-warning">KONTROLE</span></h3></div>
-    <div class="p-2">
-        @foreach($przedsiebiorca as $row)
-            <div class="row">Przedsiębiorca:&nbsp;<strong>{{$row->nazwa_firmy}}</strong></div>
-        @endforeach
 
-    </div>
-    <div class="row" style="margin:0 auto;">
+    <div class="row" style="margin:0 auto;text-align:center;width:70%;">
+        <div class="p-2">
+            @foreach($przedsiebiorca as $row)
+                <div class="row">Przedsiębiorca:&nbsp;<strong>{{$row->nazwa_firmy}}</strong></div>
+            @endforeach
+
+        </div>
     <table class="table table-striped table-sm table-bordered text-center" >
         <thead class="table-primary" style="font-weight:bold;">
             <tr>

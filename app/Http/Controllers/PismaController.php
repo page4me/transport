@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DB;
 use PDF;
+use PhpOffice;
 
 class PismaController extends Controller
 {
@@ -128,7 +129,9 @@ class PismaController extends Controller
         //$pismo->nazwa = 'Zdolność finansowa';
         $pismo->nr_sprawy = $request->get('nr_sprawy');
         $pismo->data_p = $request->get('data_p');
-        $dok = DB::table('dok_przed')->where('id_przed' , $request->id)->where('nr_dok', $request->nr_dok)->get();
+
+        $dok = DB::table('dok_przed')->where('nr_dok', $request->nr_dok)->get();
+
 
 
         return view('przedsiebiorca.pisma.print_zdol_finans', compact('przedsiebiorca','pisma','dok'));
@@ -155,17 +158,24 @@ class PismaController extends Controller
        return view('przedsiebiorca.pisma.podglad', compact('przedsiebiorca','pisma','dok'));
      }
 
-     public function pismo_zarzadzajacy($id)
+     public function pismo_zarzadzajacy(Request $request, $id)
     {
         $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
         //$pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca]);
-        $dok = DB::table('dok_przed')->where('id_przed' , $przedsiebiorca->id)->get();
-        $cars = DB::table('wykaz_poj')->where('id_przed', $przedsiebiorca->id)->get();
-        $stan = DB::table('dok_przed_wyp')->where('id_przed', $przedsiebiorca->id)->orderBy('id', 'desc')->first();
+        $dok = DB::table('dok_przed')->where('nr_dok' , $request->nr_dok)->get();
 
-        $wypisy = DB::table('dok_przed_wyp')->where('id_przed' , $przedsiebiorca->id)->get();
 
-        return view('przedsiebiorca.pisma.zarzadzajacy', compact('przedsiebiorca'));
+        return view('przedsiebiorca.pisma.zarzadzajacy', compact('przedsiebiorca','dok'));
+    }
+
+    public function pismo_baza(Request $request, $id)
+    {
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+        //$pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca]);
+        $dok = DB::table('dok_przed')->where('nr_dok' , $request->nr_dok)->get();
+
+
+        return view('przedsiebiorca.pisma.baza', compact('przedsiebiorca','dok'));
     }
 
     public function print_zarzadzajacy(Request $request, $id)
@@ -177,10 +187,23 @@ class PismaController extends Controller
         //$pismo->nazwa = 'Zdolność finansowa';
         $pismo->nr_sprawy = $request->get('nr_sprawy');
         $pismo->data_p = $request->get('data_p');
-        $dok = DB::table('dok_przed')->where('id_przed' , $request->id)->where('nr_dok', $request->nr_dok)->get();
-
+        $dok = DB::table('dok_przed')->where('nr_dok', $request->nr_dok)->get();
 
         return view('przedsiebiorca.pisma.print_zarzadzajacy', compact('przedsiebiorca','pisma','dok'));
+     }
+
+     public function print_baza(Request $request, $id)
+     {
+        $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
+        $pisma = \App\Pisma::all();
+        $pismo = new Pisma;
+        $pismo->id_przed = $request->id;
+        //$pismo->nazwa = 'Zdolność finansowa';
+        $pismo->nr_sprawy = $request->get('nr_sprawy');
+        $pismo->data_p = $request->get('data_p');
+        $dok = DB::table('dok_przed')->where('nr_dok', $request->nr_dok)->get();
+
+        return view('przedsiebiorca.pisma.print_baza', compact('przedsiebiorca','pisma','dok'));
      }
 
 }

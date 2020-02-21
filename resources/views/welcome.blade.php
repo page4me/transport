@@ -28,10 +28,11 @@
                             $zdolnosc = \App\Zdolnosc::where('data_do','<',date('Y-m-d'))->count();
                             $os_zarzzdajaca = \App\Certyfikat::where('dat_umowy','<',date('Y-m-d'))->count();
                             $baza = \App\Baza::where('dat_umowy','<',date('Y-m-d'))->count();
+                            $lic = \App\DokumentyPrzed::where('data_waz','<',date('Y-m-d'))->count();
                            @endphp
-                        @if($zdolnosc> 0 or $os_zarzzdajaca > 0 or $baza > 0)
+                        @if($zdolnosc> 0 or $os_zarzzdajaca > 0 or $baza > 0 or $lic >0)
                          <a href="przedsiebiorca/zdarzenia" role="button" class="btn btn-danger" style="margin-bottom:5px;">
-                         Zdarzenia&nbsp;<span class="badge badge-light">{{ $zdarzenia = $zdolnosc + $os_zarzzdajaca + $baza}}</span>
+                         Zdarzenia&nbsp;<span class="badge badge-light">{{ $zdarzenia = $zdolnosc + $os_zarzzdajaca + $baza + $lic}}</span>
                         <span class="sr-only">unread messages</span>
                         @else
                             <div>

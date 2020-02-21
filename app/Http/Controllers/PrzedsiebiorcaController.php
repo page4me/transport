@@ -396,6 +396,15 @@ class PrzedsiebiorcaController extends Controller
         return view('przedsiebiorca.zarzadzajacy.stare', compact('certyfikat','dok'));
     }
 
+    public function stare_lic()
+    {
+        $certyfikat = \App\Certyfikat::all();
+        $dok = \App\DokumentyPrzed::all();
+
+        return view('przedsiebiorca.dokumenty.stare', compact('certyfikat','dok'));
+    }
+
+
      public function search(Request $request)
      {
         $search = $request->get('search');

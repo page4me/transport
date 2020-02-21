@@ -30,13 +30,20 @@ Route::get('/search', 'PrzedsiebiorcaController@search');
 Route::get('/przedsiebiorca/{id}/zmiany/{nr_dok}', 'ZmianyPrzedController@index')->name('index');
 Route::get('/przedsiebiorca/baza/stare', 'PrzedsiebiorcaController@stare_bz')->name('stare_bz');
 Route::get('/przedsiebiorca/zarzadzajacy/stare', 'PrzedsiebiorcaController@stare_oz')->name('stare_oz');
+Route::get('/przedsiebiorca/dokumenty/stare', 'PrzedsiebiorcaController@stare_lic')->name('stare_lic');
 
 Route::get('/przedsiebiorca/pisma/print_zdol_finans/{id}', 'PismaController@print_zdol_finans');
+Route::get('/przedsiebiorca/pisma/print_zarzadzajacy/{id}', 'PismaController@print_zarzadzajacy');
+
+
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/zabezpieczenie/tresc/', 'PismaController@tresc');
 Route::post('/przedsiebiorca/pisma/podglad/{id}', 'PismaController@pismo_gotowe')->name('pismo_gotowe');
 Route::get('/przedsiebiorca/pisma/zf_pdf/{id}', 'PismaController@zf_pdf');
+
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/zarzadzajacy/tresc/', 'PismaController@pismo_zarzadzajacy')->name('pismo_zarzadzajacy');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/baza/tresc/', 'PismaController@pismo_baza')->name('pismo_baza');
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/zarzadzajacy/printPDF/', 'PismaController@print_zarzadzajacy')->name('print_zarzadzajacy');
+Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/pisma/baza/printPDF/', 'PismaController@print_baza')->name('print_baza');
 
 Route::get('/przedsiebiorca/zdarzenia', 'PrzedsiebiorcaController@zdarzenia');
 Route::patch('/przedsiebiorca/{id}/dokument/{nr_dok}/zawies/', 'PrzedsiebiorcaController@zawies')->name('zawies');

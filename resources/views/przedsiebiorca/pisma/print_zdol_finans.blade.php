@@ -24,6 +24,7 @@
         </style>
 </head>
 <body>
+
     @foreach($pisma as $ps)
 
     @endforeach
@@ -39,7 +40,7 @@
      <div><textarea class="form-control" id="pismo" name="tresc" style="height: 100%;">
      <div style="float:right;padding-top:30px;padding-right:40px;">Koszalin dn. {{$data_p = $_GET['data_p']}} r.</div>
      <div style="text-align:left;margin-top:30px;clear:both;padding-left:40px;">{{ $nr_sprawy = $_GET['nr_sprawy']}}</div>
-     <div class="row col-4" style="float:right;margin-top: 40px;margin-right: 220px;">
+     <div class="row col-4" style="float:right;margin-top: 20px;margin-right: 80px;width:250px;text-align:justify;">
      <strong>{{$przedsiebiorca->nazwa_firmy}}<br/>{{$przedsiebiorca->adres}}<br />{{$przedsiebiorca->kod_p}} {{$przedsiebiorca->miejscowosc}}</strong>
      </div>
             <div style="clear:both;">
@@ -98,7 +99,7 @@
             </ul>
         </div>
         <div style="padding-top: 2.5in;padding-left:40px;padding-right:40px;">
-            <strong>UWAGA: wszelkie informacje można uzyskać pod nr telefonu 94 71 40 116 lub w pokoju nr 116 w Wydziale Komunikacji i Dróg Starostwa Powiatowego w Koszalinie</strong>
+            <strong>UWAGA: wszelkie informacje można uzyskać pod nr telefonu 94 71 40 116 lub w pokoju nr 115 w Wydziale Komunikacji i Dróg Starostwa Powiatowego w Koszalinie</strong>
         </div>
     </textarea></div>
 

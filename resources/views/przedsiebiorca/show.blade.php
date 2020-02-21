@@ -224,7 +224,7 @@
                                     {{$ck->dat_umowy}} r.
                                     {{$ck->umowa}} <br />
                                     po terminie {{$dni = (strtotime($ck->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
-                                    </span><a href="/przedsiebiorca/{{$rodz->id}}/dokument/{{$rodz->nr_dok}}/pisma/zarzadzajacy/tresc/" role="button" class="btn btn-warning btn-sm" style="font-size:10px;">przygotuj pismo inf.</a>
+                                    </span><a href="/przedsiebiorca/{{$rodz->id}}/dokument/{{$rodz->nr_dok}}/pisma/zarzadzajacy/tresc/" role="button" class="btn btn-warning btn-sm">przygotuj pismo inf.</a>
                                     @else
                                     Umowa do dnia -
                                     <span class="badge badge-success" style="font-size:13px;">    {{$ck->dat_umowy}} r.</span> <br/>
@@ -375,7 +375,7 @@
 
                           @else
                             <div><strong>Baza eksploatacyjna</strong></div>
-                            <div><strong>Adres:</strong> <br />{{$bz->adres}}<br /> {{$bz->kod_p}} {{$bz->miasto}}</div>
+                            <div>{{$bz->adres}}<br /> {{$bz->kod_p}} {{$bz->miasto}}</div>
                             <div>
                             @if(!empty($bz->dat_umowy))
                                 @if($bz->dat_umowy < date('Y-m-d'))
@@ -385,7 +385,7 @@
 
                                     po terminie {{$dni = (strtotime($bz->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
                                     </span>
-                                    <a href="{{ url('/przedsiebiorca/'.$przedsiebiorca->id.'/dokument/'.$rodz->nr_dok.'/pisma/baza/tresc/')}}" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
+                                    <a href="{{ url('/przedsiebiorca/'.$przedsiebiorca->id.'/dokument/'.$rodz->nr_dok.'/pisma/baza/tresc/?nr_dok='.$rodz->nr_dok)}}" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
 
                                     @else
                                     Umowa do dnia
@@ -410,7 +410,7 @@
                                 <div>{{$zb->suma_zab}} &euro; - {{$zb->ile_poj}} pojazdy</div>
                                 <div>
                                 @if($zb->data_do < date('Y-m-d'))
-                                    <h5><span class="badge badge-danger" style="font-size:12px;">Do dnia {{$zb->data_do}} r.
+                                    <h5><span class="badge badge-danger" style="font-size:11px;">Do dnia {{$zb->data_do}} r.
                                     <br /> po terminie {{$dni = (strtotime($zb->data_do) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
                                     </span></h5>
                                     <a href="{{ url('/przedsiebiorca/'.$przedsiebiorca->id.'/dokument/'.$rodz->nr_dok.'/pisma/zabezpieczenie/tresc/')}}" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
@@ -441,8 +441,9 @@
                </span>
              </div>
               <div class="col-md-3">
-               <strong>Ważnść do dnia: </strong><br />@if($rodz->data_waz <= date('Y-m-d'))<span class="badge badge-danger" style="font-size:14px;"> {{$rodz->data_waz}} r.</span> @else <span class="badge badge-success" style="font-size:14px;"> {{$rodz->data_waz}} r.</span>@endif
-             </div>
+               <strong>Ważnść do dnia: </strong><br />@if($rodz->data_waz <= date('Y-m-d'))<span class="badge badge-danger" style="font-size:14px;"> {{$rodz->data_waz}} r. <br/> po terminie {{$dni = (strtotime($dk->data_waz) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni</span> @else <span class="badge badge-success" style="font-size:14px;"> {{$rodz->data_waz}} r.</span>@endif
+
+            </div>
               <div class="col-md-3">
                <strong>Numer sprawy: </strong><br />  {{$rodz->nr_sprawy}}
              </div>

@@ -13,7 +13,7 @@
             /** Define the margins of your page **/
             body {
                 font-family: DejaVu Sans;
-                font-size: 12px;
+                font-size: 11px;
                 margin: 5px 5px 0 0;
             }
             @page {
@@ -30,7 +30,7 @@
     @foreach($dok as $dk)
     @endforeach
     <div class="text-center"><a class="btn btn-primary" style="font-family: Arial, Helvetica, sans-serif" href="{{route('kontrole.show', ['id_przed'=>$kt->id_przed, 'nr_dok'=>$dk->nr_dok])}}" role="button"><< Szczegóły przedsiębiorcy</a></div><br />
-  <div class="container" style="font-size: 14px;font-family: Arial;width:900px;">
+  <div class="container" style="font-size: 12px;font-family: Arial;width:900px;">
 
      <div><textarea class="form-control" id="pismo" name="tresc" style="height: 100%;">
      <div style="float:right;padding-top:20px;padding-right:40px;">Koszalin dn. {{ Carbon\Carbon::parse($kt->dat_zawiad)->format('d.m.Y') }} r.</div>
