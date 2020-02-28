@@ -373,27 +373,29 @@
                         @foreach ($baza as $bz)
                           @if($bz->adres == 'b/d')
 
+                          @elseif($dk->nazwa =='Zaświadczenie')
+
                           @else
                             <div><strong>Baza eksploatacyjna</strong></div>
                             <div>{{$bz->adres}}<br /> {{$bz->kod_p}} {{$bz->miasto}}</div>
                             <div>
-                            @if(!empty($bz->dat_umowy))
-                                @if($bz->dat_umowy < date('Y-m-d'))
-                                Umowa do dnia
-                                    <span class="badge badge-danger" style="font-size:11px;">
-                                    {{$bz->dat_umowy}} r.<br/>
-
-                                    po terminie {{$dni = (strtotime($bz->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
-                                    </span>
-                                    <a href="{{ url('/przedsiebiorca/'.$przedsiebiorca->id.'/dokument/'.$rodz->nr_dok.'/pisma/baza/tresc/?nr_dok='.$rodz->nr_dok)}}" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
-
-                                    @else
+                                @if(!empty($bz->dat_umowy))
+                                    @if($bz->dat_umowy < date('Y-m-d'))
                                     Umowa do dnia
-                                    <span class="badge badge-success" style="font-size:11px;">  {{$bz->dat_umowy}} r.</span>
-                                    @endif
-                            @else
-                                {{$bz->wlasnosc}}
-                            @endif
+                                        <span class="badge badge-danger" style="font-size:11px;">
+                                        {{$bz->dat_umowy}} r.<br/>
+
+                                        po terminie {{$dni = (strtotime($bz->dat_umowy) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni
+                                        </span>
+                                        <a href="{{ url('/przedsiebiorca/'.$przedsiebiorca->id.'/dokument/'.$rodz->nr_dok.'/pisma/baza/tresc/?nr_dok='.$rodz->nr_dok)}}" class="btn btn-warning btn-sm" role="butotn">przygotuj pismo inf.</a>
+
+                                        @else
+                                        Umowa do dnia
+                                        <span class="badge badge-success" style="font-size:11px;">  {{$bz->dat_umowy}} r.</span>
+                                        @endif
+                                @else
+                                    {{$bz->wlasnosc}}
+                                @endif
 
                             </div>
                             <br />

@@ -219,7 +219,7 @@ class PrzedsiebiorcaController extends Controller
             return redirect('/przedsiebiorca')->with('danger', 'Dane przedsiębiorcy usunięte');
     }
 
-    public function zawies(Request $request)
+    public function zawies(Request $request, $id)
     {
         $zawies = \App\Przedsiebiorca::findOrFail($request->id);
 
@@ -227,6 +227,7 @@ class PrzedsiebiorcaController extends Controller
         $id = Input::get('idz');
 
         $zawies_lic = DB::table('dok_przed')->where('nr_dok', $request->nr_dok)->get();
+
         foreach($zawies_lic as $li){
             $li->id;
             $li->id_przed;
@@ -237,16 +238,18 @@ class PrzedsiebiorcaController extends Controller
         $dat_zaw_do = Input::get('dat_zaw_do');
         $dat_zaw_new = Carbon::createFromDate($dat_zaw)->addYear()->format('Y-m-d');
         $lic = \App\DokumentyPrzed::findOrFail($li->id);
+
+
         $lic->update(['status'=>'2','dat_zaw'=> $dat_zaw_new,'dat_zaw_do'=> $dat_zaw_do,'powod'=>$powod]);
 
         $data_zm = date('Y-m-d');
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $li->id_przed, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Zawieszenie dokumentu przedsiębiorcy od'.$dat_zaw.' do '.$dat_zaw_do,'data_zm' => $dat_zaw]);
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $li->id_przed, 'id_dok_przed' => $li->id, 'nazwa_zm' => 'Zawieszenie dokumentu '.$li->nr_dok.' przedsiębiorcy od '.$dat_zaw.' do '.$dat_zaw_do,'data_zm' => $dat_zaw]);
 
         Alert::warning('Zawieszono licencję/zezwolenie przedsiębiorcy', '');
-        return redirect('/przedsiebiorca', compact('zawies_lic'))->with('lic');
+        return redirect('/przedsiebiorca');
     }
 
-    public function odwies(Request $request)
+    public function odwies(Request $request, $id)
     {
 
         $input = Input::all();
@@ -263,7 +266,7 @@ class PrzedsiebiorcaController extends Controller
         $lico->update(['dat_odw'=> $dat_odw, 'status'=>'0', 'dat_zaw'=>null,'powod'=>null]);
 
 
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $lic->id, 'id_dok_przed' => $lic->id, 'nazwa_zm' => 'Przywrócenie dokumentu przedsiębiorcy po zawieszeniu ','data_zm' => $dat_odw]);
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $lic->id, 'id_dok_przed' => $lic->id, 'nazwa_zm' => 'Przywrócenie dokumentu '.$lic->nr_dok.' przedsiębiorcy po zawieszeniu ','data_zm' => $dat_odw]);
 
         Alert::warning('Odwieszono licencję/zezwolenie przedsiębiorcy', '');
         return redirect('/przedsiebiorca');

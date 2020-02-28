@@ -4,6 +4,7 @@
 @section('content')
 @php $id_dok = \App\DokumentyPrzed::all(); @endphp
 @foreach($id_dok as $id)
+ @php $nr_dok = $id->nr_dok; @endphp
 @endforeach
 <div class="container-fluid">
     <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
@@ -180,8 +181,8 @@
      <div class="modal fade" id="zawies">
         <div class="modal-dialog" style="margin:0 auto;top:25%;">
           <div class="modal-content">
-            @foreach($rodzaje as $petent)
-            <form  method="POST" action="{{ route('zawies', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok] ) }}" >
+
+            <form  method="POST" action="{{ route('zawies', ['id' => $id->id_przed, 'nr_dok' => $id->nr_dok] ) }}" >
             <!-- Modal Header -->
 
             <div class="modal-header bg-warning">
@@ -195,7 +196,7 @@
               Data zawieszenia od: <input class="form-control" type="date" id="dat_zaw" name="dat_zaw" /><br />
               Data zawieszenia do: <input class="form-control" type="date" id="dat_zaw_do" name="dat_zaw_do" /><br />
               Podaj powód zawieszenia: <textarea class="form-control" id="powod" name="powod"></textarea><br />
-              <input type="hidden" id="idz" name="nr_dok" value="{{$petent->nr_dok}} " />
+              <input type="hidden" id="idz" name="nr_dok" value="{{$nr_dok}} " />
 
             </div>
             <!-- Modal footer -->
@@ -205,7 +206,7 @@
 
             </div>
            </form>
-           @endforeach
+
           </div>
         </div>
       </div>
@@ -220,8 +221,8 @@
     <div class="modal fade" id="odwies">
         <div class="modal-dialog" style="margin:0 auto;top:25%;">
           <div class="modal-content">
-            @foreach($rodzaje as $petent)
-            <form  method="POST" action="{{ route('odwies', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok] ) }}" >
+
+            <form  method="POST" action="{{ route('odwies', ['id' => $id->id_przed, 'nr_dok' => $nr_dok] ) }}" >
             <!-- Modal Header -->
 
             <div class="modal-header bg-warning">
@@ -233,7 +234,7 @@
                 @csrf
                 @method('PATCH')
               Wprowadź datę odwieszenia: <input class="form-control" type="date"  name="dat_odw" /><br />
-              <input type="hidden" id="ido" name="nr_dok" value="@foreach($rodzaje as $petent) {{$petent->id}} @endforeach" />
+              <input type="hidden" id="ido" name="nr_dok" value="{{$nr_dok}}" />
 
 
             </div>
@@ -244,7 +245,7 @@
 
             </div>
            </form>
-           @endforeach
+
           </div>
         </div>
       </div>
@@ -259,8 +260,8 @@
         <div class="modal fade" id="rezygnacja">
             <div class="modal-dialog" style="margin:0 auto;top:25%;">
             <div class="modal-content">
-                @foreach($rodzaje as $petent)
-                <form  method="POST" action="{{ route('rezygnacja', ['id' => $id->id_przed, 'nr_dok' => $petent->nr_dok] ) }}" >
+
+                <form  method="POST" action="{{ route('rezygnacja', ['id' => $id->id_przed, 'nr_dok' => $nr_dok] ) }}" >
                 <!-- Modal Header -->
 
                 <div class="modal-header bg-danger text-light">
@@ -284,7 +285,7 @@
 
                 </div>
             </form>
-            @endforeach
+
             </div>
             </div>
         </div>
