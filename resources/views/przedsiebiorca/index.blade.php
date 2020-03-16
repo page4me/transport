@@ -48,7 +48,7 @@
            <div class="col-md-6 text-right">
               <span class="badge badge-warning" style="font-size:13px;"> L-O: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','osoby')->where('nazwa','=','Licencja')->count()}}</span>
               <span class="badge badge-success" style="font-size:13px;"> L-R: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','rzeczy')->where('nazwa','=','Licencja')->count()}}</span>
-              <span class="badge badge-danger" style="font-size:13px;"> L-S: 2</span>
+              <span class="badge badge-danger" style="font-size:13px;"> L-S: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','rzeczy')->where('nazwa','=','Licencja Pośrednictwo')->count()}}</span>
               <span class="badge badge-secondary" style="font-size:13px;"> L 7-9: {{$count = \App\DokumentyPrzed::where('nazwa','=','Licencja 7-9')->count()}}</span>
               <span class="badge badge-warning" style="font-size:13px;"> Z-O: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','osoby')->where('nazwa','=','Zezwolenie')->count()}}</span>
               <span class="badge badge-success" style="font-size:13px;"> Z-R: {{$count = \App\DokumentyPrzed::where('rodz_dok','=','rzeczy')->where('nazwa','=','Zezwolenie')->count()}}</span>
@@ -181,10 +181,10 @@
      <div class="modal fade" id="zawies">
         <div class="modal-dialog" style="margin:0 auto;top:25%;">
           <div class="modal-content">
-
+            @foreach($id_dok as $id)
             <form  method="POST" action="{{ route('zawies', ['id' => $id->id_przed, 'nr_dok' => $id->nr_dok] ) }}" >
             <!-- Modal Header -->
-
+            @endforeach
             <div class="modal-header bg-warning">
               <h4 class="modal-title">Zawieszenie licencji / zezwolenia</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -196,8 +196,10 @@
               Data zawieszenia od: <input class="form-control" type="date" id="dat_zaw" name="dat_zaw" /><br />
               Data zawieszenia do: <input class="form-control" type="date" id="dat_zaw_do" name="dat_zaw_do" /><br />
               Podaj powód zawieszenia: <textarea class="form-control" id="powod" name="powod"></textarea><br />
-              <input type="hidden" id="idz" name="nr_dok" value="{{$nr_dok}} " />
-
+              @foreach($id_dok as $id)
+                @php $nr_dok = $id->nr_dok; @endphp
+                <input type="hidden" id="idz" name="nr_dok" value="{{$nr_dok}} " />
+              @endforeach
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
@@ -221,10 +223,10 @@
     <div class="modal fade" id="odwies">
         <div class="modal-dialog" style="margin:0 auto;top:25%;">
           <div class="modal-content">
-
+            @foreach($id_dok as $id)
             <form  method="POST" action="{{ route('odwies', ['id' => $id->id_przed, 'nr_dok' => $nr_dok] ) }}" >
             <!-- Modal Header -->
-
+            @endforeach
             <div class="modal-header bg-warning">
               <h5 class="modal-title">Przywrócenie po zawieszeniu licencji / zezwolenia</h5>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -234,8 +236,10 @@
                 @csrf
                 @method('PATCH')
               Wprowadź datę odwieszenia: <input class="form-control" type="date"  name="dat_odw" /><br />
+              @foreach($id_dok as $id)
+              @php $nr_dok = $id->nr_dok; @endphp
               <input type="hidden" id="ido" name="nr_dok" value="{{$nr_dok}}" />
-
+              @endforeach
 
             </div>
             <!-- Modal footer -->
@@ -260,10 +264,10 @@
         <div class="modal fade" id="rezygnacja">
             <div class="modal-dialog" style="margin:0 auto;top:25%;">
             <div class="modal-content">
-
+                @foreach($id_dok as $id)
                 <form  method="POST" action="{{ route('rezygnacja', ['id' => $id->id_przed, 'nr_dok' => $nr_dok] ) }}" >
                 <!-- Modal Header -->
-
+                @endforeach
                 <div class="modal-header bg-danger text-light">
                 <h5 class="modal-title">Rezygnacja - Wycofanie z licencji / zezwolenia</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
