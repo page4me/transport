@@ -108,16 +108,49 @@
 
         <div class="row">
           <div class="col-md-4 form-group">
-              <label for="tel">Zarządzający:</label>
-              <input type="text" class="form-control" name="os_zarz" />
+              <label for="tel">Przedsiębiorca jest zarządzającym</label>
+              <select class="form-control os_zarz" name="os_zarz" id="os_zarz">
+                <option value="0"></option>
+                <option value="Tak">Tak</option>
+                <option value="Nie">Nie</option>
+              </select>
           </div>
           <div class="col-md-4 form-group">
               <label for="tel">Umowa:</label>
-              <input type="text" class="form-control" name="umowa" />
+              <select name="umowa" id="umowa" pk="1" class="form-control">
+                  <option value="umowa najmu">umowa najmu</option>
+                  <option value="umowa użyczenia">umowa użyczenia</option>
+              </select>
+              <input type="checkbox" value="0" name="umowa_nie" pk="3" id="umowa_nie" /> na czas nieokreślony
+              <script>
+                   document.getElementById('umowa_nie').onchange = function() {
+                        document.querySelector('.dat_umowy').style.display = this.checked ? 'none' : 'block';
+                    }
+
+                    $("#os_zarz").change(function () {
+                    var selected_option = $('#os_zarz').val();
+
+                    if (selected_option === 'Nie') {
+                        $('#umowa').attr('pk','1').show();
+                        $("#umowa").prop("disabled", false);
+                        $('#dat_umowy').attr('pk','2').show();
+                        $("#dat_umowy").prop("disabled", false);
+                        $('#umowa_nie').attr('pk','3').show();
+                        $("#umowa_nie").prop("disabled", false);
+                    }
+
+                    if (selected_option != 'Nie') {
+                        //$("#umowa").removeAttr('pk').disabled();
+                        $("#umowa").prop("disabled", true);
+                        $("#dat_umowy").prop("disabled", true);
+                        $("#umowa_nie").prop("disabled", true);
+                    }
+                    })
+              </script>
           </div>
           <div class="col-md-4 form-group">
               <label for="data">Data umowy:</label>
-              <input type="date" class="form-control" name="dat_umowy" />
+              <input type="date" class="form-control dat_umowy" pk="2" id="dat_umowy" name="dat_umowy" />
           </div>
         </div>
         <div class="row">

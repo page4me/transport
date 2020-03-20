@@ -72,7 +72,7 @@ class BazaController extends Controller
 
               $data_bz = date('Y-m-d');
 
-               $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $dk->id, 'nazwa_zm' => 'Zgłoszenie nowej bazy eksploatacyjnej', 'data_zm' => $request->data_bz]);
+               $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $dk->id, 'nazwa_zm' => 'Zgłoszenie nowej bazy eksploatacyjnej', 'data_zm' => $data_bz]);
 
                Alert::success('Dodano nową bazę', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
                return redirect('/przedsiebiorca/zarzadzajacy/create')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
@@ -131,8 +131,6 @@ class BazaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-
 
         $validatedData = $request->validate([
          'id_przed' => 'required|max:1',
@@ -154,14 +152,24 @@ class BazaController extends Controller
             $adres = $bz->adres;
             $wlasnosc = $bz->wlasnosc;
         }
+        $dok = DB::table('dok_przed')->where('nr_dok' , $request->nr_dok)->get();
+
+        foreach($dok as $dk)
+         {
+
+          $dk->nr_dok;
+
+          $dk->id;
+         }
+
 
         $data_zm = date('Y-m-d');
 
         // zapisanie historii wykonanych zmian danych przedsiebiorcy
-        if($request->nazwa_firmy <> $adres) {
-            $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => null, 'nazwa_zm' => 'Zmiana adresu bazy eksploatacyjnej z '. $adres .' na '.$request->adres, 'data_zm' => $data_zm]);
+        if($request->adres <> $adres) {
+            $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => $request->id_dok, 'nazwa_zm' => 'Zmiana adresu bazy eksploatacyjnej z '. $adres .' na '.$request->adres, 'data_zm' => $data_zm]);
         }elseif($request->wlasnosc <> $wlasnosc) {
-            $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => null, 'nazwa_zm' => 'Zmiana prawa własności z '. $wlasnosc .' na '.$request->wlasnosc, 'data_zm' => $data_zm]);
+            $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $id, 'id_dok_przed' => $request->id_dok, 'nazwa_zm' => 'Zmiana prawa własności z '. $wlasnosc .' na '.$request->wlasnosc, 'data_zm' => $data_zm]);
         }
 
         $baza = \App\Baza::whereId($id)->update($validatedData);

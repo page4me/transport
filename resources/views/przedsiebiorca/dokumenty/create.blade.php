@@ -80,8 +80,11 @@
               <input type="text" class="form-control" name="nr_dok"/>
           </div>
           <div class="col-md-3 form-group">
-              <label for="kod_p">Rodzaj:</label>
-              <input type="text" class="form-control" name="rodz_dok" maxlength="6" placeholder="osoby/rzeczy"/>
+              <label for="rodz_dok">Rodzaj:</label>
+              <select class="form-control" name="rodz_dok">
+                <option value="osoby">osoby</option>
+                <option value="rzeczy">rzeczy</option>
+              </select>
           </div>
            <div class="col-md-3 form-group">
               <label for="miejscowosc">Nr druku:</label>

@@ -231,7 +231,7 @@
                                         {{$ck->umowa}}
                                     @endif
                             @else
-                                    Zarządzający: Właściciel
+                                <strong>Zarządzający:</strong> @if($ck->os_zarz =='Tak') Właściciel @else Nie @endif
                             @endif
                         @else
                             brak
@@ -394,7 +394,7 @@
                                         <span class="badge badge-success" style="font-size:11px;">  {{$bz->dat_umowy}} r.</span>
                                         @endif
                                 @else
-                                    {{$bz->wlasnosc}}
+                                    <strong>Własność: </strong>{{$bz->wlasnosc}}
                                 @endif
 
                             </div>

@@ -120,8 +120,10 @@
                 <br />
                     @foreach($id_dok as $id)
                        @if($id->nr_dok == $petent->nr_dok && $id->status == '2')
-            <span class="text small p-0"><strong> {{$id->powod}} do </strong></span> <span class="badge badge-danger text-wrap">{{ \Carbon\Carbon::createFromDate($id->dat_zaw_do)->format('d-m-Y')}} r.</span>
-                       @endif
+                         <span class="text small p-0"><strong> {!!$id->powod!!} do </strong></span> <span class="badge badge-danger text-wrap">{{ \Carbon\Carbon::createFromDate($id->dat_zaw_do)->format('d-m-Y')}} r.</span>
+                       @elseif($id->nr_dok == $petent->nr_dok && $id->status == '3')
+                         <span class="text small p-0"><strong> {!!$id->powod!!} </strong></span>
+                        @endif
                     @endforeach
             </td>
             <td style="width:280px;" @foreach($id_dok as $id) @if($id->nr_dok == $petent->nr_dok) @if($id->status =="2") class="bg-warning" @elseif($id->status == '3') class="bg-danger text-light" @else  @endif @endif @endforeach >{{$petent->nazwa_firmy}}</td>

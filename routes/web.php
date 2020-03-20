@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('check_system', function () {
+    return view('check_system');
+});
+
 Route::get('/przedsiebiorca/{id}/dokument/{nr_dok}/cars', 'PrzedsiebiorcaController@cars')->name('cars');
 Route::patch('/przedsiebiorca/pojazdy/wycofaj/{id}', 'WykazPojController@wycofaj')->name('wycofaj');
 Route::patch('/przedsiebiorca/{id}/dokument/{nr_dok}/wypisy/depozyt/', 'WypisyController@depozyt')->name('depozyt');

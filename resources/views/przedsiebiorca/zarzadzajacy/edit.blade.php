@@ -74,7 +74,7 @@
                <input type="text" class="form-control" name="adres" value="{{$oz->adres}}" />
            </div>
             <div class="col-md-4 form-group">
-               <label for="miejscowosc">Miejscowosć:</label>
+               <label for="miejscowosc">Miejscowość:</label>
                <input type="text" class="form-control" name="miasto" value="{{$oz->miasto}}" />
            </div>
             <div class="col-md-4 form-group">
@@ -87,21 +87,45 @@
          <div class="row">
            <div class="col-md-4 form-group">
                <label for="tel">Zarządzający:</label>
-               <input type="text" class="form-control" name="os_zarz" value="{{$oz->os_zarz}}" />
+               <select class="form-control" name="os_zarz">
+                @if($oz->os_zarz =='Tak')
+                <option value="{{$oz->os_zarz}}">{{$oz->os_zarz}}</option>
+                <option value="Nie">Nie</option>
+                @else
+                <option value="{{$oz->os_zarz}}">{{$oz->os_zarz}}</option>
+                <option value="Tak">Tak</option>
+                @endif
+              </select>
            </div>
            <div class="col-md-4 form-group">
                <label for="tel">Umowa:</label>
-               <input type="text" class="form-control" name="umowa" value="{{$oz->umowa}}" />
-           </div>
+               <select name="umowa" id="umowa" pk="1"  @if($oz->os_zarz =='Tak') disabled class="form-control" @elseif($oz->os_zarz =='Nie') class="form-control border-danger" @endif>
+                @if(empty($oz->umowa))
+                    <option value="0"></option>
+                    <option value="umowa najmu">umowa najmu</option>
+                    <option value="umowa użyczenia">umowa użyczenia</option>
+                @else
+                   @if($oz->umowa =='umowa najmu')
+                        <option value="{{$oz->umowa}}">{{$oz->umowa}}</option>
+                        <option value="umowa użyczenia">umowa użyczenia</option>
+                    @elseif($oz->umowa =='umowa użyczenia')
+                        <option value="{{$oz->umowa}}">{{$oz->umowa}}</option>
+                        <option value="umowa najmu">umowa najmu</option>
+                    @endif
+                @endif
+
+            </select>
+            <input type="checkbox" name="umowa_nie" pk="3" id="umowa_nie" @if(empty($oz->umowa)) @elseif(!empty($oz->umowa)) checked @else @endif  @if($oz->os_zarz=="Tak") disabled @else @endif /> na czas nieokreślony
+            </div>
            <div class="col-md-4 form-group">
                <label for="data">Data umowy:</label>
-               <input type="date" class="form-control" name="dat_umowy" value="{{$oz->dat_umowy}}" />
+               <input type="date" name="dat_umowy" value="{{$oz->dat_umowy}}" @if($oz->os_zarz=='Tak') class="form-control" disabled @else class="form-control border-danger" @endif />
            </div>
          </div>
          <div class="row">
            <div class="col-md-12 form-group">
                <label for="uwagi">Uwagi:</label>
-               <textarea class="form-control" id="osz" name="uwagi" value="{{$oz->uwagi}}" />{{$oz->uwagi}}</textarea>
+               <textarea class="form-control" id="osz" name="uwagi" value="{{$oz->uwagi}}"  />{{$oz->uwagi}}</textarea>
            </div>
          </div>
            <button type="submit" class="btn btn-success">Zapisz zmiany zarządzającego</button>

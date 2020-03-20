@@ -57,7 +57,13 @@ class DokPrzedController extends Controller
 
         $data_bz = date('Y-m-d');
 
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => null, 'nazwa_zm' => 'Dodanie nowego dokumentu o numerze '.$request->nr_dok, 'data_zm' => $request->data_bz]);
+        $dok = DB::table('dok_przed')->where('nr_dok' , $request->nr_dok)->get();
+
+        foreach($dok as $dk){
+            $id = $dk->id;
+        }
+
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $id, 'nazwa_zm' => 'Dodanie nowego dokumentu o numerze '.$request->nr_dok, 'data_zm' => $data_bz]);
 
         Alert::success('Dodano nowy dokument', '');
         return redirect('/przedsiebiorca/baza/create')->with('success', 'Dokument dodany do bazy danych');
@@ -88,10 +94,7 @@ class DokPrzedController extends Controller
 
          $przedsiebiorca = \App\Przedsiebiorca::findOrFail($id);
 
-
          $dok = DB::table('dok_przed')->where('id_przed' , $id)->where('nr_dok' , $request->nr_dok)->get();
-
-
 
         return view('przedsiebiorca.dokumenty.edit', compact('przedsiebiorca', 'rodzaje','dok'));
     }
@@ -105,25 +108,39 @@ class DokPrzedController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //echo $request->rodz_dok;
+        //exit;
         $validatedData = $request->validate([
-
          'nazwa' => 'required|max:255',
-         'rodz_dok' => 'required:max:255',
+         'rodz_dok' => 'required',
          'nr_dok' => 'required|max:255',
+         'p_nr_dok' => 'nullable|max:255',
          'nr_druku' => 'required|max:255',
          'nr_sprawy' => 'required|max:255',
          'data_wn' => 'required',
          'data_wyd' => 'required',
          'data_waz' => 'required',
-
+         'uwagi' => 'required',
         ]);
 
+        //$dok = DB::table('dok_przed')->where('nr_dok' ,'=', $request->nr_dok)->get();
+
         \App\DokumentyPrzed::whereId($id)->update($validatedData);
+
+        $dok = DB::table('dok_przed')->where('nr_dok' , $request->nr_dok)->get();
+
+        foreach($dok as $dk){
+            $id = $dk->id;
+        }
+
+        $data_bz = date('Y-m-d');
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $id, 'nazwa_zm' => 'Zmiana dokumentu z '.$request->p_nr_dok.' na numer '.$request->nr_dok, 'data_zm' => $data_bz]);
+
+
         Alert::success('Zmniany Zapisano', 'Dane dokumentów przedsiębiorcy zmienione');
 
-        //return redirect('/przedsiebiorca/'.$id.'/dokument/'.$request->nr_dok)->with('success', 'Dane dokumentów przedsiębiorcy zmienione');
-        return back();
+        return redirect('/przedsiebiorca/dokumenty/'.$id.'/edit?nr_dok='.$request->nr_dok)->with('success', 'Dane dokumentów przedsiębiorcy zmienione');
+       // return back();
     }
 
     /**

@@ -59,7 +59,7 @@ class CertController extends Controller
 
         $data_bz = date('Y-m-d');
 
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Dodanie nowej osoby zarządzającej', 'data_zm' => $request->data_bz]);
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Dodanie nowej osoby zarządzającej', 'data_zm' => $data_bz]);
 
 
         Alert::success('Dodano nowego zarządzającego', 'Zarządzający przypisany do przedsiębiorcy');
@@ -130,6 +130,14 @@ class CertController extends Controller
         ]);
 
         \App\Certyfikat::whereId($id)->update($validatedData);
+
+        if($request->os_zarz =='Tak') {
+            \App\Certyfikat::where($request->id)->update(['dat_umowy' => null]);
+            \App\Certyfikat::where($request->id)->update(['umowa' => null]);
+        }else {
+
+        }
+
         //return redirect('/przedsiebiorca')->with('success', 'Dane osoby zarządającej zmienione');
         Alert::success('Zapisano zmiany', 'Dane osoby zarządającej zmienione');
         return back();

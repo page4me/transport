@@ -56,7 +56,7 @@ class ZdolnoscController extends Controller
 
         $data_bz = date('Y-m-d');
 
-        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Dodanie nowego zabezpieczenia finansowego', 'data_zm' => $request->data_bz]);
+        $historia_zm = \App\ZmianyPrzed::create(['id_przed' => $request->id_przed, 'id_dok_przed' => $request->id_dok_przed, 'nazwa_zm' => 'Dodanie nowego zabezpieczenia finansowego', 'data_zm' => $data_bz]);
 
         Alert::success('Dodano nowe zabezpieczenie', 'Zdolnosć finansowa przypisana do przedsiębiorcy');
         return redirect('/przedsiebiorca')->with('success', 'Baza eksploatacyjna przypisana do przedsiębiorcy');
@@ -108,23 +108,23 @@ class ZdolnoscController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $validatedData = $request->validate([
-            'id_przed' => 'required|max:1',
-            'id_dok_przed' => 'required|nullable',
-            'nazwa' => 'string|max:255|nullable',
-            'numer' => 'string|max:255|nullable',
-            'data_od' => 'string|max:255|nullable',
+       // echo $request->nazwa;
+      //  echo $request->numer;
+     $validatedData = $request->validate([
+           'nazwa' => 'required|nullable',
+           'numer' => 'string|max:255|nullable',
+            'data_od' =>'string|max:255|nullable',
             'data_do' => 'string|max:255|nullable',
-            'ile_poj' => 'required|max:255',
-            'suma_zab' => 'required|max:255',
-            'status' => 'required|max:16|nullable',
-            'uwagi' => 'string|max:255|nullable'
-           ]);
+            'ile_poj' => 'string|max:255|nullable',
+            'suma_zab' => 'string|max:255|nullable',
+            'status' => 'string|max:2|nullable',
+            'uwagi' => 'string|max:255|nullable',
+     ]);
+       // echo $id;
+       \App\Zdolnosc::whereId($id)->update($validatedData);
+       Alert::success('Zapisano zmiany', 'Dane zdolności finansowej zmienione');
+       return back();
 
-           \App\Zdolnosc::whereId($id)->update($validatedData);
-
-           Alert::success('Zapisano zmiany', 'Dane zdolności finansowej zmienione');
-        return back();
     }
 
     /**

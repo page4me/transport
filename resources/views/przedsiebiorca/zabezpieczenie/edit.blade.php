@@ -83,7 +83,9 @@
                           <textarea class="form-control" id="zf" name="uwagi" value="{{$zf->uwagi}}" />{{$zf->uwagi}}</textarea>
                       </div>
                     </div>
+
                     @endforeach
+
                       <button type="submit" class="btn btn-success">Zapisz zmiany zabezpieczenia</button>
                   </form>
                </div>

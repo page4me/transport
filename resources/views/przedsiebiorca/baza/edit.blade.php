@@ -77,16 +77,24 @@
 
                  <div class="row">
                    <div class="col-md-4 form-group">
-                       <label for="tel">Własność:</label>
-                       <input type="text" class="form-control" name="wlasnosc" value="{{$bz->wlasnosc}}" />
+                       <label for="wlasnosc">Własność:</label>
+                       <select class="form-control" name="wlasnosc">
+                        @if($bz->wlasnosc =='Tak')
+                         <option value="{{$bz->wlasnosc}}">{{$bz->wlasnosc}}</option>
+                         <option value="Nie">Nie</option>
+                        @elseif($bz->wlasnosc =='Nie')
+                         <option value="{{$bz->wlasnosc}}">{{$bz->wlasnosc}}</option>
+                         <option value="Tak">Tak</option>
+                        @endif
+                       </select>
                    </div>
                    <div class="col-md-4 form-group">
                        <label for="tel">Umowa:</label>
-                       <input type="text" class="form-control" name="umowa" value="{{$bz->umowa}}" />
+                       <input type="text" class="form-control" name="umowa" value="{{$bz->umowa}}" @if($bz->wlasnosc == 'Tak') disabled @else  @endif />
                    </div>
                    <div class="col-md-4 form-group">
                        <label for="tel">Data umowy:</label>
-                       <input type="date" class="form-control" name="dat_umowy" value="{{$bz->dat_umowy}}" />
+                       <input type="date" class="form-control" name="dat_umowy" value="{{$bz->dat_umowy}}" @if($bz->wlasnosc == 'Tak') disabled @else  @endif />
                    </div>
                  </div>
                  <div class="row">
@@ -95,6 +103,7 @@
                        <textarea class="form-control" id="bz" name="uwagi" value="{{$bz->uwagi}}" />{{$bz->uwagi}}</textarea>
                    </div>
                  </div>
+                <input type="hidden" name="id_dok" value="{{$id->id}}" />
                    <button type="submit" class="btn btn-success">Zapisz zmiany bazy</button>
                </form>
            </div>

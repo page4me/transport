@@ -98,9 +98,11 @@ class PrzedsiebiorcaController extends Controller
         ->where('dok_przed.nr_dok', '=', $request->route('nr_dok'))
         ->get();
 
+        foreach($rodzaje as $rr){
+           echo $id_osf = $rr->id_osf;
+        }
 
-        $osobowosc = DB::table('rodzaj_przed')->where('id', $request->route('id'))->get();
-
+        $osobowosc = DB::table('rodzaj_przed')->where('id','=', $id_osf)->get();
 
         $dok = DB::table('dok_przed')->where('id_przed' , $request->route('id'))->get();
 
@@ -171,7 +173,7 @@ class PrzedsiebiorcaController extends Controller
          'nip' => 'required|max:11',
          'regon' => 'required|max:9',
          'telefon' => 'required|max:10',
-
+         'uwagi' => 'required',
      ]);
 
      $przedsiebiorca = DB::table('przedsiebiorca')->where('id' , $id)->get();

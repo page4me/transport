@@ -14,7 +14,7 @@
   }
 
 </style>
-{{print_r($przedsiebiorca)}}
+
 <div class="container">
    <div style="padding-top: 20px;margin: 0 auto; text-align: center;">
     <i class="fa fa-truck-monster fa-3x"></i>&nbsp;&nbsp;

@@ -98,8 +98,11 @@
 
         <div class="row">
           <div class="col-md-4 form-group">
-              <label for="tel">Własność:</label>
-              <input type="text" class="form-control" name="wlasnosc" />
+              <label for="wlasnosc">Własność:</label>
+              <select class="form-control" name="wlasnosc">
+                <option value="Tak">Tak</option>
+                <option value="Nie">Nie</option>
+              </select>
           </div>
           <div class="col-md-4 form-group">
               <label for="tel">Umowa:</label>
