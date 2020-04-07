@@ -12,8 +12,6 @@
         <div class="col-md-12 text-center text-primary shadow-sm p-2 mb-2 bg-white rounded"><h3>PRZEDSIĘBIORCY</h3></div>
     <div class="p-2">
 
-
-
 <div class="container">
     <div class="card uper">
         <div @if($przedsiebiorca->status =="0") class="card-header bg-dark text-light" @elseif($przedsiebiorca->status =="2") class="card-header bg-warning"  @elseif($przedsiebiorca->status =="3") class="card-header bg-danger text-light" @endif>
@@ -24,7 +22,6 @@
                   @if(!empty($rodz->nr_dok)) {{ $rodz->nr_dok}} @else brak @endif
 
               </span><span @if($przedsiebiorca->status =="2") style="color: #000000;font-size:16px;" @else style="color: #fff;font-size:16px;" @endif>wydano dn. {{ $rodz->data_wyd}}   r.</span>
-
            </div>
   <div class="card-body">
     @if ($errors->any())
@@ -163,7 +160,7 @@
 
        <div class="row">
          <div class="col-md-12 text-center">
-          <span style="font-size: 20px;"> <strong>WYKAZ POJAZDÓW</strong></span>
+          <span style="font-size: 16px;"> <strong>WYKAZ POJAZDÓW</strong></span>
          </div>
          <div class="col-md-12 text-center">
 
@@ -182,7 +179,7 @@
                <th class="text-center">Opcja</th>
               </tr>
              </thead>
-             <tr><td colspan="8" class="text-center"><strong><span style="font-size: 16px;color:red;">Pojazdy wprowadzone do licencji / zezwolenia
+             <tr><td colspan="8" class="text-center"><strong><span style="font-size: 15px;color:red;">Pojazdy wprowadzone do licencji / zezwolenia
              </span></strong></td></tr>
               <p style="font-size:1px;">{{$i=1}}</p>
              @foreach($cars as $car)
@@ -192,7 +189,7 @@
                        <td>{{$car->rodzaj_poj}}<br /><strong> {{$car->marka}} </strong></td>
                        <td class="text-center">{{$car->nr_rej}}<br /><span class="text-primary"><small>{{$car->p_nr_rej}}</small></span></td>
                        <td class="text-center">{{$car->nr_vin}}</td>
-                       <td class="text-center">{{$car->dmc}} kg</td>
+                       <td class="text-center">{{$car->dmc}}</td>
                        <td class="text-center">{{$car->wlasnosc}}</td>
                        <td class="text-center">{{$car->data_wpr}} r.</td>
                        <td class="text-center" colspan="2">
@@ -396,7 +393,7 @@
                <th class="text-center">Data wycofania</th>
               </tr>
              </thead>
-             <tr><td colspan="7" class="text-center"><strong><span style="font-size: 16px;color:red;">Pojazdy wycofane z licencji / zezwolenia</span>
+             <tr><td colspan="7" class="text-center"><strong><span style="font-size: 15px;color:red;">Pojazdy wycofane z licencji / zezwolenia</span>
              </strong></td></tr>
                <p style="font-size:1px;">{{$a=1}}</p>
                @foreach($cars as $car)

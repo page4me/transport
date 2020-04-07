@@ -12,11 +12,11 @@
             /** Define the margins of your page **/
             body {
           font-family: DejaVu Sans;
-          font-size: 12px;
-          margin: 10px 10px 0 0;
+          font-size: 11px;
+          margin: 10px 10px 0 0px;
       }
             @page {
-               margin: 10px 10px 0 0;
+               margin: 10px 10px 0 0px;
 
             }
 
@@ -83,32 +83,32 @@
           </div>
         </div>
 
-       <div class="row" style="margin-left: 10px;">
+       <div class="row" >
 
-         <div class="col-md-12">
+         <div class="col-md-12" style="margin: 3px 3px;">
            <table class="table table-striped table-sm">
              <thead class="table bg-dark text-light text-center">
               <tr>
                <th class="text-center" style="width:30px;">Lp.</th>
                <th>Rodzaj i marka</th>
-               <th class="text-center" style="width:80px;">Nr rej.</th>
+               <th class="text-center" style="width:70px;">Nr rej.</th>
                <th class="text-center" style="width:100px;">Nr VIN</th>
-               <th class="text-center" style="width:80px;">DMC / os.</th>
-               <th class="text-center" style="width:80px;">Własność</th>
+               <th class="text-center" style="width:60px;">DMC/os.</th>
+               <th class="text-center" style="width:70px;">Własność</th>
                <th class="text-center" style="width:90px;">Data wpr.</th>
               </tr>
              </thead>
-             <tr><td colspan="7" class="text-center"><strong><span style="font-size: 14px;color:red;">Pojazdy wprowadzone do licencji / zezwolenia
+             <tr><td colspan="7" class="text-center"><strong><span style="font-size: 13px;color:red;">Pojazdy wprowadzone do licencji / zezwolenia
              </span></strong></td></tr>
               <p style="font-size:1px;">{{$i=1}}</p>
              @foreach($cars as $car)
                @if(($car->status)==1)
                  <tr>
                    <td class="text-center">{{$i++}}</td>
-                   <td style="width:140px;">{{$car->rodzaj_poj}}<br /><strong> {{$car->marka}} </strong></td>
+                   <td style="width:140px;font-size:10px;">{{$car->rodzaj_poj}}<br /><strong> {{$car->marka}} </strong></td>
                    <td class="text-center">{{$car->nr_rej}}<br /><span class="text-primary"><small style="font-size:11px;">{{$car->p_nr_rej}}</small></span></td>
                    <td class="text-center">{{$car->nr_vin}}</td>
-                   <td class="text-center">{{$car->dmc}} kg</td>
+                   <td class="text-center">{{$car->dmc}}</td>
                    <td class="text-center">{{$car->wlasnosc}}</td>
                    <td class="text-center">{{$car->data_wpr}} r.</td>
 
@@ -117,28 +117,26 @@
                @endif
              @endforeach
            </table>
-
-
            <table class="table table-striped table-sm">
               <thead class="table bg-dark text-light text-center">
               <tr>
                <th class="text-center" style="width:30px;">Lp.</th>
                <th>Rodzaj i marka</th>
-               <th class="text-center" style="width:80px;">Nr rej.</th>
+               <th class="text-center" style="width:70px;">Nr rej.</th>
                <th class="text-center" style="width:100px;">Nr VIN</th>
-               <th class="text-center" style="width:80px;">DMC / os.</th>
-               <th class="text-center" style="width:80px;">Własność</th>
+               <th class="text-center" style="width:60px;">DMC/os.</th>
+               <th class="text-center" style="width:70px;">Własność</th>
                <th class="text-center" style="width:90px;">Data wpr.</th>
               </tr>
              </thead>
-             <tr><td colspan="7" class="text-center"><strong><span style="font-size: 14px;color:red;">Pojazdy wycofane z licencji / zezwolenia</span>
+             <tr><td colspan="7" class="text-center"><strong><span style="font-size: 13px;color:red;">Pojazdy wycofane z licencji / zezwolenia</span>
              </strong></td></tr>
               <p style="font-size:1px;">{{$a=1}}</p>
                @foreach($cars as $car)
                @if(($car->status)==2)
                     <tr>
                      <td class="text-center">{{$a++}}</td>
-                     <td style="width:140px;">{{$car->rodzaj_poj}}<br /><strong> {{$car->marka}} </strong></td>
+                     <td style="width:140px;font-size:10px;">{{$car->rodzaj_poj}}<br /><strong> {{$car->marka}} </strong></td>
                      <td class="text-center">{{$car->nr_rej}}</td>
                      <td class="text-center">{{$car->nr_vin}}</td>
                      <td class="text-center">{{$car->dmc}} kg</td>

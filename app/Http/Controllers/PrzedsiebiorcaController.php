@@ -330,7 +330,7 @@ class PrzedsiebiorcaController extends Controller
 
         $pdf = PDF::loadView('przedsiebiorca.print_cars', ['przedsiebiorca' => $przedsiebiorca,'dok'=> $dok, 'cars'=>$cars, 'stan' => $stan, 'rodzaje' =>$rodzaje ] );
 
-        return $pdf->download('wykazpojazdow.pdf');
+        return $pdf->download('wykazpojazdow_'.$request->route('nr_dok').'_'.date('d-m-Y H:i:s').'.pdf');
 
     }
 
