@@ -99,7 +99,7 @@ class PrzedsiebiorcaController extends Controller
         ->get();
 
         foreach($rodzaje as $rr){
-           echo $id_osf = $rr->id_osf;
+         $id_osf = $rr->id_osf;
         }
 
         $osobowosc = DB::table('rodzaj_przed')->where('id','=', $id_osf)->get();
@@ -126,7 +126,9 @@ class PrzedsiebiorcaController extends Controller
         //exit;
         $cars = DB::table('wykaz_poj')->where('id', $request->route('id'))->get();
 
-        return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert','baza','zab','cars','kontrole'));
+        $id_dok = \App\DokumentyPrzed::all()->where('nr_dok','=',$rr->nr_dok);
+
+        return view('przedsiebiorca.show', compact('przedsiebiorca','rodzaje','osobowosc','dok','cert','baza','zab','cars','kontrole','id_dok'));
     }
 
      /**

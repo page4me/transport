@@ -8,13 +8,9 @@
         @endforeach
 
 
-            @php
-
-               $id_dok = \App\DokumentyPrzed::all()->where('nr_dok','=',$rodz->nr_dok); @endphp
-
-                @foreach($id_dok as $id)
-                @php $id_d = $id->id @endphp
-                @endforeach
+        @foreach($id_dok as $id)
+        @php $id_d = $id->id; @endphp
+        @endforeach
 
         <div class="container-fluid">
                 <div class="col-md-12 text-center bg bg-primary" style="height: 8px;"></div>
