@@ -1,3 +1,5 @@
+<p align="center"><img src="http://tr.page4me.pl/img/logo.jpg" width="200" /></p>
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
