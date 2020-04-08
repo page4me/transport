@@ -7,7 +7,6 @@
         @foreach($dok as $dk)
         @endforeach
 
-
         @foreach($id_dok as $id)
         @php $id_d = $id->id; @endphp
         @endforeach
