@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\osk;
 
+use App\Models\KategorieIns;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class OskController extends Controller
+class KategorieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +16,6 @@ class OskController extends Controller
     public function index()
     {
         //
-        return view('osk.start');
-    }
-
-    public function szkoly()
-    {
-        //
-        return view('osk.szkoly.index');
     }
 
     /**
@@ -48,10 +42,10 @@ class OskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\KategorieIns  $kategorieIns
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(KategorieIns $kategorieIns)
     {
         //
     }
@@ -59,10 +53,10 @@ class OskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\KategorieIns  $kategorieIns
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(KategorieIns $kategorieIns)
     {
         //
     }
@@ -71,10 +65,10 @@ class OskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\KategorieIns  $kategorieIns
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, KategorieIns $kategorieIns)
     {
         //
     }
@@ -82,10 +76,10 @@ class OskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\KategorieIns  $kategorieIns
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(KategorieIns $kategorieIns)
     {
         //
     }

@@ -89,6 +89,15 @@ Route::resource('przedsiebiorca', 'PrzedsiebiorcaController');
 // Routing - OSK
 
 Route::resource('osk', 'osk\OskController');
+Route::get('szkoly', 'osk\OskController@szkoly')->name('szkoly');
+
+
+Route::resource('instruktor', 'osk\InstruktorController');
+
+Route::resource('kategorie', 'osk\KategorieController');
+
+
+// End Routing - OSK
 
 // Routing - SKP
 
