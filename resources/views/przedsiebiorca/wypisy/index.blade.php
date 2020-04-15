@@ -78,15 +78,15 @@
                                         <form method="post" action="{{ route('wypisy.store') }}">
                                     <div class="row">
                                             @csrf
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="nr_wyp"><strong>Numer wypisu:</strong></label>
                                             <input type="text" class="form-control" name="nr_wyp"/>
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="nr_druk"><strong>Nr druku:</strong></label>
                                             <input type="text" class="form-control" name="nr_druku"/>
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="id_dok_przed"><strong>Nr dokumentu:</strong></label>
                                             <input type="text" class="form-control" name="_id_dok_przed" placeholder="{{$dk->nr_dok}}" disabled="disabled" />
                                             <input type="hidden" class="form-control" name="id_dok_przed" value="{{$dk->nr_dok}}" />
@@ -95,33 +95,33 @@
 
                                     <div class="row">
 
-                                        <div class="col-md-6 form-group">
+                                        <div class="col-md-6 form-control">
                                          <label for="nazwa"><strong>Nazwa dokumentu:</strong></label>
                                          <input type="text" class="form-control" name="_nazwa" value="{{$dk->nazwa}}" disabled="disabled" />
                                          <input type="hidden" class="form-control" name="nazwa" value="{{$dk->nazwa}}" />
                                         </div>
-                                        <div class="col-md-6 form-group">
+                                        <div class="col-md-6 form-control">
                                             <label for="nazwa_wyp"><strong>Rodzaj dokuemntu:</strong></label>
                                             <input type="text" class="form-control" name="_nazwa" value="{{$dk->rodz_dok}}" disabled="disabled" />
                                             <input type="hidden" class="form-control" name="rodzaj_wyp" value="{{$dk->rodz_dok}}" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="data_wn"><strong>Data wniosku:</strong></label>
                                             <input type="date" class="form-control" name="data_wn"/>
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="data_wyd"><strong>Data wydania:</strong></label>
                                             <input type="date" class="form-control" name="data_wyd" />
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="nr_sprawy"><strong>Numer sprawy:</strong></label>
                                             <input type="text" class="form-control" name="nr_sprawy" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 form-group">
+                                        <div class="col-md-12 form-control">
                                             <label for="uwagi"><strong>Uwagi:</strong></label>
                                             <input type="text" class="form-control" name="uwagi"/>
                                         </div>
@@ -225,15 +225,15 @@
                                     <div class="row">
                                             @csrf
                                              @method('PATCH')
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="nr_wyp"><strong>Numer wypisu:</strong></label>
                                             <input type="text" class="form-control" id="nr_wyp" name="nr_wyp" value="{{$wp->nr_wyp}}" />
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="nr_druk"><strong>Nr druku:</strong></label>
                                             <input type="text" class="form-control" name="nr_druku" id="nr_druku" />
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="id_dok_przed"><strong>Nr dokumentu:</strong></label>
                                             <input type="text" class="form-control" name="_id_dok_przed" placeholder="{{$dk->nr_dok}}" disabled="disabled" />
                                             <input type="hidden" class="form-control" name="nr_dok" value="{{$dk->nr_dok}}" />
@@ -242,33 +242,33 @@
 
                                     <div class="row">
 
-                                        <div class="col-md-6 form-group">
+                                        <div class="col-md-6 form-control">
                                          <label for="nazwa"><strong>Nazwa dokumentu:</strong></label>
                                          <input type="text" class="form-control" name="_nazwa" value="{{$dk->nazwa}}" disabled="disabled" />
                                          <input type="hidden" class="form-control" name="nazwa" value="{{$dk->nazwa}}" />
                                         </div>
-                                        <div class="col-md-6 form-group">
+                                        <div class="col-md-6 form-control">
                                             <label for="nazwa_wyp"><strong>Rodzaj dokuemntu:</strong></label>
                                             <input type="text" class="form-control" name="_nazwa" value="{{$dk->rodz_dok}}" disabled="disabled" />
                                             <input type="hidden" class="form-control" name="rodzaj_wyp" value="{{$dk->rodz_dok}}" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="data_wn"><strong>Data wniosku:</strong></label>
                                             <input type="date" class="form-control" name="data_wn" id="data_wn" value="{{$wp->data_wn}}" />
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="data_wyd"><strong>Data wydania:</strong></label>
                                             <input type="date" class="form-control" name="data_wyd" id="data_wyd" value="{{$wp->data_wyd}}" />
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-4 form-control">
                                             <label for="nr_sprawy"><strong>Numer sprawy:</strong></label>
                                             <input type="text" class="form-control" name="nr_sprawy" id="nr_sprawy" value="{{$wp->nr_sprawy}}" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 form-group">
+                                        <div class="col-md-12 form-control">
                                             <label for="uwagi"><strong>Uwagi:</strong></label>
                                             <input type="text" class="form-control" name="uwagi" id="uwagi" value="{{$wp->uwagi}}" />
                                         </div>

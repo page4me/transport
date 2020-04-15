@@ -80,11 +80,16 @@ class InstruktorController extends Controller
      * @param  \App\Models\Instruktor  $instruktor
      * @return \Illuminate\Http\Response
      */
-    public function show(Instruktor $instruktor)
+    public function show(Request $request, $id)
     {
-     
-        //
+       
+        $instruktor = \App\Models\Instruktor::findOrFail($id);
+        
+        //echo '<pre />';
+       // print_r($instruktor);
+        //exit;
 
+             return view('osk.instruktorzy.show', compact('instruktor'));
        
     }
 
@@ -94,9 +99,13 @@ class InstruktorController extends Controller
      * @param  \App\Models\Instruktor  $instruktor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Instruktor $instruktor)
+    public function edit(Request $request, $id)
     {
         //
+        $instruktor = \App\Models\Instruktor::findOrFail($id);
+        
+        return view('osk.instruktorzy.edit', compact('instruktor'));
+
     }
 
     /**
@@ -106,9 +115,39 @@ class InstruktorController extends Controller
      * @param  \App\Models\Instruktor  $instruktor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Instruktor $instruktor)
+    public function update(Request $request, $id)
     {
         //
+        $validatedData = $request->validate([
+            'id_osk' => 'nullable',
+            'nr_upr' => 'required|max:8',
+            'nr_upr' => 'nullable',
+            'dat_w' => 'required|date',
+            'nr_leg' => 'nullable',
+            'p_nr_leg' => 'nullable',
+            'imie' => 'required|max:255',
+            'nazwisko' => 'required|max:255',
+            'adres' => 'required|max:255',
+            'pesel' => 'required|max:11',
+            'dat_w_leg' => 'required|date',
+            'dat_skr' => 'nullable',
+            'powod' => 'nullable',
+            'warsztaty' => 'required|max:50',
+            'orz_lek' => 'required|date',
+            'orz_psy' => 'required|date',
+            'telefon' => 'nullable',
+            'email' => 'nullable',
+            'status' => 'nullable',
+            'uwagi' => 'nullable',
+           ]);
+
+           \App\Models\Instruktor::whereId($id)->update($validatedData); //update
+           //print_r($validatedData);
+           //exit;
+           Alert::success('', 'Zmieniono dane instruktora');
+
+           return back();
+
     }
 
     /**

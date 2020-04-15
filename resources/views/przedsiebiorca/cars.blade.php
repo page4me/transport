@@ -85,7 +85,7 @@
                         <form method="post" action="{{ route('pojazdy.store') }}">
                       <div class="row">
                             @csrf
-                         <div class="col-md-12 form-group">
+                         <div class="col-md-12 form-control">
                             <label for="nr_rej"><strong>Numer rejestracyjny:</strong></label>
                             <input type="text" class="form-control" name="nr_rej"/>
                         </div>
@@ -93,7 +93,7 @@
 
                       <div class="row">
 
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 form-control">
                             <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
 
                             <select name="rodzaj_poj" class="form-control">
@@ -103,11 +103,11 @@
                               <option value="autobus">autobus</option>
                             </select>
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 form-control">
                             <label for="kod_p"><strong>Marka:</strong></label>
                             <input type="text" class="form-control" name="marka">
                         </div>
-                         <div class="col-md-4 form-group">
+                         <div class="col-md-4 form-control">
                             <label for="nr_druku"><strong>Nr VIN:</strong></label>
                             <input type="text" class="form-control" name="nr_vin" maxlength="17" />
                         </div>
@@ -116,11 +116,11 @@
 
 
                       <div class="row">
-                         <div class="col-md-4 form-group">
+                         <div class="col-md-4 form-control">
                             <label for="nr_sprawy"><strong>DMC:</strong></label>
                             <input type="text" class="form-control" name="dmc"/>
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 form-control">
                             <label for="tel"><strong>Prawo do dysponowania:</strong></label>
                                                 <select name="wlasnosc" class="form-control">
                                                     <option value="wlasność">własność</option>
@@ -129,14 +129,14 @@
                                                     <option value="użyczenie">użyczenie</option>
                                                   </select>
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 form-control">
                             <label for="tel"><strong>Data wprowadzenia:</strong></label>
                             <input type="date" class="form-control" name="data_wpr" />
                         </div>
 
                       </div>
                       <div class="row">
-                        <div class="col-md-12 form-group">
+                        <div class="col-md-12 form-control">
                             <label for="uwagi"><strong>Uwagi:</strong></label>
                             <input type="text" class="form-control" name="uwagi"/>
                         </div>
@@ -230,11 +230,11 @@
                                               <div class="row">
                                                     @csrf
                                                       @method('PATCH')
-                                                 <div class="col-md-6 form-group">
+                                                 <div class="col-md-6 form-control">
                                                     <label for="nr_rej"><strong>Numer rejestracyjny:</strong></label>
                                                     <input type="text" class="form-control" name="nr_rej" id="nr_rej" value="@if(count($cars) >0) {{$car->nr_rej}} @else @endif"/>
                                                  </div>
-                                                 <div class="col-md-6 form-group">
+                                                 <div class="col-md-6 form-control">
                                                     <label for="p_nr_rej"><strong>Poprzedni numer rejestracyjny:</strong></label>
                                                     <input type="text" class="form-control" name="p_nr_rej" id="p_nr_rej" value="@if(count($cars) >0) {{$car->p_nr_rej}} @else @endif"/>
                                                  </div>
@@ -242,15 +242,15 @@
 
                                               <div class="row">
 
-                                                <div class="col-md-4 form-group">
+                                                <div class="col-md-4 form-control">
                                                     <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
                                                     <input type="text" name="rodzaj_poj" class="form-control" id="rodzaj_poj" value="@if(count($cars) >0) {{$car->rodzaj_poj}} @else @endif">
                                                 </div>
-                                                <div class="col-md-4 form-group">
+                                                <div class="col-md-4 form-control">
                                                     <label for="kod_p"><strong>Marka:</strong></label>
                                                     <input type="text" class="form-control" name="marka" id="marka" value="@if(count($cars) >0) {{$car->marka}} @else @endif" />
                                                 </div>
-                                                 <div class="col-md-4 form-group">
+                                                 <div class="col-md-4 form-control">
                                                     <label for="nr_druku"><strong>Nr VIN:</strong></label>
                                                     <input type="text" class="form-control" name="nr_vin" id="nr_vin" maxlength="17" value="@if(count($cars) >0) {{$car->nr_vin}} @else @endif" />
                                                 </div>
@@ -259,22 +259,22 @@
 
 
                                               <div class="row">
-                                                 <div class="col-md-4 form-group">
+                                                 <div class="col-md-4 form-control">
                                                     <label for="nr_sprawy"><strong>DMC:</strong></label>
                                                     <input type="text" class="form-control" name="dmc" id="dmc" value="@if(count($cars) >0) {{$car->dmc}} @else @endif" />
                                                 </div>
-                                                <div class="col-md-4 form-group">
+                                                <div class="col-md-4 form-control">
                                                     <label for="tel"><strong>Własność:</strong></label>
                                                     <input type="text" class="form-control" name="wlasnosc" id="wlasnosc" value="@if(count($cars) >0) {{$car->wlasnosc}} @else @endif" />
                                                 </div>
-                                                <div class="col-md-4 form-group">
+                                                <div class="col-md-4 form-control">
                                                     <label for="tel"><strong>Data wprowadzenia:</strong></label>
                                                     <input type="date" class="form-control" name="data_wpr" id="data_wpr" value="@if(count($cars) >0) {{$car->data_wpr}} @else @endif" />
                                                 </div>
 
                                               </div>
                                               <div class="row">
-                                                <div class="col-md-12 form-group">
+                                                <div class="col-md-12 form-control">
                                                     <label for="uwagi"><strong>Uwagi:</strong></label>
                                                     <input type="text" class="form-control" name="uwagi" id="uwagi" value="@if(count($cars) >0) {{$car->uwagi}} @else @endif" />
                                                 </div>
@@ -354,7 +354,7 @@
 
                                           @csrf
                                           @method('PATCH')
-                                        Wprowadź datę wycofania pojazdu: <input class="form-group" type="date" id="data_wyc" name="data_wyc" />
+                                        Wprowadź datę wycofania pojazdu: <input class="form-control" type="date" id="data_wyc" name="data_wyc" />
                                         <input type="hidden" id="id" name="id" value="@if(count($cars) >0) {{$car->id}}@else @endif" />
                                         <input type="hidden" name="id_przed" value="@if(count($cars) >0) {{$dk->id_przed}}@else @endif" />
                                       </div>

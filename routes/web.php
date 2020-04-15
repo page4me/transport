@@ -93,6 +93,7 @@ Route::get('szkoly', 'osk\OskController@szkoly')->name('szkoly');
 
 
 Route::resource('instruktor', 'osk\InstruktorController');
+Route::post('instruktor/{id}','osk\InstruktorController@update')->name('instruktor.update');
 
 Route::resource('kategorie', 'osk\KategorieController');
 

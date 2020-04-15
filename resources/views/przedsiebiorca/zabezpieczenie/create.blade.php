@@ -45,7 +45,7 @@
         <div class="row">
               @csrf
 
-          <div class="col-md-8 form-group">
+          <div class="col-md-8 form-control">
               <label for="id_przed">Przedsiębiorca:</label>
              <select class="form-control" name="id_przed" id="id_przed">
 
@@ -59,7 +59,7 @@
 
               <input type="hidden" name="id_dok_przed" value="{{$dok}}" />
           </div>
-          <div class="col-md-4 form-group">
+          <div class="col-md-4 form-control">
 
             <label for="">Numer polisy:</label>
             <input type="text" class="form-control" name="numer" />
@@ -67,15 +67,15 @@
         </div>
 
         <div class="row">
-           <div class="col-md-4 form-group">
+           <div class="col-md-4 form-control">
               <label for="imie">Nazwa:</label>
               <input type="text" class="form-control" name="nazwa"/>
           </div>
-          <div class="col-md-4 form-group">
+          <div class="col-md-4 form-control">
               <label for="adres">Data od:</label>
               <input type="date" class="form-control" name="data_od"/>
           </div>
-          <div class="col-md-4 form-group">
+          <div class="col-md-4 form-control">
               <label for="">Data do:</label>
               <input type="date" class="form-control" name="data_do" />
           </div>
@@ -84,11 +84,11 @@
 
         <div class="row">
 
-         <div class="col-md-4 form-group">
+         <div class="col-md-4 form-control">
               <label for="miejscowosc">Na ile pojazdów:</label>
               <input type="text" class="form-control" name="ile_poj"/>
           </div>
-           <div class="col-md-4 form-group">
+           <div class="col-md-4 form-control">
               <label for="gmina">Suma zabezpieczenia w &euro;:</label>
               <input type="text" class="form-control" name="suma_zab"/>
           </div>
@@ -97,7 +97,7 @@
 
         </div>
         <div class="row">
-          <div class="col-md-12 form-group">
+          <div class="col-md-12 form-control">
               <label for="uwagi">Uwagi:</label>
               <input type="text" class="form-control" name="uwagi"/>
           </div>

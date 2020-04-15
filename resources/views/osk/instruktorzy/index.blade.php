@@ -34,7 +34,6 @@
                         <td>{{ $ins->orz_psy }}</td>
                         <td>{{ $ins->warsztaty }}</td>
                         <td>
-                            <a href="#" role="button" class="btn btn-warning btn-sm"><i class="fa fa-history"></i></a> 
                             <a href="#" role="button" class="btn btn-danger btn-sm"><i class="fas fa-user-slash"></i></a> 
                             <a href="{{ route('instruktor.show', ['id'=>$ins->id, 'nr_upr'=>$ins->nr_upr]) }}" role="button" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a> 
                         </td>

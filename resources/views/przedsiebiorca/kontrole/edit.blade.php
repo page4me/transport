@@ -39,19 +39,19 @@
         </div>
 
         <div class="row">
-          <div class="col-md-3 form-group">
+          <div class="col-md-3 form-control">
               <label for="nazwa"><strong>Nazwa kontroli:</strong></label>
           <input type="text" class="form-control" name="nazwa" value="{{$kt->nazwa}}" />
           </div>
-           <div class="col-md-3 form-group">
+           <div class="col-md-3 form-control">
               <label for="dat_roz">Data rozporzczęcia:</label>
               <input type="date" class="form-control" name="dat_roz" value="{{$kt->dat_roz}}" />
           </div>
-           <div class="col-md-3 form-group">
+           <div class="col-md-3 form-control">
               <label for="dat_zak">Data zakończenia:</label>
               <input type="date" class="form-control" name="dat_zak" value="{{$kt->dat_zak}}" />
           </div>
-          <div class="col-md-3 form-group">
+          <div class="col-md-3 form-control">
             <label for="dat_zawiad">Zawiadomienie:</label>
             <input type="date" class="form-control" name="dat_zawiad" value="{{$kt->dat_zawiad}}" />
         </div>
@@ -59,48 +59,48 @@
 
 
         <div class="row">
-          <div class="col-md-4 form-group">
+          <div class="col-md-4 form-control">
                 <label for="nr_sprawy">Numer sprawy:</label>
                 <input type="text" class="form-control" name="nr_sprawy" value="{{$kt->nr_sprawy}}"  />
           </div>
-          <div class="col-md-3 form-group">
+          <div class="col-md-3 form-control">
               <label for="nr_upo">Numer upoważnienia:</label>
               <input type="text" class="form-control" name="nr_upo" value="{{$kt->nr_upo}}"  />
           </div>
-          <div class="col-md-5 form-group">
+          <div class="col-md-5 form-control">
             <label for="kto">Osoba przeprowadzająca kontrolę:</label>
             <input type="text" class="form-control" name="kto" value="{{$kt->kto}}"  />
           </div>
 
         </div>
         <div class="row">
-            <div class="col-md-4 form-group">
+            <div class="col-md-4 form-control">
                   <label for="wynik">Wynik kontroli:</label>
                   <input type="text" class="form-control" name="wynik" value="{{$kt->wynik}}"  />
             </div>
-            <div class="col-md-4 form-group">
+            <div class="col-md-4 form-control">
                 <label for="dat_zal">Data zaleceń pokontrolnych:</label>
                 <input type="date" class="form-control" name="dat_zal" value="{{$kt->dat_zal}}"  />
             </div>
           </div>
         <div class="row">
-            <div class="col-md-12 form-group">
+            <div class="col-md-12 form-control">
                 <label for="zalecenia"><strong>Zalecenia pokontrolne:</strong></label>
                 <input id="nk" type="text" class="form-control" name="zalecenia" value="{{$kt->zalecenia}}"  />
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 form-group">
+            <div class="col-md-4 form-control">
                   <label for="wyn_pokont">Wynik po zalceniach:</label>
                   <input type="text" class="form-control" name="wyn_pokont" value="{{$kt->wyn_pokont}}"  />
             </div>
-            <div class="col-md-4 form-group">
+            <div class="col-md-4 form-control">
                 <label for="dat_ost_kont">Data ostatniej kontroli:</label>
                 <input type="date" class="form-control" name="dat_ost_kont" value="{{$kt->dat_ost_kont}}"  />
             </div>
         </div>
         <div class="row">
-          <div class="col-md-12 form-group">
+          <div class="col-md-12 form-control">
               <label for="uwagi">Uwagi:</label>
               <input type="text" class="form-control" name="uwagi" value="{{$kt->uwagi}}" />
           </div>

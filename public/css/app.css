@@ -2107,7 +2107,7 @@ textarea.form-control {
   height: auto;
 }
 
-.form-group {
+.form-control {
   margin-bottom: 1rem;
 }
 
@@ -2465,7 +2465,7 @@ textarea.form-control.is-invalid {
     margin-bottom: 0;
   }
 
-  .form-inline .form-group {
+  .form-inline .form-control {
     display: flex;
     flex: 0 0 auto;
     flex-flow: row wrap;
