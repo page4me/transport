@@ -104,7 +104,9 @@
     </textarea></div>
 
    </form>
+    <div class="row"><a class="btn btn-primary" href="/przedsiebiorca/{{ $dk->id_przed }}/dokument/{{ $dk->nr_dok }}">Powrót do szczegółowych danych przedsiębiorcy</a></div>
   </div>
+
 
   <script type="text/javascript">
     tinymce.init({
@@ -116,10 +118,6 @@
 
     </script>
 
-
-
-
-    -->
 </body>
 </html>
 

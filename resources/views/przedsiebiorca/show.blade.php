@@ -448,8 +448,21 @@
                <strong>Numer dokumentu: </strong><br /><strong> <span style="color:#17aa06;"> {{$rodz->nr_dok}}
               </span> /   {{$rodz->nr_druku}} </strong></span>
              </div>
-             <div class="col-md-12 text-center"><br /><a href="{{ url('/przedsiebiorca/' . $przedsiebiorca->id.'/zmiany/'.$rodz->nr_dok)}}" role="button" class="btn btn-primary btn-sm">Historia zmian</a></div>
+             
            </div>
+           <!-- jezeli jest licencja zawieszona lub jest rezygnacja pokaz powod -->
+           <div class="row">&nbsp;</div>
+           @if($rodz->powod)
+           <div class="row p-3 border border-danger">
+              <div class="col-md-4"><strong>Powód rezygnacji / zawieszenia: </strong></div>
+              <div class="col-md-8 text-danger"><strong>{{ $rodz->powod }}</strong></div>
+           </div>
+          @else 
+          @endif
+       <!-- koniec informacji o zawieszeniu lub rezygnacji -->
+         <div class="row"><div class="col-md-12 text-center"><br /><a href="{{ url('/przedsiebiorca/' . $przedsiebiorca->id.'/zmiany/'.$rodz->nr_dok)}}" role="button" class="btn btn-primary btn-sm">Historia zmian</a></div>
+        </div>
+
     </div>
     <div class="card-header bg-dark text-light">
 

@@ -2,7 +2,9 @@
 
 @section('content')
 
-@php $kat = \App\Models\KategorieIns::find($instruktor->id);  @endphp
+@foreach($kategoria as $kat)
+
+@endforeach
 
 <div class="container-fluid">
     <div class="col-md-12 text-center bg bg-success" style="height: 8px;"></div>
@@ -74,7 +76,7 @@
                    </div>
                    <div class="col-md-6 text-right">
                      @if($kat) @else <a href="{{ route('kategorie.create', ['nr_upr'=>$instruktor->nr_upr]) }}" class="btn btn-primary btn-sm">Dodaj kategorię</a> @endif
-                      <a href="{{ route('kategorie.edit', ['id'=>$kat->id, 'nr_upr'=>$instruktor->nr_upr]) }}" class="btn btn-success btn-sm">Edytuj kategorię</a>
+                     @if($kat) <a href="{{ route('kategorie.edit', ['id'=>$kat->id, 'nr_upr'=>$instruktor->nr_upr]) }}" class="btn btn-success btn-sm">Edytuj kategorię</a> @else @endif
                    </div>
                </div>
             </div>

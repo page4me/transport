@@ -6,6 +6,7 @@ use App\Models\Instruktor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Alert;
+use DB;
 
 
 class InstruktorController extends Controller
@@ -83,13 +84,16 @@ class InstruktorController extends Controller
     public function show(Request $request, $id)
     {
        
-        $instruktor = \App\Models\Instruktor::findOrFail($id);
+       
+       $instruktor = \App\Models\Instruktor::findOrFail($id);
+       // $kategoria = \App\Models\KategorieIns::findOrFail($request->id_ins);
+       $kategoria = DB::table('osk_kat_inst')->where('id' , $id)->get();
         
         //echo '<pre />';
-       // print_r($instruktor);
+       // print_r($kategoria);
         //exit;
 
-             return view('osk.instruktorzy.show', compact('instruktor'));
+             return view('osk.instruktorzy.show', compact('instruktor','kategoria'));
        
     }
 
@@ -135,7 +139,7 @@ class InstruktorController extends Controller
             'warsztaty' => 'required|max:50',
             'orz_lek' => 'required|date',
             'orz_psy' => 'required|date',
-            'telefon' => 'nullable',
+            'tel' => 'nullable',
             'email' => 'nullable',
             'status' => 'nullable',
             'uwagi' => 'nullable',

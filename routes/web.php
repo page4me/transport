@@ -96,7 +96,7 @@ Route::resource('instruktor', 'osk\InstruktorController');
 Route::post('instruktor/{id}','osk\InstruktorController@update')->name('instruktor.update');
 
 Route::resource('kategorie', 'osk\KategorieController');
-
+Route::post('kategorie/{id}/edit','osk\KategorieController@update')->name('kategorie.update');
 
 // End Routing - OSK
 

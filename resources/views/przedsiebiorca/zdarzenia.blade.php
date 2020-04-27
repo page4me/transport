@@ -74,7 +74,7 @@
                                     <div class="alert alert-danger">
                                         <strong>{{$i++}}</strong> - Nr dok: <strong>{{$dk->nr_dok}}</strong> - {{$ilosc_lic_po_terminie= \App\Przedsiebiorca::find($dk->id_przed)->nazwa_firmy}}
                                         - <strong> {{$dk->data_waz}} po terminie {{$dni = (strtotime($dk->data_waz) - strtotime(date('Y-m-d'))) / (60*60*24)}} dni</strong>
-                                        <a role="button" class="btn btn-danger btn-sm text-light" href="{{ route('przedsiebiorca.show',$dk->id_przed.'/dokument/'.$nr_dok)}}">Podgląd</a>
+                                        <a role="button" class="btn btn-danger btn-sm text-light" href="{{ route('przedsiebiorca.show',$dk->id_przed.'/dokument/'.$dk->nr_dok)}}">Podgląd</a>
                                         </div>
 
                                     @endif
