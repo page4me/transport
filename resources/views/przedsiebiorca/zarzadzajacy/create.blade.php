@@ -44,7 +44,7 @@
         <div class="row">
               @csrf
 
-          <div class="col-md-8 form-control">
+          <div class="col-md-8 form-group">
               <label for="id_przed">Przedsiębiorca:</label>
              <select class="form-control" name="id_przed" id="id_przed">
 
@@ -58,7 +58,7 @@
 
               <input type="hidden" name="id_dok_przed" value="{{$dok}}" />
           </div>
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
               <label for="imie">Rodzaj:</label>
                <select class="form-control" name="rodzaj" id="rodzaj" >
                  <option value="0"> </option>
@@ -71,19 +71,19 @@
 
         <div class="row">
 
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="adres">Nr certyfikatu:</label>
               <input type="text" class="form-control" name="nr_cert"/>
           </div>
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="">Imię:</label>
               <input type="text" class="form-control" name="imie_os_z" />
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="miejscowosc">Nazwisko:</label>
               <input type="text" class="form-control" name="nazwisko_os_z"/>
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="gmina">Data urodzenia:</label>
               <input type="date" class="form-control" name="dat_ur"/>
           </div>
@@ -91,15 +91,15 @@
 
         <div class="row">
 
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="adres">Adres:</label>
               <input type="text" class="form-control" name="adres"/>
           </div>
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
               <label for="miejscowosc">Miejscowość:</label>
               <input type="text" class="form-control" name="miasto"/>
           </div>
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
               <label for="data">Data wydania:</label>
               <input type="date" class="form-control" name="dat_wyd"/>
           </div>
@@ -107,7 +107,7 @@
 
 
         <div class="row">
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="tel">Przedsiębiorca jest zarządzającym</label>
               <select class="form-control os_zarz" name="os_zarz" id="os_zarz">
                 <option value="0"></option>
@@ -115,7 +115,7 @@
                 <option value="Nie">Nie</option>
               </select>
           </div>
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="tel">Umowa:</label>
               <select name="umowa" id="umowa" pk="1" class="form-control">
                   <option value="umowa najmu">umowa najmu</option>
@@ -148,13 +148,13 @@
                     })
               </script>
           </div>
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="data">Data umowy:</label>
               <input type="date" class="form-control dat_umowy" pk="2" id="dat_umowy" name="dat_umowy" />
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 form-control">
+          <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
               <input type="text" class="form-control" name="uwagi"/>
           </div>

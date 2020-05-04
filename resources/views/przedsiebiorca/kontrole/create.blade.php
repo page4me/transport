@@ -38,19 +38,19 @@
         </div>
 
         <div class="row">
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="nazwa"><strong>Nazwa kontroli:</strong></label>
               <input type="text" class="form-control" name="nazwa" />
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="dat_roz">Data rozporzczęcia:</label>
               <input type="date" class="form-control" name="dat_roz"/>
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="dat_zak">Data zakończenia:</label>
               <input type="date" class="form-control" name="dat_zak"/>
           </div>
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
             <label for="dat_zawiad">Zawiadomienie:</label>
             <input type="date" class="form-control" name="dat_zawiad"/>
         </div>
@@ -58,15 +58,15 @@
 
 
         <div class="row">
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
                 <label for="nr_sprawy">Numer sprawy:</label>
                 <input type="text" class="form-control" name="nr_sprawy" />
           </div>
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="nr_upo">Numer upoważnienia:</label>
               <input type="text" class="form-control" name="nr_upo" />
           </div>
-          <div class="col-md-5 form-control">
+          <div class="col-md-5 form-group">
             <label for="kto">Osoba przeprowadzająca kontrolę:</label>
             <input type="text" class="form-control" name="kto" />
           </div>
@@ -74,7 +74,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-12 form-control">
+          <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
               <input type="text" class="form-control" name="uwagi"/>
           </div>

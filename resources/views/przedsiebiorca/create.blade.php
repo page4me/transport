@@ -46,13 +46,13 @@
         <div class="row">
               @csrf
 
-          <div class="col-md-12 form-control">
+          <div class="col-md-12 form-group">
               <label for="Nazwa firmy"><B>Nazwa firmy - zgodnie z CEIDG:</B></label>
               <input type="text" class="form-control" name="nazwa_firmy"/>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="rodzaj">Rodzaj przedsiębiorcy:</label>
               <select class="form-control" name="id_osf" id="id_osf" >
                  @foreach($rodzaje as $rodzaj)
@@ -60,59 +60,59 @@
                  @endforeach
               </select>
           </div>
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="imie">Imię:</label>
               <input type="text" class="form-control" name="imie"/>
           </div>
-         <div class="col-md-4 form-control">
+         <div class="col-md-4 form-group">
               <label for="nazwisko">Nazwisko:</label>
               <input type="text" class="form-control" name="nazwisko"/>
           </div>
         </div>
         <div class="row">
 
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="adres">Adres:</label>
               <input type="text" class="form-control" name="adres"/>
           </div>
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="kod_p">Kod pocztowy:</label>
               <input type="text" class="form-control" name="kod_p" maxlength="6" placeholder="xx-xxx"/>
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="miejscowosc">Miejscowość:</label>
               <input type="text" class="form-control" name="miejscowosc"/>
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="gmina">Gmina:</label>
               <input type="text" class="form-control" name="gmina"/>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6 form-control">
+          <div class="col-md-6 form-group">
               <label for="nip">NIP:</label>
               <input type="text" class=" form-control" name="nip" maxlength="11" placeholder="12345678910"/>
               <span><a href="https://prod.ceidg.gov.pl/CEIDG/CEIDG.Public.UI/Search.aspx" target="_blank">Podgląd w CEIGD</a></span>
           </div>
-          <div class="col-md-6 form-control">
+          <div class="col-md-6 form-group">
               <label for="regon">REGON:</label>
               <input type="text" class="form-control" name="regon" maxlength="9" placeholder="123456789"/>
                <span><a href="https://wyszukiwarkaregon.stat.gov.pl/appBIR/index.aspx" target="_blank">Podgląd w GUS</a></span>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 form-control">
+          <div class="col-md-6 form-group">
               <label for="tel">Telefon:</label>
               <input type="text" class="form-control" name="telefon" maxlength="10" placeholder="888999888"/>
           </div>
-          <div class="col-md-6 form-control">
+          <div class="col-md-6 form-group">
               <label for="tel">E-mail:</label>
               <input type="text" class="form-control" name="email" placeholder="nazwa@firma.pl"/>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 form-control">
+          <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
               <input type="text" class="form-control" name="uwagi"/>
           </div>

@@ -34,7 +34,7 @@
         <div class="row">
               @csrf
 
-          <div class="col-md-8 form-control">
+          <div class="col-md-8 form-group">
               <label for="id_przed">Przedsiębiorca:</label>
               <select class="form-control" disabled="disabled">
 
@@ -46,7 +46,7 @@
               </select>
               <input type="hidden" name="id_przed" value="{{$row->id}}" />
           </div>
-           <div class="col-md-4 form-control" style="margin-top: 35px;">
+           <div class="col-md-4 form-group" style="margin-top: 35px;">
             @foreach($dok as $dk)
               <p><strong>{{$dk->nazwa}}: {{$dk->nr_dok}}</strong></p>
               <input type="hidden" name="nazwa" value="{{$dk->nazwa}}" />
@@ -57,15 +57,15 @@
 
         <div class="row">
 
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="nr_dok"><strong>Nr wypisu:</strong></label>
               <input type="text" class="form-control" name="nr_wyp"/>
           </div>
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="kod_p">Rodzaj:</label>
               <input type="text" class="form-control" name="rodzaj_wyp" maxlength="6" placeholder="osoby/rzeczy"/>
           </div>
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
               <label for="nr_druku">Nr druku:</label>
               <input type="text" class="form-control" name="nr_druku"/>
           </div>
@@ -74,22 +74,22 @@
 
 
         <div class="row">
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
               <label for="nr_sprawy">Nr sprawy:</label>
               <input type="text" class="form-control" name="nr_sprawy"/>
           </div>
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="tel">Data wniosku:</label>
               <input type="date" class="form-control" name="data_wn" />
           </div>
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="tel">Data wydania:</label>
               <input type="date" class="form-control" name="data_wyd" />
           </div>
           
         </div>
         <div class="row">
-          <div class="col-md-12 form-control">
+          <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
               <input type="text" class="form-control" name="uwagi"/>
           </div>

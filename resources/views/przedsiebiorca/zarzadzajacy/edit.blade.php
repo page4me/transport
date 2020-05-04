@@ -27,13 +27,13 @@
          <div class="row">
                @csrf
                @method('PATCH')
-           <div class="col-md-8 form-control">
+           <div class="col-md-8 form-group">
                <label for="id_przed">Przedsiębiorca:</label>
                <input type="text" class="form-control" name="nazwa_firmy" value="{{$przedsiebiorca->nazwa_firmy}}" disabled="disabled"/>
                <input type="hidden""  name="id_przed" value="{{$przedsiebiorca->id}}"/>
 
            </div>
-            <div class="col-md-4 form-control">
+            <div class="col-md-4 form-group">
                <label for="imie">Rodzaj:</label>
                 <select class="form-control" name="rodzaj" id="rodzaj" value="{{$oz->rodzaj}}">
                  @if($oz->rodzaj =='rzeczy')
@@ -49,19 +49,19 @@
 
          <div class="row">
 
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
                <label for="adres"><strong>Nr certyfikatu:</strong></label>
                <input type="text" class="form-control" name="nr_cert" value="{{$oz->nr_cert}}" />
            </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
                <label for="">Imię:</label>
                <input type="text" class="form-control" name="imie_os_z" value="{{$oz->imie_os_z}}" />
            </div>
-            <div class="col-md-3 form-control">
+            <div class="col-md-3 form-group">
                <label for="miejscowosc">Nazwisko:</label>
                <input type="text" class="form-control" name="nazwisko_os_z" value="{{$oz->nazwisko_os_z}}" />
            </div>
-            <div class="col-md-3 form-control">
+            <div class="col-md-3 form-group">
                <label for="gmina">Data urodzenia:</label>
                <input type="date" class="form-control" name="dat_ur" value="{{$oz->dat_ur}}" />
            </div>
@@ -69,15 +69,15 @@
 
          <div class="row">
 
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
                <label for="adres">Adres:</label>
                <input type="text" class="form-control" name="adres" value="{{$oz->adres}}" />
            </div>
-            <div class="col-md-4 form-control">
+            <div class="col-md-4 form-group">
                <label for="miejscowosc">Miejscowość:</label>
                <input type="text" class="form-control" name="miasto" value="{{$oz->miasto}}" />
            </div>
-            <div class="col-md-4 form-control">
+            <div class="col-md-4 form-group">
                <label for="data">Data wydania:</label>
                <input type="date" class="form-control" name="dat_wyd" value="{{$oz->dat_wyd}}" />
            </div>
@@ -85,7 +85,7 @@
 
          @endforeach
          <div class="row">
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
                <label for="tel">Zarządzający:</label>
                <select class="form-control" name="os_zarz">
                 @if($oz->os_zarz =='Tak')
@@ -97,7 +97,7 @@
                 @endif
               </select>
            </div>
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
                <label for="tel">Umowa:</label>
                <select name="umowa" id="umowa" pk="1"  @if($oz->os_zarz =='Tak') disabled class="form-control" @elseif($oz->os_zarz =='Nie') class="form-control border-danger" @endif>
                 @if(empty($oz->umowa))
@@ -117,13 +117,13 @@
             </select>
             <input type="checkbox" name="umowa_nie" pk="3" id="umowa_nie" @if(empty($oz->umowa)) @elseif(!empty($oz->umowa)) checked @else @endif  @if($oz->os_zarz=="Tak") disabled @else @endif /> na czas nieokreślony
             </div>
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
                <label for="data">Data umowy:</label>
                <input type="date" name="dat_umowy" value="{{$oz->dat_umowy}}" @if($oz->os_zarz=='Tak') class="form-control" disabled @else class="form-control border-danger" @endif />
            </div>
          </div>
          <div class="row">
-           <div class="col-md-12 form-control">
+           <div class="col-md-12 form-group">
                <label for="uwagi">Uwagi:</label>
                <textarea class="form-control" id="osz" name="uwagi" value="{{$oz->uwagi}}"  />{{$oz->uwagi}}</textarea>
            </div>

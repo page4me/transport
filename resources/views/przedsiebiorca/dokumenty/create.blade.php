@@ -48,7 +48,7 @@
         <div class="row">
               @csrf
 
-          <div class="col-md-8 form-control">
+          <div class="col-md-8 form-group">
               <label for="id_przed">Przedsiębiorca:</label>
               <select class="form-control" name="id_przed" id="id_przed">
 
@@ -59,7 +59,7 @@
                  @endforeach
               </select>
           </div>
-           <div class="col-md-4 form-control">
+           <div class="col-md-4 form-group">
               <label for="imie">Nazwa:</label>
                <select class="form-control" name="nazwa">
                  <option value="0"> </option>
@@ -75,22 +75,22 @@
 
         <div class="row">
 
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="adres"><strong>Nr dokumentu:</strong></label>
               <input type="text" class="form-control" name="nr_dok"/>
           </div>
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="rodz_dok">Rodzaj:</label>
               <select class="form-control" name="rodz_dok">
                 <option value="osoby">osoby</option>
                 <option value="rzeczy">rzeczy</option>
               </select>
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="miejscowosc">Nr druku:</label>
               <input type="text" class="form-control" name="nr_druku"/>
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="gmina">Nr sprawy:</label>
               <input type="text" class="form-control" name="nr_sprawy"/>
           </div>
@@ -98,21 +98,21 @@
 
 
         <div class="row">
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="tel">Data wniosku:</label>
               <input type="date" class="form-control" name="data_wn" />
           </div>
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="tel">Data wydania:</label>
               <input type="date" class="form-control" name="data_wyd" />
           </div>
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="tel">Data ważności:</label>
               <input type="date" class="form-control" name="data_waz" />
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 form-control">
+          <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
               <input type="text" class="form-control" name="uwagi"/>
           </div>

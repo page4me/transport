@@ -42,7 +42,7 @@
                             <div class="row">
                                   @csrf
                            		  @method('HEAD')
-                               <div class="col-md-12 form-control">
+                               <div class="col-md-12 form-group">
                                   <label for="nr_rej"><strong>Numer rejestracyjny:</strong></label>
                                   <input type="text" class="form-control" name="nr_rej" value="{{$cars->nr_rej}}"/>
                               </div>
@@ -50,15 +50,15 @@
 
                             <div class="row">
 
-                              <div class="col-md-4 form-control">
+                              <div class="col-md-4 form-group">
                                   <label for="nr_dok"><strong>Rodzaj pojazdu:</strong></label>
                                   <input type="text" class="form-control" name="rodzaj_poj" value="{{$cars->rodzaj_poj}}" />
                               </div>
-                              <div class="col-md-4 form-control">
+                              <div class="col-md-4 form-group">
                                   <label for="kod_p"><strong>Marka:</strong></label>
                                   <input type="text" class="form-control" name="marka" value="{{$cars->marka}}" />
                               </div>
-                               <div class="col-md-4 form-control">
+                               <div class="col-md-4 form-group">
                                   <label for="nr_druku"><strong>Nr VIN:</strong></label>
                                   <input type="text" class="form-control" name="nr_vin" maxlength="17" value="{{$cars->nr_vin}}" />
                               </div>
@@ -67,22 +67,22 @@
 
 
                             <div class="row">
-                               <div class="col-md-4 form-control">
+                               <div class="col-md-4 form-group">
                                   <label for="nr_sprawy"><strong>DMC:</strong></label>
                                   <input type="text" class="form-control" name="dmc" value="{{$cars->dmc}}" />
                               </div>
-                              <div class="col-md-4 form-control">
+                              <div class="col-md-4 form-group">
                                   <label for="tel"><strong>Własnosć:</strong></label>
                                   <input type="text" class="form-control" name="wlasnosc" value="{{$cars->wlasnosc}}" />
                               </div>
-                              <div class="col-md-4 form-control">
+                              <div class="col-md-4 form-group">
                                   <label for="tel"><strong>Data wprowadzenia:</strong></label>
                                   <input type="date" class="form-control" name="data_wpr" value="{{$cars->data_wpr}}" />
                               </div>
 
                             </div>
                             <div class="row">
-                              <div class="col-md-12 form-control">
+                              <div class="col-md-12 form-group">
                                   <label for="uwagi"><strong>Uwagi:</strong></label>
                                   <input type="text" class="form-control" name="uwagi" value="{{$cars->uwagi}}" />
                               </div>

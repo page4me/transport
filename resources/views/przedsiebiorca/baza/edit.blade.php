@@ -28,12 +28,12 @@
                  <div class="row">
                        @csrf
                        @method('PATCH')
-                   <div class="col-md-8 form-control">
+                   <div class="col-md-8 form-group">
                         <label for="id_przed">Przedsiębiorca:</label>
                        <input type="text" class="form-control" name="nazwa_firmy" value="{{$przedsiebiorca->nazwa_firmy}}" disabled="disabled"/>
                        <input type="hidden""  name="id_przed" value="{{$przedsiebiorca->id}}"/>
                    </div>
-                    <div class="col-md-4 form-control">
+                    <div class="col-md-4 form-group">
                        <label for="imie">Rodzaj:</label>
                         <select class="form-control" name="rodzaj" id="rodzaj" value="{{$bz->rodzaj}}" >
 
@@ -56,19 +56,19 @@
 
                  <div class="row">
 
-                   <div class="col-md-3 form-control">
+                   <div class="col-md-3 form-group">
                        <label for="adres">Adres:</label>
                        <input type="text" class="form-control" name="adres" value="{{$bz->adres}}" />
                    </div>
-                   <div class="col-md-3 form-control">
+                   <div class="col-md-3 form-group">
                        <label for="kod_p">Kod pocztowy:</label>
                        <input type="text" class="form-control" name="kod_p" maxlength="6" placeholder="xx-xxx" value="{{$bz->kod_p}}" />
                    </div>
-                    <div class="col-md-3 form-control">
+                    <div class="col-md-3 form-group">
                        <label for="miejscowosc">Miejscowość:</label>
                        <input type="text" class="form-control" name="miasto" value="{{$bz->miasto}}" />
                    </div>
-                    <div class="col-md-3 form-control">
+                    <div class="col-md-3 form-group">
                        <label for="gmina">Gmina:</label>
                        <input type="text" class="form-control" name="gmina" value="{{$bz->gmina}}" />
                    </div>
@@ -76,7 +76,7 @@
                  @endforeach
 
                  <div class="row">
-                   <div class="col-md-4 form-control">
+                   <div class="col-md-4 form-group">
                        <label for="wlasnosc">Własność:</label>
                        <select class="form-control" name="wlasnosc">
                         @if($bz->wlasnosc =='Tak')
@@ -88,17 +88,17 @@
                         @endif
                        </select>
                    </div>
-                   <div class="col-md-4 form-control">
+                   <div class="col-md-4 form-group">
                        <label for="tel">Umowa:</label>
                        <input type="text" class="form-control" name="umowa" value="{{$bz->umowa}}" @if($bz->wlasnosc == 'Tak') disabled @else  @endif />
                    </div>
-                   <div class="col-md-4 form-control">
+                   <div class="col-md-4 form-group">
                        <label for="tel">Data umowy:</label>
                        <input type="date" class="form-control" name="dat_umowy" value="{{$bz->dat_umowy}}" @if($bz->wlasnosc == 'Tak') disabled @else  @endif />
                    </div>
                  </div>
                  <div class="row">
-                   <div class="col-md-12 form-control">
+                   <div class="col-md-12 form-group">
                        <label for="uwagi">Uwagi:</label>
                        <textarea class="form-control" id="bz" name="uwagi" value="{{$bz->uwagi}}" />{{$bz->uwagi}}</textarea>
                    </div>

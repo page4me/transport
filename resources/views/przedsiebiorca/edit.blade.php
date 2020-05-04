@@ -37,13 +37,13 @@
         <div class="row">
               @csrf
                @method('PATCH')
-          <div class="col-md-12 form-control">
+          <div class="col-md-12 form-group">
               <label for="Nazwa firmy"><B>Nazwa firmy - zgodnie z CEIDG:</B></label>
               <input type="text" class="form-control" name="nazwa_firmy" value="{{$przedsiebiorca->nazwa_firmy}}" />
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="rodzaj">Rodzaj przedsiębiorcy:</label>
               <select class="form-control" name="id_osf" id="id_osf" >
                  @foreach($rodzaje as $rodzaj)
@@ -51,59 +51,59 @@
                  @endforeach
               </select>
           </div>
-          <div class="col-md-4 form-control">
+          <div class="col-md-4 form-group">
               <label for="imie">Imię:</label>
               <input type="text" class="form-control" name="imie" value="{{$przedsiebiorca->imie}}"/>
           </div>
-         <div class="col-md-4 form-control">
+         <div class="col-md-4 form-group">
               <label for="nazwisko">Nazwisko:</label>
               <input type="text" class="form-control" name="nazwisko" value="{{$przedsiebiorca->nazwisko}}"/>
           </div>
         </div>
         <div class="row">
 
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="adres">Adres:</label>
               <input type="text" class="form-control" name="adres" value="{{$przedsiebiorca->adres}}"/>
           </div>
-          <div class="col-md-3 form-control">
+          <div class="col-md-3 form-group">
               <label for="kod_p">Kod pocztowy:</label>
               <input type="text" class="form-control" name="kod_p" maxlength="6" placeholder="xx-xxx" value="{{$przedsiebiorca->kod_p}}"/>
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="miejscowosc">Miejscowość:</label>
               <input type="text" class="form-control" name="miejscowosc" value="{{$przedsiebiorca->miejscowosc}}"/>
           </div>
-           <div class="col-md-3 form-control">
+           <div class="col-md-3 form-group">
               <label for="gmina">Gmina:</label>
               <input type="text" class="form-control" name="gmina" value="{{$przedsiebiorca->gmina}}"/>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6 form-control">
+          <div class="col-md-6 form-group">
               <label for="nip">NIP:</label>
               <input type="text" class=" form-control" name="nip" maxlength="11" value="{{$przedsiebiorca->nip}}" />
 
           </div>
-          <div class="col-md-6 form-control">
+          <div class="col-md-6 form-group">
               <label for="regon">REGON:</label>
               <input type="text" class="form-control" name="regon" maxlength="9" value="{{$przedsiebiorca->regon}}"/>
 
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 form-control">
+          <div class="col-md-6 form-group">
               <label for="tel">Telefon:</label>
               <input type="text" class="form-control" name="telefon" maxlength="10" value="{{$przedsiebiorca->telefon}}"/>
           </div>
-          <div class="col-md-6 form-control">
+          <div class="col-md-6 form-group">
               <label for="tel">E-mail:</label>
               <input type="text" class="form-control" name="email" value="{{$przedsiebiorca->email}}"/>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 form-control">
+          <div class="col-md-12 form-group">
               <label for="uwagi">Uwagi:</label>
               <textarea class="form-control" id="pp" name="uwagi" value="{{$przedsiebiorca->uwagi}}" />{{$przedsiebiorca->uwagi}}</textarea>
           </div>
