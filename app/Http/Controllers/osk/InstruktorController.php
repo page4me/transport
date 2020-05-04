@@ -87,7 +87,7 @@ class InstruktorController extends Controller
        
        $instruktor = \App\Models\Instruktor::findOrFail($id);
        // $kategoria = \App\Models\KategorieIns::findOrFail($request->id_ins);
-       $kategoria = DB::table('osk_kat_inst')->where('id' , $id)->get();
+       $kategoria = DB::table('osk_kat_inst')->where('id_inst' , $id)->get();
         
         //echo '<pre />';
        // print_r($kategoria);

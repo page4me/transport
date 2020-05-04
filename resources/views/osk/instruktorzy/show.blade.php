@@ -2,9 +2,7 @@
 
 @section('content')
 
-@foreach($kategoria as $kat)
 
-@endforeach
 
 <div class="container-fluid">
     <div class="col-md-12 text-center bg bg-success" style="height: 8px;"></div>
@@ -66,115 +64,144 @@
           
           </div>
         </div>
-         
         
-        <div class="card uper">
-            <div class="card-header bg-warning">
-               <div class="row">
-                   <div class="col-md-6">
-                    Kategorie uprawnień instruktora: 
-                   </div>
-                   <div class="col-md-6 text-right">
-                     @if($kat) @else <a href="{{ route('kategorie.create', ['nr_upr'=>$instruktor->nr_upr]) }}" class="btn btn-primary btn-sm">Dodaj kategorię</a> @endif
-                     @if($kat) <a href="{{ route('kategorie.edit', ['id'=>$kat->id, 'nr_upr'=>$instruktor->nr_upr]) }}" class="btn btn-success btn-sm">Edytuj kategorię</a> @else @endif
-                   </div>
-               </div>
-            </div>
-            <div class="card-body">
-                <div class="row text-center">
-                    <div class="col-md-2 checkbox">
-                    A <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a > 0) checked @else  @endif /><br />
-                    @if(!$kat) @elseif($kat->dat_a) Data: {{ $kat->dat_a }} @else Data: ----- @endif
+      
+        @if($kategoria->count() == 0)
+                  <div class="card uper">
+                    <div class="card-header bg-warning">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Kategorie uprawnień instruktora: 
+                        </div>
+                        <div class="col-md-6 text-right">                           
+                             <a href="{{ route('kategorie.create', ['id_inst'=>$instruktor->id, 'nr_upr'=>$instruktor->nr_upr]) }}" class="btn btn-primary btn-sm">Dodaj kategorię</a>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        AM <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_am == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_am) Data: {{ $kat->dat_am }} @else Data: ----- @endif
+        @else
+                @foreach($kategoria as $kat)
+
+                <div class="card uper">
+                    <div class="card-header bg-warning">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Kategorie uprawnień instruktora: 
+                        </div>
+                        <div class="col-md-6 text-right">
+                           
+                            @if($instruktor->id == $kat->id_inst && $instruktor->nr_upr == $kat->nr_upr) 
+
+                                @if($kat) <a href="{{ route('kategorie.edit', ['id'=>$kat->id, 'nr_upr'=>$instruktor->nr_upr]) }}" class="btn btn-success btn-sm">Edytuj kategorię</a> @else @endif
+                            @else 
+
+                                  @if($kat) @else <a href="{{ route('kategorie.create', ['nr_upr'=>$instruktor->nr_upr]) }}" class="btn btn-primary btn-sm">Dodaj kategorię</a> @endif
+
+                            @endif
+
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        A1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a1 == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_a1) Data: {{ $kat->dat_a1 }} @else Data: ----- @endif
                     </div>
-                    <div class="col-md-2">
-                        A2 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a2 == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_a2) Data: {{ $kat->dat_a2 }} @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        B <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_b == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_b) <span class="badge badge-success"> Data: {{ $kat->dat_b }} </span> @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        B1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_b1 == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_b1) <span class="badge badge-success"> Data: {{ $kat->dat_b1 }} </span> @else Data: ----- @endif
-                    </div>
-                </div>
-                <div class="row">
-                    &nbsp;
-                </div>
-                <div class="row text-center">
-                    <div class="col-md-2 checkbox">
-                        BE <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_be == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_be)<span class="badge badge-success"> Data: {{ $kat->dat_be }}</span> @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        C <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_c == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_c) <span class="badge badge-success">Data: {{ $kat->dat_c }}</span> @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        C1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_c1 == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_c1) <span class="badge badge-success">Data: {{ $kat->dat_c1 }}</span> @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        C1E <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_c1e == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_c1e) Data: {{ $kat->dat_c1e }} @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        CE <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_ce == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_ce) <span class="badge badge-success">Data: {{ $kat->dat_ce }} </span>@else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        D <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_d == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_d)<span class="badge badge-success"> Data: {{ $kat->dat_d }} </span> @else Data: ----- @endif
-                    </div>
-                </div>
-                <div class="row">
-                    &nbsp;
-                </div>
-                <div class="row text-center">
-                    <div class="col-md-2 checkbox">
-                        D1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_d1 == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_d1) Data: {{ $kat->dat_d1 }} @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        D1E <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_d1e == 1) checked @else @endif  /><br />
-                        @if(!$kat) @elseif($kat->dat_d1e) Data: {{ $kat->dat_d1e }} @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        DE <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_de == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_de) Data: {{ $kat->dat_de }} @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        T <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_t == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_t) Data: {{ $kat->dat_t }} @else Data: ----- @endif
-                    </div>
-                    <div class="col-md-2">
-                        T1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_t1 == 1) checked @else @endif /><br />
-                        @if(!$kat) @elseif($kat->dat_t1) Data: {{ $kat->dat_t1 }} @else Data: ----- @endif
-                    </div>
-                   
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-2 checkbox">
+                            A <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a > 0) checked @else  @endif /><br />
+                            @if(!$kat) @elseif($kat->dat_a) Data: {{ $kat->dat_a }} @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                AM <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_am == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_am) Data: {{ $kat->dat_am }} @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                A1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a1 == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_a1) Data: {{ $kat->dat_a1 }} @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                A2 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a2 == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_a2) Data: {{ $kat->dat_a2 }} @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                B <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_b == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_b) <span class="badge badge-success"> Data: {{ $kat->dat_b }} </span> @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                B1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_b1 == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_b1) <span class="badge badge-success"> Data: {{ $kat->dat_b1 }} </span> @else Data: ----- @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-2 checkbox">
+                                BE <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_be == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_be)<span class="badge badge-success"> Data: {{ $kat->dat_be }}</span> @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                C <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_c == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_c) <span class="badge badge-success">Data: {{ $kat->dat_c }}</span> @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                C1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_c1 == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_c1) <span class="badge badge-success">Data: {{ $kat->dat_c1 }}</span> @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                C1E <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_c1e == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_c1e) Data: {{ $kat->dat_c1e }} @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                CE <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_ce == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_ce) <span class="badge badge-success">Data: {{ $kat->dat_ce }} </span>@else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                D <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_d == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_d)<span class="badge badge-success"> Data: {{ $kat->dat_d }} </span> @else Data: ----- @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-2 checkbox">
+                                D1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_d1 == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_d1) Data: {{ $kat->dat_d1 }} @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                D1E <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_d1e == 1) checked @else @endif  /><br />
+                                @if(!$kat) @elseif($kat->dat_d1e) Data: {{ $kat->dat_d1e }} @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                DE <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_de == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_de) Data: {{ $kat->dat_de }} @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                T <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_t == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_t) Data: {{ $kat->dat_t }} @else Data: ----- @endif
+                            </div>
+                            <div class="col-md-2">
+                                T1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_t1 == 1) checked @else @endif /><br />
+                                @if(!$kat) @elseif($kat->dat_t1) Data: {{ $kat->dat_t1 }} @else Data: ----- @endif
+                            </div>
+                        
+                            
+                        </div>
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 checkbox">
+                            <strong>Uwagi</strong><br />
+                            {{ $instruktor->uwagi }}
+                            </div>
+                        </div>
                     
-                </div>
-                <div class="row">
-                    &nbsp;
-                </div>
-                <div class="row">
-                    <div class="col-md-12 checkbox">
-                       <strong>Uwagi</strong><br />
-                       {{ $instruktor->uwagi }}
                     </div>
-                </div>
-               
-            </div>
-            
+                    @endforeach
+        @endif
+
+      
+    
+
+       
+        
         </div>
         <div class="container">
             <div class="row ">
