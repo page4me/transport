@@ -19,12 +19,12 @@
               Edycja kategorii instruktora nauki jazdy o numerze uprawnienia NR {{ $kat->nr_upr }}
             </div>
             <div class="card-body font-weight-bold">
-                <form method="post" action="{{ route('kategorie.edit' , $kat->id) }}">
+                <form method="post" action="{{ route('kategorie.update' , $kat->id) }}">
                     @csrf
                    
                 <div class="row text-center">
                     <div class="col-md-2 checkbox">
-                        A <input type="checkbox" name="kat_a" class="form-control" @if(!$kat) @elseif($kat->kat_a >0) checked value="{{ $kat->kat_a }}" @else value="1" @endif /><br />
+                        A <input type="checkbox" name="kat_a" class="form-control" @if($kat->kat_a >0) checked="checked" value="{{ $kat->kat_a }}" @else checked="" value="" @endif /><br />
                         Data: <input type="date" name="dat_a" @if(!$kat) @elseif($kat->dat_a >0) value="{{ $kat->dat_a }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">

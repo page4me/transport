@@ -103,20 +103,20 @@
                     <div class="card-body">
                         <div class="row text-center">
                             <div class="col-md-2 checkbox">
-                            A <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a > 0) checked @else  @endif /><br />
-                            @if(!$kat) @elseif($kat->dat_a) Data: {{ $kat->dat_a }} @else Data: ----- @endif
+                            A <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a > 0) checked @else value="2" @endif /><br />
+                            @if(!$kat) @elseif($kat->dat_a) <span class="badge badge-success">  Data: {{ $kat->dat_a }} </span> @else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
                                 AM <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_am == 1) checked @else @endif /><br />
-                                @if(!$kat) @elseif($kat->dat_am) Data: {{ $kat->dat_am }} @else Data: ----- @endif
+                                @if(!$kat) @elseif($kat->dat_am) <span class="badge badge-success"> Data: {{ $kat->dat_am }} </span> @else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
                                 A1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a1 == 1) checked @else @endif /><br />
-                                @if(!$kat) @elseif($kat->dat_a1) Data: {{ $kat->dat_a1 }} @else Data: ----- @endif
+                                @if(!$kat) @elseif($kat->dat_a1) <span class="badge badge-success"> Data: {{ $kat->dat_a1 }} </span> @else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
                                 A2 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a2 == 1) checked @else @endif /><br />
-                                @if(!$kat) @elseif($kat->dat_a2) Data: {{ $kat->dat_a2 }} @else Data: ----- @endif
+                                @if(!$kat) @elseif($kat->dat_a2) <span class="badge badge-success"> Data: {{ $kat->dat_a2 }} </span> @else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
                                 B <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_b == 1) checked @else @endif /><br />

@@ -119,6 +119,8 @@ class KategorieController extends Controller
     public function update(Request $request, $id)
     {
         //
+      //echo $request->kat_a;
+      //exit;
         $validatedData = $request->validate([
             'id_inst' => 'nullable',
             'nr_upr' => 'nullable',
