@@ -68,11 +68,11 @@
 
                             <div class="row">
                                <div class="col-md-4 form-group">
-                                  <label for="nr_sprawy"><strong>DMC:</strong></label>
+                                  <label for="nr_sprawy"><strong>DMC/OS:</strong></label>
                                   <input type="text" class="form-control" name="dmc" value="{{$cars->dmc}}" />
                               </div>
                               <div class="col-md-4 form-group">
-                                  <label for="tel"><strong>Własnosć:</strong></label>
+                                  <label for="tel"><strong>Własność:</strong></label>
                                   <input type="text" class="form-control" name="wlasnosc" value="{{$cars->wlasnosc}}" />
                               </div>
                               <div class="col-md-4 form-group">
