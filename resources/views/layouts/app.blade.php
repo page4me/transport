@@ -18,7 +18,7 @@
 
         <script src="{{asset("/js/all.js")}}"></script>
         <link href="{{asset("/css/all.css")}}" rel="stylesheet">
-        <script src="{{asset("/vendor/tinymce/tinymce.min.js")}}"></script>
+        <script src="{{asset("/public/vendor/tinymce/tinymce.min.js")}}"></script>
 
 
      <style>
