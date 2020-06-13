@@ -145,7 +145,7 @@
                             </div>
                             <div class="col-md-2">
                                 C1E <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_c1e == 1) checked @else @endif /><br />
-                                @if(!$kat) @elseif($kat->dat_c1e) Data: {{ $kat->dat_c1e }} @else Data: ----- @endif
+                                @if(!$kat) @elseif($kat->dat_c1e)<span class="badge badge-success"> Data: {{ $kat->dat_c1e }}</span> @else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
                                 CE <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_ce == 1) checked @else @endif /><br />
@@ -162,23 +162,23 @@
                         <div class="row text-center">
                             <div class="col-md-2 checkbox">
                                 D1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_d1 == 1) checked @else @endif /><br />
-                                @if(!$kat) @elseif($kat->dat_d1) Data: {{ $kat->dat_d1 }} @else Data: ----- @endif
+                                @if(!$kat) @elseif($kat->dat_d1)<span class="badge badge-success"> Data: {{ $kat->dat_d1 }}</span> @else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
                                 D1E <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_d1e == 1) checked @else @endif  /><br />
-                                @if(!$kat) @elseif($kat->dat_d1e) Data: {{ $kat->dat_d1e }} @else Data: ----- @endif
+                                @if(!$kat) @elseif($kat->dat_d1e)<span class="badge badge-success"> Data: {{ $kat->dat_d1e }} </span>@else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
                                 DE <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_de == 1) checked @else @endif /><br />
-                                @if(!$kat) @elseif($kat->dat_de) Data: {{ $kat->dat_de }} @else Data: ----- @endif
+                                @if(!$kat) @elseif($kat->dat_de)<span class="badge badge-success"> Data: {{ $kat->dat_de }}</span> @else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
                                 T <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_t == 1) checked @else @endif /><br />
-                                @if(!$kat) @elseif($kat->dat_t) Data: {{ $kat->dat_t }} @else Data: ----- @endif
+                                @if(!$kat) @elseif($kat->dat_t) <span class="badge badge-success">Data: {{ $kat->dat_t }}</span> @else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
                                 T1 <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_t1 == 1) checked @else @endif /><br />
-                                @if(!$kat) @elseif($kat->dat_t1) Data: {{ $kat->dat_t1 }} @else Data: ----- @endif
+                                @if(!$kat) @elseif($kat->dat_t1)<span class="badge badge-success"> Data: {{ $kat->dat_t1 }}</span> @else Data: ----- @endif
                             </div>
                         
                             

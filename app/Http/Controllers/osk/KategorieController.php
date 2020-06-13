@@ -119,7 +119,7 @@ class KategorieController extends Controller
     public function update(Request $request, $id)
     {
         //
-      //echo $request->kat_a;
+     // echo "sadf".$request->kat_a;
       //exit;
         $validatedData = $request->validate([
             'id_inst' => 'nullable',
@@ -166,6 +166,8 @@ class KategorieController extends Controller
            //exit;
            Alert::success('', 'Zmieniono kategorie');
 
+           
+        
            return back();
 
 

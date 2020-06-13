@@ -163,5 +163,9 @@ class InstruktorController extends Controller
     public function destroy(Instruktor $instruktor)
     {
         //
+        $instruktor->delete();
+        Alert::error('', 'Instruktor został usunięty');
+
+        return back();
     }
 }
