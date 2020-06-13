@@ -73,7 +73,7 @@
                      <input id="p_nr_leg" class="form-control" type="text" name="p_nr_leg" value="{{ $instruktor->p_nr_leg }}" />
                    </div>
                    <div class="col-md-4 form-group">
-                     <label for="dat_w_leg">Data wydania legitymacji</label>
+                     <label for="dat_w_leg">Data ważności legitymacji</label>
                      <input id="dat_w_leg" class="form-control" type="date" name="dat_w_leg" value="{{ $instruktor->dat_w_leg }}" />
                    </div>
                  </div>
