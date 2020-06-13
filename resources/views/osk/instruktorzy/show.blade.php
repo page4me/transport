@@ -26,6 +26,7 @@
                     {{ $instruktor->imie }} {{ $instruktor->nazwisko }}<br />
                     {{ $instruktor->adres }} <br />
                     <strong>Telefon: </strong>{{ $instruktor->tel }} <br />
+                    <strong>E-mail: </strong>{{ $instruktor->email }} <br />
                     PESEL: {{ $instruktor->pesel }}
                 </div>
                 <div class="col-md-3 form-group">
@@ -38,8 +39,8 @@
                 </div>
                 <div class="col-md-3 form-group">
                     <strong>Legitymacja</strong><br />
-                    Numer: {{ $instruktor->nr_leg }} <br />
-                    Wydano: {{ $instruktor->dat_w_leg }}<br />
+                    <span class="text-primary "><strong>Numer: {{ $instruktor->nr_leg }} </strong></span><br />
+                    Wydano: <span class="badge badge-info"> {{ $instruktor->dat_w_leg }}</span><br />
                     Ważność: <span class="badge badge-success"> {{ $instruktor->dat_w }}</span>
                 </div>
             </div>
@@ -54,11 +55,11 @@
                 </div>
                 <div class="col-md-3 form-group">
                     <strong>Skreślony</strong> <br />
-                    {{ $instruktor->dat_skr }}
+                    @if(!$instruktor->dat_skr) brak @else {{ $instruktor->dat_skr }} @endif
                  </div>
                  <div class="col-md-3 form-group">
                     <strong>Powód</strong> <br />
-                    {{ $instruktor->powod }}
+                   @if(!$instruktor->powod) brak @else {{ $instruktor->powod }} @endif
                  </div>
             </div>
           
@@ -103,7 +104,7 @@
                     <div class="card-body">
                         <div class="row text-center">
                             <div class="col-md-2 checkbox">
-                            A <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a > 0) checked @else value="2" @endif /><br />
+                            A <input type="checkbox" class="form-control" disabled @if(!$kat) @elseif($kat->kat_a > 0) checked @else @endif /><br />
                             @if(!$kat) @elseif($kat->dat_a) <span class="badge badge-success">  Data: {{ $kat->dat_a }} </span> @else Data: ----- @endif
                             </div>
                             <div class="col-md-2">
