@@ -46,10 +46,12 @@
                         Data: <input type="date" name="dat_a2" @if(!$kat) @elseif($kat->dat_a2 >0) value="{{ $kat->dat_a2 }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_b"> 
                         B <input type="checkbox" name="kat_b" class="form-control" @if(!$kat) @elseif($kat->kat_b >0) checked value="{{ $kat->kat_b }}" @else  value="0" @endif  /><br />
                         Data: <input type="date" name="dat_b" @if(!$kat) @elseif($kat->dat_b >0) value="{{ $kat->dat_b }}"  @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_b1"> 
                         B1 <input type="checkbox" name="kat_b1" class="form-control" @if(!$kat) @elseif($kat->kat_b1 >0) checked value="{{ $kat->kat_b1 }}" @else  value="0" @endif /><br />
                         Data: <input type="date" name="dat_b1" @if(!$kat) @elseif($kat->dat_b1 >0) value="{{ $kat->dat_b1 }}" @else @endif class="form-control form-control-sm" />
                     </div>
@@ -59,26 +61,32 @@
                 </div>
                 <div class="row text-center">
                     <div class="col-md-2 checkbox">
+                    <input type="hidden" value="" name="kat_be"> 
                         BE <input type="checkbox" name="kat_be" class="form-control" @if(!$kat) @elseif($kat->kat_be >0) checked value="{{ $kat->kat_be }}" @else  value="1" @endif /><br />
                         Data: <input type="date" name="dat_be" @if(!$kat) @elseif($kat->dat_be >0) value="{{ $kat->dat_be }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_c"> 
                         C <input type="checkbox" name="kat_c" class="form-control" @if(!$kat) @elseif($kat->kat_c >0) checked value="{{ $kat->kat_c }}" @else  value="1" @endif /><br />
                         Data: <input type="date" name="dat_c" @if(!$kat) @elseif($kat->dat_c >0) value="{{ $kat->dat_c }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_c1"> 
                         C1 <input type="checkbox" name="kat_c1" class="form-control" @if(!$kat) @elseif($kat->kat_c1 >0) checked value="{{ $kat->kat_c1 }}" @else  value="1" @endif /><br />
                         Data: <input type="date" name="dat_c1" @if(!$kat) @elseif($kat->dat_c1 >0) value="{{ $kat->dat_c1 }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_c1e"> 
                         C1E <input type="checkbox" name="kat_c1e" class="form-control" @if(!$kat) @elseif($kat->kat_c1e >0) checked value="{{ $kat->kat_c1e }}" @else  value="1" @endif /><br />
                         Data: <input type="date" name="dat_c1e" @if(!$kat) @elseif($kat->dat_c1e >0) value="{{ $kat->dat_c1e }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_ce"> 
                         CE <input type="checkbox" name="kat_ce" class="form-control" @if(!$kat) @elseif($kat->kat_ce >0) checked value="{{ $kat->kat_ce }}" @else value="1" @endif /><br />
                         Data: <input type="date" name="dat_ce" @if(!$kat) @elseif($kat->dat_ce >0) value="{{ $kat->dat_ce }}"  @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_d"> 
                         D <input type="checkbox" name="kat_d" class="form-control" @if(!$kat) @elseif($kat->kat_d >0) checked value="{{ $kat->kat_d }}" @else value="1" @endif /><br />
                         Data: <input type="date" name="dat_d" @if(!$kat) @elseif($kat->dat_d >0) value="{{ $kat->dat_d }}" @else @endif class="form-control form-control-sm" />
                     </div>
@@ -88,22 +96,27 @@
                 </div>
                 <div class="row text-center">
                     <div class="col-md-2 checkbox">
+                    <input type="hidden" value="" name="kat_d1"> 
                         D1 <input type="checkbox" name="kat_d1" class="form-control" @if(!$kat) @elseif($kat->kat_d1 >0) checked value="{{ $kat->kat_d1 }}" @else value="1" @endif /><br />
                         Data: <input type="date" name="dat_d1" @if(!$kat) @elseif($kat->dat_d1 >0) value="{{ $kat->dat_d1 }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_d1e"> 
                         D1E <input type="checkbox" name="kat_d1e" class="form-control" @if(!$kat) @elseif($kat->kat_d1e >0) checked value="{{ $kat->kat_d1e }}" @else value="1" @endif /><br />
                         Data: <input type="date" name="dat_d1e" @if(!$kat) @elseif($kat->dat_d1e >0) value="{{ $kat->dat_d1e }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_de"> 
                         DE <input type="checkbox" name="kat_de" class="form-control" @if(!$kat) @elseif($kat->kat_de >0) checked value="{{ $kat->kat_de }}" @else value="1" @endif /><br />
                         Data: <input type="date" name="dat_de" @if(!$kat) @elseif($kat->dat_de >0) value="{{ $kat->dat_de }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_t"> 
                         T <input type="checkbox" name="kat_t" class="form-control" @if(!$kat) @elseif($kat->kat_t >0) checked value="{{ $kat->kat_t }}" @else value="1" @endif /><br />
                         Data: <input type="date" name="dat_t" @if(!$kat) @elseif($kat->dat_t >0) value="{{ $kat->dat_t }}" @else @endif class="form-control form-control-sm" />
                     </div>
                     <div class="col-md-2">
+                    <input type="hidden" value="" name="kat_t1"> 
                         T1 <input type="checkbox" name="kat_t1" class="form-control" @if(!$kat) @elseif($kat->kat_t1 >0) checked value="{{ $kat->kat_t1 }}" @else value="1" @endif /><br />
                         Data: <input type="date" name="dat_t1" @if(!$kat) @elseif($kat->dat_t1 >0) value="{{ $kat->dat_t1 }}" @else @endif class="form-control form-control-sm" />
                     </div>
